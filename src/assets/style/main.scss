@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --font: 'Inter', sans-serif;
+  --gray-0: #f7f7fa;
+  --gray-5: #ededf0;
+  --gray-10: #e1e1e3;
+  --gray-20: #d2d2d6;
+  --gray-30: #b4b4bb;
+  --gray-40: #9696a0;
+  --gray-50: #787885;
+  --gray-60: #5a5b6a;
+  --gray-70: #4a4b57;
+  --gray-80: #3a3a44;
+  --gray-90: #292a31;
+  --gray-100: #19191d;
+
+  --blue-10: #d8e6ff;
+  --blue-50: #4f91ff;
+  --blue-100: #0c2146;
+
+  --green-20: #cbe5cc;
+  --green-80: #2b662e;
+
+  --red-0: #fef2f1;
+  --red-5: #fee8e7;
+  --red-50: #f6655a;
+  --red-60: #f44336;
+  --red-90: #6f1f19;
+
+  --indigo-5: #eff0fa;
+  --indigo-30: #b4bbe2;
+  --indigo-80: #3b457b;
+}
+
+html {
+  font-size: 16px;
+}
+* {
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: var(--font);
+  cursor: default;
+  color: var(--gray-80);
+}
+section {
+  position: relative;
+}
+ul {
+  list-style: none;
+}
+textarea,
+button,
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-family: var(--font);
+  border: none;
+  background: none;
+  outline: none;
+  &[disabled] {
+    cursor: default;
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+// убирает цвет автокомплита у инпута
+input {
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    font-size: 1rem;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+h1 {
+  font-size: 6rem;
+  letter-spacing: -0.026em;
+}
+h2 {
+  font-size: 3.75rem;
+  letter-spacing: -0.025em;
+}
+h3 {
+  font-size: 3rem;
+  letter-spacing: -0.01em;
+}
+h4 {
+  font-size: 2.125rem;
+  font-weight: 600;
+}
+h5 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+h6 {
+  font-size: 1.25rem;
+  letter-spacing: 0.0075em;
+}
+.main {
+  padding: 25px 0 35px;
+  box-sizing: border-box;
+}

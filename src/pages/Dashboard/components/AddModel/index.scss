@@ -1,0 +1,22 @@
+.addModel {
+  background-color: var(--red-60);
+  border-radius: 50%;
+  height: 2.5rem;
+  width: 2.5rem;
+  box-shadow: 0px 2px 4px rgba(156, 43, 35, 0.2), 0px 4px 8px rgba(244, 67, 54, 0.2);
+  position: relative;
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 7px);
+    width: 14px;
+    height: 2px;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  &::after {
+    transform: rotate(90deg);
+  }
+}
