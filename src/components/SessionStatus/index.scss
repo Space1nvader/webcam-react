@@ -1,0 +1,16 @@
+.sessionStatus {
+  width: 4.5rem;
+  height: 1.5rem;
+  border-radius: 12px;
+  background-color: var(--red-50);
+  color: var(--red-90);
+  display: inline-flex;
+  text-align: center;
+  align-items: center;
+  text-transform: capitalize;
+  justify-content: center;
+  &.online {
+    background-color: var(--green-20);
+    color: var(--green-80);
+  }
+}

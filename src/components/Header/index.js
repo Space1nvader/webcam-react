@@ -2,16 +2,32 @@ import React from 'react';
 import Logo from 'components/Logo';
 import Wrapper from 'components/Wrapper';
 import Profile from 'components/Profile';
+import LinkButton from 'components/LinkButton';
 import Papper from 'components/Papper';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import DataUsageIcon from '@material-ui/icons/DataUsage';
+import TuneRoundedIcon from '@material-ui/icons/TuneRounded';
+import { Link } from 'react-router-dom';
+import UserImage from 'assets/img/user.png';
 import './index.scss';
 
 const Header = () => (
   <header className="header">
     <Wrapper>
       <div className="header__box">
-        <Logo />
+        <Link to="/">
+          <Logo />
+        </Link>
+
+        <div className="header__cell">
+          <LinkButton icon={<SupervisorAccountIcon />}>Модели</LinkButton>
+          <LinkButton active icon={<DataUsageIcon />}>
+            Статистика
+          </LinkButton>
+          <LinkButton icon={<TuneRoundedIcon />}>Опции</LinkButton>
+        </div>
         <Papper style={{ borderRadius: '12px' }}>
-          <Profile>FirstStudioPetr</Profile>
+          <Profile image={UserImage}>FirstStudioPetr</Profile>
         </Papper>
       </div>
     </Wrapper>

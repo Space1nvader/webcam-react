@@ -28,6 +28,7 @@
   --red-60: #f44336;
   --red-90: #6f1f19;
 
+  --indigo-0: #f7f8fc;
   --indigo-5: #eff0fa;
   --indigo-30: #b4bbe2;
   --indigo-80: #3b457b;
@@ -40,6 +41,9 @@ html {
   outline: none;
   padding: 0;
   margin: 0;
+}
+a {
+  text-decoration: none;
 }
 body {
   font-family: var(--font);
@@ -65,6 +69,15 @@ input {
   &[disabled] {
     cursor: default;
   }
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: var(--gray-40);
+}
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  color: var(--gray-40);
 }
 
 button {

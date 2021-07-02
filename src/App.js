@@ -1,23 +1,17 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Dashboard from 'pages/Dashboard';
-import Header from 'components/Header';
-import User from 'components/User';
+import Detail from 'pages/Detail';
 import Layout from './components/Layout';
 import 'assets/style/main.scss';
 
 function App() {
   return (
     <Layout>
-      <BrowserRouter>
-        <Header />
-        <div className="wrapper">
-          <Switch>
-            <Route exact path="/" component={Dashboard} />
-            <Route path="/user" component={User} />
-          </Switch>
-        </div>
-      </BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={Dashboard} />
+        <Route path="/user/:userId" component={Detail} />
+      </Switch>
     </Layout>
   );
 }
