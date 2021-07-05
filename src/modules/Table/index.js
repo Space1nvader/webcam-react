@@ -30,9 +30,23 @@ const useStyles = makeStyles({
   }
 });
 
+
 const DataTable = (props) => {
   const { rows, fields, ...other } = props;
   const classes = useStyles();
+
+  // eslint-disable-next-line prefer-const
+  let [isSelect, setSelect] = useState([]);
+
+  const handleSelectClick = () => {
+    // @ts-ignore
+    // setSelect((prev) => [...prev, '123'])
+    setSelect((prev) =>  [...prev].push('123'))
+  
+   
+}
+
+
 
   return (
     <TableContainer {...other} className={classes.tableContainer}>
@@ -49,10 +63,10 @@ const DataTable = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows.map((row, index) => (
             <TableRow className={classes.tableRow} key={row.id}>
               <TableCell padding="checkbox">
-                <SmallCheckbox />
+                <SmallCheckbox style={isSelect === row.id ? { background: 'red' } : {background: 'black'}} onChange={handleSelectClick}/>
               </TableCell>
               {fields.map((field) =>
                 field.id === 'name' ? (
