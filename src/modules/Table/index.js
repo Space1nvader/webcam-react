@@ -35,13 +35,10 @@ const DataTable = (props) => {
   const { rows, fields, ...other } = props;
   const classes = useStyles();
 
-  // eslint-disable-next-line prefer-const
-  let [isSelect, setSelect] = useState([]);
+  const  [isSelect, setSelect] = useState([]);
 
   const handleSelectClick = () => {
-    // @ts-ignore
-    // setSelect((prev) => [...prev, '123'])
-    setSelect((prev) =>  [...prev].push('123'))
+    setSelect((prev) => [...prev, '123'])
   
    
 }
