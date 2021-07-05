@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-
 import SmallCheckbox from 'components/SmallCheckbox';
 import User from 'components/User';
-
+import { RowingSharp } from '@material-ui/icons';
 import TableCell from './components/Cell';
 import HeaderCell from './components/HeaderCell';
 import TablePagination from './components/Pagination';
@@ -35,8 +34,13 @@ const useStyles = makeStyles({
 const DataTable = (props) => {
   const { rows, fields, ...other } = props;
   const classes = useStyles();
+  // const [isSelect, setSelect] = useState(false);
+  // const handleSetStatus = () => {
+  //   setSelect(!isSelect);
+  // };
+
   return (
-    <TableContainer className={classes.tableContainer}>
+    <TableContainer {...other} className={classes.tableContainer}>
       <TableFiltres />
       <Table>
         <TableHead>
@@ -51,14 +55,14 @@ const DataTable = (props) => {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow className={classes.tableRow} key={row.user.name}>
+            <TableRow className={classes.tableRow} key={row.id}>
               <TableCell padding="checkbox">
-                <SmallCheckbox />
+                <SmallCheckbox onChange={selectRowClick} />
               </TableCell>
               {fields.map((field) =>
                 field.id === 'name' ? (
                   <TableCell>
-                    <User link={`/user/:${row.userId}`} image={row.user.image}>
+                    <User link={`/user/:${row.id}`} image={row.user.image}>
                       {row.user.name}
                     </User>
                   </TableCell>

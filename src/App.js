@@ -10,7 +10,7 @@ function App() {
     <Layout>
       <Switch>
         <Route exact path="/" component={Dashboard} />
-        <Route path="/user/:userId" component={Detail} />
+        <Route path="/user/:id" component={Detail} />
       </Switch>
     </Layout>
   );

@@ -1,8 +1,8 @@
-let userId = 0;
+let id = 0;
 export const api = {
   models: [
     {
-      userId: (userId += 1),
+      id: (id += 1),
       user: {
         name: 'AgnesFisher / Сахнова Дарья',
         image: 'img/model1.png'
@@ -17,7 +17,7 @@ export const api = {
       online: true
     },
     {
-      userId: (userId += 1),
+      id: (id += 1),
       user: {
         name: 'Agnes 2 Fisher / Фамильева Мария',
         image: 'img/model2.png'
@@ -31,7 +31,7 @@ export const api = {
       online: false
     },
     {
-      userId: (userId += 1),
+      id: (id += 1),
       user: {
         name: 'Agnes 2 Fisher / Фамильева Мория',
         image: 'img/model3.png'
@@ -45,7 +45,7 @@ export const api = {
       online: false
     },
     {
-      userId: (userId += 1),
+      id: (id += 1),
       user: {
         name: 'Agnes 2 Fisher / Фамильева Мория',
         image: 'img/model3.png'
@@ -59,7 +59,7 @@ export const api = {
       online: false
     },
     {
-      userId: (userId += 1),
+      id: (id += 1),
       user: {
         name: 'Agnes 2 Fisher / Фамильева Мория',
         image: 'img/model3.png'
@@ -73,7 +73,7 @@ export const api = {
       online: false
     },
     {
-      userId: (userId += 1),
+      id: (id += 1),
       user: {
         name: 'Agnes 2 Fisher / Фамильева Мория',
         image: 'img/model3.png'
@@ -87,7 +87,7 @@ export const api = {
       online: false
     },
     {
-      userId: (userId += 1),
+      id: (id += 1),
       user: {
         name: 'Agnes 2 Fisher / Фамильева Мория',
         image: 'img/model3.png'
@@ -101,7 +101,7 @@ export const api = {
       online: false
     },
     {
-      userId: (userId += 1),
+      id: (id += 1),
       user: {
         name: 'Agnes 2 Fisher / Фамильева Мория',
         image: 'img/model3.png'
@@ -115,7 +115,7 @@ export const api = {
       online: false
     },
     {
-      userId: (userId += 1),
+      id: (id += 1),
       user: {
         name: 'Agnes 2 Fisher / Фамильева Мория',
         image: 'img/model3.png'
@@ -129,7 +129,7 @@ export const api = {
       online: false
     },
     {
-      userId: (userId += 1),
+      id: (id += 1),
       user: {
         name: 'Agnes 2 Fisher / Фамильева Мория',
         image: 'img/model3.png'
@@ -143,7 +143,7 @@ export const api = {
       online: false
     },
     {
-      userId: (userId += 1),
+      id: (id += 1),
       user: {
         name: 'Agnes 2 Fisher / Фамильева Мория',
         image: 'img/model3.png'
@@ -157,7 +157,7 @@ export const api = {
       online: false
     },
     {
-      userId: (userId += 1),
+      id: (id += 1),
       user: {
         name: 'Agnes 2 Fisher / Фамильева Мория',
         image: 'img/model3.png'
@@ -171,7 +171,7 @@ export const api = {
       online: false
     },
     {
-      userId: (userId += 1),
+      id: (id += 1),
       user: {
         name: 'Agnes 2 Fisher / Фамильева Мория',
         image: 'img/model3.png'
@@ -185,7 +185,7 @@ export const api = {
       online: false
     },
     {
-      userId: (userId += 1),
+      id: (id += 1),
       user: {
         name: 'Agnes 2 Fisher / Фамильева Мория',
         image: 'img/model3.png'
