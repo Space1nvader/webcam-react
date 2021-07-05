@@ -1,16 +1,26 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import Dashboard from 'pages/Dashboard';
-import Detail from 'pages/Detail';
+import { Switch } from 'react-router-dom';
+import RouteCrubms from 'modules/Breadcrumbs/RouteCrubms';
+import { generateAppRoutes } from 'modules/Breadcrumbs/until';
+import { dataRoutes } from 'api/routes';
 import Layout from './components/Layout';
 import 'assets/style/main.scss';
+
+const routes = generateAppRoutes(dataRoutes);
 
 function App() {
   return (
     <Layout>
       <Switch>
-        <Route exact path="/" component={Dashboard} />
-        <Route path="/user/:id" component={Detail} />
+        {routes.map((route) => (
+          <RouteCrubms
+            key={route.path}
+            label={route.label}
+            route={route}
+            path={route.path}
+            component={route.component}
+          />
+        ))}
       </Switch>
     </Layout>
   );

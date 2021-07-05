@@ -6,7 +6,7 @@ import Field from 'modules/Form/Field';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Cell from 'modules/Table/components/Cell';
 import SmallCheckbox from 'components/SmallCheckbox';
-import DataUsageIcon from '@material-ui/icons/DataUsage';
+import DonutSmallRoundedIcon from '@material-ui/icons/DonutSmallRounded';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import funnelIcon from 'assets/img/funnel-fill.svg';
@@ -21,7 +21,7 @@ const TableFilters = (props) => {
           <Cell style={{ padding: '0 0 0 4px' }}>
             <SmallCheckbox style={{ marginRight: 4 }} />
             <IconButton size="small" style={{ marginRight: 6 }}>
-              <DataUsageIcon style={{ fill: 'var(--red-50)' }} />
+              <DonutSmallRoundedIcon style={{ fill: 'var(--red-50)' }} />
             </IconButton>
             <IconButton size="small">
               <DeleteIcon style={{ fill: 'var(--gray-20)' }} />

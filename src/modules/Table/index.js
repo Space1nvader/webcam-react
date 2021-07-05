@@ -7,7 +7,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import SmallCheckbox from 'components/SmallCheckbox';
 import User from 'components/User';
-import { RowingSharp } from '@material-ui/icons';
 import TableCell from './components/Cell';
 import HeaderCell from './components/HeaderCell';
 import TablePagination from './components/Pagination';
@@ -34,10 +33,6 @@ const useStyles = makeStyles({
 const DataTable = (props) => {
   const { rows, fields, ...other } = props;
   const classes = useStyles();
-  // const [isSelect, setSelect] = useState(false);
-  // const handleSetStatus = () => {
-  //   setSelect(!isSelect);
-  // };
 
   return (
     <TableContainer {...other} className={classes.tableContainer}>
@@ -57,13 +52,13 @@ const DataTable = (props) => {
           {rows.map((row) => (
             <TableRow className={classes.tableRow} key={row.id}>
               <TableCell padding="checkbox">
-                <SmallCheckbox onChange={selectRowClick} />
+                <SmallCheckbox />
               </TableCell>
               {fields.map((field) =>
                 field.id === 'name' ? (
                   <TableCell>
-                    <User link={`/user/:${row.id}`} image={row.user.image}>
-                      {row.user.name}
+                    <User to={`/model/${row.id}`} image={row.user.image}>
+                      {row.user.nickname} / {row.user.name}
                     </User>
                   </TableCell>
                 ) : (

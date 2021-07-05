@@ -5,7 +5,7 @@ import Profile from 'components/Profile';
 import LinkButton from 'components/LinkButton';
 import Papper from 'components/Papper';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import DataUsageIcon from '@material-ui/icons/DataUsage';
+import DonutSmallRoundedIcon from '@material-ui/icons/DonutSmallRounded';
 import TuneRoundedIcon from '@material-ui/icons/TuneRounded';
 import { Link } from 'react-router-dom';
 import UserImage from 'assets/img/user.png';
@@ -21,7 +21,7 @@ const Header = () => (
 
         <div className="header__cell">
           <LinkButton icon={<SupervisorAccountIcon />}>Модели</LinkButton>
-          <LinkButton active icon={<DataUsageIcon />}>
+          <LinkButton active icon={<DonutSmallRoundedIcon />}>
             Статистика
           </LinkButton>
           <LinkButton icon={<TuneRoundedIcon />}>Опции</LinkButton>
