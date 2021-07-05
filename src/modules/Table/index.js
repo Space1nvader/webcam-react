@@ -38,11 +38,8 @@ const DataTable = (props) => {
   const  [isSelect, setSelect] = useState([]);
 
   const handleSelectClick = () => {
-    setSelect((prev) => [...prev, '123'])
-  
-   
-}
-
+    setSelect((prev) => [...prev, '123'])   
+  }
 
 
   return (
