@@ -17,8 +17,7 @@ const useStyles = makeStyles({
     borderRadius: 12,
     border: '1px solid var(--gray-20)',
     boxSizing: 'border-box',
-    padding: 24,
-    paddingBottom: 0
+    padding: '24px 24px 0'
   },
   tableRow: {
     '&:hover': {
@@ -30,21 +29,31 @@ const useStyles = makeStyles({
   }
 });
 
-
 const DataTable = (props) => {
   const { rows, fields, ...other } = props;
   const classes = useStyles();
 
-  const  [isSelect, setSelect] = useState([]);
-
-  const handleSelectClick = () => {
-    setSelect((prev) => [...prev, '123'])   
-  }
-
-
+  const [isSelect, setSelectState] = useState();
+  const selected = new Set(isSelect);
+  const handleSelectClick = (id) => {
+    if (selected.has(id)) {
+      selected.delete(id);
+    } else {
+      selected.add(id);
+    }
+    setSelectState(selected);
+  };
+  const handleSelectAllClick = (e) => {
+    if (e.target.checked) {
+      rows.map((row) => selected.add(row.id));
+      setSelectState(selected);
+      return;
+    }
+    setSelectState();
+  };
   return (
     <TableContainer {...other} className={classes.tableContainer}>
-      <TableFiltres />
+      <TableFiltres onChange={(e) => handleSelectAllClick(e)} />
       <Table>
         <TableHead>
           <TableRow style={{ backgroundColor: 'var(--indigo-0)' }}>
@@ -57,10 +66,13 @@ const DataTable = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, index) => (
+          {rows.map((row) => (
             <TableRow className={classes.tableRow} key={row.id}>
               <TableCell padding="checkbox">
-                <SmallCheckbox style={isSelect === row.id ? { background: 'red' } : {background: 'black'}} onChange={handleSelectClick}/>
+                <SmallCheckbox
+                  checked={isSelect ? isSelect.has(row.id) : false}
+                  onChange={() => handleSelectClick(row.id)}
+                />
               </TableCell>
               {fields.map((field) =>
                 field.id === 'name' ? (

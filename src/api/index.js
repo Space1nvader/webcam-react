@@ -6,7 +6,7 @@ export const api = {
       user: {
         name: 'Сахнова Дарья',
         nickname: 'AgnesFisher',
-        image: 'img/model1.png'
+        image: '/img/model1.png'
       },
       shifts: 5,
       lastShift: '15.02.11',
@@ -21,7 +21,7 @@ export const api = {
       user: {
         name: 'Фамильева Мария',
         nickname: 'Agnes 2 Fisher',
-        image: 'img/model2.png'
+        image: '/img/model2.png'
       },
       shifts: 2,
       lastShift: '15.02.11',
@@ -36,7 +36,7 @@ export const api = {
       user: {
         name: 'Фамильева Мория',
         nickname: 'Agnes 2 Fisher',
-        image: 'img/model3.png'
+        image: '/img/model3.png'
       },
       shifts: 2,
       lastShift: '15.02.11',
@@ -51,7 +51,7 @@ export const api = {
       user: {
         name: 'Фамильева Мория',
         nickname: 'Agnes 2 Fisher',
-        image: 'img/model3.png'
+        image: '/img/model3.png'
       },
       shifts: 2,
       lastShift: '15.02.11',
@@ -80,7 +80,7 @@ export const api = {
       user: {
         name: 'Фамильева Мория',
         nickname: 'Agnes 2 Fisher',
-        image: 'img/model3.png'
+        image: '/img/model3.png'
       },
       shifts: 2,
       lastShift: '15.02.11',
@@ -95,7 +95,7 @@ export const api = {
       user: {
         name: 'Фамильева Мория',
         nickname: 'Agnes 2 Fisher',
-        image: 'img/model3.png'
+        image: '/img/model3.png'
       },
       shifts: 2,
       lastShift: '15.02.11',
@@ -110,7 +110,7 @@ export const api = {
       user: {
         name: 'Фамильева Мория',
         nickname: 'Agnes 2 Fisher',
-        image: 'img/model3.png'
+        image: '/img/model3.png'
       },
       shifts: 2,
       lastShift: '15.02.11',
@@ -125,7 +125,7 @@ export const api = {
       user: {
         name: 'Фамильева Мория',
         nickname: 'Agnes 2 Fisher',
-        image: 'img/model3.png'
+        image: '/img/model3.png'
       },
       shifts: 2,
       lastShift: '15.02.11',
@@ -140,7 +140,7 @@ export const api = {
       user: {
         name: 'Фамильева Мория',
         nickname: 'Agnes 2 Fisher',
-        image: 'img/model3.png'
+        image: '/img/model3.png'
       },
       shifts: 2,
       lastShift: '15.02.11',
@@ -155,7 +155,7 @@ export const api = {
       user: {
         name: 'Фамильева Мория',
         nickname: 'Agnes 2 Fisher',
-        image: 'img/model3.png'
+        image: '/img/model3.png'
       },
       shifts: 2,
       lastShift: '15.02.11',
@@ -170,7 +170,7 @@ export const api = {
       user: {
         name: 'Фамильева Мория',
         nickname: 'Agnes 2 Fisher',
-        image: 'img/model3.png'
+        image: '/img/model3.png'
       },
       shifts: 2,
       lastShift: '15.02.11',
@@ -185,7 +185,7 @@ export const api = {
       user: {
         name: 'Фамильева Мория',
         nickname: 'Agnes 2 Fisher',
-        image: 'img/model3.png'
+        image: '/img/model3.png'
       },
       shifts: 2,
       lastShift: '15.02.11',
@@ -200,7 +200,7 @@ export const api = {
       user: {
         name: 'Фамильева Мория',
         nickname: 'Agnes 2 Fisher',
-        image: 'img/model3.png'
+        image: '/img/model3.png'
       },
       shifts: 2,
       lastShift: '15.02.11',

@@ -1,7 +1,7 @@
 import React from 'react';
 import DataTable from 'modules/Table';
 import { api } from 'api/index';
-import Status from './components/Status';
+import DashboardStatus from './components/Status';
 import './index.scss';
 
 const rows = api.models;
@@ -20,7 +20,7 @@ const Dashboard = () => (
   <div className="dashboard">
     <div className="dashboard__header">
       <h4 className="dashboard__title">Модели студии</h4>
-      <Status />
+      <DashboardStatus />
     </div>
 
     <div className="dashboard__table">

@@ -1,0 +1,29 @@
+.detail {
+  display: flex;
+  flex-wrap: wrap;
+  &__title {
+    width: 100%;
+    margin-bottom: 0.875rem;
+  }
+  &__subtitle {
+    width: 100%;
+    margin-bottom: 3.5rem;
+    color: var(--gray-20);
+  }
+  &__data {
+    width: 13.125rem;
+  }
+  &__box {
+    width: calc(100% - (13.125rem + 2.25rem));
+    margin-left: 2.25rem;
+    box-sizing: border-box;
+  }
+  &__tabs {
+    margin-bottom: 0.625rem;
+  }
+  &__frame {
+    background-color: var(--indigo-0);
+    padding: 2rem 1.25rem;
+    border-radius: 8px;
+  }
+}
