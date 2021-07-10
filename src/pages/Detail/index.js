@@ -6,7 +6,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
+import DocsForm from './Components/DocsForm';
 import PictureForm from './Components/PictureForm';
 import DetailForm from './Components/DataForm';
 import './index.scss';
@@ -15,10 +15,11 @@ const useStyles = makeStyles({
   button: {
     color: 'var(--gray-50)',
     textTransform: 'none',
-    marginRight: 40
+    marginRight: 40,
+    fontWeight: 700
   },
   activeButton: {
-    background: 'red'
+    color: 'var(--blue-100)'
   }
 });
 const tabNames = [
@@ -84,7 +85,8 @@ const Detail = (props) => {
           ))}
         </div>
         <div className="detail__frame">
-          <DetailForm />
+          <DetailForm className='detail__form' />
+          <DocsForm className='detail__docs'/>
         </div>
       </div>
     </div>

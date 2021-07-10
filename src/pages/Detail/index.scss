@@ -4,6 +4,7 @@
   &__title {
     width: 100%;
     margin-bottom: 0.875rem;
+    color: var(--blue-100);
   }
   &__subtitle {
     width: 100%;
@@ -25,5 +26,15 @@
     background-color: var(--indigo-0);
     padding: 2rem 1.25rem;
     border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  &__form{
+    width: calc(100% - 23rem);
+  }
+  &__docs{
+    width: 19rem;
+    margin-left: 4rem;
   }
 }
