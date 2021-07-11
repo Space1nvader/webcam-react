@@ -19,6 +19,12 @@
     margin-left: 2.25rem;
     box-sizing: border-box;
   }
+  &__name{
+    line-height: 1.5;
+    font-weight: 600;
+    color: var(--blue-100);
+    margin-bottom: 1.125rem;
+  }
   &__tabs {
     margin-bottom: 0.625rem;
   }
@@ -37,4 +43,5 @@
     width: 19rem;
     margin-left: 4rem;
   }
+
 }

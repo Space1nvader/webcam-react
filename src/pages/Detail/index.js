@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import DocsForm from './Components/DocsForm';
 import PictureForm from './Components/PictureForm';
 import DetailForm from './Components/DataForm';
+import Income from './Components/Income';
 import './index.scss';
 
 const useStyles = makeStyles({
@@ -44,7 +45,7 @@ const Detail = (props) => {
   const { route, match, ...other } = props;
   const model = api.models[match.params.userId - 1];
   const [isActiveTab, setActiveTab] = useState();
-  const handleChangeTabClick = (key) => {
+  const handleChangeTabClick = (key) => () => {
     setActiveTab(key);
   };
 
@@ -58,7 +59,7 @@ const Detail = (props) => {
         <div className="detail__data">
           <PictureForm image={model.user.image} />
           <h5 className="detail__name">
-            {model.user.name} / {model.user.nickname}
+            {model.user.name} <br/> / {model.user.nickname}
           </h5>
           <div className="detail__contacts">
             <a href="/" className="email">
@@ -67,6 +68,9 @@ const Detail = (props) => {
             <a href="/" className="email">
               номер телефона
             </a>
+          </div>
+          <div className="detail__income">
+            <Income/>
           </div>
         </div>
       </div>
@@ -78,7 +82,7 @@ const Detail = (props) => {
                 isActiveTab === button.key ? classes.activeButton : ''
               }`}
               startIcon={button.icon}
-              onClick={() => handleChangeTabClick(button.key)}
+              onClick={handleChangeTabClick(button.key)}
             >
               {button.title}
             </Button>
