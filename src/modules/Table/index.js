@@ -50,10 +50,9 @@ const DataTable = (props) => {
       return;
     }
     setSelectState(null);
-  }
-  const isChecked = (id) => 
-    isSelect ? isSelect.has(id) : false
-  
+  };
+  const isChecked = (id) => (isSelect ? isSelect.has(id) : false);
+
   return (
     <TableContainer {...other} className={classes.tableContainer}>
       <TableFiltres onChange={handleSelectAllClick} />
@@ -70,13 +69,9 @@ const DataTable = (props) => {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-    
-           <TableRow className={classes.tableRow} key={row.id}>
+            <TableRow className={classes.tableRow} key={row.id}>
               <TableCell padding="checkbox">
-                <SmallCheckbox
-                  checked={isChecked(row.id)}
-                  onChange={handleSelectClick(row.id)}
-                />
+                <SmallCheckbox checked={isChecked(row.id)} onChange={handleSelectClick(row.id)} />
               </TableCell>
               {fields.map((field) =>
                 field.id === 'name' ? (
@@ -90,7 +85,7 @@ const DataTable = (props) => {
                     {row[field.id]}
                   </TableCell>
                 )
-                )}
+              )}
             </TableRow>
           ))}
         </TableBody>

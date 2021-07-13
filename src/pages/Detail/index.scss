@@ -11,6 +11,9 @@
     margin-bottom: 3.5rem;
     color: var(--gray-20);
   }
+  &__profile {
+    display: flex;
+  }
   &__data {
     width: 13.125rem;
   }
@@ -19,10 +22,9 @@
     margin-left: 2.25rem;
     box-sizing: border-box;
   }
-  &__name{
+  &__name {
     line-height: 1.5;
     font-weight: 600;
-    color: var(--blue-100);
     margin-bottom: 1.125rem;
   }
   &__tabs {
@@ -36,12 +38,17 @@
     justify-content: space-between;
     flex-wrap: wrap;
   }
-  &__form{
+  &__form {
     width: calc(100% - 23rem);
   }
-  &__docs{
+  &__docs {
     width: 19rem;
     margin-left: 4rem;
   }
-
+  &__contacts {
+    margin-bottom: 1rem;
+  }
+  &__income {
+    margin-bottom: 1.875rem;
+  }
 }

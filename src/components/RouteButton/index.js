@@ -1,12 +1,12 @@
 import React from 'react';
 import './index.scss';
 
-const LinkButton = (props) => {
+const RouteButton = (props) => {
   const { children, active, icon, className, ...other } = props;
   return (
     <button
       type="button"
-      className={`linkButton ${active ? 'active' : ''} ${className || ''}`}
+      className={`RouteButton ${active ? 'active' : ''} ${className || ''}`}
       {...other}
     >
       {icon || ''}
@@ -15,4 +15,4 @@ const LinkButton = (props) => {
   );
 };
 
-export default LinkButton;
+export default RouteButton;

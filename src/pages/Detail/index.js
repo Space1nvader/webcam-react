@@ -6,10 +6,10 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import DetailForm from './Components/DataForm';
 import DocsForm from './Components/DocsForm';
 import PictureForm from './Components/PictureForm';
-import DetailForm from './Components/DataForm';
-import Income from './Components/Income';
+import DetailData from './Components/DetailData';
 import './index.scss';
 
 const useStyles = makeStyles({
@@ -21,6 +21,19 @@ const useStyles = makeStyles({
   },
   activeButton: {
     color: 'var(--blue-100)'
+  },
+  removeBtn: {
+    backgroundColor: 'var(--red-5)',
+    color: 'var(--red-60)',
+    width: '100%',
+    borderRadius: 36,
+    padding: 14,
+    boxSizing: 'border-box',
+    fontWeight: 700,
+    '&:hover': {
+      backgroundColor: 'var(--red-50)',
+      color: '#fff'
+    }
   }
 });
 const tabNames = [
@@ -41,6 +54,11 @@ const tabNames = [
   }
 ];
 
+const docs = [
+  { name: 'Паспорт лицевая сторона Admina.pdf', size: '245 kb' },
+  { name: 'Agnes_Fisher.doc ', size: '255 kb' }
+];
+
 const Detail = (props) => {
   const { route, match, ...other } = props;
   const model = api.models[match.params.userId - 1];
@@ -48,49 +66,39 @@ const Detail = (props) => {
   const handleChangeTabClick = (key) => () => {
     setActiveTab(key);
   };
-
   const classes = useStyles();
   return (
     <div className="detail">
       <NavCrumbs route={route} />
-      <h4 className="detail__title">{model.user.name}</h4>
+      <h4 className="detail__title">{model ? model.user.name : 'Данные модели'}</h4>
       <h6 className="detail__subtitle">Text fields popular combinations</h6>
       <div className="detail__profile">
         <div className="detail__data">
-          <PictureForm image={model.user.image} />
-          <h5 className="detail__name">
-            {model.user.name} <br/> / {model.user.nickname}
-          </h5>
-          <div className="detail__contacts">
-            <a href="/" className="email">
-              тест @ емейл
-            </a>
-            <a href="/" className="email">
-              номер телефона
-            </a>
-          </div>
-          <div className="detail__income">
-            <Income/>
-          </div>
+          <PictureForm
+            style={{ marginBottom: 10 }}
+            name="profile-picture"
+            image={model ? model.user.image : null}
+          />
+          {model && <DetailData data={model} />}
         </div>
-      </div>
-      <div className="detail__box">
-        <div className="detail__tabs">
-          {tabNames.map((button) => (
-            <Button
-              className={`${classes.button} ${
-                isActiveTab === button.key ? classes.activeButton : ''
-              }`}
-              startIcon={button.icon}
-              onClick={handleChangeTabClick(button.key)}
-            >
-              {button.title}
-            </Button>
-          ))}
-        </div>
-        <div className="detail__frame">
-          <DetailForm className='detail__form' />
-          <DocsForm className='detail__docs'/>
+        <div className="detail__box">
+          <div className="detail__tabs">
+            {tabNames.map((button) => (
+              <Button
+                className={`${classes.button} ${
+                  isActiveTab === button.key ? classes.activeButton : ''
+                }`}
+                startIcon={button.icon}
+                onClick={handleChangeTabClick(button.key)}
+              >
+                {button.title}
+              </Button>
+            ))}
+          </div>
+          <div className="detail__frame">
+            <DetailForm className="detail__form" />
+            <DocsForm docs={docs} className="detail__docs" />
+          </div>
         </div>
       </div>
     </div>

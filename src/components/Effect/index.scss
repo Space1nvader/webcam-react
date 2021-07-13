@@ -1,0 +1,11 @@
+.effect {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  &__text {
+    margin-left: 0.225rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+}

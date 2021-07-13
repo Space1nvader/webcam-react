@@ -8,6 +8,11 @@ export const dataRoutes = [
     component: Dashboard,
     routes: [
       {
+        path: '/model/add-model',
+        label: 'Добавление модели',
+        component: Detail
+      },
+      {
         path: '/model/:userId',
         label: 'Модель',
         component: Detail
