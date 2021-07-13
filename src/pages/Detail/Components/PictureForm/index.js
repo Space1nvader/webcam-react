@@ -46,7 +46,7 @@ const PictureForm = (props) => {
   const { image = null, name, ...other } = props;
   const classes = useStyles();
   const [preview, setPreview] = useState(image);
-  const setControl = (src) => {
+  const generatePicture = (src) => {
     if (src) {
       return userPhotoForm(src, classes.absoluteBtn);
     }
@@ -72,7 +72,7 @@ const PictureForm = (props) => {
         type="file"
       />
       <label htmlFor={name} className="pictureForm__label">
-        {setControl(preview)}
+        {generatePicture(preview)}
       </label>
     </form>
   );

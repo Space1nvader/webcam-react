@@ -14,7 +14,7 @@ const Effect = (props) => {
       fill: 'var(--red-50)'
     }
   })();
-  const setIconFromValue = () => {
+  const generateIconFromValue = () => {
     if (value === 'up') {
       return <ArrowDropUpIcon className={useStyles.arrowUp} />;
     }
@@ -22,7 +22,7 @@ const Effect = (props) => {
   };
   return (
     <div className="effect" {...other}>
-      {setIconFromValue()}
+      {generateIconFromValue()}
       <div className="effect__text">{children}</div>
     </div>
   );
