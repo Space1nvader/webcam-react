@@ -3,7 +3,6 @@ import UserPhoto from 'components/UserPhoto';
 import IconButton from 'components/IconButton';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import { makeStyles } from '@material-ui/core/styles';
-import { Formik } from 'formik';
 import './index.scss';
 
 const useStyles = makeStyles({

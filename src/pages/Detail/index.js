@@ -6,11 +6,14 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import DetailForm from './Components/DataForm';
+import { Tabs } from 'components/Tabs';
+import { Tab } from 'components/Tabs/Tab';
+import PersonalForm from './Components/PersonalForm';
 import DocsForm from './Components/DocsForm';
 import PictureForm from './Components/PictureForm';
 import DetailData from './Components/DetailData';
 import './index.scss';
+import MainDataForm from './Components/MainDataForm';
 
 const useStyles = makeStyles({
   button: {
@@ -36,33 +39,41 @@ const useStyles = makeStyles({
     }
   }
 });
-const tabNames = [
-  {
-    key: 'personal',
-    title: 'Личные данные',
-    icon: <PersonIcon />
-  },
-  {
-    key: 'general',
-    title: 'Основные данные',
-    icon: <PersonAddIcon />
-  },
-  {
-    key: 'account',
-    title: 'Учетные данные',
-    icon: <SettingsIcon />
-  }
-];
-
 const docs = [
   { name: 'Паспорт лицевая сторона Admina.pdf', size: '245 kb' },
   { name: 'Agnes_Fisher.doc ', size: '255 kb' }
 ];
 
+const detailTabs = [
+  {
+    key: 'personal',
+    title: 'Личные данные',
+    icon: <PersonIcon />,
+    component: (
+      <>
+        <PersonalForm className="detail__form" />
+        <DocsForm docs={docs} className="detail__docs" />
+      </>
+    )
+  },
+  {
+    key: 'general',
+    title: 'Основные данные',
+    icon: <PersonAddIcon />,
+    component: <MainDataForm />
+  },
+  {
+    key: 'account',
+    title: 'Учетные данные',
+    icon: <SettingsIcon />,
+    component: <DocsForm docs={docs} className="detail__docs" />
+  }
+];
+
 const Detail = (props) => {
   const { route, match, ...other } = props;
   const model = api.models[match.params.userId - 1];
-  const [isActiveTab, setActiveTab] = useState();
+  const [activeTab, setActiveTab] = useState(0);
   const handleChangeTabClick = (key) => () => {
     setActiveTab(key);
   };
@@ -83,21 +94,22 @@ const Detail = (props) => {
         </div>
         <div className="detail__box">
           <div className="detail__tabs">
-            {tabNames.map((button) => (
+            {detailTabs.map((button, index) => (
               <Button
-                className={`${classes.button} ${
-                  isActiveTab === button.key ? classes.activeButton : ''
-                }`}
+                className={`${classes.button} ${activeTab === index ? classes.activeButton : ''}`}
                 startIcon={button.icon}
-                onClick={handleChangeTabClick(button.key)}
+                onClick={handleChangeTabClick(index)}
               >
                 {button.title}
               </Button>
             ))}
           </div>
           <div className="detail__frame">
-            <DetailForm className="detail__form" />
-            <DocsForm docs={docs} className="detail__docs" />
+            <Tabs activeTab={activeTab}>
+              {detailTabs.map((tab, index) => (
+                <Tab index={index}>{tab.component}</Tab>
+              ))}
+            </Tabs>
           </div>
         </div>
       </div>

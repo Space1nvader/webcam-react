@@ -6,6 +6,7 @@ import { InputField } from 'components/Form/inputField';
 
 import * as Yup from 'yup';
 import './index.scss';
+import FormTitle from '../FormTitle';
 
 const validSchema = Yup.object().shape({
   name: Yup.string().required('очень')
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
   }
 });
 
-const DataForm = (props) => {
+const PersonalForm = (props) => {
   const { className, ...other } = props;
   const classList = `form ${className || ''}`;
   const classes = useStyles();
@@ -27,8 +28,8 @@ const DataForm = (props) => {
     console.log(values);
   };
   return (
-    <form className={classList}>
-      <h6 className="form__title">Личные данные</h6>
+    <div className={classList}>
+      <FormTitle>Личные данные</FormTitle>
 
       <FormContainer
         className="settings"
@@ -79,8 +80,8 @@ const DataForm = (props) => {
           </>
         )}
       </FormContainer>
-    </form>
+    </div>
   );
 };
 
-export default DataForm;
+export default PersonalForm;

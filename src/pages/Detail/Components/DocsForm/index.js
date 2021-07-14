@@ -3,7 +3,7 @@ import IconButton from 'components/IconButton';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
 import UploadFileButton from 'components/UploadFileButton';
-import { FormContainer } from 'components/Form/FormContainer';
+
 import './index.scss';
 
 const DocsForm = (props) => {
@@ -34,11 +34,9 @@ const DocsForm = (props) => {
     <div className={`docs ${className}`} {...other}>
       <h6 className="docs__title">Документы</h6>
       {docs && renderDocs()}
-      <FormContainer>
-        <UploadFileButton size="large" name="docs-upload" icon={<GetAppRoundedIcon />}>
-          ЗАГРУЗИТЬ ФАЙЛ
-        </UploadFileButton>
-      </FormContainer>
+      <UploadFileButton size="large" name="docs-upload" icon={<GetAppRoundedIcon />}>
+        ЗАГРУЗИТЬ ФАЙЛ
+      </UploadFileButton>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { FormContainer } from 'components/Form/FormContainer';
 import './index.scss';
 
 const useStyles = makeStyles({
@@ -19,21 +20,25 @@ const UploadFileButton = (props) => {
   const classes = useStyles();
   const { children, name, icon, ...other } = props;
   return (
-    <form className="uploadFile">
-      <input
-        accept="image/*"
-        className="uploadFile__input"
-        name={name}
-        id={name}
-        multiple
-        type="file"
-      />
-      <label htmlFor={name} className="uploadFile__label">
-        <Button className={classes.button} component="span" {...other} startIcon={icon}>
-          {children || 'Загрузить'}
-        </Button>
-      </label>
-    </form>
+    <FormContainer>
+      {({ isValid }) => (
+        <form className="uploadFile">
+          <input
+            accept="image/*"
+            className="uploadFile__input"
+            name={name}
+            id={name}
+            multiple
+            type="file"
+          />
+          <label htmlFor={name} className="uploadFile__label">
+            <Button className={classes.button} component="span" {...other} startIcon={icon}>
+              {children || 'Загрузить'}
+            </Button>
+          </label>
+        </form>
+      )}
+    </FormContainer>
   );
 };
 export default UploadFileButton;
