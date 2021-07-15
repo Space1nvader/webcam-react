@@ -35,14 +35,13 @@
     padding: 2rem 1.25rem;
     border-radius: 8px;
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
   }
   &__form {
-    width: calc(100% - 23rem);
+    width: 44rem;
   }
   &__docs {
-    width: 19rem;
+    width: calc(100% - 48rem);
     margin-left: 4rem;
   }
   &__contacts {

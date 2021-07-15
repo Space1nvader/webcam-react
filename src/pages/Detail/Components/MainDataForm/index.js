@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
 const MainDataForm = (props) => {
   const { className, ...other } = props;
-  const classList = `form ${className || ''}`;
+  const classList = `form ${className || ' '}`;
   const classes = useStyles();
   const onSubmit = (values) => {
     console.log(values);
@@ -59,13 +59,14 @@ const MainDataForm = (props) => {
                 <TextField className={classes.field} variant="outlined" label="Псевдоним (eng*)" /> */}
             </div>
             <div className="form__set form__set--divider">
-              <InputField name="name-eng" type="text" label="Имя (eng*)" />
-              <InputField name="name-eng" type="text" label="Имя (eng*)" />
+              <InputField className="form__field" name="name-eng" type="text" label="Имя (eng*)" />
+              <InputField className="form__field" name="name-eng" type="text" label="Имя (eng*)" />
             </div>
+
             <div className="form__set form__set--divider">
               <span className="form__setTitle">Паспортные данные</span>
-              <InputField name="name-eng" type="text" label="Имя (eng*)" />
-              <InputField name="name-eng" type="text" label="Имя (eng*)" />
+              <InputField className="form__field" name="name-eng" type="text" label="Имя (eng*)" />
+              <InputField className="form__field" name="name-eng" type="text" label="Имя (eng*)" />
             </div>
             <div className="form__set">
               <InputField name="name-eng" type="text" label="Имя (eng*)" />

@@ -1,9 +1,11 @@
 .form {
   &__set {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     margin-bottom: 2.5rem;
+    & > div:nth-of-type(even) {
+      margin-left: 2rem;
+    }
     &Title {
       font-weight: 600;
       width: 100%;

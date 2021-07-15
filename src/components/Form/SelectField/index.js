@@ -8,24 +8,21 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   field: {
-    width: '48%',
+    width: 'calc(50% - (32px / 2))',
     marginBottom: 26,
-    '& input': {
-      padding: 12
-    },
     '& label': {
       transform: ' translate(14px,14px) scale(1)'
     }
   },
-  button: {
-    marginRight: 16,
-    fontWeight: 700,
-    letterSpacing: '0.035em'
+  select: {
+    '&>div': {
+      padding: 12
+    }
   }
 });
 export const SelectField = (props) => {
   const classes = useStyles();
-  const { name, label, children, className } = props;
+  const { name, label, options, className = '', ...other } = props;
   // eslint-disable-next-line no-nested-ternary
   const [value, setValue] = React.useState('');
   const handleChange = (event) => {
@@ -38,7 +35,7 @@ export const SelectField = (props) => {
         const isError = !!(meta.error && meta.touched);
         const errorClass = isError ? 'error' : '';
         return (
-          <FormControl variant="outlined" className={classes.field}>
+          <FormControl variant="outlined" {...other} className={`${className} ${classes.field}`}>
             <InputLabel id="demo-simple-select-outlined-label">{label}</InputLabel>
             <Select
               {...field}
@@ -46,14 +43,14 @@ export const SelectField = (props) => {
               value={value}
               name={name}
               id={name}
-              className={`${classes.field} ${className} ${errorClass}`}
+              className={`${classes.select} ${errorClass}`}
               onChange={handleChange}
               label={label}
             >
               <MenuItem value="">
-                <em>None</em>
+                <em>Не указано</em>
               </MenuItem>
-              {children.map((option) => (
+              {options.map((option) => (
                 <MenuItem value={option.value}>{option.title}</MenuItem>
               ))}
             </Select>

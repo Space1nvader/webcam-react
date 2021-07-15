@@ -12,8 +12,8 @@ import PersonalForm from './Components/PersonalForm';
 import DocsForm from './Components/DocsForm';
 import PictureForm from './Components/PictureForm';
 import DetailData from './Components/DetailData';
-import './index.scss';
 import MainDataForm from './Components/MainDataForm';
+import './index.scss';
 
 const useStyles = makeStyles({
   button: {
@@ -60,7 +60,7 @@ const detailTabs = [
     key: 'general',
     title: 'Основные данные',
     icon: <PersonAddIcon />,
-    component: <MainDataForm />
+    component: <MainDataForm className="detail__form" />
   },
   {
     key: 'account',
