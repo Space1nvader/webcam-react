@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
   field: {
     width: 'calc(50% - (32px / 2))',
-    marginBottom: 26,
+    marginBottom: 30,
     '& label': {
       transform: ' translate(14px,14px) scale(1)'
     }

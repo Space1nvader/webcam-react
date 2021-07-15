@@ -50,13 +50,6 @@ const MainDataForm = (props) => {
               <InputField name="name-eng" type="text" label="Имя (eng*)" />
               <InputField name="name-eng" type="text" label="Имя (eng*)" />
               <InputField name="name-eng" type="text" label="Имя (eng*)" />
-              {/* TODO когда появится бекенд для формы */}
-              {/* <TextField className={classes.field} variant="outlined" label="Имя (рус*)" />
-                <TextField className={classes.field} variant="outlined" label="Имя (eng*)" />
-                <TextField className={classes.field} variant="outlined" label="Отчество (рус*)" />
-                <TextField className={classes.field} variant="outlined" label="Отчество (eng*)" />
-                <TextField className={classes.field} variant="outlined" label="Фамилия (рус*)" />
-                <TextField className={classes.field} variant="outlined" label="Псевдоним (eng*)" /> */}
             </div>
             <div className="form__set form__set--divider">
               <InputField className="form__field" name="name-eng" type="text" label="Имя (eng*)" />

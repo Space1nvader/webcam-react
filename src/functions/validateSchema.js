@@ -12,6 +12,7 @@ Yup.addMethod(Yup.string, 'Rus', function Rus(err = 'Только русские
 Yup.addMethod(Yup.string, 'Req', function Req(err = 'Обязательное поле') {
   return this.required(err);
 });
+const nubmerErr = 'Допускаются только цифры';
 
 export const PROFILE_VALIDATION_SCHEMA = Yup.object().shape({
   nickname: Yup.string().Req().Eng(),
@@ -21,7 +22,9 @@ export const PROFILE_VALIDATION_SCHEMA = Yup.object().shape({
   secondname_eng: Yup.string().Req().Eng(),
   surname: Yup.string().Req().Rus(),
   surname_eng: Yup.string().Req().Eng(),
-  old: Yup.number()
+  old: Yup.number().typeError(nubmerErr),
+  doc_series: Yup.number().typeError(nubmerErr),
+  doc_nubmer: Yup.number().typeError(nubmerErr)
   // phone: Yup.string().required("Поле обязательно").matches(phoneRegExp, "Неверный номер телефона"),
   // file: Yup.mixed().test("fileSize", "Файл слишком большой", value => value?.size <= 20000)
 });

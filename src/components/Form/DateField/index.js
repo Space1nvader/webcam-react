@@ -1,18 +1,19 @@
 import React from 'react';
 import { Field } from 'formik';
-import { KeyboardDatePicker } from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/core/styles';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+import DateRangeRoundedIcon from '@material-ui/icons/DateRangeRounded';
 
 const useStyles = makeStyles({
   field: {
     width: 'calc(50% - (32px / 2))',
-    marginBottom: 26,
+    marginBottom: 30,
+    marginTop: 0,
     '& label': {
       transform: ' translate(14px,14px) scale(1)'
-    }
-  },
-  select: {
-    '&>div': {
+    },
+    '& input': {
       padding: 12
     }
   }
@@ -23,30 +24,38 @@ export const DateField = (props) => {
     setSelectedDate(date);
   };
   const classes = useStyles();
-  const { name, label, options, className = '', ...other } = props;
+  const { name, label, className = '', ...other } = props;
 
   return (
     <Field {...props}>
       {({ field, form, meta }) => {
         const isError = !!(meta.error && meta.touched);
         const errorClass = isError ? 'error' : '';
+
         return (
-          <KeyboardDatePicker
-            disableToolbar
-            variant="outlined"
-            format="MM/dd/yyyy"
-            id={name}
-            {...field}
-            labelId={name}
-            label={name}
-            name={name}
-            value={selectedDate}
-            onChange={handleDateChange}
-            KeyboardButtonProps={{
-              'aria-label': 'change date'
-            }}
-            helperText={meta.error || ''}
-          />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              variant="inline"
+              inputVariant="outlined"
+              format="MM/dd/yyyy"
+              margin="normal"
+              id={name}
+              {...field}
+              labelId={name}
+              label={label}
+              name={name}
+              value={selectedDate}
+              className={`${classes.field} ${className} ${errorClass}`}
+              onChange={handleDateChange}
+              KeyboardButtonProps={{
+                'aria-label': 'change date',
+                size: 'small'
+              }}
+              keyboardIcon={<DateRangeRoundedIcon />}
+              helperText={meta.error || ''}
+            />
+          </MuiPickersUtilsProvider>
         );
       }}
     </Field>
