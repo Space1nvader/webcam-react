@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from 'components/Logo';
 import Wrapper from 'components/Wrapper';
 import Profile from 'components/Profile';
-import LinkButton from 'components/LinkButton';
+import RouteButton from 'components/RouteButton';
 import Papper from 'components/Papper';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import DonutSmallRoundedIcon from '@material-ui/icons/DonutSmallRounded';
@@ -18,13 +18,12 @@ const Header = () => (
         <Link to="/">
           <Logo />
         </Link>
-
         <div className="header__cell">
-          <LinkButton icon={<SupervisorAccountIcon />}>Модели</LinkButton>
-          <LinkButton active icon={<DonutSmallRoundedIcon />}>
+          <RouteButton icon={<SupervisorAccountIcon />}>Модели</RouteButton>
+          <RouteButton active icon={<DonutSmallRoundedIcon />}>
             Статистика
-          </LinkButton>
-          <LinkButton icon={<TuneRoundedIcon />}>Опции</LinkButton>
+          </RouteButton>
+          <RouteButton icon={<TuneRoundedIcon />}>Опции</RouteButton>
         </div>
         <Papper style={{ borderRadius: '12px' }}>
           <Profile image={UserImage}>FirstStudioPetr</Profile>
