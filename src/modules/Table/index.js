@@ -75,13 +75,13 @@ const DataTable = (props) => {
               </TableCell>
               {fields.map((field) =>
                 field.id === 'name' ? (
-                  <TableCell>
+                  <TableCell key={field.id}>
                     <User to={`/model/${row.id}`} image={row.user.image}>
                       {row.user.nickname} / {row.user.name}
                     </User>
                   </TableCell>
                 ) : (
-                  <TableCell type={{ name: field.type, state: row[field.id] }}>
+                  <TableCell key={field.id} type={{ name: field.type, state: row[field.id] }}>
                     {row[field.id]}
                   </TableCell>
                 )
@@ -90,7 +90,13 @@ const DataTable = (props) => {
           ))}
         </TableBody>
       </Table>
-      <TablePagination count={rows.length} rowsPerPageOptions={false} page={0} rowsPerPage="10" />
+      <TablePagination
+        count={rows.length}
+        rowsPerPageOptions={[10]}
+        onPageChange={() => console.log('page changes')}
+        page={0}
+        rowsPerPage={10}
+      />
     </TableContainer>
   );
 };

@@ -74,8 +74,8 @@ const Detail = (props) => {
   const { route, match, ...other } = props;
   const model = api.models[match.params.userId - 1];
   const [activeTab, setActiveTab] = useState(0);
-  const handleChangeTabClick = (key) => () => {
-    setActiveTab(key);
+  const handleChangeTabClick = (index) => () => {
+    setActiveTab(index);
   };
   const classes = useStyles();
   return (
@@ -96,6 +96,7 @@ const Detail = (props) => {
           <div className="detail__tabs">
             {detailTabs.map((button, index) => (
               <Button
+                key={button.key}
                 className={`${classes.button} ${activeTab === index ? classes.activeButton : ''}`}
                 startIcon={button.icon}
                 onClick={handleChangeTabClick(index)}
@@ -107,7 +108,9 @@ const Detail = (props) => {
           <div className="detail__frame">
             <Tabs activeTab={activeTab}>
               {detailTabs.map((tab, index) => (
-                <Tab index={index}>{tab.component}</Tab>
+                <Tab key={tab.title} index={index}>
+                  {tab.component}
+                </Tab>
               ))}
             </Tabs>
           </div>

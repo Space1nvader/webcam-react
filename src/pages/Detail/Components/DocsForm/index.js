@@ -12,7 +12,7 @@ const DocsForm = (props) => {
   const renderDocs = () => (
     <div className="docs__list">
       {docs.map((doc) => (
-        <div className="docs__item">
+        <div className="docs__item" key={doc.name}>
           <span className="docs__itemName">{doc.name}</span>
           <div className="docs__itemRow">
             <span className="docs__itemSize">{doc.size}</span>

@@ -6,8 +6,8 @@ import { InputField } from 'components/Form/inputField';
 import { DateField } from 'components/Form/DateField';
 import { SelectField } from 'components/Form/SelectField';
 import { PROFILE_VALIDATION_SCHEMA } from 'functions/validateSchema';
+import FieldSet from 'components/Form/FieldSet';
 import FormTitle from '../FormTitle';
-import './index.scss';
 
 const useStyles = makeStyles({
   button: {
@@ -30,15 +30,15 @@ const PersonalForm = (props) => {
 
       <FormContainer
         className="settings"
-        // enableReinitialize
+        enableReinitialize
         initialValues={{}}
         validationSchema={PROFILE_VALIDATION_SCHEMA}
         onSubmit={onSubmit}
       >
-        {({ isValid }) => (
-          <>
+        {({ isValid, errors, validateForm }) => (
+          <form>
             <InputField name="nickname" type="text" label="Псевдоним (eng*)" required />
-            <div className="form__set form__set--divider">
+            <FieldSet divider>
               <InputField
                 className="form__field"
                 name="name"
@@ -81,8 +81,8 @@ const PersonalForm = (props) => {
                 label="Фамилия (eng*)"
                 required
               />
-            </div>
-            <div className="form__set form__set--divider">
+            </FieldSet>
+            <FieldSet divider>
               <SelectField
                 className="form__field"
                 label="Пол"
@@ -98,9 +98,8 @@ const PersonalForm = (props) => {
                 type="Nubmer"
                 name="old"
               />
-            </div>
-            <div className="form__set form__set--divider">
-              <span className="form__setTitle">Паспортные данные</span>
+            </FieldSet>
+            <FieldSet divider title="Паспортные данные">
               <DateField
                 className="form__field"
                 name="birthday"
@@ -113,8 +112,8 @@ const PersonalForm = (props) => {
                 type="text"
                 label="Серия номер"
               />
-            </div>
-            <div className="form__set">
+            </FieldSet>
+            <FieldSet>
               <DateField
                 className="form__field"
                 name="doc_term"
@@ -131,8 +130,8 @@ const PersonalForm = (props) => {
               <InputField className="form__field" name="region" type="text" label="Регион" />
               <InputField className="form__field" name="city" type="text" label="Город" />
               <InputField className="form__field" name="adress" type="text" label="Адрес" />
-            </div>
-            <div className="form__set form__set--divider">
+            </FieldSet>
+            <FieldSet divider>
               <InputField
                 className="form__field"
                 label="Почтовый индекс"
@@ -147,14 +146,22 @@ const PersonalForm = (props) => {
                 type="password"
                 name="password"
               />
-            </div>
-            <Button color="secondary" type="submit" className={classes.button} variant="contained">
+            </FieldSet>
+            <Button
+              color="secondary"
+              type="submit"
+              onClick={() => {
+                validateForm();
+              }}
+              className={classes.button}
+              variant="contained"
+            >
               сохранить
             </Button>
             <Button className={classes.button} variant="contained">
               отменить
             </Button>
-          </>
+          </form>
         )}
       </FormContainer>
     </div>

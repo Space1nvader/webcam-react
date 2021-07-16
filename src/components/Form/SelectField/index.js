@@ -51,7 +51,7 @@ export const SelectField = (props) => {
                 <em>Не указано</em>
               </MenuItem>
               {options.map((option) => (
-                <MenuItem value={option.value}>{option.title}</MenuItem>
+                <MenuItem value={option.value || option.title}>{option.title}</MenuItem>
               ))}
             </Select>
           </FormControl>

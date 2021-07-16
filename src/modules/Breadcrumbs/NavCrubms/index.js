@@ -16,7 +16,10 @@ const NavCrubms = (props) => {
       style={{ marginBottom: 26 }}
     >
       {pathTo(route).map((crumb, index, breadcrumbs) => (
-        <Typography style={{ fontSize: 14, fontWeight: 500, color: 'var(--gray-40)' }}>
+        <Typography
+          key={crumb.label}
+          style={{ fontSize: 14, fontWeight: 500, color: 'var(--gray-40)' }}
+        >
           {index < breadcrumbs.length - 1 ? (
             <Link style={{ fontWeight: 500, color: 'var(--gray-80)' }} to={crumb.path}>
               {crumb.label}

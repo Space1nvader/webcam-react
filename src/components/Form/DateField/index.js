@@ -42,7 +42,7 @@ export const DateField = (props) => {
               margin="normal"
               id={name}
               {...field}
-              labelId={name}
+              labelid={name}
               label={label}
               name={name}
               value={selectedDate}

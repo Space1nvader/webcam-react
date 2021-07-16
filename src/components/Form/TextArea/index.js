@@ -6,7 +6,7 @@ import { theme } from 'functions/customTheme';
 
 const useStyles = makeStyles({
   field: {
-    width: 'calc(50% - (32px / 2))',
+    width: '100%',
     marginBottom: 30,
     '& input': {
       padding: 12,
@@ -33,9 +33,10 @@ const useStyles = makeStyles({
     color: 'green'
   }
 });
-export const InputField = (props) => {
+export const TextArea = (props) => {
   const classes = useStyles();
-  const { title = '', name, required, label, type, className = '', ...other } = props;
+  const { title = '', name, required, rows = '5', label, type, className = '', ...other } = props;
+  // eslint-disable-next-line no-nested-ternary
 
   return (
     <Field {...props}>
@@ -47,8 +48,10 @@ export const InputField = (props) => {
             {...field}
             {...other}
             name={name}
+            multiline
             id={name}
             type={type}
+            rows={rows}
             className={`${classes.field} ${className} ${errorClass}`}
             variant="outlined"
             label={label}
