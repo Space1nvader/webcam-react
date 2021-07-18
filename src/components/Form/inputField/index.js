@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Field } from 'formik';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
@@ -35,7 +35,7 @@ const useStyles = makeStyles({
 });
 export const InputField = (props) => {
   const classes = useStyles();
-  const { title = '', name, required, label, type, className = '', ...other } = props;
+  const { title = '', name, label, type, className = '', ...other } = props;
 
   return (
     <Field {...props}>
@@ -53,7 +53,7 @@ export const InputField = (props) => {
             variant="outlined"
             label={label}
             helperText={isError && meta.error}
-            // helperText={isError ? meta.error : required && 'Обязательное поле'}
+            
           />
         );
       }}

@@ -23,7 +23,8 @@ const PersonalForm = (props) => {
   const classes = useStyles();
   const onSubmit = (values) => {
     console.log('SUBMIT', values);
-  };
+};
+  
   return (
     <div className={classList}>
       <FormTitle>Личные данные</FormTitle>
@@ -31,55 +32,55 @@ const PersonalForm = (props) => {
       <FormContainer
         className="settings"
         enableReinitialize
-        initialValues={{}}
+        initialValues={{name: '', name_eng: ''}}
         validationSchema={PROFILE_VALIDATION_SCHEMA}
         onSubmit={onSubmit}
       >
         {({ isValid, errors, validateForm }) => (
-          <form>
-            <InputField name="nickname" type="text" label="Псевдоним (eng*)" required />
+
+          <>
+            <InputField name="nickname" type="text" label="Псевдоним (eng*)" />
             <FieldSet divider>
               <InputField
                 className="form__field"
                 name="name"
                 type="text"
                 label="Имя (рус*)"
-                required
               />
               <InputField
                 className="form__field"
                 name="name_eng"
                 type="text"
                 label="Имя (eng*)"
-                required
+                
               />
               <InputField
                 className="form__field"
                 name="secondname"
                 type="text"
                 label="Отчество (рус)"
-                required
+                
               />
               <InputField
                 className="form__field"
                 name="secondname_eng"
                 type="text"
                 label="Отчество (eng*)"
-                required
+                
               />
               <InputField
                 className="form__field"
                 name="surname"
                 type="text"
                 label="Фамилия (рус)"
-                required
+                
               />
               <InputField
                 className="form__field"
                 name="surname_eng"
                 type="text"
                 label="Фамилия (eng*)"
-                required
+                
               />
             </FieldSet>
             <FieldSet divider>
@@ -150,9 +151,6 @@ const PersonalForm = (props) => {
             <Button
               color="secondary"
               type="submit"
-              onClick={() => {
-                validateForm();
-              }}
               className={classes.button}
               variant="contained"
             >
@@ -161,7 +159,7 @@ const PersonalForm = (props) => {
             <Button className={classes.button} variant="contained">
               отменить
             </Button>
-          </form>
+            </>
         )}
       </FormContainer>
     </div>
