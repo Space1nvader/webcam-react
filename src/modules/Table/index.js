@@ -33,7 +33,7 @@ const DataTable = (props) => {
   const { rows, fields, ...other } = props;
   const classes = useStyles();
 
-  const [isSelect, setSelectState] = useState();
+  const [isSelect, setSelectState] = useState(new Set());
   const selected = new Set(isSelect);
   const handleSelectClick = (id) => () => {
     if (selected.has(id)) {
@@ -49,9 +49,8 @@ const DataTable = (props) => {
       setSelectState(selected);
       return;
     }
-    setSelectState(null);
+    setSelectState(new Set());
   };
-  const isChecked = (id) => (isSelect ? isSelect.has(id) : false);
 
   return (
     <TableContainer {...other} className={classes.tableContainer}>
@@ -71,7 +70,10 @@ const DataTable = (props) => {
           {rows.map((row) => (
             <TableRow className={classes.tableRow} key={row.id}>
               <TableCell padding="checkbox">
-                <SmallCheckbox checked={isChecked(row.id)} onChange={handleSelectClick(row.id)} />
+                <SmallCheckbox
+                  checked={isSelect.has(row.id)}
+                  onChange={handleSelectClick(row.id)}
+                />
               </TableCell>
               {fields.map((field) =>
                 field.id === 'name' ? (

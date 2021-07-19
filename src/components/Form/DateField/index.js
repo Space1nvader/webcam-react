@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateRangeRoundedIcon from '@material-ui/icons/DateRangeRounded';
+import clsx from 'clsx';
 
 const useStyles = makeStyles({
   field: {
@@ -46,7 +47,7 @@ export const DateField = (props) => {
               label={label}
               name={name}
               value={selectedDate}
-              className={`${classes.field} ${className} ${errorClass}`}
+              className={clsx(classes.field, className && className, errorClass)}
               onChange={handleDateChange}
               KeyboardButtonProps={{
                 'aria-label': 'change date',

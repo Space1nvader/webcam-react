@@ -5,14 +5,18 @@ import { FormContainer } from 'components/Form/FormContainer';
 import { InputField } from 'components/Form/inputField';
 import { DateField } from 'components/Form/DateField';
 import { SelectField } from 'components/Form/SelectField';
-import { PROFILE_VALIDATION_SCHEMA } from 'functions/validateSchema';
+import { PROFILE_VALIDATION_SCHEMA } from 'constants/validateSchema';
 import FieldSet from 'components/Form/FieldSet';
+import { PasswordField } from 'components/Form/PasswordField';
 import FormTitle from '../FormTitle';
 
 const useStyles = makeStyles({
   button: {
     marginRight: 16,
+    boxShadow: 'none',
     fontWeight: 700,
+    fontSize: 14,
+    padding: '8px 24px',
     letterSpacing: '0.035em'
   }
 });
@@ -23,8 +27,8 @@ const PersonalForm = (props) => {
   const classes = useStyles();
   const onSubmit = (values) => {
     console.log('SUBMIT', values);
-};
-  
+  };
+
   return (
     <div className={classList}>
       <FormTitle>Личные данные</FormTitle>
@@ -32,55 +36,47 @@ const PersonalForm = (props) => {
       <FormContainer
         className="settings"
         enableReinitialize
-        initialValues={{name: '', name_eng: ''}}
+        initialValues={{
+          nickname: '',
+          name: '',
+          name_eng: '',
+          secondname: '',
+          secondname_eng: '',
+          surname: '',
+          surname_eng: ''
+        }}
         validationSchema={PROFILE_VALIDATION_SCHEMA}
         onSubmit={onSubmit}
       >
-        {({ isValid, errors, validateForm }) => (
-
+        {() => (
           <>
             <InputField name="nickname" type="text" label="Псевдоним (eng*)" />
             <FieldSet divider>
-              <InputField
-                className="form__field"
-                name="name"
-                type="text"
-                label="Имя (рус*)"
-              />
-              <InputField
-                className="form__field"
-                name="name_eng"
-                type="text"
-                label="Имя (eng*)"
-                
-              />
+              <InputField className="form__field" name="name" type="text" label="Имя (рус*)" />
+              <InputField className="form__field" name="name_eng" type="text" label="Имя (eng*)" />
               <InputField
                 className="form__field"
                 name="secondname"
                 type="text"
                 label="Отчество (рус)"
-                
               />
               <InputField
                 className="form__field"
                 name="secondname_eng"
                 type="text"
                 label="Отчество (eng*)"
-                
               />
               <InputField
                 className="form__field"
                 name="surname"
                 type="text"
                 label="Фамилия (рус)"
-                
               />
               <InputField
                 className="form__field"
                 name="surname_eng"
                 type="text"
                 label="Фамилия (eng*)"
-                
               />
             </FieldSet>
             <FieldSet divider>
@@ -141,25 +137,17 @@ const PersonalForm = (props) => {
               />
               <InputField className="form__field" label="Телефон" type="phone" name="phone" />
               <InputField className="form__field" label="Email" type="email" name="email" />
-              <InputField
-                className="form__field"
-                label="Email пароль"
-                type="password"
-                name="password"
-              />
+              {/* TODO: PASSWORD FIELD */}
+              <PasswordField className="form__field" label="Email пароль" name="password" />
             </FieldSet>
-            <Button
-              color="secondary"
-              type="submit"
-              className={classes.button}
-              variant="contained"
-            >
+
+            <Button color="secondary" type="submit" className={classes.button} variant="contained">
               сохранить
             </Button>
             <Button className={classes.button} variant="contained">
               отменить
             </Button>
-            </>
+          </>
         )}
       </FormContainer>
     </div>

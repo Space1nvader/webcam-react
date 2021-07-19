@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Field } from 'formik';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from 'components/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import clsx from 'clsx';
 
 const useStyles = makeStyles({
@@ -33,10 +37,18 @@ const useStyles = makeStyles({
     color: 'green'
   }
 });
-export const InputField = (props) => {
+export const PasswordField = (props) => {
   const classes = useStyles();
-  const { name, label, type = 'text', className = '', ...other } = props;
-
+  const { name, label, type = 'password', className = '', ...other } = props;
+  const [values, setValues] = useState({
+    showPassword: false
+  });
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
   return (
     <Field {...props}>
       {({ field, form, meta }) => {
@@ -48,7 +60,19 @@ export const InputField = (props) => {
             {...other}
             name={name}
             id={name}
-            type={type}
+            type={values.showPassword ? 'text' : 'password'}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
             className={clsx(classes.field, className && className, errorClass)}
             variant="outlined"
             label={label}

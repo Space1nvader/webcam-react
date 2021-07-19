@@ -16,6 +16,9 @@ import funnelIcon from 'assets/img/funnel-fill.svg';
 
 const useStyles = makeStyles(() => ({
   search: {
+    '& input': {
+      padding: '12px 14px'
+    },
     '& fieldset': {
       borderColor: 'var(--gray-20)'
     },

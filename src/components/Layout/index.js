@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Header from 'components/Header';
-import { theme } from 'functions/customTheme';
+import { theme } from 'constants/customTheme';
 import { ThemeProvider } from '@material-ui/styles';
 
 const Layout = ({ children }) => (

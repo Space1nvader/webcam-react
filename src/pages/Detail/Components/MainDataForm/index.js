@@ -4,11 +4,10 @@ import { Button } from '@material-ui/core';
 import { FormContainer } from 'components/Form/FormContainer';
 import { InputField } from 'components/Form/inputField';
 import { SelectField } from 'components/Form/SelectField';
-import * as Yup from 'yup';
 import FieldSet from 'components/Form/FieldSet';
 import bodyImage from 'assets/img/image19.png';
 import { TextArea } from 'components/Form/TextArea';
-import { SETTING_VALIDATION_SCHEMA } from 'functions/validateSchema';
+import { SETTING_VALIDATION_SCHEMA } from 'constants/validateSchema';
 import FormTitle from '../FormTitle';
 
 const useStyles = makeStyles({

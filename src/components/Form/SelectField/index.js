@@ -23,7 +23,6 @@ const useStyles = makeStyles({
 export const SelectField = (props) => {
   const classes = useStyles();
   const { name, label, options, className = '', ...other } = props;
-  // eslint-disable-next-line no-nested-ternary
   const [value, setValue] = React.useState('');
   const handleChange = (event) => {
     setValue(event.target.value);
