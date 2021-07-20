@@ -34,6 +34,7 @@ const DataTable = (props) => {
   const classes = useStyles();
 
   const [isSelect, setSelectState] = useState(new Set());
+
   const selected = new Set(isSelect);
   const handleSelectClick = (id) => () => {
     if (selected.has(id)) {

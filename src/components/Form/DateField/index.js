@@ -2,6 +2,7 @@ import React from 'react';
 import { Field } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
 import DateFnsUtils from '@date-io/date-fns';
+import ruLocale from 'date-fns/locale/ru';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateRangeRoundedIcon from '@material-ui/icons/DateRangeRounded';
 import clsx from 'clsx';
@@ -34,7 +35,7 @@ export const DateField = (props) => {
         const errorClass = isError ? 'error' : '';
 
         return (
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
             <KeyboardDatePicker
               disableToolbar
               variant="inline"
@@ -42,6 +43,7 @@ export const DateField = (props) => {
               format="MM/dd/yyyy"
               margin="normal"
               id={name}
+              {...other}
               {...field}
               labelid={name}
               label={label}

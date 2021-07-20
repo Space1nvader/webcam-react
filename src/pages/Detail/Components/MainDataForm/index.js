@@ -13,7 +13,10 @@ import FormTitle from '../FormTitle';
 const useStyles = makeStyles({
   button: {
     marginRight: 16,
+    boxShadow: 'none',
     fontWeight: 700,
+    fontSize: 14,
+    padding: '8px 24px',
     letterSpacing: '0.035em'
   },
   formControl: {

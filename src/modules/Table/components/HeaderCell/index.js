@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 const HeaderCell = (props) => {
-  const { sortble, children, ...other } = props;
+  const { sortble, children, onClick, ...other } = props;
   const cellStyles = makeStyles({
     cell: {
       border: 'none',
@@ -26,7 +26,7 @@ const HeaderCell = (props) => {
     <TableCell className={cellStyles().cell} {...other}>
       {children}
       {sortble && (
-        <IconButton size="small" style={{ marginLeft: 8 }}>
+        <IconButton size="small" onClick={onClick} style={{ marginLeft: 8 }}>
           <ArrowDownwardIcon fontSize="small" style={{ fill: 'var(--gray-40)' }} />
         </IconButton>
       )}
