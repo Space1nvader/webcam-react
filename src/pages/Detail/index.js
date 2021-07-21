@@ -72,7 +72,7 @@ const detailTabs = [
 ];
 
 const Detail = (props) => {
-  const { route, match, ...other } = props;
+  const { route, match } = props;
   const model = api.models[match.params.userId - 1];
   const [activeTab, setActiveTab] = useState(0);
   const handleChangeTabClick = (index) => () => {
@@ -88,8 +88,8 @@ const Detail = (props) => {
         <div className="detail__data">
           <PictureForm
             style={{ marginBottom: 10 }}
-            name="profile-picture"
-            image={model ? model.user.image : null}
+            name="profile_picture"
+            initialValue={{ profile_picture: model ? model.user.image : '' }}
           />
           {model && <DetailData data={model} />}
         </div>

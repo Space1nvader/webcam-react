@@ -2,7 +2,7 @@ import React from 'react';
 import IconButton from 'components/IconButton';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
-import UploadFileButton from 'components/UploadFileButton';
+import UploadFileForm from 'components/Form/UploadFileForm';
 
 import './index.scss';
 
@@ -34,9 +34,15 @@ const DocsForm = (props) => {
     <div className={`docs ${className}`} {...other}>
       <h6 className="docs__title">Документы</h6>
       {docs && renderDocs()}
-      <UploadFileButton size="large" name="docs-upload" icon={<GetAppRoundedIcon />}>
+
+      <UploadFileForm
+        size="large"
+        name="docs_upload"
+        initialValue={{ name: '' }}
+        icon={<GetAppRoundedIcon />}
+      >
         ЗАГРУЗИТЬ ФАЙЛ
-      </UploadFileButton>
+      </UploadFileForm>
     </div>
   );
 };

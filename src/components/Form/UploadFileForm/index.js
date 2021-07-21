@@ -18,16 +18,21 @@ const useStyles = makeStyles({
 
 const UploadFileButton = (props) => {
   const classes = useStyles();
-  const { children, name, icon, ...other } = props;
+  const { children, name, initialValue, icon, ...other } = props;
+
+  const onSubmit = (values) => {
+    console.log('SUBMIT', values);
+  };
   return (
-    <FormContainer>
-      {({ isValid }) => (
-        <form className="uploadFile">
+    <FormContainer enableReinitialize initialValues={initialValue} onSubmit={onSubmit}>
+      {({ isValid, submitForm, values }) => (
+        <>
           <input
             accept="image/*"
             className="uploadFile__input"
             name={name}
             id={name}
+            onChange={submitForm}
             multiple
             type="file"
           />
@@ -36,7 +41,7 @@ const UploadFileButton = (props) => {
               {children || 'Загрузить'}
             </Button>
           </label>
-        </form>
+        </>
       )}
     </FormContainer>
   );

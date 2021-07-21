@@ -66,7 +66,7 @@ const MainDataForm = (props) => {
         validationSchema={SETTING_VALIDATION_SCHEMA}
         onSubmit={onSubmit}
       >
-        {({ isValid, validateForm }) => (
+        {() => (
           <>
             <FieldSet divider>
               <SelectField
@@ -184,7 +184,7 @@ const MainDataForm = (props) => {
             </Button>
             <Button
               className={classes.button}
-              onClick={() => validateForm().then(() => console.log('blah'))}
+              // onClick={() => validateForm().then(() => console.log('blah'))}
               type="submit"
               variant="contained"
             >
