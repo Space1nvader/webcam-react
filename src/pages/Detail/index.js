@@ -8,7 +8,6 @@ import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Tabs } from 'components/Tabs';
 import { Tab } from 'components/Tabs/Tab';
-
 import PersonalForm from './Components/PersonalForm';
 import DocsForm from './Components/DocsForm';
 import PictureForm from './Components/PictureForm';
@@ -40,6 +39,7 @@ const useStyles = makeStyles({
     }
   }
 });
+
 const docs = [
   { name: 'Паспорт лицевая сторона Admina.pdf', size: '245 kb' },
   { name: 'Agnes_Fisher.doc ', size: '255 kb' }

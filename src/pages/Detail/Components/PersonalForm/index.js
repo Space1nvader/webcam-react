@@ -28,6 +28,15 @@ const PersonalForm = (props) => {
   const onSubmit = (values) => {
     console.log('SUBMIT', values);
   };
+  const initialValues = {
+    nickname: '',
+    name: '',
+    name_eng: '',
+    secondname: '',
+    secondname_eng: '',
+    surname: '',
+    surname_eng: ''
+  };
 
   return (
     <div className={classList}>
@@ -36,15 +45,7 @@ const PersonalForm = (props) => {
       <FormContainer
         className="settings"
         enableReinitialize
-        initialValues={{
-          nickname: '',
-          name: '',
-          name_eng: '',
-          secondname: '',
-          secondname_eng: '',
-          surname: '',
-          surname_eng: ''
-        }}
+        initialValues={initialValues}
         validationSchema={PROFILE_VALIDATION_SCHEMA}
         onSubmit={onSubmit}
       >
