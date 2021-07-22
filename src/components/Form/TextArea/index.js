@@ -2,6 +2,7 @@ import React from 'react';
 import { Field } from 'formik';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 
 const useStyles = makeStyles({
   field: {
@@ -34,11 +35,11 @@ const useStyles = makeStyles({
 });
 export const TextArea = (props) => {
   const classes = useStyles();
-  const { name, rows = '5', label, type, className = '', ...other } = props;
+  const { name, rows = '5', label, type, className, ...other } = props;
 
   return (
     <Field {...props}>
-      {({ field, form, meta }) => {
+      {({ field, meta }) => {
         const isError = !!(meta.error && meta.touched);
         const errorClass = isError ? 'error' : '';
         return (
@@ -50,7 +51,7 @@ export const TextArea = (props) => {
             id={name}
             type={type}
             rows={rows}
-            className={`${classes.field} ${className} ${errorClass}`}
+            className={clsx(classes.field, className, errorClass)}
             variant="outlined"
             label={label}
             helperText={isError && meta.error}

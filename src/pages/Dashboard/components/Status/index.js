@@ -1,6 +1,6 @@
 import React from 'react';
 import Papper from 'components/Papper';
-import IconButton from 'components/IconButton';
+import IconBtn from 'components/IconBtn';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import './index.scss';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const Staus = () => (
   <div className="status">
     <Link to="/model/add-model">
-      <IconButton
+      <IconBtn
         style={{
           backgroundColor: 'var(--red-60)',
           height: 40,
@@ -17,7 +17,7 @@ const Staus = () => (
         }}
       >
         <AddRoundedIcon style={{ fill: '#fff' }} />
-      </IconButton>
+      </IconBtn>
     </Link>
 
     <Papper style={{ marginLeft: '24px' }}>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import UserPhoto from 'components/UserPhoto';
-import IconButton from 'components/IconButton';
+import IconBtn from 'components/IconBtn';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 
 const useStyles = makeStyles({
@@ -26,17 +26,17 @@ const useStyles = makeStyles({
 });
 
 const addPhotoButton = (className) => (
-  <IconButton component="span" className={className}>
+  <IconBtn component="span" className={className}>
     <AddRoundedIcon style={{ width: 50, height: 50, fill: 'var(--gray-20)' }} />
-  </IconButton>
+  </IconBtn>
 );
 
 const userPhotoForm = (image, className) => (
   <>
     <UserPhoto style={{ height: '100%', width: '100%' }} image={image} />
-    <IconButton component="span" className={className}>
+    <IconBtn component="span" className={className}>
       <AddRoundedIcon style={{ fill: '#fff' }} />
-    </IconButton>
+    </IconBtn>
   </>
 );
 

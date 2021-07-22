@@ -26,11 +26,11 @@ export const DateField = (props) => {
     setSelectedDate(date);
   };
   const classes = useStyles();
-  const { name, label, className = '', ...other } = props;
+  const { name, label, className, ...other } = props;
 
   return (
     <Field {...props}>
-      {({ field, form, meta }) => {
+      {({ field, meta }) => {
         const isError = !!(meta.error && meta.touched);
         const errorClass = isError ? 'error' : '';
 
@@ -49,7 +49,7 @@ export const DateField = (props) => {
               label={label}
               name={name}
               value={selectedDate}
-              className={clsx(classes.field, className && className, errorClass)}
+              className={clsx(classes.field, className, errorClass)}
               onChange={handleDateChange}
               KeyboardButtonProps={{
                 'aria-label': 'change date',

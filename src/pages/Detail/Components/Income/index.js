@@ -1,8 +1,8 @@
 import React from 'react';
-import IconButton from 'components/IconButton';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import './index.scss';
 import Effect from 'components/Effect';
+import SimpleMenu from 'components/SimpleMenu';
+import './index.scss';
 
 const Income = (props) => {
   const { ...other } = props;
@@ -10,9 +10,9 @@ const Income = (props) => {
     <div className="income" {...other}>
       <div className="income__header">
         <span className="income__title">Прибыль в месяце</span>
-        <IconButton>
-          <MoreHorizIcon style={{ fill: 'var(--indigo-30)' }} />
-        </IconButton>
+        <SimpleMenu icon={<MoreHorizIcon style={{ fill: 'var(--indigo-30)' }} />}>
+          {['312', '123', '312']}
+        </SimpleMenu>
       </div>
       <h4 className="income__value">$7,784</h4>
       <Effect value="up">+ 20% прибыль</Effect>

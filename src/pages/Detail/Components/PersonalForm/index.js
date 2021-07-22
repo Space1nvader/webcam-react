@@ -8,6 +8,7 @@ import { SelectField } from 'components/Form/SelectField';
 import { PROFILE_VALIDATION_SCHEMA } from 'constants/validateSchema';
 import FieldSet from 'components/Form/FieldSet';
 import { PasswordField } from 'components/Form/PasswordField';
+import clsx from 'clsx';
 import FormTitle from '../FormTitle';
 
 const useStyles = makeStyles({
@@ -20,10 +21,7 @@ const useStyles = makeStyles({
     letterSpacing: '0.035em'
   }
 });
-
-const PersonalForm = (props) => {
-  const { className, ...other } = props;
-  const classList = `form ${className || ''}`;
+const PersonalForm = ({ className }) => {
   const classes = useStyles();
   const onSubmit = (values) => {
     console.log('SUBMIT', values);
@@ -39,7 +37,7 @@ const PersonalForm = (props) => {
   };
 
   return (
-    <div className={classList}>
+    <div className={clsx('form', className)}>
       <FormTitle>Личные данные</FormTitle>
 
       <FormContainer
@@ -137,8 +135,6 @@ const PersonalForm = (props) => {
                 name="zip"
               />
               <InputField className="form__field" label="Телефон" type="phone" name="phone" />
-              <InputField className="form__field" label="Email" type="email" name="email" />
-              {/* TODO: PASSWORD FIELD */}
               <PasswordField className="form__field" label="Email пароль" name="password" />
             </FieldSet>
 

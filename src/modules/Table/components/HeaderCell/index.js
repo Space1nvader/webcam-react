@@ -1,7 +1,7 @@
 import React from 'react';
 import TableCell from '@material-ui/core/TableCell';
 import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
+import IconBtn from 'components/IconBtn';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 const HeaderCell = (props) => {
@@ -26,9 +26,9 @@ const HeaderCell = (props) => {
     <TableCell className={cellStyles().cell} {...other}>
       {children}
       {sortble && (
-        <IconButton size="small" onClick={onClick} style={{ marginLeft: 8 }}>
+        <IconBtn onClick={onClick} style={{ marginLeft: 8 }}>
           <ArrowDownwardIcon fontSize="small" style={{ fill: 'var(--gray-40)' }} />
-        </IconButton>
+        </IconBtn>
       )}
     </TableCell>
   );

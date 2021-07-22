@@ -5,6 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 
 const useStyles = makeStyles({
   field: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
 });
 export const SelectField = (props) => {
   const classes = useStyles();
-  const { name, label, options, className = '', ...other } = props;
+  const { name, label, options, className, ...other } = props;
   const [value, setValue] = React.useState('');
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -30,19 +31,19 @@ export const SelectField = (props) => {
 
   return (
     <Field {...props}>
-      {({ field, form, meta }) => {
+      {({ field, meta }) => {
         const isError = !!(meta.error && meta.touched);
         const errorClass = isError ? 'error' : '';
         return (
-          <FormControl variant="outlined" {...other} className={`${className} ${classes.field}`}>
-            <InputLabel id="demo-simple-select-outlined-label">{label}</InputLabel>
+          <FormControl variant="outlined" {...other} className={clsx(className, classes.field)}>
+            <InputLabel id={name}>{label}</InputLabel>
             <Select
               {...field}
               labelId={name}
               value={value}
               name={name}
               id={name}
-              className={`${classes.select} ${errorClass}`}
+              className={clsx(classes.select, errorClass)}
               onChange={handleChange}
               label={label}
             >

@@ -8,11 +8,13 @@ import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Tabs } from 'components/Tabs';
 import { Tab } from 'components/Tabs/Tab';
+import clsx from 'clsx';
 import PersonalForm from './Components/PersonalForm';
 import DocsForm from './Components/DocsForm';
 import PictureForm from './Components/PictureForm';
 import DetailData from './Components/DetailData';
 import MainDataForm from './Components/MainDataForm';
+
 import './index.scss';
 
 const useStyles = makeStyles({
@@ -98,7 +100,7 @@ const Detail = (props) => {
             {detailTabs.map((button, index) => (
               <Button
                 key={button.key}
-                className={`${classes.button} ${activeTab === index ? classes.activeButton : ''}`}
+                className={clsx(classes.button, activeTab === index && classes.activeButton)}
                 startIcon={button.icon}
                 onClick={handleChangeTabClick(index)}
               >

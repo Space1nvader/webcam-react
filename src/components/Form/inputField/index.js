@@ -35,11 +35,11 @@ const useStyles = makeStyles({
 });
 export const InputField = (props) => {
   const classes = useStyles();
-  const { name, label, type = 'text', className = '', ...other } = props;
+  const { name, label, type = 'text', className, ...other } = props;
 
   return (
     <Field {...props}>
-      {({ field, form, meta }) => {
+      {({ field, meta }) => {
         const isError = !!(meta.error && meta.touched);
         const errorClass = isError ? 'error' : '';
         return (
@@ -49,7 +49,7 @@ export const InputField = (props) => {
             name={name}
             id={name}
             type={type}
-            className={clsx(classes.field, className && className, errorClass)}
+            className={clsx(classes.field, className, errorClass)}
             variant="outlined"
             label={label}
             helperText={isError && meta.error}

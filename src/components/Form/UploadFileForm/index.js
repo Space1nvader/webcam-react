@@ -25,7 +25,7 @@ const UploadFileButton = (props) => {
   };
   return (
     <FormContainer enableReinitialize initialValues={initialValue} onSubmit={onSubmit}>
-      {({ isValid, submitForm, values }) => (
+      {({ submitForm }) => (
         <>
           <input
             accept="image/*"

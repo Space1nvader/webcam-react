@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Field } from 'formik';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import IconButton from 'components/IconButton';
+import IconBtn from 'components/IconBtn';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import clsx from 'clsx';
@@ -48,22 +48,15 @@ const useStyles = makeStyles({
 });
 export const PasswordField = (props) => {
   const classes = useStyles();
-  const { name, label, type = 'password', className = '', ...other } = props;
-  const [values, setValues] = useState({
-    showPassword: false
-  });
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
+  const { name, label, className, ...other } = props;
+  const [isVisible, setPasswordVisiblie] = useState(false);
+
   const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
+    setPasswordVisiblie(!isVisible);
   };
   return (
     <Field {...props}>
-      {({ field, form, meta }) => {
+      {({ field, meta }) => {
         const isError = !!(meta.error && meta.touched);
         const errorClass = isError ? 'error' : '';
         return (
@@ -71,26 +64,22 @@ export const PasswordField = (props) => {
             <TextField
               {...field}
               {...other}
-              value={values.password}
               name={name}
               id={name}
-              onChange={handleChange('password')}
-              type={values.showPassword ? 'text' : 'password'}
-              className={clsx(classes.field, className && className, errorClass)}
+              type={isVisible ? 'text' : 'password'}
+              className={clsx(classes.field, className, errorClass)}
               variant="outlined"
               label={label}
               helperText={isError && meta.error}
             />
-            {values.password && (
-              <IconButton
+            {field.value && (
+              <IconBtn
                 className={classes.control}
                 aria-label={name}
                 onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
               >
-                {values.showPassword ? <Visibility /> : <VisibilityOff />}
-              </IconButton>
+                {isVisible ? <Visibility /> : <VisibilityOff />}
+              </IconBtn>
             )}
           </div>
         );

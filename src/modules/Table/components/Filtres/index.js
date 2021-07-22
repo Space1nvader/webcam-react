@@ -10,9 +10,10 @@ import TextField from '@material-ui/core/TextField';
 import DonutSmallRoundedIcon from '@material-ui/icons/DonutSmallRounded';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
-import IconButton from 'components/IconButton';
+import IconBtn from 'components/IconBtn';
 import DeleteIcon from '@material-ui/icons/Delete';
 import funnelIcon from 'assets/img/funnel-fill.svg';
+import SimpleMenu from 'components/SimpleMenu';
 
 const useStyles = makeStyles(() => ({
   search: {
@@ -40,12 +41,12 @@ const TableFilters = (props) => {
         <TableRow>
           <Cell style={{ padding: '0 0 0 4px' }}>
             <SmallCheckbox onChange={onChange} style={{ marginRight: 4 }} />
-            <IconButton style={{ marginRight: 6 }}>
+            <IconBtn style={{ marginRight: 6 }}>
               <DonutSmallRoundedIcon style={{ fill: 'var(--red-50)' }} />
-            </IconButton>
-            <IconButton>
+            </IconBtn>
+            <IconBtn>
               <DeleteIcon style={{ fill: 'var(--gray-20)' }} />
-            </IconButton>
+            </IconBtn>
           </Cell>
           <Cell>
             <form noValidate autoComplete="off">
@@ -65,12 +66,12 @@ const TableFilters = (props) => {
             </form>
           </Cell>
           <Cell align="right">
-            <IconButton style={{ marginRight: 10 }}>
+            <IconBtn style={{ marginRight: 10 }}>
               <img alt="" src={funnelIcon} />
-            </IconButton>
-            <IconButton>
-              <MoreVertIcon style={{ fill: 'var(--gray-20)' }} />
-            </IconButton>
+            </IconBtn>
+            <SimpleMenu icon={<MoreVertIcon style={{ fill: 'var(--gray-20)' }} />}>
+              {['Фильтр', 'Навигаций', 'Кнопка', 'Филтр']}
+            </SimpleMenu>
           </Cell>
         </TableRow>
       </TableBody>

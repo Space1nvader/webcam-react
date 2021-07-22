@@ -1,9 +1,9 @@
 import React from 'react';
-import IconButton from 'components/IconButton';
+import IconBtn from 'components/IconBtn';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
 import UploadFileForm from 'components/Form/UploadFileForm';
-
+import clsx from 'clsx';
 import './index.scss';
 
 const DocsForm = (props) => {
@@ -17,12 +17,12 @@ const DocsForm = (props) => {
           <div className="docs__itemRow">
             <span className="docs__itemSize">{doc.size}</span>
             <div className="docs__itemBar">
-              <IconButton>
+              <IconBtn>
                 <GetAppRoundedIcon color="secondary" />
-              </IconButton>
-              <IconButton>
+              </IconBtn>
+              <IconBtn>
                 <DeleteRoundedIcon style={{ fill: 'var(--gray-10)' }} />
-              </IconButton>
+              </IconBtn>
             </div>
           </div>
         </div>
@@ -31,7 +31,7 @@ const DocsForm = (props) => {
   );
 
   return (
-    <div className={`docs ${className}`} {...other}>
+    <div className={clsx('docs', className)} {...other}>
       <h6 className="docs__title">Документы</h6>
       {docs && renderDocs()}
 

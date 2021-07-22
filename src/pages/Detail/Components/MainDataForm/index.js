@@ -8,6 +8,7 @@ import FieldSet from 'components/Form/FieldSet';
 import bodyImage from 'assets/img/image19.png';
 import { TextArea } from 'components/Form/TextArea';
 import { SETTING_VALIDATION_SCHEMA } from 'constants/validateSchema';
+import clsx from 'clsx';
 import FormTitle from '../FormTitle';
 
 const useStyles = makeStyles({
@@ -49,14 +50,13 @@ const useStyles = makeStyles({
 const MainDataForm = (props) => {
   const { className, ...other } = props;
   const classes = useStyles();
-  const classList = `form ${classes.container} ${className || ''}`;
 
   const onSubmit = (values) => {
     console.log(values);
   };
 
   return (
-    <div className={classList} {...other} style={{ width: 800 }}>
+    <div className={clsx(classes.container, className)} {...other} style={{ width: 800 }}>
       <FormTitle>Основные данные</FormTitle>
 
       <FormContainer

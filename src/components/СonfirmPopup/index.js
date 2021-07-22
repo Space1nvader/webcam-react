@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import { useSpring, animated } from 'react-spring';
-import IconButton from 'components/IconButton';
+import IconBtn from 'components/IconBtn';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 
 const useStyles = makeStyles(() => ({
@@ -76,9 +76,9 @@ export default function ConfirmPopup(props) {
     >
       <Fade in={open}>
         <div className={classes.paper} style={style}>
-          <IconButton onClick={onClose} className={classes.xBtn}>
+          <IconBtn onClick={onClose} className={classes.xBtn}>
             <CloseRoundedIcon />
-          </IconButton>
+          </IconBtn>
           {title && <h5 className={classes.title}>{title}</h5>}
           {children}
         </div>
