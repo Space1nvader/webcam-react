@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import DataTable from 'modules/Table';
-import { useSelector } from 'react-redux';
 import DashboardStatus from './components/Status';
 import { modelsListSelector } from './redux/selectors';
+import { GetModelsListAction, ResetAction } from './redux/actions';
 import './index.scss';
 
 const fields = [
@@ -17,6 +18,15 @@ const fields = [
 
 const Dashboard = () => {
   const rows = useSelector(modelsListSelector);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(GetModelsListAction());
+
+    return () => {
+      dispatch(ResetAction());
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className="dashboard">
       <div className="dashboard__header">
