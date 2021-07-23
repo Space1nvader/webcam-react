@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { api } from 'api';
 import NavCrumbs from 'modules/Breadcrumbs/NavCrubms';
 import PersonIcon from '@material-ui/icons/Person';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
@@ -75,7 +74,9 @@ const detailTabs = [
 
 const Detail = (props) => {
   const { route, match } = props;
-  const model = api.models[match.params.userId - 1];
+  // const model = models[match.params.userId - 1];
+  // TODO: MODELS
+  const model = undefined;
   const [activeTab, setActiveTab] = useState(0);
   const handleChangeTabClick = (index) => () => {
     setActiveTab(index);

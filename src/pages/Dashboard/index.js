@@ -1,10 +1,9 @@
 import React from 'react';
 import DataTable from 'modules/Table';
-import { api } from 'api/index';
+import { useSelector } from 'react-redux';
 import DashboardStatus from './components/Status';
+import { modelsListSelector } from './redux/selectors';
 import './index.scss';
-
-const rows = api.models;
 
 const fields = [
   { id: 'name', label: 'Псевдоним', sortble: true },
@@ -16,16 +15,16 @@ const fields = [
   { id: 'online', type: 'status', label: 'Статус' }
 ];
 
-const Dashboard = () => (
-  <div className="dashboard">
-    <div className="dashboard__header">
-      <h4 className="dashboard__title">Модели студии</h4>
-      <DashboardStatus />
+const Dashboard = () => {
+  const rows = useSelector(modelsListSelector);
+  return (
+    <div className="dashboard">
+      <div className="dashboard__header">
+        <h4 className="dashboard__title">Модели студии</h4>
+        <DashboardStatus />
+      </div>
+      <div className="dashboard__table">{rows && <DataTable rows={rows} fields={fields} />}</div>
     </div>
-
-    <div className="dashboard__table">
-      <DataTable rows={rows} fields={fields} />
-    </div>
-  </div>
-);
+  );
+};
 export default Dashboard;

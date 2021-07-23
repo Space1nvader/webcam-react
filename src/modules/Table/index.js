@@ -32,7 +32,6 @@ const useStyles = makeStyles({
 const DataTable = (props) => {
   const { rows, fields, ...other } = props;
   const classes = useStyles();
-
   const [isSelect, setSelectState] = useState(new Set());
 
   const selected = new Set(isSelect);
@@ -68,33 +67,34 @@ const DataTable = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow className={classes.tableRow} key={row.id}>
-              <TableCell padding="checkbox">
-                <SmallCheckbox
-                  checked={isSelect.has(row.id)}
-                  onChange={handleSelectClick(row.id)}
-                />
-              </TableCell>
-              {fields.map((field) =>
-                field.id === 'name' ? (
-                  <TableCell key={field.id}>
-                    <User to={`/model/${row.id}`} image={row.user.image}>
-                      {row.user.nickname} / {row.user.name}
-                    </User>
-                  </TableCell>
-                ) : (
-                  <TableCell key={field.id} type={{ name: field.type, state: row[field.id] }}>
-                    {row[field.id]}
-                  </TableCell>
-                )
-              )}
-            </TableRow>
-          ))}
+          {rows &&
+            rows.map((row) => (
+              <TableRow className={classes.tableRow} key={row.id}>
+                <TableCell padding="checkbox">
+                  <SmallCheckbox
+                    checked={isSelect.has(row.id)}
+                    onChange={handleSelectClick(row.id)}
+                  />
+                </TableCell>
+                {fields.map((field) =>
+                  field.id === 'name' ? (
+                    <TableCell key={field.id}>
+                      <User to={`/model/${row.id}`} image={row.user.image}>
+                        {row.user.nickname} / {row.user.name}
+                      </User>
+                    </TableCell>
+                  ) : (
+                    <TableCell key={field.id} type={{ name: field.type, state: row[field.id] }}>
+                      {row[field.id]}
+                    </TableCell>
+                  )
+                )}
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
       <TablePagination
-        count={rows.length}
+        count={rows && rows.length}
         rowsPerPageOptions={[10]}
         onPageChange={() => console.log('page changes')}
         page={0}

@@ -1,9 +1,10 @@
 import React from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { Grow, Paper } from '@material-ui/core';
+import { Grow, Paper, IconButton } from '@material-ui/core';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconBtn from 'components/IconBtn';
+
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -14,7 +15,7 @@ const useStyles = makeStyles({
 });
 
 export default function MenuListComposition(props) {
-  const { icon, children } = props;
+  const { icon, children, size = 'small' } = props;
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const classes = useStyles();
@@ -39,14 +40,15 @@ export default function MenuListComposition(props) {
 
   return (
     <>
-      <IconBtn
+      <IconButton
+        size={size}
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
       >
         {icon}
-      </IconBtn>
+      </IconButton>
       <Popper
         className={classes.popper}
         open={open}
