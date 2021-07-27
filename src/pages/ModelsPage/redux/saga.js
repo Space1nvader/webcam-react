@@ -4,7 +4,7 @@ import { MODELSLIST_ACTION_TYPES } from './reducer';
 
 function* getModels() {
   try {
-    const { data } = yield call(SERVICE_API.ModelsApi.getModels);
+    const { data } = yield call(SERVICE_API.Models.getModels);
     yield put({
       type: MODELSLIST_ACTION_TYPES.GET.SUCCESS,
       payload: data

@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
-import ModelsListReducer from 'pages/Dashboard/redux/reducer';
+import ModelsListReducer from 'pages/ModelsPage/redux/reducer';
+import ModelProfileReducer from 'modules/ModelProfile/redux/reducer';
 
 const appReducer = combineReducers({
-  modelsList: ModelsListReducer
+  modelsList: ModelsListReducer,
+  profile: ModelProfileReducer
 });
 export default appReducer;

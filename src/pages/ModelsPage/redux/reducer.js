@@ -8,12 +8,12 @@ export const MODELSLIST_ACTION_TYPES = new ActionTypes('MODELSLIST')
   .getActionTypes();
 
 const initialState = {
-  models: ''
+  models: []
 };
 const handleAction = {
   [MODELSLIST_ACTION_TYPES.GET.SUCCESS]: (state, params) => ({
     ...state,
-    models: params.list || '',
+    models: params.models || [],
     totalAmount: params.totalAmount || 0
   }),
   [MODELSLIST_ACTION_TYPES.POST.SUCCESS]: (state) => state

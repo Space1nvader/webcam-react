@@ -1,7 +1,7 @@
-import API from 'api';
+import API from 'api/restApiService';
 
-class ModelsApi {
-  getModels = (payload) => API.get('/models', payload);
+class Models {
+  getModels = () => API.get('/models');
 }
 
-export default new ModelsApi();
+export default new Models();

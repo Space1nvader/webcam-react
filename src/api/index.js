@@ -1,7 +1,9 @@
-import ModelsApi from './models';
+import Models from './models';
+import Profile from './profile';
 
 const SERVICE_API = {
-  ModelsApi
+  Models,
+  Profile
 };
 
 export default SERVICE_API;

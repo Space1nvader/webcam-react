@@ -1,21 +1,21 @@
-import Dashboard from 'pages/Dashboard';
-import Detail from 'pages/Detail';
+import ModelsPage from 'pages/ModelsPage';
+import ProfilePage from 'pages/ProfilePage';
 
 export const dataRoutes = [
   {
     path: '/',
     label: 'Модели',
-    component: Dashboard,
+    component: ModelsPage,
     routes: [
       {
         path: '/model/add-model',
         label: 'Добавление модели',
-        component: Detail
+        component: ProfilePage
       },
       {
         path: '/model/:userId',
         label: 'Модель',
-        component: Detail
+        component: ProfilePage
       }
     ]
   }

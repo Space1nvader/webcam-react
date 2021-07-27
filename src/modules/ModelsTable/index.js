@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import { Table, TableHead, TableContainer, TableBody, TableRow } from '@material-ui/core';
 import SmallCheckbox from 'components/SmallCheckbox';
 import User from 'components/User';
-import TableCell from './components/Cell';
-import HeaderCell from './components/HeaderCell';
-import TablePagination from './components/Pagination';
+import Status from 'components/SessionStatus';
+import IOSSwitch from 'components/IOSSwitch';
+import SimpleDateTime from 'react-simple-timestamp-to-date';
+import TableCell from 'components/Table/Cell';
+import HeaderCell from 'components/Table/HeaderCell';
+import TablePagination from 'components/Table/Pagination';
 import TableFiltres from './components/Filtres';
 
 const useStyles = makeStyles({
@@ -29,7 +28,7 @@ const useStyles = makeStyles({
   }
 });
 
-const DataTable = (props) => {
+const ModelsTable = (props) => {
   const { rows, fields, ...other } = props;
   const classes = useStyles();
   const [isSelect, setSelectState] = useState(new Set());
@@ -51,7 +50,22 @@ const DataTable = (props) => {
     }
     setSelectState(new Set());
   };
-
+  const generateFields = (type, value) => {
+    switch (type) {
+      case 'switch':
+        return <IOSSwitch checked={value} />;
+      case 'status':
+        return <Status value={value} />;
+      case 'date':
+        return (
+          <SimpleDateTime dateFormat="DMY" showTime="0">
+            {value}
+          </SimpleDateTime>
+        );
+      default:
+        return value;
+    }
+  };
   return (
     <TableContainer {...other} className={classes.tableContainer}>
       <TableFiltres onChange={handleSelectAllClick} />
@@ -79,13 +93,13 @@ const DataTable = (props) => {
                 {fields.map((field) =>
                   field.id === 'name' ? (
                     <TableCell key={field.id}>
-                      <User to={`/model/${row.id}`} image={row.user.image}>
-                        {row.user.nickname} / {row.user.name}
+                      <User to={`/model/${row.id}`} image={row.image}>
+                        {row.nickname} / {row.fullNameRus}
                       </User>
                     </TableCell>
                   ) : (
-                    <TableCell key={field.id} type={{ name: field.type, state: row[field.id] }}>
-                      {row[field.id]}
+                    <TableCell key={field.id}>
+                      {generateFields(field.type, row[field.id])}
                     </TableCell>
                   )
                 )}
@@ -103,4 +117,4 @@ const DataTable = (props) => {
     </TableContainer>
   );
 };
-export default DataTable;
+export default ModelsTable;

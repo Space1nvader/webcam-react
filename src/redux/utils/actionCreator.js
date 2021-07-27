@@ -6,7 +6,7 @@ export class ActionTypes {
     this.RESET_STATE = 'RESET_STATE';
 
     // YOU SERVICE NAME
-    const SERVICE_NAME = 'MODELS';
+    const SERVICE_NAME = 'WEBCAM';
     this.moduleName = `${SERVICE_NAME}/${moduleName}`;
 
     const customActions = {};

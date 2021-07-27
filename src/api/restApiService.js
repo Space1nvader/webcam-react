@@ -2,8 +2,8 @@ import axios from 'axios';
 
 class API {
   constructor(tokenName = 'token') {
-    this.url = `${process.env.REACT_APP_BASE_URL}}/api`;
-    // this.tokenName = tokenName;
+    this.url = `${process.env.REACT_APP_BASE_URL}/api`;
+    this.tokenName = tokenName;
   }
 
   handleSuccess = (response) => response;

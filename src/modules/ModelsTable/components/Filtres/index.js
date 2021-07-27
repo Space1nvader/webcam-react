@@ -4,7 +4,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import { makeStyles } from '@material-ui/core/styles';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Cell from 'modules/Table/components/Cell';
+import Cell from 'components/Table/Cell';
 import SmallCheckbox from 'components/SmallCheckbox';
 import TextField from '@material-ui/core/TextField';
 import DonutSmallRoundedIcon from '@material-ui/icons/DonutSmallRounded';

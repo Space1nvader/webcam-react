@@ -1,11 +1,9 @@
 import React from 'react';
 import TableCell from '@material-ui/core/TableCell';
 import { makeStyles } from '@material-ui/core/styles';
-import Status from 'components/SessionStatus';
-import IOSSwitch from 'components/IOSSwitch';
 
 const Cell = (props) => {
-  const { children, type, ...other } = props;
+  const { children, ...other } = props;
   const cellStyles = makeStyles({
     cell: {
       border: 'none',
@@ -21,19 +19,10 @@ const Cell = (props) => {
       }
     }
   });
-  const generateFields = (value) => {
-    switch (value) {
-      case 'switch':
-        return <IOSSwitch checked={type.state} />;
-      case 'status':
-        return <Status value={type.state} />;
-      default:
-        return children;
-    }
-  };
+
   return (
     <TableCell className={cellStyles().cell} {...other}>
-      {type?.name ? generateFields(type.name) : children}
+      {children}
     </TableCell>
   );
 };
