@@ -24,6 +24,7 @@ const useStyles = makeStyles({
     letterSpacing: '0.035em'
   }
 });
+
 const initialValues = {
   nickname: '',
   name: '',
@@ -42,8 +43,10 @@ const initialValues = {
   city: '',
   address: '',
   zipCode: '',
-  phone: ''
+  phone: '',
+  emailPassword: ''
 };
+
 const PersonalForm = ({ className }) => {
   const classes = useStyles();
   const onSubmit = (values) => {
@@ -134,17 +137,17 @@ const PersonalForm = ({ className }) => {
               <InputField className="form__field" name="country" type="text" label="Страна" />
               <InputField className="form__field" name="region" type="text" label="Регион" />
               <InputField className="form__field" name="city" type="text" label="Город" />
-              <InputField className="form__field" name="adress" type="text" label="Адрес" />
+              <InputField className="form__field" name="address" type="text" label="Адрес" />
             </FieldSet>
             <FieldSet divider>
               <InputField
                 className="form__field"
                 label="Почтовый индекс"
-                type="number"
-                name="zip"
+                type="text"
+                name="zipCode"
               />
               <InputField className="form__field" label="Телефон" type="phone" name="phone" />
-              <PasswordField className="form__field" label="Email пароль" name="password" />
+              <PasswordField className="form__field" label="Email пароль" name="emailPassword" />
             </FieldSet>
 
             <Button color="secondary" type="submit" className={classes.button} variant="contained">

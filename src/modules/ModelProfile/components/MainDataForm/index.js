@@ -9,6 +9,9 @@ import bodyImage from 'assets/img/image19.png';
 import { TextArea } from 'components/Form/TextArea';
 import { SETTING_VALIDATION_SCHEMA } from 'constants/validateSchema';
 import clsx from 'clsx';
+import { checkValueEmpty } from 'untils/checkValueEmpty';
+import { useSelector } from 'react-redux';
+import { profileSelector } from 'modules/ModelProfile/redux/selectors';
 import FormTitle from '../FormTitle';
 
 const useStyles = makeStyles({
@@ -46,10 +49,14 @@ const useStyles = makeStyles({
     }
   }
 });
+const initialValues = {
+  name: ''
+};
 
 const MainDataForm = (props) => {
   const { className, ...other } = props;
   const classes = useStyles();
+  const data = useSelector(profileSelector);
 
   const onSubmit = (values) => {
     console.log(values);
@@ -61,8 +68,7 @@ const MainDataForm = (props) => {
 
       <FormContainer
         className="settings"
-        // enableReinitialize
-        initialValues={{}}
+        initialValues={checkValueEmpty(data, initialValues)}
         validationSchema={SETTING_VALIDATION_SCHEMA}
         onSubmit={onSubmit}
       >
