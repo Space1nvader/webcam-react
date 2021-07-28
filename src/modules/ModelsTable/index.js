@@ -58,7 +58,7 @@ const ModelsTable = (props) => {
         return <Status value={value} />;
       case 'date':
         return (
-          <SimpleDateTime dateFormat="DMY" showTime="0">
+          <SimpleDateTime dateFormat="DMY" dateSeparator="." showTime="0">
             {value}
           </SimpleDateTime>
         );
