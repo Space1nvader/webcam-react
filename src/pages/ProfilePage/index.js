@@ -8,12 +8,12 @@ import './index.scss';
 
 const ProfilePage = (props) => {
   const { route, match } = props;
+  const modelId = { id: match.params.userId };
   const model = useSelector(profileSelector);
-  const modelId = match.params.userId;
-  console.log(',asd', match.params.userId);
+
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(GetProfileDataAction(1));
+    dispatch(GetProfileDataAction(modelId));
 
     return () => {
       dispatch(ResetAction());

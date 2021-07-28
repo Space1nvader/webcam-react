@@ -10,6 +10,7 @@ const DocsForm = (props) => {
   const { className, docs, ...other } = props;
 
   const renderDocs = () => (
+    // TODO: функционал доков и их скачивания REDUX
     <div className="docs__list">
       {docs.map((doc) => (
         <div className="docs__item" key={doc.name}>

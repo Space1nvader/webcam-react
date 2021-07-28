@@ -28,10 +28,10 @@ export const SelectField = (props) => {
   const handleChange = (event) => {
     setValue(event.target.value);
   };
-
   return (
     <Field {...props}>
       {({ field, meta }) => {
+        setValue(field.value);
         const isError = !!(meta.error && meta.touched);
         const errorClass = isError ? 'error' : '';
         return (

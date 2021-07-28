@@ -7,6 +7,8 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import { Tabs } from 'components/Tabs';
 import { Tab } from 'components/Tabs/Tab';
 import clsx from 'clsx';
+import { useSelector } from 'react-redux';
+import { profileSelector } from 'modules/ModelProfile/redux/selectors';
 import PersonalForm from './components/PersonalForm';
 import DocsForm from './components/DocsForm';
 import MainDataForm from './components/MainDataForm';
@@ -68,8 +70,8 @@ const modelProfileTabs = [
     component: <DocsForm docs={docs} className="modelProfile__docs" />
   }
 ];
-const ModelProfile = (props) => {
-  const { model } = props;
+const ModelProfile = () => {
+  const model = useSelector(profileSelector);
   const [activeTab, setActiveTab] = useState(0);
   const handleChangeTabClick = (index) => () => {
     setActiveTab(index);
@@ -78,15 +80,15 @@ const ModelProfile = (props) => {
   return (
     <>
       <h4 className="modelProfile__title">{model ? model.name : 'Данные модели'}</h4>
-      {/* <h6 className="modelProfile__subtitle">Text fields popular combinations</h6>
+      <h6 className="modelProfile__subtitle">Text fields popular combinations</h6>
       <div className="modelProfile__profile">
         <div className="modelProfile__data">
           <PictureForm
             style={{ marginBottom: 10 }}
-            name="profile_picture"
-            initialValue={{ profile_picture: model ? model.image : '' }}
+            name="avatar"
+            imagePath={{ avatar: model ? model.avatar : '' }}
           />
-          {model && <DetailData data={model} />}
+          {model && <DetailData />}
         </div>
         <div className="modelProfile__box">
           <div className="modelProfile__tabs">
@@ -111,7 +113,7 @@ const ModelProfile = (props) => {
             </Tabs>
           </div>
         </div>
-      </div> */}
+      </div>
     </>
   );
 };

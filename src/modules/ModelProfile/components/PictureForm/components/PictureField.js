@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import UserPhoto from 'components/UserPhoto';
 import IconBtn from 'components/IconBtn';
@@ -41,17 +41,18 @@ const userPhotoForm = (image, className) => (
 );
 
 const PictureField = (props) => {
-  const { name, initialValue, setFieldValue, submitForm } = props;
-  const [preview, setPreview] = useState(initialValue[name]);
+  const { name, imagePath, setFieldValue, submitForm } = props;
+  const [preview, setPreview] = useState(imagePath[name]);
   const classes = useStyles();
-
   const generatePicture = (src) => {
     if (src) {
       return userPhotoForm(src, classes.absoluteBtn);
     }
     return addPhotoButton(classes.fullWidthBtn);
   };
-
+  useEffect(() => {
+    if (imagePath && imagePath[name]) setPreview(imagePath[name]);
+  }, [imagePath]);
   const handleSetPicturePreview = (e) => {
     const file = e.target.files;
     if (file && file[0]) {

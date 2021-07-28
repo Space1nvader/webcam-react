@@ -4,7 +4,10 @@ import ConfirmPopup from 'components/СonfirmPopup';
 import { makeStyles } from '@material-ui/core/styles';
 import ContactLink from 'components/ContactLink';
 import { Button } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import { profileSelector } from 'modules/ModelProfile/redux/selectors';
 import Income from '../Income';
+import './index.scss';
 
 const useStyles = makeStyles({
   button: {
@@ -18,35 +21,41 @@ const useStyles = makeStyles({
   }
 });
 
-const DetailData = (props) => {
+const DetailData = () => {
   const classes = useStyles();
+
+  const data = useSelector(profileSelector);
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpenClick = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
-  const { data } = props;
   return (
     <>
-      <h5 className="detail__name">
-        {data.user.name} <br /> / {data.user.nickname}
+      <h5 className="detailData__name">
+        {data.name} <br /> / {data.nickname}
       </h5>
-      <div className="detail__contacts">
-        <ContactLink
-          style={{ color: 'var(--blue-100)', display: 'block', marginBottom: 12 }}
-          href="mailto:ivanova@gmail.com"
-        >
-          ivanova@gmail.com
-        </ContactLink>
-        <ContactLink
-          style={{ color: 'var(--gray-30)', display: 'block' }}
-          href="tel:8 (964) 457 54-54"
-        >
-          8 (964) 457 54-54
-        </ContactLink>
+      <div className="detailData__contacts">
+        {data.email && (
+          <ContactLink
+            style={{ color: 'var(--blue-100)', display: 'block', marginBottom: 12 }}
+            href={`mailto:${data.email}`}
+          >
+            {data.email}
+          </ContactLink>
+        )}
+        {data.phone && (
+          <ContactLink
+            style={{ color: 'var(--gray-30)', display: 'block' }}
+            href={`tel:${data.phone}`}
+          >
+            {data.phone}
+          </ContactLink>
+        )}
       </div>
-      <div className="detail__income">
+      <div className="detailData__income">
         <Income />
       </div>
-      <div className="detail__remove">
+      <div className="detailData__remove">
+        {/* TODO: REMOVE REQUEST */}
         <RemoveButton onClick={handleModalOpenClick}>удалить</RemoveButton>
         <ConfirmPopup
           style={{ width: 480 }}

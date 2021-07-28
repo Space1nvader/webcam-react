@@ -4,15 +4,15 @@ import PictureField from './components/PictureField';
 import './index.scss';
 
 const PictureForm = (props) => {
-  const { initialValue, ...other } = props;
+  const { imagePath, style, ...other } = props;
 
   const onSubmit = (values) => {
     console.log('SUBMIT', values);
   };
   return (
-    <FormContainer enableReinitialize initialValues={initialValue} onSubmit={onSubmit} {...other}>
+    <FormContainer enableReinitialize initialValues={imagePath} onSubmit={onSubmit} {...other}>
       {({ setFieldValue, submitForm }) => (
-        <div className="pictureForm" {...other}>
+        <div className="pictureForm" style={style}>
           <PictureField {...props} submitForm={submitForm} setFieldValue={setFieldValue} />
         </div>
       )}

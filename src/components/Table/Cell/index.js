@@ -12,7 +12,7 @@ const Cell = (props) => {
       color: 'var(--gray-80)',
       letterSpacing: '0.018em',
       '&:first-of-type': {
-        borderRadius: '4px 0 0 4 px'
+        borderRadius: '4px 0 0 4px'
       },
       '&:last-of-type': {
         borderRadius: '0 4px 4px 0'

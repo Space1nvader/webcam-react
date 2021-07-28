@@ -3,9 +3,8 @@ import SERVICE_API from 'api';
 import { MODELPROFILE_ACTION_TYPES } from './reducer';
 
 function* getProfile(action) {
-  console.log('123', action);
   try {
-    const { data } = yield call(SERVICE_API.Profile.getProfile, action.payload.id);
+    const { data } = yield call(SERVICE_API.Profile.getProfile, action.payload);
 
     yield put({
       type: MODELPROFILE_ACTION_TYPES.GET.SUCCESS,

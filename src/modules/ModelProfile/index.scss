@@ -20,11 +20,6 @@
     margin-left: 2.25rem;
     box-sizing: border-box;
   }
-  &__name {
-    line-height: 1.5;
-    font-weight: 600;
-    margin-bottom: 1.125rem;
-  }
   &__tabs {
     margin-bottom: 0.625rem;
   }
@@ -41,11 +36,5 @@
   &__docs {
     width: calc(100% - 48rem);
     margin-left: 4rem;
-  }
-  &__contacts {
-    margin-bottom: 1rem;
-  }
-  &__income {
-    margin-bottom: 1.875rem;
   }
 }
