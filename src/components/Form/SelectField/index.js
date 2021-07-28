@@ -5,11 +5,12 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 
 const useStyles = makeStyles({
   field: {
     width: 'calc(50% - (32px / 2))',
-    marginBottom: 26,
+    marginBottom: 30,
     '& label': {
       transform: ' translate(14px,14px) scale(1)'
     }
@@ -22,28 +23,27 @@ const useStyles = makeStyles({
 });
 export const SelectField = (props) => {
   const classes = useStyles();
-  const { name, label, options, className = '', ...other } = props;
-  // eslint-disable-next-line no-nested-ternary
+  const { name, label, options, className, ...other } = props;
   const [value, setValue] = React.useState('');
   const handleChange = (event) => {
     setValue(event.target.value);
   };
-
   return (
     <Field {...props}>
-      {({ field, form, meta }) => {
+      {({ field, meta }) => {
+        setValue(field.value);
         const isError = !!(meta.error && meta.touched);
         const errorClass = isError ? 'error' : '';
         return (
-          <FormControl variant="outlined" {...other} className={`${className} ${classes.field}`}>
-            <InputLabel id="demo-simple-select-outlined-label">{label}</InputLabel>
+          <FormControl variant="outlined" {...other} className={clsx(className, classes.field)}>
+            <InputLabel id={name}>{label}</InputLabel>
             <Select
               {...field}
               labelId={name}
               value={value}
               name={name}
               id={name}
-              className={`${classes.select} ${errorClass}`}
+              className={clsx(classes.select, errorClass)}
               onChange={handleChange}
               label={label}
             >
@@ -51,7 +51,7 @@ export const SelectField = (props) => {
                 <em>Не указано</em>
               </MenuItem>
               {options.map((option) => (
-                <MenuItem value={option.value}>{option.title}</MenuItem>
+                <MenuItem value={option.value || option.title}>{option.title}</MenuItem>
               ))}
             </Select>
           </FormControl>

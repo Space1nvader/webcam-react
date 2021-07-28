@@ -8,7 +8,7 @@ const SessionStatus = (props) => {
     if (value) {
       return 'online';
     }
-    return 'offile';
+    return 'offline';
   };
   return (
     <span {...other} className={`sessionStatus ${setStatus()}`}>

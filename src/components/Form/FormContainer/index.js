@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Formik } from 'formik';
+import FormikErrorFocus from 'formik-error-focus';
 import { FormErrorContainer } from './FormErrorContainer';
 
 export const FormContainer = (props) => {
@@ -11,7 +12,16 @@ export const FormContainer = (props) => {
         const { setErrors } = formik;
         return (
           <FormErrorContainer serverErrors={serverErrors && serverErrors} setErrors={setErrors}>
-            <Form className={className}>{children(formik)}</Form>
+            <Form className={className}>
+              <FormikErrorFocus
+                offset={-200}
+                align={'top'}
+                focusDelay={550}
+                ease={'inOutQuart'}
+                duration={550}
+              />
+              {children(formik)}
+            </Form>
           </FormErrorContainer>
         );
       }}

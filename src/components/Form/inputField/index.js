@@ -2,12 +2,12 @@ import React from 'react';
 import { Field } from 'formik';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 
 const useStyles = makeStyles({
   field: {
     width: 'calc(50% - (32px / 2))',
-    marginBottom: 26,
-    borderColor: 'red',
+    marginBottom: 30,
     '& input': {
       padding: 12,
       borderRarius: '12px'
@@ -15,25 +15,31 @@ const useStyles = makeStyles({
     '& label': {
       transform: ' translate(14px,14px) scale(1)'
     },
+    '& p': {
+      position: 'absolute',
+      top: '100%'
+    },
     '&.error': {
       '& fieldset': {
         borderColor: 'red'
       },
       '& p': {
-        color: 'red'
+        color: 'var(--red-60)'
       }
     }
+  },
+  textHelper: {
+    position: 'absolute',
+    color: 'green'
   }
 });
 export const InputField = (props) => {
   const classes = useStyles();
-  const { title = '', name, label, type, className = '', ...other } = props;
-  // eslint-disable-next-line no-nested-ternary
+  const { name, label, type = 'text', className, ...other } = props;
 
   return (
     <Field {...props}>
-      {({ field, form, meta }) => {
-        console.log('meta', meta);
+      {({ field, meta }) => {
         const isError = !!(meta.error && meta.touched);
         const errorClass = isError ? 'error' : '';
         return (
@@ -43,10 +49,10 @@ export const InputField = (props) => {
             name={name}
             id={name}
             type={type}
-            className={`${classes.field} ${className} ${errorClass}`}
+            className={clsx(classes.field, className, errorClass)}
             variant="outlined"
             label={label}
-            helperText={meta.error || ''}
+            helperText={isError && meta.error}
           />
         );
       }}
