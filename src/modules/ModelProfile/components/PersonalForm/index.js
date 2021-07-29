@@ -10,7 +10,8 @@ import FieldSet from 'components/Form/FieldSet';
 import { PasswordField } from 'components/Form/PasswordField';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
-import { profileSelector } from 'modules/ModelProfile/redux/selectors';
+import { modelSelector } from 'modules/ModelProfile/redux/selectors';
+import { staticModelDataSelector } from 'redux/selectors/staticData';
 import { checkValueEmpty } from 'untils/checkValueEmpty';
 import FormTitle from '../FormTitle';
 
@@ -33,7 +34,7 @@ const initialValues = {
   patronymicRus: '',
   surname: '',
   surnameRus: '',
-  gender: '',
+  gender1: '',
   age: '',
   birthday: '',
   serialNumber: '',
@@ -52,8 +53,8 @@ const PersonalForm = ({ className }) => {
   const onSubmit = (values) => {
     console.log('SUBMIT', values);
   };
-  const data = useSelector(profileSelector);
-
+  const data = useSelector(modelSelector);
+  const defaultValues = useSelector(staticModelDataSelector).model || '';
   return (
     <div className={clsx('form', className)}>
       <FormTitle>Личные данные</FormTitle>
@@ -100,11 +101,8 @@ const PersonalForm = ({ className }) => {
               <SelectField
                 className="form__field"
                 label="Пол"
-                name="gender"
-                options={[
-                  { title: 'Мужской', value: 'М' },
-                  { title: 'Женский', value: 'Ж' }
-                ]}
+                name="genderId"
+                options={defaultValues.gender}
               />
               <InputField
                 className="form__field"
@@ -134,7 +132,12 @@ const PersonalForm = ({ className }) => {
                 type="text"
                 label="Срок действия"
               />
-              <InputField className="form__field" name="country" type="text" label="Страна" />
+              <SelectField
+                className="form__field"
+                label="Пол"
+                name="countryId"
+                options={defaultValues.country}
+              />
               <InputField className="form__field" name="region" type="text" label="Регион" />
               <InputField className="form__field" name="city" type="text" label="Город" />
               <InputField className="form__field" name="address" type="text" label="Адрес" />
@@ -149,7 +152,6 @@ const PersonalForm = ({ className }) => {
               <InputField className="form__field" label="Телефон" type="phone" name="phone" />
               <PasswordField className="form__field" label="Email пароль" name="emailPassword" />
             </FieldSet>
-
             <Button color="secondary" type="submit" className={classes.button} variant="contained">
               сохранить
             </Button>

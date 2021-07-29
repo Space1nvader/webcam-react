@@ -11,7 +11,8 @@ import { SETTING_VALIDATION_SCHEMA } from 'constants/validateSchema';
 import clsx from 'clsx';
 import { checkValueEmpty } from 'untils/checkValueEmpty';
 import { useSelector } from 'react-redux';
-import { profileSelector } from 'modules/ModelProfile/redux/selectors';
+import { modelSelector } from 'modules/ModelProfile/redux/selectors';
+import { staticModelDataSelector } from 'redux/selectors/staticData';
 import FormTitle from '../FormTitle';
 
 const useStyles = makeStyles({
@@ -49,15 +50,33 @@ const useStyles = makeStyles({
     }
   }
 });
+
 const initialValues = {
-  name: ''
+  raceId: '',
+  height: '',
+  weight: '',
+  bodyId: '',
+  hairLengthId: '',
+  hairColorId: '',
+  breastSizeId: '',
+  chestCircumference: '',
+  waistCircumference: '',
+  hipGirth: '',
+  pubicHairId: '',
+  sexualPreferenceId: '',
+  firstLanguageId: '',
+  secondLanguageId: '',
+  about: '',
+  experience: '',
+  style: '',
+  turnsOn: ''
 };
 
 const MainDataForm = (props) => {
   const { className, ...other } = props;
   const classes = useStyles();
-  const data = useSelector(profileSelector);
-
+  const data = useSelector(modelSelector);
+  const defaultValues = useSelector(staticModelDataSelector).model || '';
   const onSubmit = (values) => {
     console.log(values);
   };
@@ -78,8 +97,8 @@ const MainDataForm = (props) => {
               <SelectField
                 className="form__field"
                 label="Рассовая пренодлежность"
-                name="race"
-                options={[{ title: 'Белая' }, { title: 'Чёрная' }, { title: 'Индийская' }]}
+                name="raceId"
+                options={defaultValues.race}
               />
               <InputField name="height" type="nubmer" style={{ width: 156 }} label="Рост" />
               <InputField

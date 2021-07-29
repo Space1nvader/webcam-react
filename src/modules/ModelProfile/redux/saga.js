@@ -2,9 +2,9 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import SERVICE_API from 'api';
 import { MODELPROFILE_ACTION_TYPES } from './reducer';
 
-function* getProfile(action) {
+function* getModel(action) {
   try {
-    const { data } = yield call(SERVICE_API.Profile.getProfile, action.payload);
+    const { data } = yield call(SERVICE_API.Model.getModel, action.payload);
 
     yield put({
       type: MODELPROFILE_ACTION_TYPES.GET.SUCCESS,
@@ -19,5 +19,5 @@ function* getProfile(action) {
 }
 
 export function* ModelProfileSaga() {
-  yield takeEvery(MODELPROFILE_ACTION_TYPES.GET.START, getProfile);
+  yield takeEvery(MODELPROFILE_ACTION_TYPES.GET.START, getModel);
 }

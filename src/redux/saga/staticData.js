@@ -4,7 +4,7 @@ import { STATICDATA_ACTION_TYPES } from 'redux/reducers/staticData';
 
 function* getStaticData() {
   try {
-    const { data } = yield call(SERVICE_API.staticData.fields);
+    const { data } = yield call(SERVICE_API.StaticData.getStaticData);
 
     yield put({
       type: STATICDATA_ACTION_TYPES.GET.SUCCESS,

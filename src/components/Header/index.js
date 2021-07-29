@@ -19,11 +19,15 @@ const Header = () => (
           <Logo />
         </Link>
         <div className="header__cell">
-          <RouteButton icon={<SupervisorAccountIcon />}>Модели</RouteButton>
-          <RouteButton active icon={<DonutSmallRoundedIcon />}>
+          <RouteButton to="/" exact icon={<SupervisorAccountIcon />}>
+            Модели
+          </RouteButton>
+          <RouteButton to="/stats" icon={<DonutSmallRoundedIcon />}>
             Статистика
           </RouteButton>
-          <RouteButton icon={<TuneRoundedIcon />}>Опции</RouteButton>
+          <RouteButton to="/options" icon={<TuneRoundedIcon />}>
+            Опции
+          </RouteButton>
         </div>
         <Papper style={{ borderRadius: '12px' }}>
           <Profile image={UserImage}>FirstStudioPetr</Profile>

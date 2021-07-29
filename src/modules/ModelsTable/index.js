@@ -5,7 +5,8 @@ import SmallCheckbox from 'components/SmallCheckbox';
 import User from 'components/User';
 import Status from 'components/SessionStatus';
 import IOSSwitch from 'components/IOSSwitch';
-import SimpleDateTime from 'react-simple-timestamp-to-date';
+
+import fromUnixTime from 'date-fns/fromUnixTime';
 import TableCell from 'components/Table/Cell';
 import HeaderCell from 'components/Table/HeaderCell';
 import TablePagination from 'components/Table/Pagination';
@@ -57,11 +58,7 @@ const ModelsTable = (props) => {
       case 'status':
         return <Status value={value} />;
       case 'date':
-        return (
-          <SimpleDateTime dateFormat="DMY" dateSeparator="." showTime="0">
-            {value}
-          </SimpleDateTime>
-        );
+        return fromUnixTime(value);
       default:
         return value;
     }
@@ -93,7 +90,7 @@ const ModelsTable = (props) => {
                 {fields.map((field) =>
                   field.id === 'name' ? (
                     <TableCell key={field.id}>
-                      <User to={`/model/${row.id}`} image={row.image}>
+                      <User to={`/models/${row.id}`} image={row.image}>
                         {row.nickname} / {row.fullNameRus}
                       </User>
                     </TableCell>

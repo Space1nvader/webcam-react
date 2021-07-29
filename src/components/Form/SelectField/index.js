@@ -31,7 +31,7 @@ export const SelectField = (props) => {
   return (
     <Field {...props}>
       {({ field, meta }) => {
-        setValue(field.value);
+        setValue(field.value || 'default');
         const isError = !!(meta.error && meta.touched);
         const errorClass = isError ? 'error' : '';
         return (
@@ -39,6 +39,7 @@ export const SelectField = (props) => {
             <InputLabel id={name}>{label}</InputLabel>
             <Select
               {...field}
+              disabled={!options}
               labelId={name}
               value={value}
               name={name}
@@ -47,12 +48,13 @@ export const SelectField = (props) => {
               onChange={handleChange}
               label={label}
             >
-              <MenuItem value="">
+              <MenuItem value="default">
                 <em>Не указано</em>
               </MenuItem>
-              {options.map((option) => (
-                <MenuItem value={option.value || option.title}>{option.title}</MenuItem>
-              ))}
+              {options?.length &&
+                options.map((option) => (
+                  <MenuItem value={option.id || option.title}>{option.title}</MenuItem>
+                ))}
             </Select>
           </FormControl>
         );

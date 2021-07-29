@@ -5,11 +5,13 @@ const { pipeHigherOrderReducers, withLoadable, withResetState } = HOR;
 export const STATICDATA_ACTION_TYPES = new ActionTypes('STATICDATA').listAT().getActionTypes();
 
 const initialState = {
-  fields: []
+  staticData: []
 };
-const stateHandler = (state, params) => ({ ...state, ...params });
 const handleAction = {
-  [STATICDATA_ACTION_TYPES.GET.SUCCESS]: stateHandler
+  [STATICDATA_ACTION_TYPES.GET.SUCCESS]: (state, params) => ({
+    ...state,
+    ...params
+  })
 };
 
 const reducer = (state = initialState, action) =>

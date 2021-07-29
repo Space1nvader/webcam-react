@@ -5,7 +5,7 @@ import StaticDataReducer from 'redux/reducers/staticData';
 
 const appReducer = combineReducers({
   modelsList: ModelsListReducer,
-  profile: ModelProfileReducer,
+  model: ModelProfileReducer,
   staticData: StaticDataReducer
 });
 export default appReducer;

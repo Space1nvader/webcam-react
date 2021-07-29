@@ -1,10 +1,10 @@
 import Models from './models';
-import Profile from './profile';
+import Model from './model';
 import StaticData from './staticData';
 
 const SERVICE_API = {
   Models,
-  Profile,
+  Model,
   StaticData
 };
 

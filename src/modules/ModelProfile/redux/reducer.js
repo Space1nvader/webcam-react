@@ -8,13 +8,12 @@ export const MODELPROFILE_ACTION_TYPES = new ActionTypes('MODELPROFILE')
   .getActionTypes();
 
 const initialState = {
-  profileData: {}
+  modelData: {}
 };
 const handleAction = {
   [MODELPROFILE_ACTION_TYPES.GET.SUCCESS]: (state, params) => ({
     ...state,
-    profileData: params || {}
-    // totalAmount: params.totalAmount || 0
+    modelData: params || {}
   }),
   [MODELPROFILE_ACTION_TYPES.POST.SUCCESS]: (state) => state
 };

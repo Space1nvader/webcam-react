@@ -1,17 +1,21 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import clsx from 'clsx';
 import './index.scss';
 
 const RouteButton = (props) => {
-  const { children, active, icon, className, ...other } = props;
+  const { children, to, icon, className, ...other } = props;
   return (
-    <button
+    <NavLink
       type="button"
-      className={`RouteButton ${active ? 'active' : ''} ${className || ''}`}
+      to={to}
+      activeClassName="active"
+      className={clsx(`RouteButton ${className}`)}
       {...other}
     >
-      {icon || ''}
+      {icon && icon}
       {children}
-    </button>
+    </NavLink>
   );
 };
 

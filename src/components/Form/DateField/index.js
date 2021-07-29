@@ -2,6 +2,7 @@ import React from 'react';
 import { Field } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
 import DateFnsUtils from '@date-io/date-fns';
+import { fromUnixTime, format } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateRangeRoundedIcon from '@material-ui/icons/DateRangeRounded';
@@ -20,20 +21,22 @@ const useStyles = makeStyles({
     }
   }
 });
+
 export const DateField = (props) => {
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
   const classes = useStyles();
   const { name, label, className, ...other } = props;
-
   return (
     <Field {...props}>
       {({ field, meta }) => {
         const isError = !!(meta.error && meta.touched);
         const errorClass = isError ? 'error' : '';
-
+        if (field.value) {
+          setSelectedDate(format(fromUnixTime(field.value), 'dd.MM.yyyy'));
+        }
         return (
           <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
             <KeyboardDatePicker
