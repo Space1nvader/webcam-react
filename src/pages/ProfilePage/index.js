@@ -12,7 +12,7 @@ const ProfilePage = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(GetProfileDataAction(modelId));
-
+    dispatch(GetStaticDataAction());
     return () => {
       dispatch(ResetAction());
     };
