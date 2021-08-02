@@ -8,11 +8,11 @@ import FieldSet from 'components/Form/FieldSet';
 import bodyImage from 'assets/img/image19.png';
 import { TextArea } from 'components/Form/TextArea';
 import { SETTING_VALIDATION_SCHEMA } from 'constants/validateSchema';
-import clsx from 'clsx';
 import { checkValueEmpty } from 'untils/checkValueEmpty';
 import { useSelector } from 'react-redux';
 import { modelSelector } from 'modules/ModelProfile/redux/selectors';
 import { staticModelDataSelector } from 'redux/selectors/staticData';
+import clsx from 'clsx';
 import FormTitle from '../FormTitle';
 
 const useStyles = makeStyles({
@@ -87,6 +87,7 @@ const MainDataForm = (props) => {
 
       <FormContainer
         className="settings"
+        enableReinitialize
         initialValues={checkValueEmpty(data, initialValues)}
         validationSchema={SETTING_VALIDATION_SCHEMA}
         onSubmit={onSubmit}
@@ -111,20 +112,17 @@ const MainDataForm = (props) => {
             <SelectField
               className={`form__field ${classes.divider}`}
               label="Телосложение"
-              name="body"
+              name="bodyId"
               style={{ display: 'flex', paddingBottom: 30 }}
-              options={[
-                { title: 'Стройная' },
-                { title: 'Изящное' },
-                { title: 'С красивыми округлыми формами' }
-              ]}
+              options={defaultValues.body}
             />
-            <InputField
+
+            <SelectField
               className="form__field"
               label="Длина волос"
-              type="nubmer"
+              name="hairLengthId"
               style={{ display: 'flex' }}
-              name="hair_height"
+              options={defaultValues.hairLength}
             />
             <SelectField
               className="form__field"

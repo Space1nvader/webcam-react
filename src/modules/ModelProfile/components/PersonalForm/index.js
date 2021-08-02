@@ -9,10 +9,12 @@ import { PROFILE_VALIDATION_SCHEMA } from 'constants/validateSchema';
 import FieldSet from 'components/Form/FieldSet';
 import { PasswordField } from 'components/Form/PasswordField';
 import clsx from 'clsx';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { UpdateModelDataAction } from 'modules/ModelProfile/redux/actions';
 import { modelSelector } from 'modules/ModelProfile/redux/selectors';
 import { staticModelDataSelector } from 'redux/selectors/staticData';
 import { checkValueEmpty } from 'untils/checkValueEmpty';
+
 import FormTitle from '../FormTitle';
 
 const useStyles = makeStyles({
@@ -50,8 +52,10 @@ const initialValues = {
 
 const PersonalForm = ({ className }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const onSubmit = (values) => {
     console.log('SUBMIT', values);
+    dispatch(UpdateModelDataAction({ id: values.id, data: values }));
   };
   const data = useSelector(modelSelector);
   const defaultValues = useSelector(staticModelDataSelector).model || '';
@@ -70,32 +74,12 @@ const PersonalForm = ({ className }) => {
           <>
             <InputField name="nickname" type="text" label="Псевдоним (eng*)" />
             <FieldSet divider>
-              <InputField className="form__field" name="nameRus" type="text" label="Имя (рус*)" />
-              <InputField className="form__field" name="name" type="text" label="Имя (eng*)" />
-              <InputField
-                className="form__field"
-                name="patronymicRus"
-                type="text"
-                label="Отчество (рус)"
-              />
-              <InputField
-                className="form__field"
-                name="patronymic"
-                type="text"
-                label="Отчество (eng*)"
-              />
-              <InputField
-                className="form__field"
-                name="surnameRus"
-                type="text"
-                label="Фамилия (рус)"
-              />
-              <InputField
-                className="form__field"
-                name="surname"
-                type="text"
-                label="Фамилия (eng*)"
-              />
+              <InputField className="form__field" name="nameRus" label="Имя (рус*)" />
+              <InputField className="form__field" name="name" label="Имя (eng*)" />
+              <InputField className="form__field" name="patronymicRus" label="Отчество (рус)" />
+              <InputField className="form__field" name="patronymic" label="Отчество (eng*)" />
+              <InputField className="form__field" name="surnameRus" label="Фамилия (рус)" />
+              <InputField className="form__field" name="surname" label="Фамилия (eng*)" />
             </FieldSet>
             <FieldSet divider>
               <SelectField
@@ -112,12 +96,7 @@ const PersonalForm = ({ className }) => {
               />
             </FieldSet>
             <FieldSet divider title="Паспортные данные">
-              <DateField
-                className="form__field"
-                name="birthday"
-                type="text"
-                label="Дата рождения"
-              />
+              <DateField className="form__field" name="birthday" label="Дата рождения" />
               <InputField
                 className="form__field"
                 name="serialNumber"
@@ -126,15 +105,10 @@ const PersonalForm = ({ className }) => {
               />
             </FieldSet>
             <FieldSet>
-              <DateField
-                className="form__field"
-                name="validatedAt"
-                type="text"
-                label="Срок действия"
-              />
+              <DateField className="form__field" name="validatedAt" label="Срок действия" />
               <SelectField
                 className="form__field"
-                label="Пол"
+                label="Страна"
                 name="countryId"
                 options={defaultValues.country}
               />
@@ -143,12 +117,7 @@ const PersonalForm = ({ className }) => {
               <InputField className="form__field" name="address" type="text" label="Адрес" />
             </FieldSet>
             <FieldSet divider>
-              <InputField
-                className="form__field"
-                label="Почтовый индекс"
-                type="text"
-                name="zipCode"
-              />
+              <InputField className="form__field" label="Почтовый индекс" name="zipCode" />
               <InputField className="form__field" label="Телефон" type="phone" name="phone" />
               <PasswordField className="form__field" label="Email пароль" name="emailPassword" />
             </FieldSet>

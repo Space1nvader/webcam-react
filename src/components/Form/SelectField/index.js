@@ -23,15 +23,11 @@ const useStyles = makeStyles({
 });
 export const SelectField = (props) => {
   const classes = useStyles();
-  const { name, label, options, className, ...other } = props;
-  const [value, setValue] = React.useState('');
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
+  const { name, label, options, defaultValue = 'default', className, ...other } = props;
+
   return (
     <Field {...props}>
       {({ field, meta }) => {
-        setValue(field.value || 'default');
         const isError = !!(meta.error && meta.touched);
         const errorClass = isError ? 'error' : '';
         return (
@@ -41,14 +37,14 @@ export const SelectField = (props) => {
               {...field}
               disabled={!options}
               labelId={name}
-              value={value}
+              value={field.value || defaultValue}
+              defaultValue={defaultValue}
               name={name}
               id={name}
               className={clsx(classes.select, errorClass)}
-              onChange={handleChange}
               label={label}
             >
-              <MenuItem value="default">
+              <MenuItem value={defaultValue}>
                 <em>Не указано</em>
               </MenuItem>
               {options?.length &&

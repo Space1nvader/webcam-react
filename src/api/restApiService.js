@@ -50,6 +50,15 @@ class API {
       data
     });
   };
+
+  delete = (path = '', data = {}, headers) => {
+    const service = this.create(headers);
+    return service.request({
+      method: 'DELETE',
+      url: `${this.url}${path}`,
+      data
+    });
+  };
 }
 
 export default new API();

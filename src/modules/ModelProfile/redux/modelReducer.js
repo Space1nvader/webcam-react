@@ -3,19 +3,22 @@ import { ActionTypes } from 'redux/utils/actionCreator';
 
 const { pipeHigherOrderReducers, withLoadable, withResetState } = HOR;
 export const MODELPROFILE_ACTION_TYPES = new ActionTypes('MODELPROFILE')
-  .addAT()
-  .listAT()
+  .getAT()
+  .updateAT()
   .getActionTypes();
 
 const initialState = {
-  modelData: {}
+  modelData: ''
 };
 const handleAction = {
   [MODELPROFILE_ACTION_TYPES.GET.SUCCESS]: (state, params) => ({
     ...state,
-    modelData: params || {}
+    modelData: params
   }),
-  [MODELPROFILE_ACTION_TYPES.POST.SUCCESS]: (state) => state
+  [MODELPROFILE_ACTION_TYPES.PUT.SUCCESS]: (state, params) => ({
+    ...state,
+    modelData: params
+  })
 };
 
 const reducer = (state = initialState, action) =>
@@ -24,14 +27,11 @@ const reducer = (state = initialState, action) =>
 export default pipeHigherOrderReducers(
   withResetState(MODELPROFILE_ACTION_TYPES.RESET_STATE, initialState),
   withLoadable({
-    isLoadingActionType: [
-      MODELPROFILE_ACTION_TYPES.GET.START,
-      MODELPROFILE_ACTION_TYPES.POST.START
-    ],
+    isLoadingActionType: [MODELPROFILE_ACTION_TYPES.GET.START, MODELPROFILE_ACTION_TYPES.PUT.START],
     successActionType: [
       MODELPROFILE_ACTION_TYPES.GET.SUCCESS,
-      MODELPROFILE_ACTION_TYPES.POST.SUCCESS
+      MODELPROFILE_ACTION_TYPES.PUT.SUCCESS
     ],
-    errorActionType: [MODELPROFILE_ACTION_TYPES.GET.ERROR, MODELPROFILE_ACTION_TYPES.POST.ERROR]
+    errorActionType: [MODELPROFILE_ACTION_TYPES.GET.ERROR, MODELPROFILE_ACTION_TYPES.PUT.ERROR]
   })
 )(reducer);

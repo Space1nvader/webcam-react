@@ -2,7 +2,7 @@ import HOR from 'redux/HOR';
 import { ActionTypes } from 'redux/utils/actionCreator';
 
 const { pipeHigherOrderReducers, withLoadable, withResetState } = HOR;
-export const STATICDATA_ACTION_TYPES = new ActionTypes('STATICDATA').listAT().getActionTypes();
+export const STATICDATA_ACTION_TYPES = new ActionTypes('STATICDATA').getAT().getActionTypes();
 
 const initialState = {
   staticData: []

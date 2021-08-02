@@ -40,8 +40,9 @@ export const InputField = (props) => {
   return (
     <Field {...props}>
       {({ field, meta }) => {
-        const isError = !!(meta.error && meta.touched);
+        const isError = !!meta.error;
         const errorClass = isError ? 'error' : '';
+
         return (
           <TextField
             {...field}

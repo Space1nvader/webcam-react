@@ -12,11 +12,6 @@ import DetailData from './components/DetailData';
 import PictureForm from './components/PictureForm';
 import './index.scss';
 
-const docs = [
-  { name: 'Паспорт лицевая сторона Admina.pdf', size: '245 kb' },
-  { name: 'Agnes_Fisher.doc ', size: '255 kb' }
-];
-
 const modelProfileTabs = [
   {
     key: 'personal',
@@ -25,7 +20,7 @@ const modelProfileTabs = [
     component: (
       <>
         <PersonalForm className="modelProfile__form" />
-        <DocsForm docs={docs} className="modelProfile__docs" />
+        <DocsForm className="modelProfile__docs" />
       </>
     )
   },
@@ -39,7 +34,7 @@ const modelProfileTabs = [
     key: 'account',
     title: 'Учетные данные',
     icon: <SettingsIcon />,
-    component: <DocsForm docs={docs} className="modelProfile__docs" />
+    component: <DocsForm className="modelProfile__docs" />
   }
 ];
 const ModelProfile = () => {
@@ -47,7 +42,7 @@ const ModelProfile = () => {
   return (
     <>
       <h4 className="modelProfile__title">
-        {model?.length && model.name ? `${model.name} ${model.surname || ''}` : 'Данные модели'}
+        {model && model.name ? `${model.name} ${model.surname || ''}` : 'Данные модели'}
       </h4>
       <h6 className="modelProfile__subtitle">Text fields popular combinations</h6>
       <div className="modelProfile__profile">
@@ -57,7 +52,7 @@ const ModelProfile = () => {
             name="avatar"
             imagePath={{ avatar: model ? model.avatar : '' }}
           />
-          {model?.length && <DetailData />}
+          {model && <DetailData />}
         </div>
         <div className="modelProfile__box">
           <ProfileTabs tabs={modelProfileTabs} />

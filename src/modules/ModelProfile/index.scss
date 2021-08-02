@@ -22,10 +22,10 @@
   }
 
   &__form {
-    width: 44rem;
+    width: calc(100% - 23rem);
   }
   &__docs {
-    width: calc(100% - 48rem);
+    width: 19rem;
     margin-left: 4rem;
   }
 }

@@ -4,23 +4,28 @@ import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
 import UploadFileForm from 'components/Form/UploadFileForm';
 import clsx from 'clsx';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { modelSelector } from 'modules/ModelProfile/redux/selectors';
 import './index.scss';
 
 const DocsForm = (props) => {
-  const { className, docs, ...other } = props;
+  const { className, ...other } = props;
+  const data = useSelector(modelSelector);
 
-  const renderDocs = () => (
-    // TODO: функционал доков и их скачивания REDUX
+  const renderDocs = (docs) => (
     <div className="docs__list">
       {docs.map((doc) => (
-        <div className="docs__item" key={doc.name}>
-          <span className="docs__itemName">{doc.name}</span>
+        <div className="docs__item" key={doc.id}>
+          <span className="docs__itemName">{doc.title}</span>
           <div className="docs__itemRow">
-            <span className="docs__itemSize">{doc.size}</span>
+            <span className="docs__itemSize">{doc.size || 'размер не определен'}</span>
             <div className="docs__itemBar">
-              <IconBtn>
-                <GetAppRoundedIcon color="secondary" />
-              </IconBtn>
+              <Link to={doc.path}>
+                <IconBtn>
+                  <GetAppRoundedIcon color="secondary" />
+                </IconBtn>
+              </Link>
               <IconBtn>
                 <DeleteRoundedIcon style={{ fill: 'var(--gray-10)' }} />
               </IconBtn>
@@ -30,16 +35,15 @@ const DocsForm = (props) => {
       ))}
     </div>
   );
-
   return (
     <div className={clsx('docs', className)} {...other}>
       <h6 className="docs__title">Документы</h6>
-      {docs && renderDocs()}
+      {data && data.documents && renderDocs(data.documents)}
 
       <UploadFileForm
         size="large"
-        name="docs_upload"
-        initialValue={{ name: '' }}
+        name="docs"
+        initialValue={{ docs: [] }}
         icon={<GetAppRoundedIcon />}
       >
         ЗАГРУЗИТЬ ФАЙЛ

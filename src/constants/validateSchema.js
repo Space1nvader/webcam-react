@@ -20,26 +20,17 @@ export const PROFILE_VALIDATION_SCHEMA = Yup.object().shape({
   surnameRus: Yup.string().Req().Rus(),
   surname: Yup.string().Req().Eng(),
   age: Yup.number().typeError(nubmerErr).positive(),
-  serialNumber: Yup.number().typeError(nubmerErr)
+  serialNumber: Yup.number().typeError(nubmerErr),
+  countryId: Yup.string().Req()
 });
 
 export const SETTING_VALIDATION_SCHEMA = Yup.object().shape({
-  race: Yup.string(),
   height: Yup.number().typeError(nubmerErr).positive(),
   weight: Yup.number().typeError(nubmerErr).positive(),
-  body: Yup.string(),
-  hair_height: Yup.number().typeError(nubmerErr).positive(),
-  hair_color: Yup.string(),
-  aye_color: Yup.string(),
-  breast_size: Yup.string(),
-  breast_girth: Yup.number().typeError(nubmerErr).positive(),
-  hip_girth: Yup.number().typeError(nubmerErr).positive(),
-  waist_girth: Yup.number().typeError(nubmerErr).positive(),
-  pubic_hair: Yup.string(),
-  sexual_preferences: Yup.string(),
-  lang: Yup.string(),
-  lang_second: Yup.string(),
-  exp: Yup.string(),
-  turns: Yup.string(),
+  chestCircumference: Yup.number().typeError(nubmerErr).positive(),
+  hipGirth: Yup.number().typeError(nubmerErr).positive(),
+  waistCircumference: Yup.number().typeError(nubmerErr).positive(),
+  experience: Yup.string(),
+  about: Yup.string(),
   style: Yup.string()
 });

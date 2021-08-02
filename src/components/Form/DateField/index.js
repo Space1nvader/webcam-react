@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Field } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
 import DateFnsUtils from '@date-io/date-fns';
@@ -34,9 +34,10 @@ export const DateField = (props) => {
       {({ field, meta }) => {
         const isError = !!(meta.error && meta.touched);
         const errorClass = isError ? 'error' : '';
-        if (field.value) {
+        useEffect(() => {
           setSelectedDate(format(fromUnixTime(field.value), 'dd.MM.yyyy'));
-        }
+        }, [field.value]);
+
         return (
           <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
             <KeyboardDatePicker
