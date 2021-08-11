@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -61,7 +62,7 @@ export default function ConfirmPopup(props) {
   const { title, children, open, onClose, style } = props;
   const classes = useStyles();
 
-  return (
+  return ReactDOM.createPortal(
     <Modal
       aria-labelledby="spring-modal-title"
       aria-describedby="spring-modal-description"
@@ -83,6 +84,7 @@ export default function ConfirmPopup(props) {
           {children}
         </div>
       </Fade>
-    </Modal>
+    </Modal>,
+    document.body
   );
 }

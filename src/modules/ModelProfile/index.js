@@ -38,21 +38,21 @@ const modelProfileTabs = [
   }
 ];
 const ModelProfile = () => {
-  const model = useSelector(modelSelector);
+  const { modelData, isLoading } = useSelector(modelSelector);
+  const data = modelData && modelData.personal ? modelData.personal : '';
   return (
     <>
       <h4 className="modelProfile__title">
-        {model && model.name ? `${model.name} ${model.surname || ''}` : 'Данные модели'}
+        {!isLoading && data ? `${data.name} ${data.surname || ''}` : 'Данные модели'}
       </h4>
-      <h6 className="modelProfile__subtitle">Text fields popular combinations</h6>
       <div className="modelProfile__profile">
         <div className="modelProfile__data">
           <PictureForm
             style={{ marginBottom: 10 }}
             name="avatar"
-            imagePath={{ avatar: model ? model.avatar : '' }}
+            imagePath={{ avatar: data ? data.avatar : '' }}
           />
-          {model && <DetailData />}
+          {!isLoading && data && <DetailData />}
         </div>
         <div className="modelProfile__box">
           <ProfileTabs tabs={modelProfileTabs} />

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Field } from 'formik';
 import UserPhoto from 'components/UserPhoto';
 import IconBtn from 'components/IconBtn';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
@@ -44,6 +45,7 @@ const PictureField = (props) => {
   const { name, imagePath, setFieldValue, submitForm } = props;
   const [preview, setPreview] = useState(imagePath[name]);
   const classes = useStyles();
+
   const generatePicture = (src) => {
     if (src) {
       return userPhotoForm(src, classes.absoluteBtn);
@@ -53,32 +55,42 @@ const PictureField = (props) => {
   useEffect(() => {
     if (imagePath && imagePath[name]) setPreview(imagePath[name]);
   }, [imagePath]);
+
   const handleSetPicturePreview = (e) => {
-    const file = e.target.files;
-    if (file && file[0]) {
+    const data = new FormData();
+    const { files } = e.target;
+    if (files && files.length) {
       const reader = new FileReader();
       reader.onload = (el) => {
         setPreview(el.target.result);
       };
-      reader.readAsDataURL(file[0]);
-      setFieldValue(name, file[0]);
+      reader.readAsDataURL(files[0]);
+      for (let i = 0; i < files.length; i += 1) {
+        data.append(name, files[i]);
+      }
+      setFieldValue(name, data);
       submitForm();
     }
   };
 
   return (
     <>
-      <input
-        accept="image/*"
-        style={{ display: 'none' }}
-        onChange={handleSetPicturePreview}
-        name={name}
-        id={name}
-        type="file"
-      />
+      <Field {...props}>
+        {({ field }) => (
+          <input
+            {...field}
+            accept="image/*"
+            style={{ display: 'none' }}
+            onChange={handleSetPicturePreview}
+            value=""
+            name={name}
+            id={name}
+            type="file"
+          />
+        )}
+      </Field>
       <label htmlFor={name}>{generatePicture(preview)}</label>
     </>
   );
 };
-
 export default PictureField;

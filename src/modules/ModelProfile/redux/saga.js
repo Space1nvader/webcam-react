@@ -5,7 +5,6 @@ import { MODELPROFILE_ACTION_TYPES } from './modelReducer';
 function* getModel(action) {
   try {
     const { data } = yield call(SERVICE_API.Model.getModel, action.payload);
-
     yield put({
       type: MODELPROFILE_ACTION_TYPES.GET.SUCCESS,
       payload: data

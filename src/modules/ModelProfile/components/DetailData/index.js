@@ -24,7 +24,8 @@ const useStyles = makeStyles({
 const DetailData = () => {
   const classes = useStyles();
 
-  const data = useSelector(modelSelector);
+  const { modelData, isLoading } = useSelector(modelSelector);
+  const data = modelData.personal;
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpenClick = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);

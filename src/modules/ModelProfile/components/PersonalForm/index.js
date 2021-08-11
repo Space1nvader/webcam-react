@@ -10,12 +10,16 @@ import FieldSet from 'components/Form/FieldSet';
 import { PasswordField } from 'components/Form/PasswordField';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { UpdateModelDataAction } from 'modules/ModelProfile/redux/actions';
+import { UpdateModelDataAction } from 'modules/ModelProfile/redux/modelActions';
 import { modelSelector } from 'modules/ModelProfile/redux/selectors';
 import { staticModelDataSelector } from 'redux/selectors/staticData';
 import { checkValueEmpty } from 'untils/checkValueEmpty';
+import { FormChangedAction } from 'redux/actions/formChanged';
 
+import SkeletonInput from 'components/skeletons/SkeletonInput';
+import { initialValues } from './initialValues';
 import FormTitle from '../FormTitle';
+import SubmitModal from '../SubmitModal';
 
 const useStyles = makeStyles({
   button: {
@@ -28,108 +32,93 @@ const useStyles = makeStyles({
   }
 });
 
-const initialValues = {
-  nickname: '',
-  name: '',
-  nameRus: '',
-  patronymic: '',
-  patronymicRus: '',
-  surname: '',
-  surnameRus: '',
-  gender1: '',
-  age: '',
-  birthday: '',
-  serialNumber: '',
-  validatedAt: '',
-  country: '',
-  region: '',
-  city: '',
-  address: '',
-  zipCode: '',
-  phone: '',
-  emailPassword: ''
-};
-
 const PersonalForm = ({ className }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const onSubmit = (values) => {
-    console.log('SUBMIT', values);
-    dispatch(UpdateModelDataAction({ id: values.id, data: values }));
-  };
-  const data = useSelector(modelSelector);
+  const { modelData, isLoading } = useSelector(modelSelector);
   const defaultValues = useSelector(staticModelDataSelector).model || '';
+  const generateInitialValues =
+    modelData && modelData?.personal
+      ? checkValueEmpty(modelData.personal, initialValues)
+      : initialValues;
+  const onSubmit = (values) => {
+    console.log('SUBMITED VALUES', values);
+    dispatch(UpdateModelDataAction({ id: modelData.id, data: values }));
+  };
   return (
-    <div className={clsx('form', className)}>
+    <div className={clsx(className)}>
       <FormTitle>Личные данные</FormTitle>
 
-      <FormContainer
-        className="settings"
-        enableReinitialize
-        initialValues={checkValueEmpty(data, initialValues)}
-        validationSchema={PROFILE_VALIDATION_SCHEMA}
-        onSubmit={onSubmit}
-      >
-        {() => (
-          <>
-            <InputField name="nickname" type="text" label="Псевдоним (eng*)" />
-            <FieldSet divider>
-              <InputField className="form__field" name="nameRus" label="Имя (рус*)" />
-              <InputField className="form__field" name="name" label="Имя (eng*)" />
-              <InputField className="form__field" name="patronymicRus" label="Отчество (рус)" />
-              <InputField className="form__field" name="patronymic" label="Отчество (eng*)" />
-              <InputField className="form__field" name="surnameRus" label="Фамилия (рус)" />
-              <InputField className="form__field" name="surname" label="Фамилия (eng*)" />
-            </FieldSet>
-            <FieldSet divider>
-              <SelectField
-                className="form__field"
-                label="Пол"
-                name="genderId"
-                options={defaultValues.gender}
-              />
-              <InputField
-                className="form__field"
-                label="Отображаемый возраст"
-                type="Nubmer"
-                name="age"
-              />
-            </FieldSet>
-            <FieldSet divider title="Паспортные данные">
-              <DateField className="form__field" name="birthday" label="Дата рождения" />
-              <InputField
-                className="form__field"
-                name="serialNumber"
-                type="text"
-                label="Серия номер"
-              />
-            </FieldSet>
-            <FieldSet>
-              <DateField className="form__field" name="validatedAt" label="Срок действия" />
-              <SelectField
-                className="form__field"
-                label="Страна"
-                name="countryId"
-                options={defaultValues.country}
-              />
-              <InputField className="form__field" name="region" type="text" label="Регион" />
-              <InputField className="form__field" name="city" type="text" label="Город" />
-              <InputField className="form__field" name="address" type="text" label="Адрес" />
-            </FieldSet>
-            <FieldSet divider>
-              <InputField className="form__field" label="Почтовый индекс" name="zipCode" />
-              <InputField className="form__field" label="Телефон" type="phone" name="phone" />
-              <PasswordField className="form__field" label="Email пароль" name="emailPassword" />
-            </FieldSet>
-            <Button color="secondary" type="submit" className={classes.button} variant="contained">
-              сохранить
-            </Button>
-            <Button className={classes.button} variant="contained">
-              отменить
-            </Button>
-          </>
-        )}
-      </FormContainer>
+      {isLoading ? (
+        <>
+          <FieldSet>
+            <SkeletonInput style={{ display: 'inline-flex', marginRight: 32 }} width={352} />
+            <SkeletonInput style={{ display: 'inline-flex' }} width={352} />
+          </FieldSet>
+          <FieldSet divider>
+            <SkeletonInput style={{ display: 'inline-flex', marginRight: 32 }} width={352} />
+            <SkeletonInput style={{ display: 'inline-flex' }} width={352} />
+          </FieldSet>
+        </>
+      ) : (
+        <FormContainer
+          className="settings"
+          id="settings"
+          enableReinitialize
+          initialValues={generateInitialValues}
+          validationSchema={PROFILE_VALIDATION_SCHEMA}
+          onSubmit={onSubmit}
+        >
+          {({ values, submitForm }) => {
+            dispatch(
+              FormChangedAction(JSON.stringify(values) !== JSON.stringify(generateInitialValues))
+            );
+            return (
+              <>
+                <SubmitModal onSubmit={submitForm} />
+                <FieldSet divider>
+                  <InputField name="nameRus" label="Имя (рус*)" />
+                  <InputField name="name" label="Имя (eng*)" />
+                  <InputField name="patronymicRus" label="Отчество (рус)" />
+                  <InputField name="patronymic" label="Отчество (eng*)" />
+                  <InputField name="surnameRus" label="Фамилия (рус)" />
+                  <InputField name="surname" label="Фамилия (eng*)" />
+                </FieldSet>
+                <FieldSet divider>
+                  <SelectField label="Пол" name="genderId" options={defaultValues.gender} />
+                  <InputField label="Отображаемый возраст" type="number" name="age" />
+                </FieldSet>
+                <FieldSet divider title="Паспортные данные">
+                  <DateField name="birthday" label="Дата рождения" />
+                  <InputField name="serialNumber" type="text" label="Серия номер" />
+                  <DateField name="validatedAt" label="Срок действия" />
+                  <SelectField label="Страна" name="countryId" options={defaultValues.country} />
+                  <InputField name="region" type="text" label="Регион" />
+                  <InputField name="city" type="text" label="Город" />
+                  <InputField name="address" type="text" label="Адрес" />
+                </FieldSet>
+                <FieldSet>
+                  <InputField label="Почтовый индекс" name="zipCode" />
+                  <InputField label="Телефон" type="phone" name="phone" />
+                  <InputField label="Email" type="email" name="email" />
+                  <PasswordField label="Email пароль" name="emailPassword" />
+                </FieldSet>
+                <Button
+                  color="secondary"
+                  type="submit"
+                  className={classes.button}
+                  variant="contained"
+                >
+                  сохранить
+                </Button>
+                <Button className={classes.button} type="reset" variant="contained">
+                  отменить
+                </Button>
+              </>
+            );
+          }}
+        </FormContainer>
+      )}
     </div>
   );
 };

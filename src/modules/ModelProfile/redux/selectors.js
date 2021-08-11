@@ -1,1 +1,1 @@
-export const modelSelector = (state) => state.model.modelData;
+export const modelSelector = (state) => state.model;

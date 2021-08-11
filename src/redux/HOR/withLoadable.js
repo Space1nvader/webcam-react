@@ -11,7 +11,7 @@ export const successReducer = (state, action) => ({
   error: null,
   fieldsErrors: null,
   isLoading: false,
-  success: action.payload && action.payload.success
+  success: !!action.payload
 });
 
 export const errorReducer = (state, action) => ({

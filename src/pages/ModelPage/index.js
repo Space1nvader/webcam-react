@@ -2,16 +2,17 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import ModelProfile from 'modules/ModelProfile';
 import NavCrumbs from 'modules/Breadcrumbs/NavCrubms';
-import { GetModelDataAction, ResetAction } from 'modules/ModelProfile/redux/actions';
+import { GetModelDataAction, ResetAction } from 'modules/ModelProfile/redux/modelActions';
 import { GetStaticDataAction } from 'redux/actions/staticData';
 import './index.scss';
 
 const ProfilePage = (props) => {
   const { route, match } = props;
-  const modelId = { id: match.params.userId };
+
+  const modelId = match.params.userId;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(GetModelDataAction(modelId));
+    if (modelId) dispatch(GetModelDataAction({ id: modelId }));
     dispatch(GetStaticDataAction());
     return () => {
       dispatch(ResetAction());

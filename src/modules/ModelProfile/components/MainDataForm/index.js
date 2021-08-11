@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import { modelSelector } from 'modules/ModelProfile/redux/selectors';
 import { staticModelDataSelector } from 'redux/selectors/staticData';
 import clsx from 'clsx';
+import { initialValues } from './initialValues';
 import FormTitle from '../FormTitle';
 
 const useStyles = makeStyles({
@@ -51,31 +52,10 @@ const useStyles = makeStyles({
   }
 });
 
-const initialValues = {
-  raceId: '',
-  height: '',
-  weight: '',
-  bodyId: '',
-  hairLengthId: '',
-  hairColorId: '',
-  breastSizeId: '',
-  chestCircumference: '',
-  waistCircumference: '',
-  hipGirth: '',
-  pubicHairId: '',
-  sexualPreferenceId: '',
-  firstLanguageId: '',
-  secondLanguageId: '',
-  about: '',
-  experience: '',
-  style: '',
-  turnsOn: ''
-};
-
 const MainDataForm = (props) => {
   const { className, ...other } = props;
   const classes = useStyles();
-  const data = useSelector(modelSelector);
+  const { modelData, isLoading } = useSelector(modelSelector);
   const defaultValues = useSelector(staticModelDataSelector).model || '';
   const onSubmit = (values) => {
     console.log(values);
@@ -88,7 +68,7 @@ const MainDataForm = (props) => {
       <FormContainer
         className="settings"
         enableReinitialize
-        initialValues={checkValueEmpty(data, initialValues)}
+        initialValues={checkValueEmpty(modelData, initialValues)}
         validationSchema={SETTING_VALIDATION_SCHEMA}
         onSubmit={onSubmit}
       >
@@ -96,7 +76,6 @@ const MainDataForm = (props) => {
           <>
             <FieldSet divider>
               <SelectField
-                className="form__field"
                 label="Рассовая пренодлежность"
                 name="raceId"
                 options={defaultValues.race}
@@ -110,7 +89,7 @@ const MainDataForm = (props) => {
               />
             </FieldSet>
             <SelectField
-              className={`form__field ${classes.divider}`}
+              className={classes.divider}
               label="Телосложение"
               name="bodyId"
               style={{ display: 'flex', paddingBottom: 30 }}
@@ -118,99 +97,79 @@ const MainDataForm = (props) => {
             />
 
             <SelectField
-              className="form__field"
               label="Длина волос"
               name="hairLengthId"
               style={{ display: 'flex' }}
               options={defaultValues.hairLength}
             />
             <SelectField
-              className="form__field"
               label="Цвет волос"
               name="hair_color"
               style={{ display: 'flex' }}
               options={[{ title: 'Русые' }, { title: 'Изящное' }, { title: 'Русые' }]}
             />
             <SelectField
-              className={`form__field ${classes.divider}`}
+              className={classes.divider}
               label="Цвет глаз"
               name="aye_color"
               style={{ display: 'flex', paddingBottom: 32 }}
               options={[{ title: 'Карие' }, { title: 'Русые' }, { title: 'Карие' }]}
             />
             <SelectField
-              className="form__field"
               label="Разммер груди"
               name="breast_size"
               style={{ display: 'flex' }}
               options={[{ title: 'A' }, { title: 'B' }, { title: 'C' }]}
             />
             <InputField
-              className="form__field"
               label="Обхват груди"
               type="nubmer"
               style={{ display: 'flex' }}
               name="breast_girth"
             />
             <InputField
-              className="form__field"
               label="Обхват бедер"
               type="nubmer"
               style={{ display: 'flex' }}
               name="hip_girth"
             />
             <InputField
-              className={`form__field ${classes.divider} ${classes.dividerLong}`}
+              className={classes.divider + classes.dividerLong}
               label="Обхват талии"
               type="nubmer"
               style={{ display: 'flex', paddingBottom: 30 }}
               name="waist_girth"
             />
             <SelectField
-              className="form__field"
               label="Лобковые волосы"
               name="pubic_hair"
               style={{ display: 'flex', marginBottom: 70 }}
               options={[{ title: 'Бритые' }, { title: 'Бритые' }, { title: 'Бритые' }]}
             />
             <SelectField
-              className="form__field"
               label="Сексуальные предпочтения"
               name="sexual_preferences"
               style={{ display: 'flex' }}
               options={[{ title: 'Гетеро' }, { title: 'Гетеро' }, { title: 'Гетеро' }]}
             />
             <SelectField
-              className="form__field"
               label="Язык 1"
               name="lang"
               options={[{ title: 'Английский' }, { title: 'Русский' }, { title: 'Английский' }]}
             />
             <SelectField
-              className="form__field"
               label="Язык 2"
               style={{ marginLeft: 32 }}
               name="lang_second"
               options={[{ title: 'Русский' }, { title: 'Английский' }, { title: 'Русский' }]}
             />
-            <TextArea
-              style={{ marginTop: 20 }}
-              className="form__field"
-              label="Мой опыт"
-              type="text"
-              name="exp"
-            />
-            <TextArea className="form__field" label="Что заводит" type="text" name="turns" />
-            <TextArea className="form__field" label="Мой стиль" type="text" name="style" />
-            <Button color="secondary" className={classes.button} variant="contained">
+            <TextArea style={{ marginTop: 20 }} label="Мой опыт" type="text" name="exp" />
+            <TextArea label="Что заводит" type="text" name="turns" />
+            <TextArea label="Мой стиль" type="text" name="style" />
+            <Button color="secondary" type="submit" className={classes.button} variant="contained">
               сохранить
             </Button>
-            <Button
-              className={classes.button}
-              // onClick={() => validateForm().then(() => console.log('blah'))}
-              type="submit"
-              variant="contained"
-            >
+            <Button className={classes.button} type="reset" variant="contained">
               отменить
             </Button>
           </>

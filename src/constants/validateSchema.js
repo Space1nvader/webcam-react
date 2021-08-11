@@ -12,7 +12,6 @@ Yup.addMethod(Yup.string, 'Req', function Req(err = 'Обязательное п
 const nubmerErr = 'Допускаются только цифры';
 
 export const PROFILE_VALIDATION_SCHEMA = Yup.object().shape({
-  nickname: Yup.string().Req().Eng(),
   nameRus: Yup.string().Req().Rus(),
   name: Yup.string().Req().Eng(),
   patronymicRus: Yup.string().Req().Rus(),
@@ -21,7 +20,8 @@ export const PROFILE_VALIDATION_SCHEMA = Yup.object().shape({
   surname: Yup.string().Req().Eng(),
   age: Yup.number().typeError(nubmerErr).positive(),
   serialNumber: Yup.number().typeError(nubmerErr),
-  countryId: Yup.string().Req()
+  countryId: Yup.string().Req(),
+  email: Yup.string().email('Некорректный формат')
 });
 
 export const SETTING_VALIDATION_SCHEMA = Yup.object().shape({

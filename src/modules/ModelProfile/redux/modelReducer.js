@@ -15,9 +15,8 @@ const handleAction = {
     ...state,
     modelData: params
   }),
-  [MODELPROFILE_ACTION_TYPES.PUT.SUCCESS]: (state, params) => ({
-    ...state,
-    modelData: params
+  [MODELPROFILE_ACTION_TYPES.PUT.SUCCESS]: (state) => ({
+    ...state
   })
 };
 
@@ -27,7 +26,7 @@ const reducer = (state = initialState, action) =>
 export default pipeHigherOrderReducers(
   withResetState(MODELPROFILE_ACTION_TYPES.RESET_STATE, initialState),
   withLoadable({
-    isLoadingActionType: [MODELPROFILE_ACTION_TYPES.GET.START, MODELPROFILE_ACTION_TYPES.PUT.START],
+    isLoadingActionType: [MODELPROFILE_ACTION_TYPES.GET.START],
     successActionType: [
       MODELPROFILE_ACTION_TYPES.GET.SUCCESS,
       MODELPROFILE_ACTION_TYPES.PUT.SUCCESS

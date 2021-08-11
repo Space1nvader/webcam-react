@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Field } from 'formik';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { FormContainer } from 'components/Form/FormContainer';
-import './index.scss';
 
 const useStyles = makeStyles({
   button: {
@@ -16,23 +15,34 @@ const useStyles = makeStyles({
   }
 });
 
-const UploadFileButton = (props) => {
+const UploadFileField = (props) => {
+  const [fd, setFd] = useState('');
+  const { submitForm, name, icon, children, setFieldValue, ...other } = props;
   const classes = useStyles();
-  const { children, name, initialValue, icon, ...other } = props;
-
-  const onSubmit = (values) => {
-    console.log('SUBMIT', values);
+  const handleSubmitForm = (e) => {
+    const { files } = e.target;
+    const data = new FormData();
+    if (files && files.length) {
+      for (let i = 0; i < files.length; i += 1) {
+        data.append('file[]', files[i]);
+        setFd(data);
+      }
+      setFieldValue(name, data);
+      submitForm();
+    }
   };
   return (
-    <FormContainer enableReinitialize initialValues={initialValue} onSubmit={onSubmit}>
-      {({ submitForm }) => (
+    <Field {...props}>
+      {({ field }) => (
         <>
           <input
+            {...field}
             accept="image/*"
             className="uploadFile__input"
             name={name}
             id={name}
-            onChange={submitForm}
+            value=""
+            onChange={handleSubmitForm}
             multiple
             type="file"
           />
@@ -43,7 +53,8 @@ const UploadFileButton = (props) => {
           </label>
         </>
       )}
-    </FormContainer>
+    </Field>
   );
 };
-export default UploadFileButton;
+
+export default UploadFileField;
