@@ -4,6 +4,8 @@ import { Field } from 'formik';
 import UserPhoto from 'components/UserPhoto';
 import IconBtn from 'components/IconBtn';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
+import { useSelector } from 'react-redux';
+import { uploadPictureSelector } from '../../../../../redux/selectors/uploadPicture';
 
 const useStyles = makeStyles({
   absoluteBtn: {

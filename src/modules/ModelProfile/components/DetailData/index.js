@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ContactLink from 'components/ContactLink';
 import { Button } from '@material-ui/core';
 import { useSelector } from 'react-redux';
-import { modelSelector } from 'modules/ModelProfile/redux/selectors';
+import { personalSelector } from 'modules/ModelProfile/redux/selectors';
 import Income from '../Income';
 import './index.scss';
 
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 const DetailData = () => {
   const classes = useStyles();
 
-  const { modelData, isLoading } = useSelector(modelSelector);
+  const { modelData, isLoading } = useSelector(personalSelector);
   const data = modelData.personal;
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpenClick = () => setModalOpen(true);

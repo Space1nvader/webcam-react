@@ -6,12 +6,12 @@ import UploadFileForm from 'modules/ModelProfile/components/UploadFileForm';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { modelSelector } from 'modules/ModelProfile/redux/selectors';
+import { personalSelector } from 'modules/ModelProfile/redux/selectors';
 import './index.scss';
 
 const DocsForm = (props) => {
   const { className, ...other } = props;
-  const { modelData, isLoading, success } = useSelector(modelSelector);
+  const { modelData, isLoading, success } = useSelector(personalSelector);
   const data = success && modelData.personal ? modelData.personal : '';
   const renderDocs = (docs) => (
     <div className="docs__list">

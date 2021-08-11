@@ -3,7 +3,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { useSelector } from 'react-redux';
-import { modelSelector } from 'modules/ModelProfile/redux/selectors';
+import { personalSelector } from 'modules/ModelProfile/redux/selectors';
 import ProfileTabs from './components/ProfileTabs';
 import PersonalForm from './components/PersonalForm';
 import DocsForm from './components/DocsForm';
@@ -23,22 +23,22 @@ const modelProfileTabs = [
         <DocsForm className="modelProfile__docs" />
       </>
     )
-  },
-  {
-    key: 'general',
-    title: 'Основные данные',
-    icon: <PersonAddIcon />,
-    component: <MainDataForm className="modelProfile__form" />
-  },
-  {
-    key: 'account',
-    title: 'Учетные данные',
-    icon: <SettingsIcon />,
-    component: <DocsForm className="modelProfile__docs" />
   }
+  // {
+  //   key: 'general',
+  //   title: 'Основные данные',
+  //   icon: <PersonAddIcon />,
+  //   component: <MainDataForm className="modelProfile__form" />
+  // },
+  // {
+  //   key: 'account',
+  //   title: 'Учетные данные',
+  //   icon: <SettingsIcon />,
+  //   component: <DocsForm className="modelProfile__docs" />
+  // }
 ];
 const ModelProfile = () => {
-  const { modelData, isLoading } = useSelector(modelSelector);
+  const { modelData, isLoading } = useSelector(personalSelector);
   const data = modelData && modelData.personal ? modelData.personal : '';
   return (
     <>

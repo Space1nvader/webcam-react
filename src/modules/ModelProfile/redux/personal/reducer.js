@@ -2,7 +2,7 @@ import HOR from 'redux/HOR';
 import { ActionTypes } from 'redux/utils/actionCreator';
 
 const { pipeHigherOrderReducers, withLoadable, withResetState } = HOR;
-export const MODELPROFILE_ACTION_TYPES = new ActionTypes('MODELPROFILE')
+export const MODEL_PERSONAL_ACTION_TYPES = new ActionTypes('MODEL_PERSONAL')
   .getAT()
   .updateAT()
   .getActionTypes();
@@ -11,11 +11,11 @@ const initialState = {
   modelData: ''
 };
 const handleAction = {
-  [MODELPROFILE_ACTION_TYPES.GET.SUCCESS]: (state, params) => ({
+  [MODEL_PERSONAL_ACTION_TYPES.GET.SUCCESS]: (state, params) => ({
     ...state,
     modelData: params
   }),
-  [MODELPROFILE_ACTION_TYPES.PUT.SUCCESS]: (state) => ({
+  [MODEL_PERSONAL_ACTION_TYPES.PUT.SUCCESS]: (state) => ({
     ...state
   })
 };
@@ -24,13 +24,13 @@ const reducer = (state = initialState, action) =>
   handleAction[action.type] ? handleAction[action.type](state, action.payload) : state;
 
 export default pipeHigherOrderReducers(
-  withResetState(MODELPROFILE_ACTION_TYPES.RESET_STATE, initialState),
+  withResetState(MODEL_PERSONAL_ACTION_TYPES.RESET_STATE, initialState),
   withLoadable({
-    isLoadingActionType: [MODELPROFILE_ACTION_TYPES.GET.START],
+    isLoadingActionType: [MODEL_PERSONAL_ACTION_TYPES.GET.START],
     successActionType: [
-      MODELPROFILE_ACTION_TYPES.GET.SUCCESS,
-      MODELPROFILE_ACTION_TYPES.PUT.SUCCESS
+      MODEL_PERSONAL_ACTION_TYPES.GET.SUCCESS,
+      MODEL_PERSONAL_ACTION_TYPES.PUT.SUCCESS
     ],
-    errorActionType: [MODELPROFILE_ACTION_TYPES.GET.ERROR, MODELPROFILE_ACTION_TYPES.PUT.ERROR]
+    errorActionType: [MODEL_PERSONAL_ACTION_TYPES.GET.ERROR, MODEL_PERSONAL_ACTION_TYPES.PUT.ERROR]
   })
 )(reducer);

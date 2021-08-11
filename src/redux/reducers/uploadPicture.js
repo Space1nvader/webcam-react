@@ -7,7 +7,7 @@ export const UPLOAD_PICTURE_ACTION_TYPES = new ActionTypes('UPLOAD_PICTURE')
   .getActionTypes();
 
 const initialState = {
-  picture: []
+  picture: ''
 };
 const handleAction = {
   [UPLOAD_PICTURE_ACTION_TYPES.POST.SUCCESS]: (state, params) => ({

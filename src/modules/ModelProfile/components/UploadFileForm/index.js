@@ -2,14 +2,14 @@ import React from 'react';
 import SERVICE_API from 'api';
 import { FormContainer } from 'components/Form/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
-import { modelSelector } from 'modules/ModelProfile/redux/selectors';
+import { personalSelector } from 'modules/ModelProfile/redux/selectors';
 import UploadFileField from './components/UploadFileField';
 import './index.scss';
 
 const UploadFileForm = (props) => {
   const { initialValue } = props;
 
-  const { modelData, isLoading, success } = useSelector(modelSelector);
+  const { modelData, isLoading, success } = useSelector(personalSelector);
   console.log(modelData);
   const onSubmit = ({ files }) => {
     console.log('SUBMIT', files);
