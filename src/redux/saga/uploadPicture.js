@@ -5,7 +5,6 @@ import { UPLOAD_PICTURE_ACTION_TYPES } from 'redux/reducers/uploadPicture';
 function* uploadPicture(action) {
   try {
     const { data } = yield call(SERVICE_API.Picture.uploadPicture, action.payload);
-
     yield put({
       type: UPLOAD_PICTURE_ACTION_TYPES.POST.SUCCESS,
       payload: data

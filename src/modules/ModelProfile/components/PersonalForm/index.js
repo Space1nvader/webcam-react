@@ -10,12 +10,11 @@ import FieldSet from 'components/Form/FieldSet';
 import { PasswordField } from 'components/Form/PasswordField';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { UpdatePersonalDataAction } from 'modules/ModelProfile/redux/personal/actions';
-import { personalSelector } from 'modules/ModelProfile/redux/selectors';
+import { UpdateModelAction } from 'modules/ModelProfile/redux/actions';
+import { modelSelector } from 'modules/ModelProfile/redux/selectors';
 import { staticModelDataSelector } from 'redux/selectors/staticData';
 import { checkValueEmpty } from 'untils/checkValueEmpty';
 import { FormChangedAction } from 'redux/actions/formChanged';
-
 import SkeletonInput from 'components/skeletons/SkeletonInput';
 import { initialValues } from './initialValues';
 import FormTitle from '../FormTitle';
@@ -35,7 +34,7 @@ const useStyles = makeStyles({
 const PersonalForm = ({ className }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { modelData, isLoading } = useSelector(personalSelector);
+  const { modelData, isLoading } = useSelector(modelSelector);
   const defaultValues = useSelector(staticModelDataSelector).model || '';
   const generateInitialValues =
     modelData && modelData?.personal
@@ -43,7 +42,7 @@ const PersonalForm = ({ className }) => {
       : initialValues;
   const onSubmit = (values) => {
     console.log('SUBMITED VALUES', values);
-    dispatch(UpdatePersonalDataAction({ id: modelData.id, data: values }));
+    dispatch(UpdateModelAction({ id: modelData.id, data: values }));
   };
   return (
     <div className={clsx(className)}>

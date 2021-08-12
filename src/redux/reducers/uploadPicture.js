@@ -12,7 +12,7 @@ const initialState = {
 const handleAction = {
   [UPLOAD_PICTURE_ACTION_TYPES.POST.SUCCESS]: (state, params) => ({
     ...state,
-    ...params
+    picture: params
   })
 };
 
