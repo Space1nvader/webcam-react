@@ -9,8 +9,7 @@ const useStyles = makeStyles({
     width: 'calc(50% - (32px / 2))',
     marginBottom: 30,
     '& input': {
-      padding: 12,
-      borderRarius: '12px'
+      padding: 12
     },
     '& label': {
       transform: ' translate(14px,14px) scale(1)'
@@ -40,8 +39,9 @@ export const InputField = (props) => {
   return (
     <Field {...props}>
       {({ field, meta }) => {
-        const isError = !!(meta.error && meta.touched);
+        const isError = !!meta.error;
         const errorClass = isError ? 'error' : '';
+
         return (
           <TextField
             {...field}

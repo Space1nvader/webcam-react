@@ -3,7 +3,6 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { Grow, Paper, IconButton } from '@material-ui/core';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
-import IconBtn from 'components/IconBtn';
 
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,7 +14,7 @@ const useStyles = makeStyles({
 });
 
 export default function MenuListComposition(props) {
-  const { icon, children, size = 'small' } = props;
+  const { icon, options, size = 'small' } = props;
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const classes = useStyles();
@@ -65,8 +64,8 @@ export default function MenuListComposition(props) {
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open} id="menu-list-grow">
-                  {children.map((el) => (
-                    <MenuItem onClick={handleClose}>{el}</MenuItem>
+                  {options.map((option) => (
+                    <MenuItem onClick={handleClose}>{option}</MenuItem>
                   ))}
                 </MenuList>
               </ClickAwayListener>

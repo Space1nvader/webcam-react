@@ -32,13 +32,13 @@ export class ActionTypes {
     return this.resultTypes;
   }
 
-  listAT() {
+  getAT() {
     const listString = 'GET';
     this.generateAsyncActionTypes(listString);
     return this;
   }
 
-  addAT() {
+  postAT() {
     const addString = 'POST';
     this.generateAsyncActionTypes(addString);
     return this;

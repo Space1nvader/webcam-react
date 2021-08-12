@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 import RouteCrubms from 'modules/Breadcrumbs/RouteCrubms';
 import { generateAppRoutes } from 'modules/Breadcrumbs/until';
-import { dataRoutes } from 'api/routes';
+import { dataRoutes } from 'constants/routes';
 import { Provider } from 'react-redux';
 import { store } from 'redux/index';
 import Layout from './components/Layout';

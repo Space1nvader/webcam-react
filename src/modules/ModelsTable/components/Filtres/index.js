@@ -69,9 +69,10 @@ const TableFilters = (props) => {
             <IconBtn style={{ marginRight: 10 }}>
               <img alt="" src={funnelIcon} />
             </IconBtn>
-            <SimpleMenu icon={<MoreVertIcon style={{ fill: 'var(--gray-20)' }} />}>
-              {['Фильтр', 'Навигаций', 'Кнопка', 'Филтр']}
-            </SimpleMenu>
+            <SimpleMenu
+              options={['Фильтр', 'Навигаций', 'Кнопка', 'Филтр']}
+              icon={<MoreVertIcon style={{ fill: 'var(--gray-20)' }} />}
+            />
           </Cell>
         </TableRow>
       </TableBody>

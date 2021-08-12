@@ -1,5 +1,5 @@
 import ModelsPage from 'pages/ModelsPage';
-import ProfilePage from 'pages/ProfilePage';
+import ModelPage from 'pages/ModelPage';
 
 export const dataRoutes = [
   {
@@ -8,14 +8,14 @@ export const dataRoutes = [
     component: ModelsPage,
     routes: [
       {
-        path: '/model/add-model',
+        path: '/models/add-model',
         label: 'Добавление модели',
-        component: ProfilePage
+        component: ModelPage
       },
       {
-        path: '/model/:userId',
+        path: '/models/:userId',
         label: 'Модель',
-        component: ProfilePage
+        component: ModelPage
       }
     ]
   }

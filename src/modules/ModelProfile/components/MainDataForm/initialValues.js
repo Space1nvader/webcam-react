@@ -1,0 +1,20 @@
+export const initialValues = {
+  raceId: '',
+  height: '',
+  weight: '',
+  bodyId: '',
+  hairLengthId: '',
+  hairColorId: '',
+  breastSizeId: '',
+  chestCircumference: '',
+  waistCircumference: '',
+  hipGirth: '',
+  pubicHairId: '',
+  sexualPreferenceId: '',
+  firstLanguageId: '',
+  secondLanguageId: '',
+  about: '',
+  experience: '',
+  style: '',
+  turnsOn: ''
+};

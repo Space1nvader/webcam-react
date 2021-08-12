@@ -12,9 +12,10 @@ const Profile = (props) => {
       <User image={image} {...other}>
         {children}
       </User>
-      <SimpleMenu icon={<MoreHorizIcon style={{ fill: 'var(--indigo-30)' }} />}>
-        {['Profile', 'My account', 'Logout']}
-      </SimpleMenu>
+      <SimpleMenu
+        options={['Profile', 'My account', 'Logout']}
+        icon={<MoreHorizIcon style={{ fill: 'var(--indigo-30)' }} />}
+      />
     </div>
   );
 };

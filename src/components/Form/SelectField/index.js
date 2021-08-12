@@ -23,15 +23,11 @@ const useStyles = makeStyles({
 });
 export const SelectField = (props) => {
   const classes = useStyles();
-  const { name, label, options, className, ...other } = props;
-  const [value, setValue] = React.useState('');
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
+  const { name, label, options, defaultValue = 'default', className, ...other } = props;
+
   return (
     <Field {...props}>
       {({ field, meta }) => {
-        setValue(field.value);
         const isError = !!(meta.error && meta.touched);
         const errorClass = isError ? 'error' : '';
         return (
@@ -39,20 +35,22 @@ export const SelectField = (props) => {
             <InputLabel id={name}>{label}</InputLabel>
             <Select
               {...field}
+              disabled={!options}
               labelId={name}
-              value={value}
+              value={field.value || defaultValue}
+              defaultValue={defaultValue}
               name={name}
               id={name}
               className={clsx(classes.select, errorClass)}
-              onChange={handleChange}
               label={label}
             >
-              <MenuItem value="">
+              <MenuItem value={defaultValue}>
                 <em>Не указано</em>
               </MenuItem>
-              {options.map((option) => (
-                <MenuItem value={option.value || option.title}>{option.title}</MenuItem>
-              ))}
+              {options?.length &&
+                options.map((option) => (
+                  <MenuItem value={option.id || option.title}>{option.title}</MenuItem>
+                ))}
             </Select>
           </FormControl>
         );

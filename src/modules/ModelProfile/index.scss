@@ -11,6 +11,7 @@
   }
   &__profile {
     display: flex;
+    // width: 100%;
   }
   &__data {
     width: 13.125rem;
@@ -20,21 +21,12 @@
     margin-left: 2.25rem;
     box-sizing: border-box;
   }
-  &__tabs {
-    margin-bottom: 0.625rem;
-  }
-  &__frame {
-    background-color: var(--indigo-0);
-    padding: 2rem 1.25rem;
-    border-radius: 8px;
-    display: flex;
-    flex-wrap: wrap;
-  }
+
   &__form {
-    width: 44rem;
+    width: calc(100% - 23rem);
   }
   &__docs {
-    width: calc(100% - 48rem);
+    width: 19rem;
     margin-left: 4rem;
   }
 }

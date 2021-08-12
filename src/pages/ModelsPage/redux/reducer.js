@@ -2,21 +2,16 @@ import HOR from 'redux/HOR';
 import { ActionTypes } from 'redux/utils/actionCreator';
 
 const { pipeHigherOrderReducers, withLoadable, withResetState } = HOR;
-export const MODELSLIST_ACTION_TYPES = new ActionTypes('MODELSLIST')
-  .addAT()
-  .listAT()
-  .getActionTypes();
+export const MODELSLIST_ACTION_TYPES = new ActionTypes('MODELSLIST').getAT().getActionTypes();
 
 const initialState = {
-  models: []
+  models: ''
 };
 const handleAction = {
   [MODELSLIST_ACTION_TYPES.GET.SUCCESS]: (state, params) => ({
     ...state,
-    models: params.models || [],
-    totalAmount: params.totalAmount || 0
-  }),
-  [MODELSLIST_ACTION_TYPES.POST.SUCCESS]: (state) => state
+    models: params.models || ''
+  })
 };
 
 const reducer = (state = initialState, action) =>
@@ -25,8 +20,8 @@ const reducer = (state = initialState, action) =>
 export default pipeHigherOrderReducers(
   withResetState(MODELSLIST_ACTION_TYPES.RESET_STATE, initialState),
   withLoadable({
-    isLoadingActionType: [MODELSLIST_ACTION_TYPES.GET.START, MODELSLIST_ACTION_TYPES.POST.START],
-    successActionType: [MODELSLIST_ACTION_TYPES.GET.SUCCESS, MODELSLIST_ACTION_TYPES.POST.SUCCESS],
-    errorActionType: [MODELSLIST_ACTION_TYPES.GET.ERROR, MODELSLIST_ACTION_TYPES.POST.ERROR]
+    isLoadingActionType: [MODELSLIST_ACTION_TYPES.GET.START],
+    successActionType: [MODELSLIST_ACTION_TYPES.GET.SUCCESS],
+    errorActionType: [MODELSLIST_ACTION_TYPES.GET.ERROR]
   })
 )(reducer);

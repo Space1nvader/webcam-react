@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const Staus = () => (
   <div className="status">
-    <Link to="/model/add-model">
+    <Link to="/models/add-model">
       <IconBtn
         style={{
           backgroundColor: 'var(--red-60)',
