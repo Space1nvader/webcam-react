@@ -43,7 +43,7 @@ const ModelProfile = () => {
   return (
     <>
       <h4 className="modelProfile__title">
-        {!isLoading && data ? `${data.name} ${data.surname || ''}` : 'Данные модели'}
+        {data ? `${data.name} ${data.surname || ''}` : 'Данные модели'}
       </h4>
       <div className="modelProfile__profile">
         <div className="modelProfile__data">
@@ -52,7 +52,7 @@ const ModelProfile = () => {
             name="avatar"
             imagePath={{ avatar: data ? data.avatar : '' }}
           />
-          {!isLoading && data && <DetailData />}
+          {data && <DetailData />}
         </div>
         <div className="modelProfile__box">
           <ProfileTabs tabs={modelProfileTabs} />

@@ -47,77 +47,63 @@ const PersonalForm = ({ className }) => {
   return (
     <div className={clsx(className)}>
       <FormTitle>Личные данные</FormTitle>
-
-      {isLoading ? (
-        <>
-          <FieldSet>
-            <SkeletonInput style={{ display: 'inline-flex', marginRight: 32 }} width={352} />
-            <SkeletonInput style={{ display: 'inline-flex' }} width={352} />
-          </FieldSet>
-          <FieldSet divider>
-            <SkeletonInput style={{ display: 'inline-flex', marginRight: 32 }} width={352} />
-            <SkeletonInput style={{ display: 'inline-flex' }} width={352} />
-          </FieldSet>
-        </>
-      ) : (
-        <FormContainer
-          className="settings"
-          id="settings"
-          enableReinitialize
-          initialValues={generateInitialValues}
-          validationSchema={PROFILE_VALIDATION_SCHEMA}
-          onSubmit={onSubmit}
-        >
-          {({ values, submitForm }) => {
-            dispatch(
-              FormChangedAction(JSON.stringify(values) !== JSON.stringify(generateInitialValues))
-            );
-            return (
-              <>
-                <SubmitModal onSubmit={submitForm} />
-                <FieldSet divider>
-                  <InputField name="nameRus" label="Имя (рус*)" />
-                  <InputField name="name" label="Имя (eng*)" />
-                  <InputField name="patronymicRus" label="Отчество (рус)" />
-                  <InputField name="patronymic" label="Отчество (eng*)" />
-                  <InputField name="surnameRus" label="Фамилия (рус)" />
-                  <InputField name="surname" label="Фамилия (eng*)" />
-                </FieldSet>
-                <FieldSet divider>
-                  <SelectField label="Пол" name="genderId" options={defaultValues.gender} />
-                  <InputField label="Отображаемый возраст" type="number" name="age" />
-                </FieldSet>
-                <FieldSet divider title="Паспортные данные">
-                  <DateField name="birthday" label="Дата рождения" />
-                  <InputField name="serialNumber" type="text" label="Серия номер" />
-                  <DateField name="validatedAt" label="Срок действия" />
-                  <SelectField label="Страна" name="countryId" options={defaultValues.country} />
-                  <InputField name="region" type="text" label="Регион" />
-                  <InputField name="city" type="text" label="Город" />
-                  <InputField name="address" type="text" label="Адрес" />
-                </FieldSet>
-                <FieldSet>
-                  <InputField label="Почтовый индекс" name="zipCode" />
-                  <InputField label="Телефон" type="phone" name="phone" />
-                  <InputField label="Email" type="email" name="email" />
-                  <PasswordField label="Email пароль" name="emailPassword" />
-                </FieldSet>
-                <Button
-                  color="secondary"
-                  type="submit"
-                  className={classes.button}
-                  variant="contained"
-                >
-                  сохранить
-                </Button>
-                <Button className={classes.button} type="reset" variant="contained">
-                  отменить
-                </Button>
-              </>
-            );
-          }}
-        </FormContainer>
-      )}
+      <FormContainer
+        className="settings"
+        id="settings"
+        enableReinitialize
+        initialValues={generateInitialValues}
+        validationSchema={PROFILE_VALIDATION_SCHEMA}
+        onSubmit={onSubmit}
+      >
+        {({ values, submitForm }) => {
+          dispatch(
+            FormChangedAction(JSON.stringify(values) !== JSON.stringify(generateInitialValues))
+          );
+          return (
+            <>
+              <SubmitModal onSubmit={submitForm} />
+              <FieldSet divider>
+                <InputField name="nameRus" label="Имя (рус*)" />
+                <InputField name="name" label="Имя (eng*)" />
+                <InputField name="patronymicRus" label="Отчество (рус)" />
+                <InputField name="patronymic" label="Отчество (eng*)" />
+                <InputField name="surnameRus" label="Фамилия (рус)" />
+                <InputField name="surname" label="Фамилия (eng*)" />
+              </FieldSet>
+              <FieldSet divider>
+                <SelectField label="Пол" name="genderId" options={defaultValues.gender} />
+                <InputField label="Отображаемый возраст" type="number" name="age" />
+              </FieldSet>
+              <FieldSet divider title="Паспортные данные">
+                <DateField name="birthday" label="Дата рождения" />
+                <InputField name="serialNumber" type="text" label="Серия номер" />
+                <DateField name="validatedAt" label="Срок действия" />
+                <SelectField label="Страна" name="countryId" options={defaultValues.country} />
+                <InputField name="region" type="text" label="Регион" />
+                <InputField name="city" type="text" label="Город" />
+                <InputField name="address" type="text" label="Адрес" />
+              </FieldSet>
+              <FieldSet>
+                <InputField label="Почтовый индекс" name="zipCode" />
+                <InputField label="Телефон" type="phone" name="phone" />
+                <InputField label="Email" type="email" name="email" />
+                <PasswordField label="Email пароль" name="emailPassword" />
+              </FieldSet>
+              <Button
+                color="secondary"
+                type="submit"
+                className={classes.button}
+                variant="contained"
+              >
+                сохранить
+              </Button>
+              <Button className={classes.button} type="reset" variant="contained">
+                отменить
+              </Button>
+            </>
+          );
+        }}
+      </FormContainer>
     </div>
   );
 };

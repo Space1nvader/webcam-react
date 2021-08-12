@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import SERVICE_API from 'api';
-import { MODEL_ACTION_TYPES } from './reducer';
+import { MODEL_ACTION_TYPES, MODEL_DOCUMENTS_ACTION_TYPES } from './reducer';
 
 function* getModel(action) {
   try {
@@ -62,9 +62,42 @@ function* deleteModel(action) {
   }
 }
 
+function* attachDocument(action) {
+  try {
+    const { data } = yield call(SERVICE_API.Model.attachFile, action.payload);
+    yield put({
+      type: MODEL_DOCUMENTS_ACTION_TYPES.POST.SUCCESS,
+      payload: data
+    });
+  } catch ({ response }) {
+    yield put({
+      type: MODEL_DOCUMENTS_ACTION_TYPES.POST.ERROR,
+      payload: response.data
+    });
+  }
+}
+
+function* deleteDocument({ payload }) {
+  try {
+    yield call(SERVICE_API.Model.detachFile, payload);
+
+    yield put({
+      type: MODEL_DOCUMENTS_ACTION_TYPES.DELETE.SUCCESS,
+      payload
+    });
+  } catch ({ response }) {
+    yield put({
+      type: MODEL_DOCUMENTS_ACTION_TYPES.DELETE.ERROR,
+      payload: response.data
+    });
+  }
+}
+
 export function* ModelProfileSaga() {
   yield takeEvery(MODEL_ACTION_TYPES.GET.START, getModel);
   yield takeEvery(MODEL_ACTION_TYPES.PUT.START, updateModel);
   // yield takeEvery(MODEL_ACTION_TYPES.POST.START, createModel);
   // yield takeEvery(MODEL_ACTION_TYPES.DELETE.START, deleteModel);
+  yield takeEvery(MODEL_DOCUMENTS_ACTION_TYPES.POST.START, attachDocument);
+  yield takeEvery(MODEL_DOCUMENTS_ACTION_TYPES.DELETE.START, deleteDocument);
 }
