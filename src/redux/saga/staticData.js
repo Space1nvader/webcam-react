@@ -18,6 +18,6 @@ function* getStaticData() {
   }
 }
 
-export function* staticDataSaga() {
+export function* StaticDataSaga() {
   yield takeLatest(STATICDATA_ACTION_TYPES.GET.START, getStaticData);
 }

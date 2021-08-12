@@ -1,9 +1,9 @@
 import { all } from 'redux-saga/effects';
 import { ModelsListSaga } from 'pages/ModelsPage/redux/saga';
 import { ModelProfileSaga } from 'modules/ModelProfile/redux/saga';
-import { staticDataSaga } from './saga/staticData';
-import { uploadPictureSaga } from './saga/uploadPicture';
+import { StaticDataSaga } from './saga/staticData';
+import { UploadPictureSaga } from './saga/uploadPicture';
 
 export default function* rootSaga() {
-  yield all([ModelsListSaga(), ModelProfileSaga(), uploadPictureSaga(), staticDataSaga()]);
+  yield all([ModelsListSaga(), ModelProfileSaga(), UploadPictureSaga(), StaticDataSaga()]);
 }

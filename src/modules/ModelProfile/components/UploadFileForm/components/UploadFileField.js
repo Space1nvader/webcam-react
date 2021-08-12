@@ -16,7 +16,6 @@ const useStyles = makeStyles({
 });
 
 const UploadFileField = (props) => {
-  const [fd, setFd] = useState('');
   const { submitForm, name, icon, children, setFieldValue, ...other } = props;
   const classes = useStyles();
   const handleSubmitForm = (e) => {
@@ -25,7 +24,6 @@ const UploadFileField = (props) => {
     if (files && files.length) {
       for (let i = 0; i < files.length; i += 1) {
         data.append('file[]', files[i]);
-        setFd(data);
       }
       setFieldValue(name, data);
       submitForm();
@@ -47,7 +45,7 @@ const UploadFileField = (props) => {
             type="file"
           />
           <label htmlFor={name} className="uploadFile__label">
-            <Button className={classes.button} component="span" {...other} startIcon={icon}>
+            <Button className={classes.button} component="span" startIcon={icon}>
               {children || 'Загрузить'}
             </Button>
           </label>

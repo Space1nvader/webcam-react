@@ -17,6 +17,6 @@ function* uploadPicture(action) {
   }
 }
 
-export function* uploadPictureSaga() {
+export function* UploadPictureSaga() {
   yield takeLatest(UPLOAD_PICTURE_ACTION_TYPES.POST.START, uploadPicture);
 }
