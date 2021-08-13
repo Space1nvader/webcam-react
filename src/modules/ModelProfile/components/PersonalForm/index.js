@@ -35,6 +35,7 @@ const PersonalForm = ({ className }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { modelData, isLoading } = useSelector(modelSelector);
+
   const defaultValues = useSelector(staticModelDataSelector).model || '';
   const generateInitialValues =
     modelData && modelData?.personal
