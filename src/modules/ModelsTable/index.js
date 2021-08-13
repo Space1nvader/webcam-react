@@ -1,39 +1,25 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Table, TableHead, TableContainer, TableBody, TableRow } from '@material-ui/core';
+import { Table, TableContainer, TableBody, TableRow } from '@material-ui/core';
 import SmallCheckbox from 'components/SmallCheckbox';
 import User from 'components/User';
 import Status from 'components/SessionStatus';
 import IOSSwitch from 'components/IOSSwitch';
 import { fromUnixTime, format } from 'date-fns';
 import TableCell from 'components/Table/Cell';
-import HeaderCell from 'components/Table/HeaderCell';
 import TablePagination from 'components/Table/Pagination';
 import { modelsListSelector } from 'pages/ModelsPage/redux/selectors';
-import { useDispatch, useSelector } from 'react-redux';
 import { GetModelsListAction } from 'pages/ModelsPage/redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
 import TableFiltres from './components/Filtres';
+import TableHead from './components/Head';
+import TableMessage from './components/Message';
+import { styles } from './styles';
 
-const useStyles = makeStyles({
-  tableContainer: {
-    borderRadius: 12,
-    border: '1px solid var(--gray-20)',
-    boxSizing: 'border-box',
-    padding: '24px 24px 0'
-  },
-  tableRow: {
-    '&:hover': {
-      backgroundColor: 'var(--indigo-0)'
-    },
-    '&:first-of-type': {
-      borderTop: '18px solid transparent'
-    }
-  }
-});
-
+const useStyles = makeStyles(styles);
 const ModelsTable = (props) => {
   const { rows, fields, ...other } = props;
-  const { models, pagination, success } = useSelector(modelsListSelector);
+  const { models, pagination, isLoading, success } = useSelector(modelsListSelector);
   const classes = useStyles();
   const [isSelect, setSelectState] = useState(new Set());
   const [page, setPage] = useState(1);
@@ -71,54 +57,46 @@ const ModelsTable = (props) => {
         return value;
     }
   };
+  const generateTableRows = () => {
+    if (!isLoading) {
+      if (rows?.length) {
+        rows.map((row) => (
+          <TableRow className={classes.tableRow} key={row.id}>
+            <TableCell padding="checkbox">
+              <SmallCheckbox checked={isSelect.has(row.id)} onChange={handleSelectClick(row.id)} />
+            </TableCell>
+            {fields.map((field) =>
+              field.id === 'name' ? (
+                <TableCell key={field.id}>
+                  <User
+                    to={`/models/${row.id}`}
+                    image={process.env.REACT_APP_BASE_URL + row.avatar}
+                  >
+                    {row.nickname} / {row.fullNameRus}
+                  </User>
+                </TableCell>
+              ) : (
+                <TableCell key={field.id}>{generateFields(field.type, row[field.id])}</TableCell>
+              )
+            )}
+          </TableRow>
+        ));
+      }
+      return (
+        <TableRow className={classes.tableRow}>
+          <TableCell>Список моделей пуст</TableCell>
+        </TableRow>
+      );
+    }
+    return <TableMessage>Пусто</TableMessage>;
+  };
+
   return (
     <TableContainer {...other} className={classes.tableContainer}>
       <TableFiltres onChange={handleSelectAllClick} />
       <Table>
-        <TableHead>
-          <TableRow style={{ backgroundColor: 'var(--indigo-0)' }}>
-            <HeaderCell padding="checkbox" />
-            {fields.map((field) => (
-              <HeaderCell key={field.id} sortble={field.sortble}>
-                {field.label}
-              </HeaderCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows ? (
-            rows.map((row) => (
-              <TableRow className={classes.tableRow} key={row.id}>
-                <TableCell padding="checkbox">
-                  <SmallCheckbox
-                    checked={isSelect.has(row.id)}
-                    onChange={handleSelectClick(row.id)}
-                  />
-                </TableCell>
-                {fields.map((field) =>
-                  field.id === 'name' ? (
-                    <TableCell key={field.id}>
-                      <User
-                        to={`/models/${row.id}`}
-                        image={process.env.REACT_APP_BASE_URL + row.avatar}
-                      >
-                        {row.nickname} / {row.fullNameRus}
-                      </User>
-                    </TableCell>
-                  ) : (
-                    <TableCell key={field.id}>
-                      {generateFields(field.type, row[field.id])}
-                    </TableCell>
-                  )
-                )}
-              </TableRow>
-            ))
-          ) : (
-            <TableRow className={classes.tableRow}>
-              <TableCell>Список моделей пуст</TableCell>
-            </TableRow>
-          )}
-        </TableBody>
+        <TableHead fields={fields} />
+        <TableBody>{generateTableRows()}</TableBody>
       </Table>
       {pagination && (
         <TablePagination

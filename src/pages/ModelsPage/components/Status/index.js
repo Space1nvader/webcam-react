@@ -8,10 +8,10 @@ import { modelsListSelector } from 'pages/ModelsPage/redux/selectors';
 import './index.scss';
 
 const Staus = () => {
-  const { online, offline } = useSelector(modelsListSelector);
+  const { online, offline, success } = useSelector(modelsListSelector);
   return (
     <div className="status">
-      <Link to="/models/add-model">
+      <Link to="/models/add-model" title="Добавить модель">
         <IconBtn
           style={{
             backgroundColor: 'var(--red-60)',
@@ -24,7 +24,7 @@ const Staus = () => {
         </IconBtn>
       </Link>
 
-      <Papper style={{ marginLeft: '24px' }}>
+      {success && <Papper style={{ marginLeft: '24px' }}>
         <div className="status__row">
           <div className="status__total">
             Всего моделей:
@@ -39,7 +39,7 @@ const Staus = () => {
             онлайн
           </div>
         </div>
-      </Papper>
+      </Papper>}
     </div>
   );
 };
