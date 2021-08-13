@@ -82,13 +82,9 @@ const ModelsTable = (props) => {
           </TableRow>
         ));
       }
-      return (
-        <TableRow className={classes.tableRow}>
-          <TableCell>Список моделей пуст</TableCell>
-        </TableRow>
-      );
+      return <TableMessage>Список моделей пуст</TableMessage>;
     }
-    return <TableMessage>Пусто</TableMessage>;
+    return <TableMessage>Загрузка списка моделей</TableMessage>;
   };
 
   return (
