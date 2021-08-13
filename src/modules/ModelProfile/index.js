@@ -18,7 +18,12 @@ const modelProfileTabs = [
     key: 'system',
     title: 'Системные данные',
     icon: <SettingsIcon />,
-    component: <SystemForm className="modelProfile__form" />
+    component: (
+      <>
+        <SystemForm className="modelProfile__form" />
+        <DocsForm className="modelProfile__docs" />
+      </>
+    )
   },
   {
     key: 'personal',

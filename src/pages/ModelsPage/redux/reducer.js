@@ -5,13 +5,12 @@ const { pipeHigherOrderReducers, withLoadable, withResetState } = HOR;
 export const MODELSLIST_ACTION_TYPES = new ActionTypes('MODELSLIST').getAT().getActionTypes();
 
 const initialState = {
-  models: ''
+  modelList: ''
 };
 const handleAction = {
   [MODELSLIST_ACTION_TYPES.GET.SUCCESS]: (state, params) => ({
     ...state,
-    models: params.models || '',
-    pagination: params.pagination
+    ...params
   })
 };
 

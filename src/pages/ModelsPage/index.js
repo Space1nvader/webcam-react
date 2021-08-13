@@ -22,7 +22,6 @@ const ModelsPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(GetModelsListAction());
-
     return () => {
       dispatch(ResetAction());
     };
