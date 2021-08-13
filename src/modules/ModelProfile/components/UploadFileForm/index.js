@@ -2,7 +2,7 @@ import React from 'react';
 import { FormContainer } from 'components/Form/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { modelSelector } from 'modules/ModelProfile/redux/selectors';
-import { PostDocumentAction } from 'modules/ModelProfile/redux/actions';
+import { CreateModelAction, PostDocumentAction } from 'modules/ModelProfile/redux/actions';
 import UploadFileField from './components/UploadFileField';
 import './index.scss';
 
@@ -12,9 +12,12 @@ const UploadFileForm = (props) => {
   const { modelData, isLoading, success } = useSelector(modelSelector);
 
   const onSubmit = ({ files }) => {
-    files.append('modelId', modelData.id);
-    // console.log(...files);
-    dispatch(PostDocumentAction(files));
+    if (modelData) {
+      files.append('modelId', modelData.id);
+      dispatch(PostDocumentAction(files));
+    } else {
+      dispatch(CreateModelAction(files));
+    }
   };
 
   return (

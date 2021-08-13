@@ -10,7 +10,8 @@ const initialState = {
 const handleAction = {
   [MODELSLIST_ACTION_TYPES.GET.SUCCESS]: (state, params) => ({
     ...state,
-    models: params.models || ''
+    models: params.models || '',
+    pagination: params.pagination
   })
 };
 

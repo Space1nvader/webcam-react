@@ -6,12 +6,11 @@ class Model {
   attachFile = (data) =>
     API.post(`/models/documents`, data, { 'Content-Type': 'multipart/form-data' });
 
-  // attachFile = (data) => console.log('PAYLOAD', data);
   detachFile = (id) => API.delete(`/models/documents`, id);
 
   updateModel = ({ id, data }) => API.put(`/models/${id}`, data);
 
-  createModel = ({ id, data }) => API.post(`/models/${id}`, data);
+  createModel = ({ data }) => API.post(`/models/`, data);
 
   deleteModel = ({ id }) => API.delete(`/models/${id}`);
 }

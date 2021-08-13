@@ -45,7 +45,6 @@ const DocsForm = (props) => {
     <div className={clsx('docs', className)} {...other}>
       <h6 className="docs__title">Документы</h6>
       {data.documents && renderDocs(data.documents)}
-
       <UploadFileForm
         size="large"
         name="files"

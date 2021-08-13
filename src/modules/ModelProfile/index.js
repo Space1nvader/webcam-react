@@ -11,8 +11,15 @@ import MainDataForm from './components/MainDataForm';
 import DetailData from './components/DetailData';
 import PictureForm from './components/PictureForm';
 import './index.scss';
+import SystemForm from './components/SystemForm';
 
 const modelProfileTabs = [
+  {
+    key: 'system',
+    title: 'Системные данные',
+    icon: <SettingsIcon />,
+    component: <SystemForm className="modelProfile__form" />
+  },
   {
     key: 'personal',
     title: 'Личные данные',
@@ -54,6 +61,7 @@ const ModelProfile = () => {
           />
           {data && <DetailData />}
         </div>
+
         <div className="modelProfile__box">
           <ProfileTabs tabs={modelProfileTabs} />
         </div>

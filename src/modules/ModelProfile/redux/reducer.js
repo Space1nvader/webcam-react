@@ -22,7 +22,9 @@ const handleAction = {
     modelData: params
   }),
   [MODEL_ACTION_TYPES.POST.SUCCESS]: (state, params) => ({
-    ...state
+    ...state,
+    params,
+    newState: state
   }),
   [MODEL_ACTION_TYPES.PUT.SUCCESS]: (state, params) => ({
     ...state
@@ -50,7 +52,6 @@ const handleAction = {
       }
     }
   })
-  // state.modelData.personal.documents.filter((file) => file.id !== params.fileId)
 };
 
 const reducer = (state = initialState, action) =>

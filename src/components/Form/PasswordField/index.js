@@ -17,8 +17,7 @@ const useStyles = makeStyles({
     width: '100%',
     marginBottom: 30,
     '& input': {
-      padding: 12,
-      borderRarius: '12px'
+      padding: 12
     },
     '& label': {
       transform: ' translate(14px,14px) scale(1)'

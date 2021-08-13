@@ -9,6 +9,9 @@ import { fromUnixTime, format } from 'date-fns';
 import TableCell from 'components/Table/Cell';
 import HeaderCell from 'components/Table/HeaderCell';
 import TablePagination from 'components/Table/Pagination';
+import { modelsListSelector } from 'pages/ModelsPage/redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { GetModelsListAction } from 'pages/ModelsPage/redux/actions';
 import TableFiltres from './components/Filtres';
 
 const useStyles = makeStyles({
@@ -30,10 +33,16 @@ const useStyles = makeStyles({
 
 const ModelsTable = (props) => {
   const { rows, fields, ...other } = props;
+  const { models, pagination, success } = useSelector(modelsListSelector);
   const classes = useStyles();
   const [isSelect, setSelectState] = useState(new Set());
+  const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
+  const handleChangePage = (e, newPage) => {
+    dispatch(GetModelsListAction(newPage));
+    setPage(newPage);
+  };
   const selected = new Set(isSelect);
-
   const handleSelectClick = (id) => () => {
     if (selected.has(id)) {
       selected.delete(id);
@@ -77,7 +86,7 @@ const ModelsTable = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows &&
+          {rows ? (
             rows.map((row) => (
               <TableRow className={classes.tableRow} key={row.id}>
                 <TableCell padding="checkbox">
@@ -103,16 +112,23 @@ const ModelsTable = (props) => {
                   )
                 )}
               </TableRow>
-            ))}
+            ))
+          ) : (
+            <TableRow className={classes.tableRow}>
+              <TableCell>Список моделей пуст</TableCell>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
-      <TablePagination
-        count={rows && rows.length}
-        rowsPerPageOptions={[10]}
-        onPageChange={() => console.log('page changes')}
-        page={0}
-        rowsPerPage={10}
-      />
+      {pagination && (
+        <TablePagination
+          count={pagination.total}
+          rowsPerPageOptions={[10]}
+          onPageChange={handleChangePage}
+          page={page}
+          rowsPerPage={pagination.perPage}
+        />
+      )}
     </TableContainer>
   );
 };

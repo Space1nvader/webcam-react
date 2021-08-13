@@ -4,6 +4,9 @@ import { Field } from 'formik';
 import UserPhoto from 'components/UserPhoto';
 import IconBtn from 'components/IconBtn';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
+import { useSelector, useDispatch } from 'react-redux';
+import { uploadPictureSelector } from 'redux/selectors/uploadPicture';
+import { UploadPictureAction } from '../../../../../redux/actions/uploadPicture';
 
 const useStyles = makeStyles({
   absoluteBtn: {
@@ -45,7 +48,8 @@ const PictureField = (props) => {
   const { name, imagePath, setFieldValue, submitForm } = props;
   const [preview, setPreview] = useState(imagePath[name]);
   const classes = useStyles();
-
+  const dispatch = useDispatch();
+  const { picture, success } = useSelector(uploadPictureSelector);
   const generatePicture = (src) => {
     if (src) {
       return userPhotoForm(src, classes.absoluteBtn);
@@ -56,23 +60,38 @@ const PictureField = (props) => {
     if (imagePath && imagePath[name]) setPreview(imagePath[name]);
   }, [imagePath]);
 
+  // const handleSetPicturePreview = (e) => {
+  //   const data = new FormData();
+  //   const { files } = e.target;
+  //   if (files && files.length) {
+  //     const reader = new FileReader();
+  //     reader.onload = (el) => {
+  //       setPreview(el.target.result);
+  //     };
+  //     reader.readAsDataURL(files[0]);
+  //     for (let i = 0; i < files.length; i += 1) {
+  //       data.append(name, files[i]);
+  //     }
+  //     setFieldValue(name, data);
+  //     submitForm();
+  //   }
+  // };
+  const data = new FormData();
   const handleSetPicturePreview = (e) => {
-    const data = new FormData();
     const { files } = e.target;
     if (files && files.length) {
-      const reader = new FileReader();
-      reader.onload = (el) => {
-        setPreview(el.target.result);
-      };
-      reader.readAsDataURL(files[0]);
       for (let i = 0; i < files.length; i += 1) {
         data.append(name, files[i]);
       }
+      dispatch(UploadPictureAction(data));
+    }
+  };
+  useEffect(() => {
+    if (success) {
       setFieldValue(name, data);
       submitForm();
     }
-  };
-
+  }, [success]);
   return (
     <>
       <Field {...props}>

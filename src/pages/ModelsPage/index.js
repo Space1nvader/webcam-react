@@ -18,7 +18,7 @@ const fields = [
 ];
 
 const ModelsPage = () => {
-  const rows = useSelector(modelsListSelector);
+  const { models } = useSelector(modelsListSelector);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(GetModelsListAction());
@@ -36,7 +36,7 @@ const ModelsPage = () => {
         <DashboardStatus />
       </div>
       <div className="dashboard__table">
-        {!!rows && <ModelsTable rows={rows} fields={fields} />}
+        <ModelsTable rows={models} fields={fields} />
       </div>
     </div>
   );

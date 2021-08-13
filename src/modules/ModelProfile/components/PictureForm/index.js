@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FormContainer } from 'components/Form/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { modelSelector } from 'modules/ModelProfile/redux/selectors';
-import { UploadPictureAction } from 'redux/actions/uploadPicture';
 import { uploadPictureSelector } from 'redux/selectors/uploadPicture';
-import { UpdateModelAction } from 'modules/ModelProfile/redux/actions';
+import { CreateModelAction, UpdateModelAction } from 'modules/ModelProfile/redux/actions';
 import PictureField from './components/PictureField';
 import './index.scss';
 
@@ -14,11 +13,12 @@ const PictureForm = (props) => {
   const { modelData } = useSelector(modelSelector);
   const { picture, success } = useSelector(uploadPictureSelector);
   const onSubmit = (values) => {
-    dispatch(UploadPictureAction(values[name]));
+    if (modelData) {
+      dispatch(UpdateModelAction({ id: modelData.id, data: values }));
+    } else {
+      dispatch(CreateModelAction({ data: picture }));
+    }
   };
-  useEffect(() => {
-    if (success) dispatch(UpdateModelAction({ id: modelData.id, data: picture }));
-  }, [success]);
 
   return (
     <FormContainer enableReinitialize initialValues={imagePath} onSubmit={onSubmit} {...other}>

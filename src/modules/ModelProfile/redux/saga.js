@@ -96,8 +96,8 @@ function* deleteDocument({ payload }) {
 export function* ModelProfileSaga() {
   yield takeEvery(MODEL_ACTION_TYPES.GET.START, getModel);
   yield takeEvery(MODEL_ACTION_TYPES.PUT.START, updateModel);
-  // yield takeEvery(MODEL_ACTION_TYPES.POST.START, createModel);
-  // yield takeEvery(MODEL_ACTION_TYPES.DELETE.START, deleteModel);
+  yield takeEvery(MODEL_ACTION_TYPES.POST.START, createModel);
+  yield takeEvery(MODEL_ACTION_TYPES.DELETE.START, deleteModel);
   yield takeEvery(MODEL_DOCUMENTS_ACTION_TYPES.POST.START, attachDocument);
   yield takeEvery(MODEL_DOCUMENTS_ACTION_TYPES.DELETE.START, deleteDocument);
 }

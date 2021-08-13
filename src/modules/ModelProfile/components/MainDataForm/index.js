@@ -57,6 +57,10 @@ const MainDataForm = (props) => {
   const classes = useStyles();
   const { modelData, isLoading } = useSelector(modelSelector);
   const defaultValues = useSelector(staticModelDataSelector).model || '';
+  const generateInitialValues =
+    modelData && modelData?.description
+      ? checkValueEmpty(modelData.description, initialValues)
+      : initialValues;
   const onSubmit = (values) => {
     console.log(values);
   };
@@ -68,7 +72,7 @@ const MainDataForm = (props) => {
       <FormContainer
         className="settings"
         enableReinitialize
-        initialValues={checkValueEmpty(modelData, initialValues)}
+        initialValues={generateInitialValues}
         validationSchema={SETTING_VALIDATION_SCHEMA}
         onSubmit={onSubmit}
       >
@@ -104,64 +108,60 @@ const MainDataForm = (props) => {
             />
             <SelectField
               label="Цвет волос"
-              name="hair_color"
+              name="hairColorId"
               style={{ display: 'flex' }}
-              options={[{ title: 'Русые' }, { title: 'Изящное' }, { title: 'Русые' }]}
+              options={defaultValues.hairColor}
             />
             <SelectField
               className={classes.divider}
               label="Цвет глаз"
-              name="aye_color"
+              name="eyesColorId"
               style={{ display: 'flex', paddingBottom: 32 }}
-              options={[{ title: 'Карие' }, { title: 'Русые' }, { title: 'Карие' }]}
+              options={defaultValues.eyesColor}
             />
             <SelectField
               label="Разммер груди"
-              name="breast_size"
+              name="breastSizeId"
               style={{ display: 'flex' }}
-              options={[{ title: 'A' }, { title: 'B' }, { title: 'C' }]}
+              options={defaultValues.breastSize}
             />
             <InputField
               label="Обхват груди"
               type="nubmer"
               style={{ display: 'flex' }}
-              name="breast_girth"
+              name="chestCircumference"
             />
             <InputField
               label="Обхват бедер"
               type="nubmer"
               style={{ display: 'flex' }}
-              name="hip_girth"
+              name="hipGirth"
             />
             <InputField
               className={classes.divider + classes.dividerLong}
               label="Обхват талии"
               type="nubmer"
               style={{ display: 'flex', paddingBottom: 30 }}
-              name="waist_girth"
+              name="waistCircumference"
             />
             <SelectField
               label="Лобковые волосы"
-              name="pubic_hair"
+              name="pubicHairId"
               style={{ display: 'flex', marginBottom: 70 }}
-              options={[{ title: 'Бритые' }, { title: 'Бритые' }, { title: 'Бритые' }]}
+              options={defaultValues.pubicHair}
             />
             <SelectField
               label="Сексуальные предпочтения"
-              name="sexual_preferences"
+              name="sexualPreferenceId"
               style={{ display: 'flex' }}
-              options={[{ title: 'Гетеро' }, { title: 'Гетеро' }, { title: 'Гетеро' }]}
+              options={defaultValues.sexualPreference}
             />
-            <SelectField
-              label="Язык 1"
-              name="lang"
-              options={[{ title: 'Английский' }, { title: 'Русский' }, { title: 'Английский' }]}
-            />
+            <SelectField label="Язык 1" name="firstLanguageId" options={defaultValues.language} />
             <SelectField
               label="Язык 2"
               style={{ marginLeft: 32 }}
-              name="lang_second"
-              options={[{ title: 'Русский' }, { title: 'Английский' }, { title: 'Русский' }]}
+              name="secondLanguageId"
+              options={defaultValues.language}
             />
             <TextArea style={{ marginTop: 20 }} label="Мой опыт" type="text" name="exp" />
             <TextArea label="Что заводит" type="text" name="turns" />

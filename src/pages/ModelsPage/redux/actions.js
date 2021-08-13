@@ -1,7 +1,8 @@
 import { MODELSLIST_ACTION_TYPES } from './reducer';
 
-export const GetModelsListAction = () => ({
-  type: MODELSLIST_ACTION_TYPES.GET.START
+export const GetModelsListAction = (payload = 0) => ({
+  type: MODELSLIST_ACTION_TYPES.GET.START,
+  payload
 });
 
 export const ResetAction = () => ({
