@@ -32,8 +32,8 @@ const ModelsTable = (props) => {
   const { rows, fields, ...other } = props;
   const classes = useStyles();
   const [isSelect, setSelectState] = useState(new Set());
-
   const selected = new Set(isSelect);
+
   const handleSelectClick = (id) => () => {
     if (selected.has(id)) {
       selected.delete(id);

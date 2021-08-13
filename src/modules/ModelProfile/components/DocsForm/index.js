@@ -19,7 +19,6 @@ const DocsForm = (props) => {
   const detachFile = (id) => () => {
     dispatch(DeleteDocumentAction({ fileId: id }));
   };
-  console.log('CHE??', success, modelData, data);
   const renderDocs = (docs) => (
     <div className="docs__list">
       {docs.map((doc) => (
