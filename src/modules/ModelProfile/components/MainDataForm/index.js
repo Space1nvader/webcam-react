@@ -9,10 +9,11 @@ import bodyImage from 'assets/img/image19.png';
 import { TextArea } from 'components/Form/TextArea';
 import { SETTING_VALIDATION_SCHEMA } from 'constants/validateSchema';
 import { checkValueEmpty } from 'untils/checkValueEmpty';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { modelSelector } from 'modules/ModelProfile/redux/selectors';
 import { staticModelDataSelector } from 'redux/selectors/staticData';
 import clsx from 'clsx';
+import { UpdateModelAction } from 'modules/ModelProfile/redux/actions';
 import { initialValues } from './initialValues';
 import FormTitle from '../FormTitle';
 
@@ -55,14 +56,26 @@ const useStyles = makeStyles({
 const MainDataForm = (props) => {
   const { className, ...other } = props;
   const classes = useStyles();
+  const dispatch = useDispatch();
   const { modelData, isLoading } = useSelector(modelSelector);
   const defaultValues = useSelector(staticModelDataSelector).model || '';
   const generateInitialValues =
     modelData && modelData?.description
       ? checkValueEmpty(modelData.description, initialValues)
       : initialValues;
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = (data) => {
+    const newData = {
+      ...data,
+      addressId: modelData.personal.addressId,
+      passportId: modelData.personal.passportId,
+      descriptionId: modelData.description.descriptionId
+    };
+    dispatch(
+      UpdateModelAction({
+        id: modelData.id,
+        data: newData
+      })
+    );
   };
 
   return (

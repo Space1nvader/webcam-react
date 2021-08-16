@@ -43,11 +43,23 @@ const SystemForm = ({ className }) => {
       : initialValues;
   const setSubmitForm = (data) => {
     if (modelData) {
-      dispatch(UpdateModelAction({ id: modelData.id, data }));
+      const newData = {
+        ...data,
+        addressId: modelData.personal.addressId,
+        passportId: modelData.personal.passportId,
+        descriptionId: modelData.description.descriptionId
+      };
+      dispatch(
+        UpdateModelAction({
+          id: modelData.id,
+          data: newData
+        })
+      );
     } else {
       dispatch(CreateModelAction({ data }));
     }
   };
+
   const onSubmit = (values) => {
     const filtredValues = { ...values };
     Object.keys(filtredValues).forEach((value) => {

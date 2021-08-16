@@ -68,10 +68,7 @@ const ModelsTable = (props) => {
             {fields.map((field) =>
               field.id === 'name' ? (
                 <TableCell key={field.id}>
-                  <User
-                    to={`/models/${row.id}`}
-                    image={process.env.REACT_APP_BASE_URL + row.avatar}
-                  >
+                  <User to={`/models/${row.id}`} image={row.avatar}>
                     {row.nickname} / {row.fullNameRus}
                   </User>
                 </TableCell>
