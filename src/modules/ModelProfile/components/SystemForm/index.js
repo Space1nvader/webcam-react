@@ -79,7 +79,7 @@ const SystemForm = ({ className }) => {
                 <InputField name="nickname" label="Псевдоним (eng*)" />
               </FieldSet>
               <FieldSet>
-                <SelectField label="Страна" name="tariffIdd" options={defaultValues.tariff} />
+                <SelectField label="Тариф" name="tariffIdd" options={defaultValues.tariff} />
                 <InputField name="contragent" label="Контрагент" />
                 <TextArea name="comment" label="Комментарий" />
               </FieldSet>
