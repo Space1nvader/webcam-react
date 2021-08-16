@@ -10,7 +10,7 @@ class Model {
 
   updateModel = ({ id, data }) => API.put(`/models/${id}`, data);
 
-  createModel = ({ data }) => API.post(`/models/`, data);
+  createModel = ({ data }) => API.post(`/models`, data);
 
   deleteModel = ({ id }) => API.delete(`/models/${id}`);
 }
