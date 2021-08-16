@@ -63,19 +63,31 @@ const MainDataForm = (props) => {
     modelData && modelData?.description
       ? checkValueEmpty(modelData.description, initialValues)
       : initialValues;
-  const onSubmit = (data) => {
-    const newData = {
-      ...data,
-      addressId: modelData.personal.addressId,
-      passportId: modelData.personal.passportId,
-      descriptionId: modelData.description.descriptionId
-    };
-    dispatch(
-      UpdateModelAction({
-        id: modelData.id,
-        data: newData
-      })
-    );
+
+  const setSubmitForm = (data) => {
+    if (modelData) {
+      const newData = {
+        ...data,
+        addressId: modelData.personal.addressId,
+        passportId: modelData.personal.passportId,
+        descriptionId: modelData.description.descriptionId
+      };
+      dispatch(
+        UpdateModelAction({
+          id: modelData.id,
+          data: newData
+        })
+      );
+    }
+  };
+  const onSubmit = (values) => {
+    const filtredValues = { ...values };
+    Object.keys(filtredValues).forEach((value) => {
+      if (filtredValues[value] === generateInitialValues[value]) {
+        delete filtredValues[value];
+      }
+    });
+    setSubmitForm(filtredValues);
   };
 
   return (
