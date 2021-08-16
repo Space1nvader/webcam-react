@@ -1,6 +1,6 @@
 export const initialValues = {
   nickname: '',
-  password: '',
-  TARIFF: '',
+  comment: '',
+  tariffId: '',
   contragent: ''
 };
