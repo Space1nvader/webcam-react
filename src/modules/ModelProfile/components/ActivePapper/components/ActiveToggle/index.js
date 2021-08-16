@@ -45,8 +45,9 @@ const ActiveToggle = ({ checked = false }) => {
   const [state, setState] = React.useState(checked);
   const handleChange = (event) => {
     setState(event.target.checked);
-    dispatch(UpdateModelStatusAction({ id: modelData.id, active: state }));
+    dispatch(UpdateModelStatusAction({ id: modelData.id, active: event.target.checked }));
   };
+
   return (
     <Switch
       focusVisibleClassName={classes.focusVisible}

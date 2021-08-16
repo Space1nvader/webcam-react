@@ -1,0 +1,15 @@
+.activePapper {
+  background: #ededf0;
+  border-radius: 8px;
+  height: 18.75rem;
+  &__row {
+    margin-bottom: 20px;
+    &Title {
+      margin-bottom: 8px;
+      color: var(--gray-50);
+    }
+    &Value {
+      color: var(--gray--100);
+    }
+  }
+}
