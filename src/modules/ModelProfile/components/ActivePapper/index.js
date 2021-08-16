@@ -9,7 +9,7 @@ const ActivePapper = (props) => {
   const { className = '' } = props;
   const { modelData } = useSelector(modelSelector);
   return (
-    <div className={clsx('.activePapper', className)}>
+    <div className={clsx('activePapper', className)}>
       <div className="activePapper__row">
         <div className="activePapper__rowTitle">Дата последней смены</div>
         <div className="activePapper__rowValue">22.02.1999</div>
