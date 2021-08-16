@@ -21,7 +21,7 @@ const modelProfileTabs = [
     component: (
       <>
         <SystemForm className="modelProfile__form" />
-        <DocsForm className="modelProfile__docs" />
+        {/* <DocsForm className="modelProfile__docs" /> */}
       </>
     )
   },

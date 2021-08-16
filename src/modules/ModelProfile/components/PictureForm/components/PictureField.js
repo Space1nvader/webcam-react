@@ -88,8 +88,9 @@ const PictureField = (props) => {
   };
   useEffect(() => {
     if (success) {
-      setFieldValue(name, data);
+      setFieldValue(name, picture[name]);
       submitForm();
+      setPreview(picture[name]);
     }
   }, [success]);
   return (

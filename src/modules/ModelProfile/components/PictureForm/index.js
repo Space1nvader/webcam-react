@@ -15,8 +15,6 @@ const PictureForm = (props) => {
   const onSubmit = (values) => {
     if (modelData) {
       dispatch(UpdateModelAction({ id: modelData.id, data: values }));
-    } else {
-      dispatch(CreateModelAction({ data: picture }));
     }
   };
 

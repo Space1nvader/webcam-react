@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import { FormContainer } from 'components/Form/FormContainer';
@@ -34,12 +35,11 @@ const useStyles = makeStyles({
 const SystemForm = ({ className }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { modelData, isLoading } = useSelector(modelSelector);
-
+  const { modelData, isLoading, success } = useSelector(modelSelector);
   const defaultValues = useSelector(staticModelDataSelector).model || '';
   const generateInitialValues =
-    modelData && modelData?.profile
-      ? checkValueEmpty(modelData.profile, initialValues)
+    modelData && modelData?.system
+      ? checkValueEmpty(modelData.system, initialValues)
       : initialValues;
   const setSubmitForm = (data) => {
     if (modelData) {

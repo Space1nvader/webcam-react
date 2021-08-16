@@ -34,7 +34,6 @@ function* updateModel(action) {
 function* createModel(action) {
   try {
     const { data } = yield call(SERVICE_API.Model.createModel, action.payload);
-
     yield put({
       type: MODEL_ACTION_TYPES.POST.SUCCESS,
       payload: data

@@ -23,8 +23,7 @@ const handleAction = {
   }),
   [MODEL_ACTION_TYPES.POST.SUCCESS]: (state, params) => ({
     ...state,
-    params,
-    newState: state
+    modelData: params
   }),
   [MODEL_ACTION_TYPES.PUT.SUCCESS]: (state, params) => ({
     ...state
