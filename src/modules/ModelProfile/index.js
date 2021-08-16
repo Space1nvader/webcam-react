@@ -52,6 +52,7 @@ const modelProfileTabs = [
 const ModelProfile = () => {
   const { modelData, isLoading } = useSelector(modelSelector);
   const data = modelData && modelData.personal ? modelData.personal : '';
+
   return (
     <>
       <h4 className="modelProfile__title">

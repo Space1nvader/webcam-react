@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import { FormContainer } from 'components/Form/FormContainer';
@@ -79,9 +79,9 @@ const SystemForm = ({ className }) => {
                 <InputField name="nickname" label="Псевдоним (eng*)" />
               </FieldSet>
               <FieldSet>
-                <SelectField label="Страна" name="countryId" options={defaultValues.country} />
-                <InputField name="name" label="Контрагент" />
-                <TextArea label="Комментарий" name="comment" />
+                <SelectField label="Страна" name="tariffIdd" options={defaultValues.tariff} />
+                <InputField name="contragent" label="Контрагент" />
+                <TextArea name="comment" label="Комментарий" />
               </FieldSet>
 
               <Button
