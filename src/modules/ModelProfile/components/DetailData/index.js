@@ -25,30 +25,30 @@ const DetailData = () => {
   const classes = useStyles();
 
   const { modelData, isLoading } = useSelector(modelSelector);
-  const data = modelData.personal;
+  const { personal, system } = modelData;
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpenClick = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
   return (
     <>
       <h5 className="detailData__name">
-        {data.name} <br /> / {data.nickname}
+        {personal.nameRus} <br /> / {system.nickname}
       </h5>
       <div className="detailData__contacts">
-        {data.email && (
+        {personal.email && (
           <ContactLink
             style={{ color: 'var(--blue-100)', display: 'block', marginBottom: 12 }}
-            href={`mailto:${data.email}`}
+            href={`mailto:${personal.email}`}
           >
-            {data.email}
+            {personal.email}
           </ContactLink>
         )}
-        {data.phone && (
+        {personal.phone && (
           <ContactLink
             style={{ color: 'var(--gray-30)', display: 'block' }}
-            href={`tel:${data.phone}`}
+            href={`tel:${personal.phone}`}
           >
-            {data.phone}
+            {personal.phone}
           </ContactLink>
         )}
       </div>
