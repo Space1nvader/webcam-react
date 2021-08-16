@@ -76,8 +76,7 @@ const SystemForm = ({ className }) => {
             <>
               <SubmitModal onSubmit={submitForm} />
               <FieldSet divider>
-                <InputField name="nameRus" label="Псевдоним (eng*)" />
-                <PasswordField name="name" label="Пароль (Не менее 8 символов)" />
+                <InputField name="nickname" label="Псевдоним (eng*)" />
               </FieldSet>
               <FieldSet>
                 <SelectField label="Страна" name="countryId" options={defaultValues.country} />

@@ -22,7 +22,7 @@ const ModelsTable = (props) => {
   const { models, pagination, isLoading, success } = useSelector(modelsListSelector);
   const classes = useStyles();
   const [isSelect, setSelectState] = useState(new Set());
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const dispatch = useDispatch();
   const handleChangePage = (e, newPage) => {
     dispatch(GetModelsListAction(newPage));
@@ -59,8 +59,8 @@ const ModelsTable = (props) => {
   };
   const generateTableRows = () => {
     if (!isLoading) {
-      if (rows?.length) {
-        rows.map((row) => (
+      if (rows) {
+        return rows.map((row) => (
           <TableRow className={classes.tableRow} key={row.id}>
             <TableCell padding="checkbox">
               <SmallCheckbox checked={isSelect.has(row.id)} onChange={handleSelectClick(row.id)} />
