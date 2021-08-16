@@ -1,8 +1,11 @@
 import React from 'react';
 import Switch from '@material-ui/core/Switch';
 import { makeStyles } from '@material-ui/core/styles';
+import { useSelector, useDispatch } from 'react-redux';
+import { modelSelector } from 'modules/ModelProfile/redux/selectors';
+import { UpdateModelStatusAction } from 'modules/ModelProfile/redux/actions';
 
-const IOSSwitch = ({ checked = false }) => {
+const ActiveToggle = ({ checked = false }) => {
   const useStyles = makeStyles({
     root: {
       width: 52,
@@ -37,9 +40,12 @@ const IOSSwitch = ({ checked = false }) => {
     focusVisible: {}
   });
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { modelData } = useSelector(modelSelector);
   const [state, setState] = React.useState(checked);
   const handleChange = (event) => {
     setState(event.target.checked);
+    dispatch(UpdateModelStatusAction({ id: modelData.id, active: state }));
   };
   return (
     <Switch
@@ -58,4 +64,4 @@ const IOSSwitch = ({ checked = false }) => {
   );
 };
 
-export default IOSSwitch;
+export default ActiveToggle;

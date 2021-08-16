@@ -1,6 +1,10 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import SERVICE_API from 'api';
-import { MODEL_ACTION_TYPES, MODEL_DOCUMENTS_ACTION_TYPES } from './reducer';
+import {
+  MODEL_ACTION_TYPES,
+  MODEL_STATUS_ACTION_TYPES,
+  MODEL_DOCUMENTS_ACTION_TYPES
+} from './reducer';
 
 function* getModel(action) {
   try {
@@ -27,6 +31,19 @@ function* updateModel(action) {
   } catch ({ response }) {
     yield put({
       type: MODEL_ACTION_TYPES.PUT.ERROR,
+      payload: response.data
+    });
+  }
+}
+function* updateModelStatus(action) {
+  try {
+    yield call(SERVICE_API.Model.updateModelStatus, action.payload);
+    yield put({
+      type: MODEL_STATUS_ACTION_TYPES.PUT.SUCCESS
+    });
+  } catch ({ response }) {
+    yield put({
+      type: MODEL_STATUS_ACTION_TYPES.PUT.ERROR,
       payload: response.data
     });
   }
@@ -99,4 +116,5 @@ export function* ModelProfileSaga() {
   yield takeEvery(MODEL_ACTION_TYPES.DELETE.START, deleteModel);
   yield takeEvery(MODEL_DOCUMENTS_ACTION_TYPES.POST.START, attachDocument);
   yield takeEvery(MODEL_DOCUMENTS_ACTION_TYPES.DELETE.START, deleteDocument);
+  yield takeEvery(MODEL_STATUS_ACTION_TYPES.PUT.START, updateModelStatus);
 }

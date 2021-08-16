@@ -10,8 +10,9 @@ import DocsForm from './components/DocsForm';
 import MainDataForm from './components/MainDataForm';
 import DetailData from './components/DetailData';
 import PictureForm from './components/PictureForm';
-import './index.scss';
 import SystemForm from './components/SystemForm';
+import ActivePapper from './components/ActivePapper';
+import './index.scss';
 
 const modelProfileTabs = [
   {
@@ -21,7 +22,7 @@ const modelProfileTabs = [
     component: (
       <>
         <SystemForm className="modelProfile__form" />
-        {/* <DocsForm className="modelProfile__docs" /> */}
+        <ActivePapper className="modelProfile__docs" />
       </>
     )
   },

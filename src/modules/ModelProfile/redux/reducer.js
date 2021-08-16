@@ -12,6 +12,9 @@ export const MODEL_DOCUMENTS_ACTION_TYPES = new ActionTypes('MODEL_DOCS')
   .postAT()
   .deleteAT()
   .getActionTypes();
+export const MODEL_STATUS_ACTION_TYPES = new ActionTypes('MODEL_STATUS')
+  .updateAT()
+  .getActionTypes();
 
 const initialState = {
   modelData: ''
@@ -29,6 +32,9 @@ const handleAction = {
     ...state
   }),
   [MODEL_ACTION_TYPES.DELETE.SUCCESS]: (state) => ({
+    ...state
+  }),
+  [MODEL_STATUS_ACTION_TYPES.PUT.SUCCESS]: (state, params) => ({
     ...state
   }),
   [MODEL_DOCUMENTS_ACTION_TYPES.POST.SUCCESS]: (state, params) => ({
@@ -65,7 +71,8 @@ export default pipeHigherOrderReducers(
       MODEL_ACTION_TYPES.PUT.START,
       MODEL_ACTION_TYPES.DELETE.START,
       MODEL_DOCUMENTS_ACTION_TYPES.POST.START,
-      MODEL_DOCUMENTS_ACTION_TYPES.DELETE.START
+      MODEL_DOCUMENTS_ACTION_TYPES.DELETE.START,
+      MODEL_STATUS_ACTION_TYPES.PUT.START
     ],
     successActionType: [
       MODEL_ACTION_TYPES.GET.SUCCESS,
@@ -73,7 +80,8 @@ export default pipeHigherOrderReducers(
       MODEL_ACTION_TYPES.PUT.SUCCESS,
       MODEL_ACTION_TYPES.DELETE.SUCCESS,
       MODEL_DOCUMENTS_ACTION_TYPES.POST.SUCCESS,
-      MODEL_DOCUMENTS_ACTION_TYPES.DELETE.SUCCESS
+      MODEL_DOCUMENTS_ACTION_TYPES.DELETE.SUCCESS,
+      MODEL_STATUS_ACTION_TYPES.PUT.SUCCESS
     ],
     errorActionType: [
       MODEL_ACTION_TYPES.GET.ERROR,
@@ -81,7 +89,8 @@ export default pipeHigherOrderReducers(
       MODEL_ACTION_TYPES.PUT.ERROR,
       MODEL_ACTION_TYPES.DELETE.ERROR,
       MODEL_DOCUMENTS_ACTION_TYPES.POST.ERROR,
-      MODEL_DOCUMENTS_ACTION_TYPES.DELETE.ERROR
+      MODEL_DOCUMENTS_ACTION_TYPES.DELETE.ERROR,
+      MODEL_STATUS_ACTION_TYPES.PUT.ERROR
     ]
   })
 )(reducer);

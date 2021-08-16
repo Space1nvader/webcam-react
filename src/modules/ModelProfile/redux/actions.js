@@ -1,4 +1,8 @@
-import { MODEL_ACTION_TYPES, MODEL_DOCUMENTS_ACTION_TYPES } from './reducer';
+import {
+  MODEL_ACTION_TYPES,
+  MODEL_STATUS_ACTION_TYPES,
+  MODEL_DOCUMENTS_ACTION_TYPES
+} from './reducer';
 
 export const GetModelAction = (payload) => ({
   type: MODEL_ACTION_TYPES.GET.START,
@@ -7,6 +11,11 @@ export const GetModelAction = (payload) => ({
 
 export const UpdateModelAction = (payload) => ({
   type: MODEL_ACTION_TYPES.PUT.START,
+  payload
+});
+
+export const UpdateModelStatusAction = (payload) => ({
+  type: MODEL_STATUS_ACTION_TYPES.PUT.START,
   payload
 });
 

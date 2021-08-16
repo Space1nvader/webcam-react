@@ -10,6 +10,8 @@ class Model {
 
   updateModel = ({ id, data }) => API.put(`/models/${id}`, data);
 
+  updateModelStatus = ({ id, active }) => API.put(`/models/${id}/toggle-active-status`, active);
+
   createModel = ({ data }) => API.post(`/models`, data);
 
   deleteModel = ({ id }) => API.delete(`/models/${id}`);

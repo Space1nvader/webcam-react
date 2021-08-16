@@ -13,8 +13,8 @@ const fields = [
   { id: 'lastActiveAt', type: 'date', label: 'Последняя смена' },
   { id: 'contragent', label: 'Студия' },
   { id: 'balance', label: 'Баланс' },
-  { id: 'activity', type: 'switch', label: 'Активность' },
-  { id: 'online', type: 'status', component: Status, label: 'Статус' }
+  { id: 'active', type: 'switch', label: 'Активность' },
+  { id: 'status', type: 'status', component: Status, label: 'Статус' }
 ];
 
 const ModelsPage = () => {
