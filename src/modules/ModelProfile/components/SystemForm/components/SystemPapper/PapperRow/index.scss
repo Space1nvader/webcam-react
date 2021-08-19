@@ -1,0 +1,10 @@
+.papperRow {
+  margin-bottom: 20px;
+  &__title {
+    margin-bottom: 8px;
+    color: var(--gray-50);
+  }
+  &__value {
+    color: var(--gray--100);
+  }
+}

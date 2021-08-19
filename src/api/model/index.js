@@ -15,7 +15,7 @@ class Model {
 
   createModel = ({ data }) => API.post(`/models`, data);
 
-  deleteModel = ({ id }) => API.delete(`/models/${id}`);
+  deleteModel = (data) => API.delete(`/models`, { ids: data });
 }
 
 export default new Model();

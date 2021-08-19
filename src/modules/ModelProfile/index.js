@@ -11,7 +11,7 @@ import MainDataForm from './components/MainDataForm';
 import DetailData from './components/DetailData';
 import PictureForm from './components/PictureForm';
 import SystemForm from './components/SystemForm';
-import ActivePapper from './components/ActivePapper';
+import SystemPapper from './components/SystemForm/components/SystemPapper';
 import './index.scss';
 
 const modelProfileTabs = [
@@ -22,7 +22,7 @@ const modelProfileTabs = [
     component: (
       <>
         <SystemForm className="modelProfile__form" />
-        <ActivePapper className="modelProfile__docs" />
+        <SystemPapper className="modelProfile__docs" />
       </>
     )
   },

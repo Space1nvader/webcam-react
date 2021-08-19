@@ -4,6 +4,7 @@ import { formChangedSelector } from 'redux/selectors/formChanged';
 import { Tabs } from 'components/Tabs';
 import { Tab } from 'components/Tabs/Tab';
 import { Button } from '@material-ui/core';
+import ConfirmPopup from 'components/СonfirmPopup';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import './index.scss';
@@ -34,13 +35,13 @@ const ProfileTabs = (props) => {
   const classes = useStyles();
   const { tabs } = props;
   const [activeTab, setActiveTab] = useState(0);
-
+  const [modalOpen, setModalOpen] = useState(false);
   const { formChanged } = useSelector(formChangedSelector);
+  const handleModalClose = () => setModalOpen(false);
   const handleChangeTabClick = (index) => () => {
-    setActiveTab(index);
-    // if (formChanged) {
-    //   alert('123');
-    // } else setActiveTab(index);
+    if (formChanged) {
+      setModalOpen(true);
+    } else setActiveTab(index);
   };
 
   return (
@@ -66,6 +67,25 @@ const ProfileTabs = (props) => {
           ))}
         </Tabs>
       </div>
+      <ConfirmPopup
+        style={{ width: 480 }}
+        title="Вы уверены что хотите удалить модель?"
+        open={modalOpen}
+        onClose={handleModalClose}
+      >
+        <Button
+          color="secondary"
+          // onClick={handleConfimClick}
+          type="submit"
+          className={classes.button}
+          variant="contained"
+        >
+          сохранить
+        </Button>
+        <Button className={classes.button} onClick={handleModalClose} variant="contained">
+          отменить
+        </Button>
+      </ConfirmPopup>
     </>
   );
 };

@@ -46,7 +46,7 @@ const ModelsTable = (props) => {
     setSelectState(new Set());
   };
   const handleDeleteSelected = () => {
-    dispatch(DeleteModelsAction({ id: [...isSelect] }));
+    dispatch(DeleteModelsAction([...isSelect]));
   };
   const generateFields = (type, id, value) => {
     switch (type) {

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import RemoveButton from 'components/RemoveButton';
+import { Button } from '@material-ui/core';
 import ConfirmPopup from 'components/СonfirmPopup';
 import { makeStyles } from '@material-ui/core/styles';
 import ContactLink from 'components/ContactLink';
-import { Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { modelSelector } from 'modules/ModelProfile/redux/selectors';
 import { DeleteModelAction } from 'modules/ModelProfile/redux/actions';
@@ -33,7 +33,7 @@ const DetailData = () => {
   const handleModalOpenClick = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
   const handleConfimClick = () => {
-    dispatch(DeleteModelAction({ id: modelData.id }));
+    dispatch(DeleteModelAction(modelData.id));
     history.push('/models');
   };
   return (
