@@ -4,8 +4,10 @@ import ConfirmPopup from 'components/СonfirmPopup';
 import { makeStyles } from '@material-ui/core/styles';
 import ContactLink from 'components/ContactLink';
 import { Button } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { modelSelector } from 'modules/ModelProfile/redux/selectors';
+import { DeleteModelAction } from 'modules/ModelProfile/redux/actions';
+import { useHistory } from 'react-router-dom';
 import Income from '../Income';
 import './index.scss';
 
@@ -23,12 +25,17 @@ const useStyles = makeStyles({
 
 const DetailData = () => {
   const classes = useStyles();
-
+  const dispatch = useDispatch();
   const { modelData, isLoading } = useSelector(modelSelector);
   const { personal, system } = modelData;
+  const history = useHistory();
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpenClick = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
+  const handleConfimClick = () => {
+    dispatch(DeleteModelAction({ id: modelData.id }));
+    history.push('/models');
+  };
   return (
     <>
       <h5 className="detailData__name">
@@ -56,7 +63,6 @@ const DetailData = () => {
         <Income />
       </div>
       <div className="detailData__remove">
-        {/* TODO: REMOVE REQUEST */}
         <RemoveButton onClick={handleModalOpenClick}>удалить</RemoveButton>
         <ConfirmPopup
           style={{ width: 480 }}
@@ -64,7 +70,13 @@ const DetailData = () => {
           open={modalOpen}
           onClose={handleModalClose}
         >
-          <Button color="secondary" type="submit" className={classes.button} variant="contained">
+          <Button
+            color="secondary"
+            onClick={handleConfimClick}
+            type="submit"
+            className={classes.button}
+            variant="contained"
+          >
             сохранить
           </Button>
           <Button className={classes.button} onClick={handleModalClose} variant="contained">

@@ -4,13 +4,13 @@ import { Table, TableContainer, TableBody, TableRow } from '@material-ui/core';
 import SmallCheckbox from 'components/SmallCheckbox';
 import User from 'components/User';
 import Status from 'components/SessionStatus';
-import IOSSwitch from 'components/IOSSwitch';
 import { fromUnixTime, format } from 'date-fns';
 import TableCell from 'components/Table/Cell';
 import TablePagination from 'components/Table/Pagination';
 import { modelsListSelector } from 'pages/ModelsPage/redux/selectors';
-import { GetModelsListAction } from 'pages/ModelsPage/redux/actions';
+import { DeleteModelsAction, GetModelsListAction } from 'pages/ModelsPage/redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import ActiveToggle from 'components/ActiveToggle';
 import TableFiltres from './components/Filtres';
 import TableHead from './components/Head';
 import TableMessage from './components/Message';
@@ -19,7 +19,7 @@ import { styles } from './styles';
 const useStyles = makeStyles(styles);
 const ModelsTable = (props) => {
   const { rows, fields, ...other } = props;
-  const { models, pagination, isLoading, success } = useSelector(modelsListSelector);
+  const { pagination, isLoading, success } = useSelector(modelsListSelector);
   const classes = useStyles();
   const [isSelect, setSelectState] = useState(new Set());
   const [page, setPage] = useState(0);
@@ -45,10 +45,13 @@ const ModelsTable = (props) => {
     }
     setSelectState(new Set());
   };
-  const generateFields = (type, value) => {
+  const handleDeleteSelected = () => {
+    dispatch(DeleteModelsAction({ id: [...isSelect] }));
+  };
+  const generateFields = (type, id, value) => {
     switch (type) {
       case 'switch':
-        return <IOSSwitch checked={value} />;
+        return <ActiveToggle id={id} checked={value} />;
       case 'status':
         return <Status value={value} />;
       case 'date':
@@ -69,11 +72,13 @@ const ModelsTable = (props) => {
               field.id === 'name' ? (
                 <TableCell key={field.id}>
                   <User to={`/models/${row.id}`} image={row.avatar}>
-                    {row.nickname} / {row.fullNameRus}
+                    {row.nickname} {row.fullNameRus && `/  ${row.fullNameRus}`}
                   </User>
                 </TableCell>
               ) : (
-                <TableCell key={field.id}>{generateFields(field.type, row[field.id])}</TableCell>
+                <TableCell key={field.id}>
+                  {generateFields(field.type, row.id, row[field.id])}
+                </TableCell>
               )
             )}
           </TableRow>
@@ -86,7 +91,7 @@ const ModelsTable = (props) => {
 
   return (
     <TableContainer {...other} className={classes.tableContainer}>
-      <TableFiltres onChange={handleSelectAllClick} />
+      <TableFiltres deleteSelected={handleDeleteSelected} selectAll={handleSelectAllClick} />
       <Table>
         <TableHead fields={fields} />
         <TableBody>{generateTableRows()}</TableBody>

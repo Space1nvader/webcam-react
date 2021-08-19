@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { modelSelector } from 'modules/ModelProfile/redux/selectors';
 import { UpdateModelStatusAction } from 'modules/ModelProfile/redux/actions';
 
-const ActiveToggle = ({ checked = false }) => {
+const ActiveToggle = ({ id, checked = false }) => {
   const useStyles = makeStyles({
     root: {
       width: 52,
@@ -41,11 +41,10 @@ const ActiveToggle = ({ checked = false }) => {
   });
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { modelData } = useSelector(modelSelector);
   const [state, setState] = React.useState(checked);
   const handleChange = (event) => {
     setState(event.target.checked);
-    dispatch(UpdateModelStatusAction({ id: modelData.id, active: event.target.checked ? 1 : 0 }));
+    dispatch(UpdateModelStatusAction({ id, active: event.target.checked ? 1 : 0 }));
   };
 
   return (

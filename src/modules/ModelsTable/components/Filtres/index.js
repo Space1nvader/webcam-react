@@ -33,18 +33,18 @@ const useStyles = makeStyles(() => ({
 }));
 
 const TableFilters = (props) => {
-  const { onChange, ...other } = props;
+  const { deleteSelected, selectAll, ...other } = props;
   const classes = useStyles();
   return (
     <Table {...other} style={{ marginBottom: 24 }}>
       <TableBody>
         <TableRow>
           <Cell style={{ padding: '0 0 0 4px' }}>
-            <SmallCheckbox onChange={onChange} style={{ marginRight: 4 }} />
+            <SmallCheckbox onChange={selectAll} style={{ marginRight: 4 }} />
             <IconBtn style={{ marginRight: 6 }}>
               <DonutSmallRoundedIcon style={{ fill: 'var(--red-50)' }} />
             </IconBtn>
-            <IconBtn>
+            <IconBtn onClick={deleteSelected}>
               <DeleteIcon style={{ fill: 'var(--gray-20)' }} />
             </IconBtn>
           </Cell>
