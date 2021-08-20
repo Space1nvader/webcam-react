@@ -43,16 +43,10 @@ const PersonalForm = ({ className }) => {
       : initialValues;
   const setSubmitForm = (data) => {
     if (modelData) {
-      const newData = {
-        ...data,
-        addressId: modelData.personal.addressId,
-        passportId: modelData.personal.passportId,
-        descriptionId: modelData.description.descriptionId
-      };
       dispatch(
         UpdateModelAction({
           id: modelData.id,
-          data: newData
+          data
         })
       );
     } else {
