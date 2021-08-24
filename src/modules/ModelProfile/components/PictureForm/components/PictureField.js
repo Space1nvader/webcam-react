@@ -60,22 +60,6 @@ const PictureField = (props) => {
     if (imagePath && imagePath[name]) setPreview(imagePath[name]);
   }, [imagePath]);
 
-  // const handleSetPicturePreview = (e) => {
-  //   const data = new FormData();
-  //   const { files } = e.target;
-  //   if (files && files.length) {
-  //     const reader = new FileReader();
-  //     reader.onload = (el) => {
-  //       setPreview(el.target.result);
-  //     };
-  //     reader.readAsDataURL(files[0]);
-  //     for (let i = 0; i < files.length; i += 1) {
-  //       data.append(name, files[i]);
-  //     }
-  //     setFieldValue(name, data);
-  //     submitForm();
-  //   }
-  // };
   const data = new FormData();
   const handleSetPicturePreview = (e) => {
     const { files } = e.target;

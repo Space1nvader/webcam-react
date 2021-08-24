@@ -2,9 +2,9 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import SERVICE_API from 'api';
 import { MODELSLIST_ACTION_TYPES } from './reducer';
 
-function* getModels(action) {
+function* getModels({ payload }) {
   try {
-    const { data } = yield call(SERVICE_API.Models.getModels, action.payload);
+    const { data } = yield call(SERVICE_API.Models.getModels, payload.page);
     yield put({
       type: MODELSLIST_ACTION_TYPES.GET.SUCCESS,
       payload: data
@@ -18,10 +18,11 @@ function* getModels(action) {
 }
 function* deleteModels(action) {
   try {
-    const { data } = yield call(SERVICE_API.Models.deleteModels, action.payload);
+    const modelData = yield call(SERVICE_API.Models.deleteModels, action.payload.data);
+    yield* getModels(action);
     yield put({
       type: MODELSLIST_ACTION_TYPES.DELETE.SUCCESS,
-      payload: data
+      payload: modelData.data
     });
   } catch ({ response }) {
     yield put({

@@ -13,7 +13,7 @@ import './index.scss';
 
 const DocsForm = (props) => {
   const { className, ...other } = props;
-  const { modelData, isLoading, success } = useSelector(modelSelector);
+  const { modelData } = useSelector(modelSelector);
   const dispatch = useDispatch();
   const data = modelData.personal || '';
   const detachFile = (id) => () => {

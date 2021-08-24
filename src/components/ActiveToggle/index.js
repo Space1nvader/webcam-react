@@ -1,8 +1,7 @@
 import React from 'react';
 import Switch from '@material-ui/core/Switch';
 import { makeStyles } from '@material-ui/core/styles';
-import { useSelector, useDispatch } from 'react-redux';
-import { modelSelector } from 'modules/ModelProfile/redux/selectors';
+import { useDispatch } from 'react-redux';
 import { UpdateModelStatusAction } from 'modules/ModelProfile/redux/actions';
 
 const ActiveToggle = ({ id, checked = false }) => {

@@ -9,7 +9,7 @@ import './index.scss';
 const UploadFileForm = (props) => {
   const { name } = props;
   const dispatch = useDispatch();
-  const { modelData, isLoading, success } = useSelector(modelSelector);
+  const { modelData } = useSelector(modelSelector);
 
   const onSubmit = ({ files }) => {
     if (modelData) {

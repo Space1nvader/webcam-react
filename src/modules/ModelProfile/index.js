@@ -4,6 +4,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { useSelector } from 'react-redux';
 import { modelSelector } from 'modules/ModelProfile/redux/selectors';
+import { ModalProvider } from 'react-modal-hook';
 import ProfileTabs from './components/ProfileTabs';
 import PersonalForm from './components/PersonalForm';
 import DocsForm from './components/DocsForm';
@@ -55,7 +56,7 @@ const ModelProfile = () => {
   const data = modelData && modelData.personal ? modelData.personal : '';
 
   return (
-    <>
+    <ModalProvider>
       <h4 className="modelProfile__title">
         {data ? `${data.name} ${data.surname || ''}` : 'Данные модели'}
       </h4>
@@ -73,7 +74,7 @@ const ModelProfile = () => {
           <ProfileTabs tabs={modelProfileTabs} />
         </div>
       </div>
-    </>
+    </ModalProvider>
   );
 };
 

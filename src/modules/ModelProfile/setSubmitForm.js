@@ -1,18 +1,17 @@
-const setSubmitForm = (id, data) => {
-  if (modelData) {
-    const newData = {
-      ...data,
-      addressId: modelData.personal.addressId,
-      passportId: modelData.personal.passportId,
-      descriptionId: modelData.description.descriptionId
-    };
-    dispatch(
+import { CreateModelAction, UpdateModelAction } from 'modules/ModelProfile/redux/actions';
+import { useDispatch } from 'react-redux';
+
+const setSubmitForm = (id = 'false', data) => {
+  const dispatch = useDispatch();
+  if (id) {
+    return dispatch(
       UpdateModelAction({
-        id: modelData.id,
-        data: newData
+        id,
+        data
       })
     );
-  } else {
-    dispatch(CreateModelAction({ data }));
   }
+  return dispatch(CreateModelAction({ data }));
 };
+
+export default setSubmitForm;

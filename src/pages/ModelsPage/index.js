@@ -21,7 +21,7 @@ const ModelsPage = () => {
   const { models } = useSelector(modelsListSelector);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(GetModelsListAction());
+    dispatch(GetModelsListAction({ page: 0 }));
     return () => {
       dispatch(ResetAction());
     };

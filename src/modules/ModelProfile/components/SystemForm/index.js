@@ -1,78 +1,36 @@
 import React from 'react';
-
-import { makeStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
-import { FormContainer } from 'components/Form/FormContainer';
 import { InputField } from 'components/Form/inputField';
 import { SelectField } from 'components/Form/SelectField';
 import { SYSTEM_VALIDATION_SCHEMA } from 'constants/validateSchema';
 import FieldSet from 'components/Form/FieldSet';
-import { PasswordField } from 'components/Form/PasswordField';
 import clsx from 'clsx';
-import { useDispatch, useSelector } from 'react-redux';
-import { CreateModelAction, UpdateModelAction } from 'modules/ModelProfile/redux/actions';
+import { useSelector } from 'react-redux';
 import { modelSelector } from 'modules/ModelProfile/redux/selectors';
 import { staticModelDataSelector } from 'redux/selectors/staticData';
 import { checkValueEmpty } from 'untils/checkValueEmpty';
-import { FormChangedAction } from 'redux/actions/formChanged';
-import SkeletonInput from 'components/skeletons/SkeletonInput';
+import { filterChangesValues } from 'untils/filterChangesValues';
 import { TextArea } from 'components/Form/TextArea';
 import { initialValues } from './initialValues';
 import FormTitle from '../FormTitle';
-import SubmitModal from '../SubmitModal';
-
-const useStyles = makeStyles({
-  button: {
-    marginRight: 16,
-    boxShadow: 'none',
-    fontWeight: 700,
-    fontSize: 14,
-    padding: '8px 24px',
-    letterSpacing: '0.035em'
-  }
-});
+import setSubmitForm from '../../setSubmitForm';
+import ModelFormContainer from '../ModelFormContainer/index';
 
 const SystemForm = ({ className }) => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const { modelData, isLoading, success } = useSelector(modelSelector);
+  const { modelData } = useSelector(modelSelector);
   const defaultValues = useSelector(staticModelDataSelector).model || '';
   const generateInitialValues =
     modelData && modelData?.system
       ? checkValueEmpty(modelData.system, initialValues)
       : initialValues;
-  const setSubmitForm = (data) => {
-    if (modelData) {
-      const newData = {
-        ...data,
-        addressId: modelData.personal.addressId,
-        passportId: modelData.personal.passportId,
-        descriptionId: modelData.description.descriptionId
-      };
-      dispatch(
-        UpdateModelAction({
-          id: modelData.id,
-          data: newData
-        })
-      );
-    } else {
-      dispatch(CreateModelAction({ data }));
-    }
-  };
 
   const onSubmit = (values) => {
-    const filtredValues = { ...values };
-    Object.keys(filtredValues).forEach((value) => {
-      if (filtredValues[value] === generateInitialValues[value]) {
-        delete filtredValues[value];
-      }
-    });
-    setSubmitForm(filtredValues);
+    const filtredValues = filterChangesValues(values, generateInitialValues);
+    setSubmitForm(modelData.id, filtredValues);
   };
   return (
     <div className={clsx(className)}>
       <FormTitle>Личные данные</FormTitle>
-      <FormContainer
+      <ModelFormContainer
         className="system"
         id="system"
         enableReinitialize
@@ -80,37 +38,15 @@ const SystemForm = ({ className }) => {
         validationSchema={SYSTEM_VALIDATION_SCHEMA}
         onSubmit={onSubmit}
       >
-        {({ values, submitForm }) => {
-          dispatch(
-            FormChangedAction(JSON.stringify(values) !== JSON.stringify(generateInitialValues))
-          );
-          return (
-            <>
-              <SubmitModal onSubmit={submitForm} />
-              <FieldSet divider>
-                <InputField name="nickname" label="Псевдоним (eng*)" />
-              </FieldSet>
-              <FieldSet>
-                <SelectField label="Тариф" name="tariffIdd" options={defaultValues.tariff} />
-                <InputField name="contragent" label="Контрагент" />
-                <TextArea name="comment" label="Комментарий" />
-              </FieldSet>
-
-              <Button
-                color="secondary"
-                type="submit"
-                className={classes.button}
-                variant="contained"
-              >
-                сохранить
-              </Button>
-              <Button className={classes.button} type="reset" variant="contained">
-                отменить
-              </Button>
-            </>
-          );
-        }}
-      </FormContainer>
+        <FieldSet divider>
+          <InputField name="nickname" label="Псевдоним (eng*)" />
+        </FieldSet>
+        <FieldSet>
+          <SelectField label="Тариф" name="tariffIdd" options={defaultValues.tariff} />
+          <InputField name="contragent" label="Контрагент" />
+          <TextArea name="comment" label="Комментарий" />
+        </FieldSet>
+      </ModelFormContainer>
     </div>
   );
 };

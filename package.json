@@ -24,6 +24,7 @@
     "react": "^17.0.2",
     "react-content-loader": "^6.0.3",
     "react-dom": "^17.0.2",
+    "react-modal-hook": "^3.0.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -35,7 +36,7 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "set REACT_APP_BASE_URL=http://192.168.1.103:8000&& react-scripts start",
+    "start": "set REACT_APP_BASE_URL=http://192.168.1.104:8000&& react-scripts start",
     "startDev": "set REACT_APP_BASE_URL=http://45.147.178.97:8080&& react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

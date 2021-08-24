@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import RemoveButton from 'components/RemoveButton';
 import { Button } from '@material-ui/core';
-import ConfirmPopup from 'components/СonfirmPopup';
+import Popup from 'components/Popup';
 import { makeStyles } from '@material-ui/core/styles';
 import ContactLink from 'components/ContactLink';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 const DetailData = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { modelData, isLoading } = useSelector(modelSelector);
+  const { modelData } = useSelector(modelSelector);
   const { personal, system } = modelData;
   const history = useHistory();
   const [modalOpen, setModalOpen] = useState(false);
@@ -64,7 +64,7 @@ const DetailData = () => {
       </div>
       <div className="detailData__remove">
         <RemoveButton onClick={handleModalOpenClick}>удалить</RemoveButton>
-        <ConfirmPopup
+        <Popup
           style={{ width: 480 }}
           title="Вы уверены что хотите удалить модель?"
           open={modalOpen}
@@ -82,7 +82,7 @@ const DetailData = () => {
           <Button className={classes.button} onClick={handleModalClose} variant="contained">
             отменить
           </Button>
-        </ConfirmPopup>
+        </Popup>
       </div>
     </>
   );

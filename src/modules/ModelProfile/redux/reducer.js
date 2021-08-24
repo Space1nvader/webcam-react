@@ -28,13 +28,13 @@ const handleAction = {
     ...state,
     modelData: params
   }),
-  [MODEL_ACTION_TYPES.PUT.SUCCESS]: (state, params) => ({
+  [MODEL_ACTION_TYPES.PUT.SUCCESS]: (state) => ({
     ...state
   }),
   [MODEL_ACTION_TYPES.DELETE.SUCCESS]: (state) => ({
     ...state
   }),
-  [MODEL_STATUS_ACTION_TYPES.PUT.SUCCESS]: (state, params) => ({
+  [MODEL_STATUS_ACTION_TYPES.PUT.SUCCESS]: (state) => ({
     ...state
   }),
   [MODEL_DOCUMENTS_ACTION_TYPES.POST.SUCCESS]: (state, params) => ({

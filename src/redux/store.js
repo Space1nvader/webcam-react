@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import ModelsListReducer from 'pages/ModelsPage/redux/reducer';
 import ModelReducer from 'modules/ModelProfile/redux/reducer';
 import StaticDataReducer from 'redux/reducers/staticData';
-import { formChangedReducer } from 'redux/reducers/formChanged';
+import { ModelFormReducer } from 'redux/reducers/modelForm';
 import uploadPictureReducer from './reducers/uploadPicture';
 
 const appReducer = combineReducers({
@@ -10,6 +10,6 @@ const appReducer = combineReducers({
   model: ModelReducer,
   picture: uploadPictureReducer,
   staticData: StaticDataReducer,
-  formChanged: formChangedReducer
+  modalForm: ModelFormReducer
 });
 export default appReducer;

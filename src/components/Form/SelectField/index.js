@@ -44,12 +44,14 @@ export const SelectField = (props) => {
               className={clsx(classes.select, errorClass)}
               label={label}
             >
-              <MenuItem value={defaultValue}>
+              <MenuItem key="default" value={defaultValue}>
                 <em>Не указано</em>
               </MenuItem>
               {options?.length &&
                 options.map((option) => (
-                  <MenuItem value={option.id || option.title}>{option.title}</MenuItem>
+                  <MenuItem key={option.id} value={option.id || option.title}>
+                    {option.title}
+                  </MenuItem>
                 ))}
             </Select>
           </FormControl>

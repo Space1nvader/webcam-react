@@ -19,13 +19,13 @@ import { styles } from './styles';
 const useStyles = makeStyles(styles);
 const ModelsTable = (props) => {
   const { rows, fields, ...other } = props;
-  const { pagination, isLoading, success } = useSelector(modelsListSelector);
+  const { pagination, isLoading } = useSelector(modelsListSelector);
   const classes = useStyles();
   const [isSelect, setSelectState] = useState(new Set());
   const [page, setPage] = useState(0);
   const dispatch = useDispatch();
   const handleChangePage = (e, newPage) => {
-    dispatch(GetModelsListAction(newPage));
+    dispatch(GetModelsListAction({ page: newPage }));
     setPage(newPage);
   };
   const selected = new Set(isSelect);
@@ -38,16 +38,21 @@ const ModelsTable = (props) => {
     setSelectState(selected);
   };
   const handleSelectAllClick = (e) => {
+    // TODO: SELECT ALL
     if (e.target.checked) {
       rows.map((row) => selected.add(row.id));
       setSelectState(selected);
-      return;
+    } else {
+      setSelectState(new Set());
     }
+  };
+  // TODO: CONFIRM DELETE
+  const handleConfirmlOpen = () => {};
+  const handleDeleteSelected = () => {
+    dispatch(DeleteModelsAction({ data: Array.from(isSelect), page }));
     setSelectState(new Set());
   };
-  const handleDeleteSelected = () => {
-    dispatch(DeleteModelsAction([...isSelect]));
-  };
+
   const generateFields = (type, id, value) => {
     switch (type) {
       case 'switch':
@@ -91,7 +96,7 @@ const ModelsTable = (props) => {
 
   return (
     <TableContainer {...other} className={classes.tableContainer}>
-      <TableFiltres deleteSelected={handleDeleteSelected} selectAll={handleSelectAllClick} />
+      <TableFiltres handleConfirmlOpen={handleConfirmlOpen} selectAll={handleSelectAllClick} />
       <Table>
         <TableHead fields={fields} />
         <TableBody>{generateTableRows()}</TableBody>
