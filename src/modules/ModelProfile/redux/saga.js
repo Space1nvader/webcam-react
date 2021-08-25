@@ -7,7 +7,6 @@ import {
 } from './reducer';
 
 function* getModel(action) {
-  console.log(action.payload);
   try {
     const { data } = yield call(SERVICE_API.Model.getModel, action.payload);
     yield put({

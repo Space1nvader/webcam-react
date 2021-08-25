@@ -22,11 +22,11 @@ const ModelsTable = (props) => {
   const { pagination, isLoading } = useSelector(modelsListSelector);
   const classes = useStyles();
   const [isSelect, setSelectState] = useState(new Set());
-  const [page, setPage] = useState(0);
+  const [currentPage, setPage] = useState(0);
   const dispatch = useDispatch();
-  const handleChangePage = (e, newPage) => {
-    dispatch(GetModelsListAction({ page: newPage }));
-    setPage(newPage);
+  const handleChangePage = (e, page) => {
+    dispatch(GetModelsListAction(page));
+    setPage(page);
   };
   const selected = new Set(isSelect);
   const handleSelectClick = (id) => () => {
@@ -49,7 +49,7 @@ const ModelsTable = (props) => {
   // TODO: CONFIRM DELETE
   const handleConfirmlOpen = () => {};
   const handleDeleteSelected = () => {
-    dispatch(DeleteModelsAction({ data: Array.from(isSelect), page }));
+    dispatch(DeleteModelsAction({ data: Array.from(isSelect), currentPage }));
     setSelectState(new Set());
   };
 
@@ -106,7 +106,7 @@ const ModelsTable = (props) => {
           count={pagination.total}
           rowsPerPageOptions={[10]}
           onPageChange={handleChangePage}
-          page={page}
+          page={currentPage}
           rowsPerPage={pagination.perPage}
         />
       )}
