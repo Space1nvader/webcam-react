@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Popup from 'components/Popup';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
@@ -15,28 +15,25 @@ const useStyles = makeStyles({
   }
 });
 
-const SubmitModal = ({ onSubmit }) => {
+const SubmitModal = ({ open, close, submit }) => {
   const classes = useStyles();
-  const [modalOpen, setModalOpen] = useState(false);
-  const handleModalClose = () => setModalOpen(false);
-
   return (
     <Popup
       style={{ width: 480 }}
-      title="Сохранить ваши изменения?"
-      open={modalOpen}
-      onClose={handleModalClose}
+      title="Действительно удалить выбранные модели?"
+      open={open}
+      onClose={close}
     >
       <Button
         color="secondary"
         type="submit"
-        onSubmit={onSubmit}
+        onClick={submit}
         className={classes.button}
         variant="contained"
       >
         Да
       </Button>
-      <Button className={classes.button} onClick={handleModalClose} variant="contained">
+      <Button className={classes.button} onClick={close} variant="contained">
         Нет
       </Button>
     </Popup>

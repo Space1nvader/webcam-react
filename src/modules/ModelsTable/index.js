@@ -14,14 +14,16 @@ import ActiveToggle from 'components/ActiveToggle';
 import TableFiltres from './components/Filtres';
 import TableHead from './components/Head';
 import TableMessage from './components/Message';
+import SubmitModal from './components/SubmitModal';
 import { styles } from './styles';
 
 const useStyles = makeStyles(styles);
 const ModelsTable = (props) => {
   const { rows, fields, ...other } = props;
-  const { pagination, isLoading } = useSelector(modelsListSelector);
   const classes = useStyles();
+  const { pagination, isLoading } = useSelector(modelsListSelector);
   const [isSelect, setSelectState] = useState(new Set());
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentPage, setPage] = useState(0);
   const dispatch = useDispatch();
   const handleChangePage = (e, page) => {
@@ -38,7 +40,6 @@ const ModelsTable = (props) => {
     setSelectState(selected);
   };
   const handleSelectAllClick = (e) => {
-    // TODO: SELECT ALL
     if (e.target.checked) {
       rows.map((row) => selected.add(row.id));
       setSelectState(selected);
@@ -47,10 +48,16 @@ const ModelsTable = (props) => {
     }
   };
   // TODO: CONFIRM DELETE
-  const handleConfirmlOpen = () => {};
+  const handleConfirmlOpen = () => {
+    setModalIsOpen(true);
+  };
+  const handleCloseModal = () => {
+    setModalIsOpen(false);
+  };
   const handleDeleteSelected = () => {
     dispatch(DeleteModelsAction({ data: Array.from(isSelect), currentPage }));
     setSelectState(new Set());
+    setModalIsOpen(false);
   };
 
   const generateFields = (type, id, value) => {
@@ -95,22 +102,25 @@ const ModelsTable = (props) => {
   };
 
   return (
-    <TableContainer {...other} className={classes.tableContainer}>
-      <TableFiltres handleConfirmlOpen={handleConfirmlOpen} selectAll={handleSelectAllClick} />
-      <Table>
-        <TableHead fields={fields} />
-        <TableBody>{generateTableRows()}</TableBody>
-      </Table>
-      {pagination && (
-        <TablePagination
-          count={pagination.total}
-          rowsPerPageOptions={[10]}
-          onPageChange={handleChangePage}
-          page={currentPage}
-          rowsPerPage={pagination.perPage}
-        />
-      )}
-    </TableContainer>
+    <>
+      <SubmitModal open={modalIsOpen} submit={handleDeleteSelected} close={handleCloseModal} />
+      <TableContainer {...other} className={classes.tableContainer}>
+        <TableFiltres handleConfirmlOpen={handleConfirmlOpen} selectAll={handleSelectAllClick} />
+        <Table>
+          <TableHead fields={fields} />
+          <TableBody>{generateTableRows()}</TableBody>
+        </Table>
+        {pagination && (
+          <TablePagination
+            count={pagination.total}
+            rowsPerPageOptions={[10]}
+            onPageChange={handleChangePage}
+            page={currentPage}
+            rowsPerPage={pagination.perPage}
+          />
+        )}
+      </TableContainer>
+    </>
   );
 };
 export default ModelsTable;

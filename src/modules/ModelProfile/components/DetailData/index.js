@@ -43,7 +43,7 @@ const DetailData = () => {
   return (
     <>
       <h5 className="detailData__name">
-        {personal.nameRus} <br /> / {system.nickname}
+        {personal.nameRus && `${personal.nameRus} /`} {system.nickname}
       </h5>
       <div className="detailData__contacts">
         {personal.email && (
