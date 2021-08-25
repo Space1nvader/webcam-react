@@ -1,17 +1,13 @@
 import { CreateModelAction, UpdateModelAction } from 'modules/ModelProfile/redux/actions';
-import { useDispatch } from 'react-redux';
 
-const setSubmitForm = (id = 'false', data) => {
-  const dispatch = useDispatch();
+const setSubmitForm = (id = '', data) => {
   if (id) {
-    return dispatch(
-      UpdateModelAction({
-        id,
-        data
-      })
-    );
+    return UpdateModelAction({
+      id,
+      data
+    });
   }
-  return dispatch(CreateModelAction({ data }));
+  return CreateModelAction({ data });
 };
 
 export default setSubmitForm;

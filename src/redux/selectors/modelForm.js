@@ -1,1 +1,1 @@
-export const modalFormSelector = (state) => state.modalForm;
+export const modalFormSelector = (state) => state.modelForm;

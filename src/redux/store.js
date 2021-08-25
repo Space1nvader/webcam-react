@@ -10,6 +10,6 @@ const appReducer = combineReducers({
   model: ModelReducer,
   picture: uploadPictureReducer,
   staticData: StaticDataReducer,
-  modalForm: ModelFormReducer
+  modelForm: ModelFormReducer
 });
 export default appReducer;

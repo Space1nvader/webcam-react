@@ -1,0 +1,13 @@
+.papperRow {
+  margin-bottom: 20px;
+  &__title {
+    margin-bottom: 8px;
+    color: var(--gray-50);
+    letter-spacing: 0.018em;
+    font-size: 0.875rem;
+  }
+  &__value {
+    color: var(--gray--100);
+    letter-spacing: 0.0275em;
+  }
+}

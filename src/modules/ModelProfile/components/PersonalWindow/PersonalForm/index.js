@@ -6,28 +6,25 @@ import { PROFILE_VALIDATION_SCHEMA } from 'constants/validateSchema';
 import FieldSet from 'components/Form/FieldSet';
 import { PasswordField } from 'components/Form/PasswordField';
 import clsx from 'clsx';
-import { useSelector } from 'react-redux';
-import { modelSelector } from 'modules/ModelProfile/redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { modelPersonalFormSelector } from 'modules/ModelProfile/redux/selectors';
 import { staticModelDataSelector } from 'redux/selectors/staticData';
-import { checkValueEmpty } from 'untils/checkValueEmpty';
-import { filterChangesValues } from 'untils/filterChangesValues';
+import { checkValueEmpty } from 'utils/checkValueEmpty';
+import { filterChangesValues } from 'utils/filterChangesValues';
+import setSubmitForm from 'modules/ModelProfile/setSubmitForm';
+import FormTitle from 'modules/ModelProfile/components/FormTitle';
+import ModelFormContainer from 'modules/ModelProfile/components/ModelFormContainer';
 import { initialValues } from './initialValues';
-import FormTitle from '../FormTitle';
-import setSubmitForm from '../../setSubmitForm';
-import ModelFormContainer from '../ModelFormContainer';
 
 const PersonalForm = ({ className }) => {
-  const { modelData } = useSelector(modelSelector);
-
+  const { id, data } = useSelector(modelPersonalFormSelector);
+  const dispatch = useDispatch();
   const defaultValues = useSelector(staticModelDataSelector).model || '';
-  const generateInitialValues =
-    modelData && modelData?.personal
-      ? checkValueEmpty(modelData.personal, initialValues)
-      : initialValues;
+  const generateInitialValues = data ? checkValueEmpty(data, initialValues) : initialValues;
 
   const onSubmit = (values) => {
     const filtredValues = filterChangesValues(values, generateInitialValues);
-    setSubmitForm(modelData.id, filtredValues);
+    dispatch(setSubmitForm(id, filtredValues));
   };
   return (
     <div className={clsx(className)}>

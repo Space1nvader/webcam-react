@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
@@ -21,10 +21,18 @@ const ModelFormContainer = (props) => {
   const { children, initialValues, ...other } = props;
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [isFormChanged, setIsFormChanged] = useState(false);
+
+  const setFormChanges = (formChangedCheck) => {
+    useMemo(() => {
+      dispatch(FormChangedAction(formChangedCheck));
+      setIsFormChanged(formChangedCheck);
+    }, [formChangedCheck]);
+  };
   return (
     <FormContainer initialValues={initialValues} {...other}>
       {({ values, submitForm }) => {
-        dispatch(FormChangedAction(JSON.stringify(values) !== JSON.stringify(initialValues)));
+        setFormChanges(JSON.stringify(values) !== JSON.stringify(initialValues));
         return (
           <>
             <SubmitModal onSubmit={submitForm} values={values} />

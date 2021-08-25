@@ -4,28 +4,26 @@ import { SelectField } from 'components/Form/SelectField';
 import { SYSTEM_VALIDATION_SCHEMA } from 'constants/validateSchema';
 import FieldSet from 'components/Form/FieldSet';
 import clsx from 'clsx';
-import { useSelector } from 'react-redux';
-import { modelSelector } from 'modules/ModelProfile/redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { modelSystemFormSelector } from 'modules/ModelProfile/redux/selectors';
 import { staticModelDataSelector } from 'redux/selectors/staticData';
-import { checkValueEmpty } from 'untils/checkValueEmpty';
-import { filterChangesValues } from 'untils/filterChangesValues';
+import { checkValueEmpty } from 'utils/checkValueEmpty';
+import { filterChangesValues } from 'utils/filterChangesValues';
 import { TextArea } from 'components/Form/TextArea';
+import ModelFormContainer from 'modules/ModelProfile/components/ModelFormContainer/index';
+import setSubmitForm from 'modules/ModelProfile/setSubmitForm';
+import FormTitle from 'modules/ModelProfile/components/FormTitle';
 import { initialValues } from './initialValues';
-import FormTitle from '../FormTitle';
-import setSubmitForm from '../../setSubmitForm';
-import ModelFormContainer from '../ModelFormContainer/index';
 
 const SystemForm = ({ className }) => {
-  const { modelData } = useSelector(modelSelector);
+  const dispatch = useDispatch();
+  const { id, data } = useSelector(modelSystemFormSelector);
   const defaultValues = useSelector(staticModelDataSelector).model || '';
-  const generateInitialValues =
-    modelData && modelData?.system
-      ? checkValueEmpty(modelData.system, initialValues)
-      : initialValues;
+  const generateInitialValues = data ? checkValueEmpty(data, initialValues) : initialValues;
 
   const onSubmit = (values) => {
     const filtredValues = filterChangesValues(values, generateInitialValues);
-    setSubmitForm(modelData.id, filtredValues);
+    dispatch(setSubmitForm(id, filtredValues));
   };
   return (
     <div className={clsx(className)}>

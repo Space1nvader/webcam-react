@@ -6,16 +6,16 @@ import FieldSet from 'components/Form/FieldSet';
 import bodyImage from 'assets/img/image19.png';
 import { TextArea } from 'components/Form/TextArea';
 import { SETTING_VALIDATION_SCHEMA } from 'constants/validateSchema';
-import { checkValueEmpty } from 'untils/checkValueEmpty';
-import { useSelector } from 'react-redux';
-import { modelSelector } from 'modules/ModelProfile/redux/selectors';
+import { checkValueEmpty } from 'utils/checkValueEmpty';
+import { useDispatch, useSelector } from 'react-redux';
+import { modelDescriptionFormSelector } from 'modules/ModelProfile/redux/selectors';
 import { staticModelDataSelector } from 'redux/selectors/staticData';
 import clsx from 'clsx';
-import { filterChangesValues } from 'untils/filterChangesValues';
+import { filterChangesValues } from 'utils/filterChangesValues';
+import setSubmitForm from 'modules/ModelProfile/setSubmitForm';
+import FormTitle from 'modules/ModelProfile/components/FormTitle';
+import ModelFormContainer from 'modules/ModelProfile/components/ModelFormContainer/index';
 import { initialValues } from './initialValues';
-import FormTitle from '../FormTitle';
-import setSubmitForm from '../../setSubmitForm';
-import ModelFormContainer from '../ModelFormContainer';
 
 const useStyles = makeStyles({
   formControl: {
@@ -45,23 +45,21 @@ const useStyles = makeStyles({
   }
 });
 
-const MainDataForm = (props) => {
+const DescriptionForm = (props) => {
   const { className, ...other } = props;
   const classes = useStyles();
-  const { modelData } = useSelector(modelSelector);
+  const dispatch = useDispatch();
+  const { id, data } = useSelector(modelDescriptionFormSelector);
   const defaultValues = useSelector(staticModelDataSelector).model || '';
-  const generateInitialValues =
-    modelData && modelData?.description
-      ? checkValueEmpty(modelData.description, initialValues)
-      : initialValues;
+  const generateInitialValues = data ? checkValueEmpty(data, initialValues) : initialValues;
 
   const onSubmit = (values) => {
     const filtredValues = filterChangesValues(values, generateInitialValues);
-    setSubmitForm(modelData.id, filtredValues);
+    dispatch(setSubmitForm(id, filtredValues));
   };
 
   return (
-    <div className={clsx(classes.container, className)} {...other} style={{ width: 800 }}>
+    <div className={clsx(classes.container, className)} {...other}>
       <FormTitle>Основные данные</FormTitle>
       <ModelFormContainer
         className="settings"
@@ -165,4 +163,4 @@ const MainDataForm = (props) => {
   );
 };
 
-export default MainDataForm;
+export default DescriptionForm;

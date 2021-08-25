@@ -44,7 +44,7 @@ export const SelectField = (props) => {
               className={clsx(classes.select, errorClass)}
               label={label}
             >
-              <MenuItem key="default" value={defaultValue}>
+              <MenuItem value={defaultValue}>
                 <em>Не указано</em>
               </MenuItem>
               {options?.length &&

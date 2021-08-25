@@ -43,14 +43,14 @@ const ProfileTabs = (props) => {
       dispatch(SetFormTabAction(index));
     }
   };
-
+  const activeClass = (index) => currentTab === index && classes.activeTab;
   return (
     <>
       <div className="profileTabs__controls">
         {tabs.map((button, index) => (
           <Button
             key={button.key}
-            className={clsx(classes.tab, currentTab === index && classes.activeTab)}
+            className={clsx(classes.tab, activeClass(index))}
             startIcon={button.icon}
             onClick={handleChangeTabClick(index)}
           >

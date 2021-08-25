@@ -1,0 +1,9 @@
+.profileWindow {
+  &__form {
+    width: calc(100% - 23rem);
+  }
+  &__docs {
+    width: 19rem;
+    margin-left: 4rem;
+  }
+}
