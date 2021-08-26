@@ -1,6 +1,6 @@
 import { MODELSLIST_ACTION_TYPES } from './reducer';
 
-export const GetModelsListAction = (payload = 0) => ({
+export const GetModelsListAction = (payload) => ({
   type: MODELSLIST_ACTION_TYPES.GET.START,
   payload
 });

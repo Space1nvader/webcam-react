@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Field } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
 import DateFnsUtils from '@date-io/date-fns';
-import { fromUnixTime, format, getTime } from 'date-fns';
+import { fromUnixTime, getTime } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateRangeRoundedIcon from '@material-ui/icons/DateRangeRounded';

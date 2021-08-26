@@ -9,11 +9,13 @@ import SmallCheckbox from 'components/SmallCheckbox';
 import TextField from '@material-ui/core/TextField';
 import DonutSmallRoundedIcon from '@material-ui/icons/DonutSmallRounded';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import { GetModelsListAction } from 'pages/ModelsPage/redux/actions';
 import SearchIcon from '@material-ui/icons/Search';
 import IconBtn from 'components/IconBtn';
 import DeleteIcon from '@material-ui/icons/Delete';
 import funnelIcon from 'assets/img/funnel-fill.svg';
 import SimpleMenu from 'components/SimpleMenu';
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles(() => ({
   search: {
@@ -33,8 +35,25 @@ const useStyles = makeStyles(() => ({
 }));
 
 const TableFilters = (props) => {
-  const { handleConfirmlOpen, selectAll, ...other } = props;
+  const { setSearchParams, handleConfirmlOpen, selectAll, ...other } = props;
   const classes = useStyles();
+  const dispatch = useDispatch();
+  let holdtimer = null;
+  const holderSetSearchFunc = (params = { page: 0, search: '' }) =>
+    setTimeout(() => {
+      setSearchParams(params);
+      dispatch(GetModelsListAction(params));
+    }, 500);
+
+  const handleSearchChange = (e) => {
+    const valueLength = e.target.value.length;
+    clearTimeout(holdtimer);
+    if (valueLength >= 3) {
+      holdtimer = holderSetSearchFunc({ page: 0, search: e.target.value });
+    }
+    if (valueLength < 1) holdtimer = holderSetSearchFunc();
+  };
+
   return (
     <Table {...other} style={{ marginBottom: 24 }}>
       <TableBody>
@@ -55,6 +74,7 @@ const TableFilters = (props) => {
                 fullWidth
                 placeholder="Поиск по моделям"
                 variant="outlined"
+                onChange={handleSearchChange}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">

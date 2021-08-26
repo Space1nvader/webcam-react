@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { InputField } from 'components/Form/inputField';
 import { DateField } from 'components/Form/DateField';
 import { SelectField } from 'components/Form/SelectField';
@@ -20,8 +20,7 @@ const PersonalForm = ({ className }) => {
   const { id, data } = useSelector(modelPersonalFormSelector);
   const dispatch = useDispatch();
   const defaultValues = useSelector(staticModelDataSelector).model || '';
-  const generateInitialValues = data ? checkValueEmpty(data, initialValues) : initialValues;
-
+  const generateInitialValues = checkValueEmpty(data, initialValues);
   const onSubmit = (values) => {
     const filtredValues = filterChangesValues(values, generateInitialValues);
     dispatch(setSubmitForm(id, filtredValues));

@@ -13,8 +13,8 @@ const ProfilePage = (props) => {
 
   const modelId = match.params.userId;
   const dispatch = useDispatch();
-  dispatch(GetStaticDataAction());
   useEffect(() => {
+    dispatch(GetStaticDataAction());
     if (modelId) dispatch(GetModelAction({ id: modelId }));
     return () => {
       dispatch(ResetAction());

@@ -14,19 +14,21 @@ import ActiveToggle from 'components/ActiveToggle';
 import TableFiltres from './components/Filtres';
 import TableHead from './components/Head';
 import TableMessage from './components/Message';
+import SubmitModal from './components/SubmitModal';
 import { styles } from './styles';
 
 const useStyles = makeStyles(styles);
 const ModelsTable = (props) => {
   const { rows, fields, ...other } = props;
-  const { pagination, isLoading } = useSelector(modelsListSelector);
   const classes = useStyles();
+  const { pagination, isLoading } = useSelector(modelsListSelector);
   const [isSelect, setSelectState] = useState(new Set());
-  const [currentPage, setPage] = useState(0);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [pageParams, setPageParams] = useState({ page: 0, search: '' });
   const dispatch = useDispatch();
   const handleChangePage = (e, page) => {
-    dispatch(GetModelsListAction(page));
-    setPage(page);
+    setPageParams({ ...pageParams, page });
+    dispatch(GetModelsListAction({ ...pageParams, page }));
   };
   const selected = new Set(isSelect);
   const handleSelectClick = (id) => () => {
@@ -38,7 +40,6 @@ const ModelsTable = (props) => {
     setSelectState(selected);
   };
   const handleSelectAllClick = (e) => {
-    // TODO: SELECT ALL
     if (e.target.checked) {
       rows.map((row) => selected.add(row.id));
       setSelectState(selected);
@@ -46,11 +47,16 @@ const ModelsTable = (props) => {
       setSelectState(new Set());
     }
   };
-  // TODO: CONFIRM DELETE
-  const handleConfirmlOpen = () => {};
+  const handleConfirmlOpen = () => {
+    setModalIsOpen(true);
+  };
+  const handleCloseModal = () => {
+    setModalIsOpen(false);
+  };
   const handleDeleteSelected = () => {
-    dispatch(DeleteModelsAction({ data: Array.from(isSelect), currentPage }));
+    dispatch(DeleteModelsAction({ data: Array.from(isSelect), pageParams }));
     setSelectState(new Set());
+    setModalIsOpen(false);
   };
 
   const generateFields = (type, id, value) => {
@@ -95,22 +101,29 @@ const ModelsTable = (props) => {
   };
 
   return (
-    <TableContainer {...other} className={classes.tableContainer}>
-      <TableFiltres handleConfirmlOpen={handleConfirmlOpen} selectAll={handleSelectAllClick} />
-      <Table>
-        <TableHead fields={fields} />
-        <TableBody>{generateTableRows()}</TableBody>
-      </Table>
-      {pagination && (
-        <TablePagination
-          count={pagination.total}
-          rowsPerPageOptions={[10]}
-          onPageChange={handleChangePage}
-          page={currentPage}
-          rowsPerPage={pagination.perPage}
+    <>
+      <SubmitModal open={modalIsOpen} submit={handleDeleteSelected} close={handleCloseModal} />
+      <TableContainer {...other} className={classes.tableContainer}>
+        <TableFiltres
+          setSearchParams={setPageParams}
+          handleConfirmlOpen={handleConfirmlOpen}
+          selectAll={handleSelectAllClick}
         />
-      )}
-    </TableContainer>
+        <Table>
+          <TableHead fields={fields} />
+          <TableBody>{generateTableRows()}</TableBody>
+        </Table>
+        {pagination && (
+          <TablePagination
+            count={pagination.total}
+            rowsPerPageOptions={[10]}
+            onPageChange={handleChangePage}
+            page={pageParams.page}
+            rowsPerPage={pagination.perPage}
+          />
+        )}
+      </TableContainer>
+    </>
   );
 };
 export default ModelsTable;
