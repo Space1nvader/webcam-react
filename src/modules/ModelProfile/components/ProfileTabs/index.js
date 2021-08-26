@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { formChangedSelector } from 'redux/selectors/formChanged';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { modalFormSelector } from 'redux/selectors/modelForm';
 import { Tabs } from 'components/Tabs';
 import { Tab } from 'components/Tabs/Tab';
 import { Button } from '@material-ui/core';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
+import { FormConfirmAction, SetFormTabAction } from 'redux/actions/modelForm';
 import './index.scss';
 
 const useStyles = makeStyles({
@@ -33,23 +34,23 @@ const useStyles = makeStyles({
 const ProfileTabs = (props) => {
   const classes = useStyles();
   const { tabs } = props;
-  const [activeTab, setActiveTab] = useState(0);
-
-  const { formChanged } = useSelector(formChangedSelector);
+  const dispatch = useDispatch();
+  const { currentTab, formChanged } = useSelector(modalFormSelector);
   const handleChangeTabClick = (index) => () => {
-    setActiveTab(index);
-    // if (formChanged) {
-    //   alert('123');
-    // } else setActiveTab(index);
+    if (formChanged) {
+      dispatch(FormConfirmAction({ active: true, route: index }));
+    } else {
+      dispatch(SetFormTabAction(index));
+    }
   };
-
+  const activeClass = (index) => currentTab === index && classes.activeTab;
   return (
     <>
       <div className="profileTabs__controls">
         {tabs.map((button, index) => (
           <Button
             key={button.key}
-            className={clsx(classes.tab, activeTab === index && classes.activeTab)}
+            className={clsx(classes.tab, activeClass(index))}
             startIcon={button.icon}
             onClick={handleChangeTabClick(index)}
           >
@@ -58,7 +59,7 @@ const ProfileTabs = (props) => {
         ))}
       </div>
       <div className="profileTabs__frame">
-        <Tabs activeTab={activeTab}>
+        <Tabs activeTab={currentTab}>
           {tabs.map((tab, index) => (
             <Tab key={tab.title} index={index}>
               {tab.component}

@@ -17,7 +17,7 @@ const handleAction = {
   }),
   [MODELSLIST_ACTION_TYPES.DELETE.SUCCESS]: (state, params) => ({
     ...state,
-    newParams: params
+    ...params
   })
 };
 

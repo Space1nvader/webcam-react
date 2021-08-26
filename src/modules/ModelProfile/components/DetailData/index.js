@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import RemoveButton from 'components/RemoveButton';
-import ConfirmPopup from 'components/СonfirmPopup';
+import { Button } from '@material-ui/core';
+import Popup from 'components/Popup';
 import { makeStyles } from '@material-ui/core/styles';
 import ContactLink from 'components/ContactLink';
-import { Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { modelSelector } from 'modules/ModelProfile/redux/selectors';
+import {
+  modelPersonalFormSelector,
+  modelSystemFormSelector
+} from 'modules/ModelProfile/redux/selectors';
 import { DeleteModelAction } from 'modules/ModelProfile/redux/actions';
 import { useHistory } from 'react-router-dom';
 import Income from '../Income';
@@ -26,14 +29,15 @@ const useStyles = makeStyles({
 const DetailData = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { modelData, isLoading } = useSelector(modelSelector);
-  const { personal, system } = modelData;
+  const { id } = useSelector(modelPersonalFormSelector);
+  const personal = useSelector(modelPersonalFormSelector).data;
+  const system = useSelector(modelSystemFormSelector).data;
   const history = useHistory();
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpenClick = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
   const handleConfimClick = () => {
-    dispatch(DeleteModelAction({ id: modelData.id }));
+    dispatch(DeleteModelAction(id));
     history.push('/models');
   };
   return (
@@ -64,7 +68,7 @@ const DetailData = () => {
       </div>
       <div className="detailData__remove">
         <RemoveButton onClick={handleModalOpenClick}>удалить</RemoveButton>
-        <ConfirmPopup
+        <Popup
           style={{ width: 480 }}
           title="Вы уверены что хотите удалить модель?"
           open={modalOpen}
@@ -82,7 +86,7 @@ const DetailData = () => {
           <Button className={classes.button} onClick={handleModalClose} variant="contained">
             отменить
           </Button>
-        </ConfirmPopup>
+        </Popup>
       </div>
     </>
   );

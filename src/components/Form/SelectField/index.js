@@ -49,7 +49,9 @@ export const SelectField = (props) => {
               </MenuItem>
               {options?.length &&
                 options.map((option) => (
-                  <MenuItem value={option.id || option.title}>{option.title}</MenuItem>
+                  <MenuItem key={option.id} value={option.id || option.title}>
+                    {option.title}
+                  </MenuItem>
                 ))}
             </Select>
           </FormControl>

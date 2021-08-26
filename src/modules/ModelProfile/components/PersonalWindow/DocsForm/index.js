@@ -6,16 +6,15 @@ import UploadFileForm from 'modules/ModelProfile/components/UploadFileForm';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { modelSelector } from 'modules/ModelProfile/redux/selectors';
+import { modelPersonalFormSelector } from 'modules/ModelProfile/redux/selectors';
 import { DeleteDocumentAction } from 'modules/ModelProfile/redux/actions';
 
 import './index.scss';
 
 const DocsForm = (props) => {
   const { className, ...other } = props;
-  const { modelData, isLoading, success } = useSelector(modelSelector);
   const dispatch = useDispatch();
-  const data = modelData.personal || '';
+  const { data } = useSelector(modelPersonalFormSelector) || '';
   const detachFile = (id) => () => {
     dispatch(DeleteDocumentAction({ fileId: id }));
   };
@@ -44,7 +43,7 @@ const DocsForm = (props) => {
   return (
     <div className={clsx('docs', className)} {...other}>
       <h6 className="docs__title">Документы</h6>
-      {data.documents && renderDocs(data.documents)}
+      {data && data.documents && renderDocs(data.documents)}
       <UploadFileForm
         size="large"
         name="files"

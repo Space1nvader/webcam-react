@@ -45,8 +45,8 @@ const userPhotoForm = (image, className) => (
 );
 
 const PictureField = (props) => {
-  const { name, imagePath, setFieldValue, submitForm } = props;
-  const [preview, setPreview] = useState(imagePath[name]);
+  const { name, data, setFieldValue, submitForm } = props;
+  const [preview, setPreview] = useState(data[name]);
   const classes = useStyles();
   const dispatch = useDispatch();
   const { picture, success } = useSelector(uploadPictureSelector);
@@ -57,35 +57,20 @@ const PictureField = (props) => {
     return addPhotoButton(classes.fullWidthBtn);
   };
   useEffect(() => {
-    if (imagePath && imagePath[name]) setPreview(imagePath[name]);
-  }, [imagePath]);
+    if (data && data[name]) setPreview(data[name]);
+  }, [data]);
 
-  // const handleSetPicturePreview = (e) => {
-  //   const data = new FormData();
-  //   const { files } = e.target;
-  //   if (files && files.length) {
-  //     const reader = new FileReader();
-  //     reader.onload = (el) => {
-  //       setPreview(el.target.result);
-  //     };
-  //     reader.readAsDataURL(files[0]);
-  //     for (let i = 0; i < files.length; i += 1) {
-  //       data.append(name, files[i]);
-  //     }
-  //     setFieldValue(name, data);
-  //     submitForm();
-  //   }
-  // };
-  const data = new FormData();
+  const formData = new FormData();
   const handleSetPicturePreview = (e) => {
     const { files } = e.target;
     if (files && files.length) {
       for (let i = 0; i < files.length; i += 1) {
-        data.append(name, files[i]);
+        formData.append(name, files[i]);
       }
-      dispatch(UploadPictureAction(data));
+      dispatch(UploadPictureAction(formData));
     }
   };
+
   useEffect(() => {
     if (success) {
       setFieldValue(name, picture[name]);

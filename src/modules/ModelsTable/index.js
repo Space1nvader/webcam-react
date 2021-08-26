@@ -19,14 +19,14 @@ import { styles } from './styles';
 const useStyles = makeStyles(styles);
 const ModelsTable = (props) => {
   const { rows, fields, ...other } = props;
-  const { pagination, isLoading, success } = useSelector(modelsListSelector);
+  const { pagination, isLoading } = useSelector(modelsListSelector);
   const classes = useStyles();
   const [isSelect, setSelectState] = useState(new Set());
-  const [page, setPage] = useState(0);
+  const [currentPage, setPage] = useState(0);
   const dispatch = useDispatch();
-  const handleChangePage = (e, newPage) => {
-    dispatch(GetModelsListAction(newPage));
-    setPage(newPage);
+  const handleChangePage = (e, page) => {
+    dispatch(GetModelsListAction(page));
+    setPage(page);
   };
   const selected = new Set(isSelect);
   const handleSelectClick = (id) => () => {
@@ -38,16 +38,21 @@ const ModelsTable = (props) => {
     setSelectState(selected);
   };
   const handleSelectAllClick = (e) => {
+    // TODO: SELECT ALL
     if (e.target.checked) {
       rows.map((row) => selected.add(row.id));
       setSelectState(selected);
-      return;
+    } else {
+      setSelectState(new Set());
     }
+  };
+  // TODO: CONFIRM DELETE
+  const handleConfirmlOpen = () => {};
+  const handleDeleteSelected = () => {
+    dispatch(DeleteModelsAction({ data: Array.from(isSelect), currentPage }));
     setSelectState(new Set());
   };
-  const handleDeleteSelected = () => {
-    dispatch(DeleteModelsAction({ id: [...isSelect] }));
-  };
+
   const generateFields = (type, id, value) => {
     switch (type) {
       case 'switch':
@@ -91,7 +96,7 @@ const ModelsTable = (props) => {
 
   return (
     <TableContainer {...other} className={classes.tableContainer}>
-      <TableFiltres deleteSelected={handleDeleteSelected} selectAll={handleSelectAllClick} />
+      <TableFiltres handleConfirmlOpen={handleConfirmlOpen} selectAll={handleSelectAllClick} />
       <Table>
         <TableHead fields={fields} />
         <TableBody>{generateTableRows()}</TableBody>
@@ -101,7 +106,7 @@ const ModelsTable = (props) => {
           count={pagination.total}
           rowsPerPageOptions={[10]}
           onPageChange={handleChangePage}
-          page={page}
+          page={currentPage}
           rowsPerPage={pagination.perPage}
         />
       )}

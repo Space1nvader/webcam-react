@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import ConfirmPopup from 'components/СonfirmPopup';
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { modalFormSelector } from 'redux/selectors/modelForm';
 import { Button } from '@material-ui/core';
-import { useSelector } from 'react-redux';
-import { formChangedSelector } from 'redux/selectors/formChanged';
+import Popup from 'components/Popup';
+import { makeStyles } from '@material-ui/core/styles';
+import { SetFormTabAction, ResetFormConfirmAction } from 'redux/actions/modelForm';
 
 const useStyles = makeStyles({
   button: {
@@ -17,36 +18,40 @@ const useStyles = makeStyles({
   }
 });
 
-const SubmitModal = ({ onSubmit }) => {
+const SubmitModal = ({ onSubmit, values }) => {
   const classes = useStyles();
-  const [modalOpen, setModalOpen] = useState(false);
-  const handleModalClose = () => setModalOpen(false);
-  const { formChanged } = useSelector(formChangedSelector);
-  useEffect(() => {
-    console.log('CHANGED?????', formChanged);
-    // setModalOpen(true);
-  }, [formChanged]);
+  const dispatch = useDispatch();
+  const { confirmModal } = useSelector(modalFormSelector);
+  const handleModalClose = () => {
+    dispatch(ResetFormConfirmAction());
+  };
+  const handleConfimClick = () => {
+    onSubmit(values);
+    dispatch(SetFormTabAction(confirmModal.route));
+  };
+  const handleCancelChanges = () => {
+    dispatch(SetFormTabAction(confirmModal.route));
+  };
   return (
-    <ConfirmPopup
+    <Popup
       style={{ width: 480 }}
       title="Сохранить ваши изменения?"
-      open={modalOpen}
+      open={confirmModal.active}
       onClose={handleModalClose}
     >
       <Button
         color="secondary"
+        onClick={handleConfimClick}
         type="submit"
-        onSubmit={onSubmit}
         className={classes.button}
         variant="contained"
       >
-        Да
+        сохранить
       </Button>
-      <Button className={classes.button} onClick={handleModalClose} variant="contained">
-        Нет
+      <Button className={classes.button} onClick={handleCancelChanges} variant="contained">
+        отменить
       </Button>
-    </ConfirmPopup>
+    </Popup>
   );
 };
-
 export default SubmitModal;

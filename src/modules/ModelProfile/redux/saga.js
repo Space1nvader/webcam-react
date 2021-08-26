@@ -26,8 +26,10 @@ function* updateModel(action) {
     yield call(SERVICE_API.Model.updateModel, action.payload);
 
     yield put({
-      type: MODEL_ACTION_TYPES.PUT.SUCCESS
+      type: MODEL_ACTION_TYPES.PUT.SUCCESS,
+      ...action.payload
     });
+    yield* getModel(action);
   } catch ({ response }) {
     yield put({
       type: MODEL_ACTION_TYPES.PUT.ERROR,

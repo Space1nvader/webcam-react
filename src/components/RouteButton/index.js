@@ -6,7 +6,7 @@ import './index.scss';
 const RouteButton = (props) => {
   const { children, to, icon, className = '', ...other } = props;
   // TODO: ACTIVE CILDREN
-  const isActiveRoute = (match, location) => console.log(match, location);
+  // const isActiveRoute = (match, location) => console.log(match, location);
   return (
     <NavLink
       to={to}
