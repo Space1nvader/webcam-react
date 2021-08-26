@@ -39,12 +39,12 @@ const TableFilters = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   let holdtimer = null;
-  const holderSetSearchFunc = (params = { page: 0, search: '' }) => {
+  const holderSetSearchFunc = (params = { page: 0, search: '' }) =>
     setTimeout(() => {
       setSearchParams(params);
       dispatch(GetModelsListAction(params));
     }, 500);
-  };
+
   const handleSearchChange = (e) => {
     const valueLength = e.target.value.length;
     clearTimeout(holdtimer);
