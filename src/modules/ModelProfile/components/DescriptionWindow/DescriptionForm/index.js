@@ -51,7 +51,7 @@ const DescriptionForm = (props) => {
   const dispatch = useDispatch();
   const { id, data } = useSelector(modelDescriptionFormSelector);
   const defaultValues = useSelector(staticModelDataSelector).model || '';
-  const generateInitialValues = data ? checkValueEmpty(data, initialValues) : initialValues;
+  const generateInitialValues = checkValueEmpty(data, initialValues);
 
   const onSubmit = (values) => {
     const filtredValues = filterChangesValues(values, generateInitialValues);
