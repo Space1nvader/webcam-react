@@ -47,7 +47,6 @@ const ModelsTable = (props) => {
       setSelectState(new Set());
     }
   };
-  // TODO: CONFIRM DELETE
   const handleConfirmlOpen = () => {
     setModalIsOpen(true);
   };
