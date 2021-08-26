@@ -2,7 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import SERVICE_API from 'api';
 import { MODELSLIST_ACTION_TYPES } from './reducer';
 
-function* getModels({ payload }) {
+function* getModels({ payload = { page: 0, search: '' } }) {
   try {
     const { data } = yield call(SERVICE_API.Models.getModels, payload);
     yield put({

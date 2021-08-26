@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { modalFormSelector } from 'redux/selectors/modelForm';
+import { modelFormTabSelector, modelFormChangedSelector } from 'redux/selectors/modelForm';
 import { Tabs } from 'components/Tabs';
 import { Tab } from 'components/Tabs/Tab';
 import { Button } from '@material-ui/core';
@@ -35,7 +35,8 @@ const ProfileTabs = (props) => {
   const classes = useStyles();
   const { tabs } = props;
   const dispatch = useDispatch();
-  const { currentTab, formChanged } = useSelector(modalFormSelector);
+  const currentTab = useSelector(modelFormTabSelector);
+  const formChanged = useSelector(modelFormChangedSelector);
   const handleChangeTabClick = (index) => () => {
     if (formChanged) {
       dispatch(FormConfirmAction({ active: true, route: index }));

@@ -24,11 +24,11 @@ const ModelsTable = (props) => {
   const { pagination, isLoading } = useSelector(modelsListSelector);
   const [isSelect, setSelectState] = useState(new Set());
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [currentPage, setPage] = useState(0);
+  const [pageParams, setPageParams] = useState({ page: 0, search: '' });
   const dispatch = useDispatch();
   const handleChangePage = (e, page) => {
-    dispatch(GetModelsListAction(page));
-    setPage(page);
+    setPageParams({ ...pageParams, page });
+    dispatch(GetModelsListAction({ ...pageParams, page }));
   };
   const selected = new Set(isSelect);
   const handleSelectClick = (id) => () => {
@@ -55,7 +55,7 @@ const ModelsTable = (props) => {
     setModalIsOpen(false);
   };
   const handleDeleteSelected = () => {
-    dispatch(DeleteModelsAction({ data: Array.from(isSelect), currentPage }));
+    dispatch(DeleteModelsAction({ data: Array.from(isSelect), pageParams }));
     setSelectState(new Set());
     setModalIsOpen(false);
   };
@@ -105,7 +105,11 @@ const ModelsTable = (props) => {
     <>
       <SubmitModal open={modalIsOpen} submit={handleDeleteSelected} close={handleCloseModal} />
       <TableContainer {...other} className={classes.tableContainer}>
-        <TableFiltres handleConfirmlOpen={handleConfirmlOpen} selectAll={handleSelectAllClick} />
+        <TableFiltres
+          setSearchParams={setPageParams}
+          handleConfirmlOpen={handleConfirmlOpen}
+          selectAll={handleSelectAllClick}
+        />
         <Table>
           <TableHead fields={fields} />
           <TableBody>{generateTableRows()}</TableBody>
@@ -115,7 +119,7 @@ const ModelsTable = (props) => {
             count={pagination.total}
             rowsPerPageOptions={[10]}
             onPageChange={handleChangePage}
-            page={currentPage}
+            page={pageParams.page}
             rowsPerPage={pagination.perPage}
           />
         )}

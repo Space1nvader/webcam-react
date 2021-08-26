@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { modalFormSelector } from 'redux/selectors/modelForm';
+import { modelFormModalSelector } from 'redux/selectors/modelForm';
 import { Button } from '@material-ui/core';
 import Popup from 'components/Popup';
 import { makeStyles } from '@material-ui/core/styles';
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 const SubmitModal = ({ onSubmit, values }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { confirmModal } = useSelector(modalFormSelector);
+  const confirmModal = useSelector(modelFormModalSelector);
   const handleModalClose = () => {
     dispatch(ResetFormConfirmAction());
   };

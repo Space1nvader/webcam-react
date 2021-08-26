@@ -37,7 +37,7 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "set REACT_APP_BASE_URL=http://192.168.1.104:8000&& react-scripts start",
+    "start": "set REACT_APP_BASE_URL=http://192.168.1.105:8000&& react-scripts start",
     "dev": "set REACT_APP_BASE_URL=http://45.147.178.97:8080&& react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
