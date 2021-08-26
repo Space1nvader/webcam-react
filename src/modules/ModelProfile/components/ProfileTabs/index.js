@@ -62,7 +62,7 @@ const ProfileTabs = (props) => {
       <div className="profileTabs__frame">
         <Tabs activeTab={currentTab}>
           {tabs.map((tab, index) => (
-            <Tab key={tab.title} index={index}>
+            <Tab key={tab.key} index={index}>
               {tab.component}
             </Tab>
           ))}

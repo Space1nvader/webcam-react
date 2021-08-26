@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 import { FormContainer } from 'components/Form/FormContainer';
 import { FormChangedAction } from 'redux/actions/modelForm';
+import FormTitle from 'modules/ModelProfile/components/FormTitle';
 import SubmitModal from '../SubmitModal';
 
 const useStyles = makeStyles({
@@ -18,7 +19,7 @@ const useStyles = makeStyles({
 });
 
 const ModelFormContainer = (props) => {
-  const { children, initialValues, ...other } = props;
+  const { children, title = '', initialValues, ...other } = props;
   const classes = useStyles();
   const dispatch = useDispatch();
   const [isFormChanged, setIsFormChanged] = useState(false);
@@ -36,6 +37,7 @@ const ModelFormContainer = (props) => {
         return (
           <>
             <SubmitModal onSubmit={submitForm} values={values} />
+            <FormTitle>{title}</FormTitle>
             {children}
             <Button color="secondary" type="submit" className={classes.button} variant="contained">
               сохранить

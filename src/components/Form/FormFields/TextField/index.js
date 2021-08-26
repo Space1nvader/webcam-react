@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field } from 'formik';
-import TextField from '@material-ui/core/TextField';
+import MaterialField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
     color: 'green'
   }
 });
-export const InputField = (props) => {
+export const TextField = (props) => {
   const classes = useStyles();
   const { name, label, type = 'text', className, ...other } = props;
 
@@ -43,7 +43,7 @@ export const InputField = (props) => {
         const errorClass = isError ? 'error' : '';
 
         return (
-          <TextField
+          <MaterialField
             {...field}
             {...other}
             name={name}

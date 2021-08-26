@@ -1,24 +1,21 @@
 import React from 'react';
-import { InputField } from 'components/Form/inputField';
-import { SelectField } from 'components/Form/SelectField';
+import { TextField, SelectField, TextArea } from 'components/Form';
 import { SYSTEM_VALIDATION_SCHEMA } from 'constants/validateSchema';
 import FieldSet from 'components/Form/FieldSet';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { modelSystemFormSelector } from 'modules/ModelProfile/redux/selectors';
 import { staticModelDataSelector } from 'redux/selectors/staticData';
-import { checkValueEmpty } from 'utils/checkValueEmpty';
-import { filterChangesValues } from 'utils/filterChangesValues';
-import { TextArea } from 'components/Form/TextArea';
+import { filterChangesValues, checkValueEmpty } from 'utils';
 import ModelFormContainer from 'modules/ModelProfile/components/ModelFormContainer/index';
 import setSubmitForm from 'modules/ModelProfile/setSubmitForm';
-import FormTitle from 'modules/ModelProfile/components/FormTitle';
+
 import { initialValues } from './initialValues';
 
 const SystemForm = ({ className }) => {
   const dispatch = useDispatch();
   const { id, data } = useSelector(modelSystemFormSelector);
-  const defaultValues = useSelector(staticModelDataSelector).model || '';
+  const defaultValues = useSelector(staticModelDataSelector);
   const generateInitialValues = checkValueEmpty(data, initialValues);
 
   const onSubmit = (values) => {
@@ -27,8 +24,8 @@ const SystemForm = ({ className }) => {
   };
   return (
     <div className={clsx(className)}>
-      <FormTitle>Личные данные</FormTitle>
       <ModelFormContainer
+        title="Системные данные"
         className="system"
         id="system"
         enableReinitialize
@@ -37,11 +34,11 @@ const SystemForm = ({ className }) => {
         onSubmit={onSubmit}
       >
         <FieldSet divider>
-          <InputField name="nickname" label="Псевдоним (eng*)" />
+          <TextField name="nickname" label="Псевдоним (eng*)" />
         </FieldSet>
         <FieldSet>
           <SelectField label="Тариф" name="tariffIdd" options={defaultValues.tariff} />
-          <InputField name="contragent" label="Контрагент" />
+          <TextField name="contragent" label="Контрагент" />
           <TextArea name="comment" label="Комментарий" />
         </FieldSet>
       </ModelFormContainer>

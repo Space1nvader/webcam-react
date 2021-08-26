@@ -1,8 +1,8 @@
 import React from 'react';
-import TableCell from '@material-ui/core/TableCell';
+import Cell from '@material-ui/core/TableCell';
 import { makeStyles } from '@material-ui/core/styles';
 
-const Cell = (props) => {
+const TableCell = (props) => {
   const { children, ...other } = props;
   const cellStyles = makeStyles({
     cell: {
