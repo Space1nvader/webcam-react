@@ -1,0 +1,8 @@
+.account {
+  padding: 1.5rem;
+  box-sizing: border-box;
+  background-color: #fff;
+  &__title {
+    color: var(--gray-90);
+  }
+}

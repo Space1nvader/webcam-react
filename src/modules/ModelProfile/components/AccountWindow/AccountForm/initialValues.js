@@ -1,6 +1,11 @@
 export const initialValues = {
-  nickname: '',
-  comment: '',
-  tariffId: '',
-  contragent: ''
+  account: [
+    {
+      server: '',
+      active: false,
+      login: '',
+      serverId: '',
+      password: ''
+    }
+  ]
 };
