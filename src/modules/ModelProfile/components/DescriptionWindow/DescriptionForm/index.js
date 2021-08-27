@@ -1,17 +1,14 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { InputField } from 'components/Form/inputField';
-import { SelectField } from 'components/Form/SelectField';
+import { TextField, TextArea, SelectField } from 'components/Form';
 import FieldSet from 'components/Form/FieldSet';
 import bodyImage from 'assets/img/image19.png';
-import { TextArea } from 'components/Form/TextArea';
 import { SETTING_VALIDATION_SCHEMA } from 'constants/validateSchema';
-import { checkValueEmpty } from 'utils/checkValueEmpty';
+import { checkValueEmpty, filterChangesValues } from 'utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { modelDescriptionFormSelector } from 'modules/ModelProfile/redux/selectors';
 import { staticModelDataSelector } from 'redux/selectors/staticData';
 import clsx from 'clsx';
-import { filterChangesValues } from 'utils/filterChangesValues';
 import setSubmitForm from 'modules/ModelProfile/setSubmitForm';
 import FormTitle from 'modules/ModelProfile/components/FormTitle';
 import ModelFormContainer from 'modules/ModelProfile/components/ModelFormContainer/index';
@@ -50,7 +47,7 @@ const DescriptionForm = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { id, data } = useSelector(modelDescriptionFormSelector);
-  const defaultValues = useSelector(staticModelDataSelector).model || '';
+  const defaultValues = useSelector(staticModelDataSelector);
   const generateInitialValues = checkValueEmpty(data, initialValues);
 
   const onSubmit = (values) => {
@@ -60,8 +57,8 @@ const DescriptionForm = (props) => {
 
   return (
     <div className={clsx(classes.container, className)} {...other}>
-      <FormTitle>Основные данные</FormTitle>
       <ModelFormContainer
+        title="Основные данные"
         className="settings"
         enableReinitialize
         initialValues={generateInitialValues}
@@ -75,8 +72,8 @@ const DescriptionForm = (props) => {
               name="raceId"
               options={defaultValues.race}
             />
-            <InputField name="height" type="nubmer" style={{ width: 156 }} label="Рост" />
-            <InputField
+            <TextField name="height" type="nubmer" style={{ width: 156 }} label="Рост" />
+            <TextField
               name="weight"
               type="nubmer"
               style={{ width: 156, marginLeft: 20 }}
@@ -116,19 +113,19 @@ const DescriptionForm = (props) => {
             style={{ display: 'flex' }}
             options={defaultValues.breastSize}
           />
-          <InputField
+          <TextField
             label="Обхват груди"
             type="nubmer"
             style={{ display: 'flex' }}
             name="chestCircumference"
           />
-          <InputField
+          <TextField
             label="Обхват бедер"
             type="nubmer"
             style={{ display: 'flex' }}
             name="hipGirth"
           />
-          <InputField
+          <TextField
             className={classes.divider + classes.dividerLong}
             label="Обхват талии"
             type="nubmer"

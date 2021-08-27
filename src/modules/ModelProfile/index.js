@@ -10,36 +10,33 @@ import DescriptionWindow from './components/DescriptionWindow';
 import DetailData from './components/DetailData';
 import PictureForm from './components/PictureForm';
 import SystemWindow from './components/SystemWindow';
+import AccountWindow from './components/AccountWindow';
 import './index.scss';
 
 const modelProfileTabs = [
   {
-    key: 'system',
     title: 'Системные данные',
     icon: <SettingsIcon />,
     component: <SystemWindow />
   },
   {
-    key: 'personal',
     title: 'Личные данные',
     icon: <PersonIcon />,
     component: <PersonalWindow />
   },
   {
-    key: 'general',
     title: 'Основные данные',
     icon: <PersonAddIcon />,
     component: <DescriptionWindow />
   },
   {
-    key: 'account',
     title: 'Учетные данные',
     icon: <SettingsIcon />,
-    component: <SystemWindow />
+    component: <AccountWindow />
   }
 ];
 const ModelProfile = () => {
-  const { id, data } = useSelector(modelPersonalFormSelector) || '';
+  const { id, data } = useSelector(modelPersonalFormSelector);
   const avatar = data ? { id, avatar: data.avatar } : '';
   return (
     <>

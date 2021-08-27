@@ -1,6 +1,6 @@
 import React from 'react';
 import { TableHead, TableRow } from '@material-ui/core';
-import HeaderCell from 'components/Table/HeaderCell';
+import { HeaderCell } from 'components/Table';
 
 const Head = ({ fields }) => (
   <TableHead>

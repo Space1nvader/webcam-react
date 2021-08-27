@@ -32,7 +32,7 @@ const ModelsPage = () => {
     <div className="dashboard">
       <div className="dashboard__header">
         <h4 className="dashboard__title">Модели студии</h4>
-        <DashboardStatus />
+        {models && <DashboardStatus />}
       </div>
       <div className="dashboard__table">
         <ModelsTable rows={models} fields={fields} />

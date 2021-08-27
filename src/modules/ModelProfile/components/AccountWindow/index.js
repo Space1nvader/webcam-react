@@ -1,13 +1,11 @@
 import React from 'react';
-import SystemForm from './SystemForm';
-import SystemPapper from './SystemPapper';
+import AccountForm from './AccountForm';
 import './index.scss';
 
-const SystemWindow = () => (
+const AccountWindow = () => (
   <>
-    <SystemForm className="systemWindow__form" />
-    <SystemPapper className="systemWindow__papper" />
+    <AccountForm className="accountWindow__form" />
   </>
 );
 
-export default SystemWindow;
+export default AccountWindow;
