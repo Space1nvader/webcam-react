@@ -38,9 +38,9 @@ const AccountForm = ({ className }) => {
   return (
     <div className={clsx(className)}>
       <ModelFormContainer
-        title="Учетные данные"
-        className="system"
-        id="system"
+        title="Учетные 1 данные"
+        className="account"
+        id="account"
         enableReinitialize
         initialValues={generateInitialValues}
         validationSchema={SYSTEM_VALIDATION_SCHEMA}

@@ -94,7 +94,7 @@ const ModelsTable = (props) => {
   const generateTableRows = () => {
     if (!isLoading) {
       if (rows) {
-        generateTableContent();
+        return generateTableContent();
       }
       return <TableMessage>Список моделей пуст</TableMessage>;
     }

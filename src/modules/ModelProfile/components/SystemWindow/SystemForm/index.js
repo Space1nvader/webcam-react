@@ -16,6 +16,7 @@ const SystemForm = ({ className }) => {
   const dispatch = useDispatch();
   const { id, data } = useSelector(modelSystemFormSelector);
   const defaultValues = useSelector(staticModelDataSelector);
+  console.log(defaultValues);
   const generateInitialValues = checkValueEmpty(data, initialValues);
 
   const onSubmit = (values) => {
@@ -24,24 +25,26 @@ const SystemForm = ({ className }) => {
   };
   return (
     <div className={clsx(className)}>
-      <ModelFormContainer
-        title="Системные данные"
-        className="system"
-        id="system"
-        enableReinitialize
-        initialValues={generateInitialValues}
-        validationSchema={SYSTEM_VALIDATION_SCHEMA}
-        onSubmit={onSubmit}
-      >
-        <FieldSet divider>
-          <TextField name="nickname" label="Псевдоним (eng*)" />
-        </FieldSet>
-        <FieldSet>
-          <SelectField label="Тариф" name="tariffIdd" options={defaultValues.tariff} />
-          <TextField name="contragent" label="Контрагент" />
-          <TextArea name="comment" label="Комментарий" />
-        </FieldSet>
-      </ModelFormContainer>
+      {defaultValues && (
+        <ModelFormContainer
+          title="Системные данные"
+          className="system"
+          id="system"
+          enableReinitialize
+          initialValues={generateInitialValues}
+          validationSchema={SYSTEM_VALIDATION_SCHEMA}
+          onSubmit={onSubmit}
+        >
+          <FieldSet divider>
+            <TextField name="nickname" label="Псевдоним (eng*)" />
+          </FieldSet>
+          <FieldSet>
+            <SelectField label="Тариф" name="tariffIdd" options={defaultValues.tariff} />
+            <TextField name="contragent" label="Контрагент" />
+            <TextArea name="comment" label="Комментарий" />
+          </FieldSet>
+        </ModelFormContainer>
+      )}
     </div>
   );
 };

@@ -21,9 +21,9 @@ const TableCell = (props) => {
   });
 
   return (
-    <TableCell className={cellStyles().cell} {...other}>
+    <Cell className={cellStyles().cell} {...other}>
       {children}
-    </TableCell>
+    </Cell>
   );
 };
-export default Cell;
+export default TableCell;

@@ -2,10 +2,10 @@ import React from 'react';
 import AccountForm from './AccountForm';
 import './index.scss';
 
-const SystemWindow = () => (
+const AccountWindow = () => (
   <>
     <AccountForm className="accountWindow__form" />
   </>
 );
 
-export default SystemWindow;
+export default AccountWindow;

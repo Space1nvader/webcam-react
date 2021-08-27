@@ -4,9 +4,7 @@ import { ActionTypes } from 'redux/utils/actionCreator';
 const { pipeHigherOrderReducers, withLoadable, withResetState } = HOR;
 export const STATICDATA_ACTION_TYPES = new ActionTypes('STATICDATA').getAT().getActionTypes();
 
-const initialState = {
-  staticData: []
-};
+const initialState = {};
 const handleAction = {
   [STATICDATA_ACTION_TYPES.GET.SUCCESS]: (state, params) => ({
     ...state,
