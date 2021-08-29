@@ -12,3 +12,7 @@ export const modelDescriptionFormSelector = (state) => ({
   id: state.model.modelData.id,
   data: state.model.modelData.personal
 });
+export const modelAccountFormSelector = (state) => ({
+  id: state.model.modelData.id,
+  data: state.model.modelData.account
+});

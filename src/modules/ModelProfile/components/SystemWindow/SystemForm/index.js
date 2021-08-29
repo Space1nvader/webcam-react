@@ -16,7 +16,6 @@ const SystemForm = ({ className }) => {
   const dispatch = useDispatch();
   const { id, data } = useSelector(modelSystemFormSelector);
   const defaultValues = useSelector(staticModelDataSelector);
-  console.log(defaultValues);
   const generateInitialValues = checkValueEmpty(data, initialValues);
 
   const onSubmit = (values) => {

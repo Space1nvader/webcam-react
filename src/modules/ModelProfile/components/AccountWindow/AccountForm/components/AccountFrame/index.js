@@ -1,10 +1,12 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import { modelAccountFormSelector } from 'modules/ModelProfile/redux/selectors';
 import { makeStyles } from '@material-ui/core/styles';
 import FieldSet from 'components/Form/FieldSet';
 import { TextField, SelectField, PasswordField } from 'components/Form';
 import ActiveToggle from 'components/ActiveToggle';
-import AccountError from '../AccountError';
+import AccountErrors from '../AccontErrors';
 import './index.scss';
 
 const useStyles = makeStyles({
@@ -18,6 +20,15 @@ const useStyles = makeStyles({
     letterSpacing: '0.035em'
   }
 });
+const errors = [
+  { title: 'Тест ошибки', text: 'Сообщение об ошибке' },
+  {
+    title: 'Ошибка №21233',
+    text: 'Неверный пароль при регистрации на сайте jasmin.com Неверный пароль при регистрации на сайте jasmin.com Неверный пароль при регистрации на сайте jasmin.com Неверный пароль при регистрации на сайте jasmin.com'
+  },
+  { title: 'Ошибка №21233', text: 'Неверный пароль при регистрации на сайте jasmin.com' }
+];
+// const {errors} = useSelector(modelAccountFormSelector);
 const AccountFrame = ({ defaultValues }) => {
   const classes = useStyles();
   return (
@@ -31,8 +42,6 @@ const AccountFrame = ({ defaultValues }) => {
         <TextField name="login" label="Login" />
         <TextField name="serverId" label="ID сервера" />
         <PasswordField label="Email пароль" name="emailPassword" />
-      </FieldSet>
-      <FieldSet>
         <div className="account__formControls">
           <Button color="secondary" type="submit" className={classes.button} variant="contained">
             сохранить
@@ -44,9 +53,8 @@ const AccountFrame = ({ defaultValues }) => {
         <div className="account__updateControls">
           <ActiveToggle />
         </div>
-        <div className="account__errors">
-          <AccountError />
-        </div>
+
+        {errors && <AccountErrors className="account__errors" errors={errors} />}
       </FieldSet>
     </div>
   );

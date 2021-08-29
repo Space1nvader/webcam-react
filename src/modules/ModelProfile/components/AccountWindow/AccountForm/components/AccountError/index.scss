@@ -1,17 +1,28 @@
 .accountError {
-  padding: 1rem 1.375rem;
+  padding: 1rem 1.3rem 1.625rem;
   width: 100%;
   background-color: var(--red-5);
+  box-sizing: border-box;
   border-radius: 6px;
+  position: relative;
+  margin-top: 1.1rem;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+  }
   &__title {
     font-weight: 600;
     font-size: 0.875rem;
     color: var(--red-80);
+    display: block;
+    padding-right: 2rem;
+    box-sizing: border-box;
   }
-  &__text {
-    & > * {
-      font-size: 0.875rem;
-      color: var(--red-80);
-    }
+  &__text,
+  &__text > * {
+    line-height: 1.6;
+    font-size: 0.875rem;
+    color: var(--red-80);
   }
 }

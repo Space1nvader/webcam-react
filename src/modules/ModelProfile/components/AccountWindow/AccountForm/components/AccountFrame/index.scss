@@ -5,4 +5,12 @@
   &__title {
     color: var(--gray-90);
   }
+
+  &__updateControls {
+    display: flex;
+    align-items: center;
+  }
+  &__errors {
+    width: 100%;
+  }
 }
