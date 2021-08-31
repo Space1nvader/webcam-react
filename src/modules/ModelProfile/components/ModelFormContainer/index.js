@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
@@ -23,9 +23,8 @@ const ModelFormContainer = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [isFormChanged, setIsFormChanged] = useState(false);
-
   const setFormChanges = (formChangedCheck) => {
-    useMemo(() => {
+    useEffect(() => {
       dispatch(FormChangedAction(formChangedCheck));
       setIsFormChanged(formChangedCheck);
     }, [formChangedCheck]);

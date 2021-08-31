@@ -6,7 +6,7 @@ import clsx from 'clsx';
 
 const useStyles = makeStyles({
   field: {
-    width: '100%',
+    width: 'calc(50% - (32px / 2))',
     marginBottom: 30,
     '& input': {
       padding: 12,

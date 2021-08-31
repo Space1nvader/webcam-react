@@ -19,6 +19,7 @@ const modelProfileTabs = [
     icon: <SettingsIcon />,
     component: <SystemWindow />
   },
+
   {
     title: 'Личные данные',
     icon: <PersonIcon />,

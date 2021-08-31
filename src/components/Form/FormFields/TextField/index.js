@@ -41,7 +41,6 @@ export const TextField = (props) => {
       {({ field, meta }) => {
         const isError = !!meta.error;
         const errorClass = isError ? 'error' : '';
-
         return (
           <MaterialField
             {...field}

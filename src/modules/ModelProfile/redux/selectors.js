@@ -10,7 +10,7 @@ export const modelPersonalFormSelector = (state) => ({
 });
 export const modelDescriptionFormSelector = (state) => ({
   id: state.model.modelData.id,
-  data: state.model.modelData.personal
+  data: state.model.modelData.description
 });
 export const modelAccountFormSelector = (state) => ({
   id: state.model.modelData.id,
