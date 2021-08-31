@@ -24,22 +24,20 @@ const Staus = () => {
         </IconBtn>
       </Link>
 
-      <Papper style={{ marginLeft: '24px' }}>
-        <div className="status__row">
-          <div className="status__total">
-            Всего моделей:
-            <span className="status__totalValue">{online + offline}</span>
-          </div>
-          <div className="status__item status__item--online">
-            <span className="status__itemValue">{online}</span>
-            онлайн
-          </div>
-          <div className="status__item status__item--offline">
-            <span className="status__itemValue">{offline}</span>
-            оффлайн
-          </div>
+      <div className="status__row">
+        <div className="status__total">
+          Всего моделей:
+          <span className="status__totalValue">{online + offline}</span>
         </div>
-      </Papper>
+        <div className="status__item status__item--online">
+          <span className="status__itemValue">{online}</span>
+          онлайн
+        </div>
+        <div className="status__item status__item--offline">
+          <span className="status__itemValue">{offline}</span>
+          оффлайн
+        </div>
+      </div>
     </div>
   );
 };

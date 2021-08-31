@@ -8,6 +8,7 @@ const useStyles = makeStyles({
   field: {
     width: 'calc(50% - (32px / 2))',
     marginBottom: 30,
+    backgroundColor: '#fff',
     '& input': {
       padding: 12,
       borderRarius: '12px'

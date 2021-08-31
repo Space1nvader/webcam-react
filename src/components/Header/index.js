@@ -3,12 +3,12 @@ import Logo from 'components/Logo';
 import Wrapper from 'components/Wrapper';
 import Profile from 'components/Profile';
 import RouteButton from 'components/RouteButton';
-import Papper from 'components/Papper';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import DonutSmallRoundedIcon from '@material-ui/icons/DonutSmallRounded';
 import TuneRoundedIcon from '@material-ui/icons/TuneRounded';
 import { Link } from 'react-router-dom';
 import UserImage from 'assets/img/user.png';
+import Menu from './Menu';
 import './index.scss';
 
 const Header = () => (
@@ -29,9 +29,12 @@ const Header = () => (
             Опции
           </RouteButton>
         </div>
-        <Papper style={{ borderRadius: '12px' }}>
-          <Profile image={UserImage}>FirstStudioPetr</Profile>
-        </Papper>
+        <div className="header__controls">
+          <Menu className="header__menu" />
+          <div className="header__profile">
+            <Profile image={UserImage}>FirstStudioPetr</Profile>
+          </div>
+        </div>
       </div>
     </Wrapper>
   </header>

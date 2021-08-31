@@ -22,7 +22,12 @@ const ProfileTabs = (props) => {
   return (
     <>
       <div className="profileTabs__controls">
-        <TabsControls tabs={tabs} currentTab={currentTab} onChange={handleChangeTabClick} />
+        <TabsControls
+          tabs={tabs}
+          id="profileTabs"
+          currentTab={currentTab}
+          onChange={handleChangeTabClick}
+        />
       </div>
       <div className="profileTabs__frame">
         <Tabs activeTab={currentTab}>

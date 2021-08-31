@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import MaterialTabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import TabButton from '@material-ui/core/Tab';
 
 const useStyles = makeStyles({
   controls: {
@@ -12,13 +12,20 @@ const useStyles = makeStyles({
     alignItems: 'center',
     margin: '0 30px 0 0',
     borderRadius: 2,
-    padding: '10px 14px',
+    color: 'var(--gray-50)',
+    padding: '10px 16px',
     minHeight: 10,
+    minWidth: 30,
+    width: 'min-content',
     fontWeight: 700,
     fontSize: 14,
     textTransform: 'none',
+    '&.Mui-selected': {
+      color: 'var(--gray-50)'
+    },
     '& .MuiTab-wrapper': {
       alignItems: 'center',
+      whiteSpace: 'nowrap',
       flexDirection: 'row',
       '& > *:first-child': {
         marginRight: 12,
@@ -28,7 +35,8 @@ const useStyles = makeStyles({
   }
 });
 
-export const TabsControls = ({ currentTab, tabs, onChange }) => {
+export const TabsControls = (props) => {
+  const { currentTab, id, tabs, onChange, ...other } = props;
   const classes = useStyles();
   return (
     <MaterialTabs
@@ -38,8 +46,15 @@ export const TabsControls = ({ currentTab, tabs, onChange }) => {
       onChange={(e, value) => onChange(value)}
       className={classes.controls}
     >
-      {tabs.map((tab) => (
-        <Tab className={classes.tab} label={tab.title} icon={tab.icon} />
+      {tabs.map((tab, index) => (
+        <TabButton
+          {...other}
+          // eslint-disable-next-line react/no-array-index-key
+          key={`${id}-${index}`}
+          className={classes.tab}
+          label={tab.title}
+          icon={tab.icon}
+        />
       ))}
     </MaterialTabs>
   );

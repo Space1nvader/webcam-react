@@ -40,7 +40,7 @@ const SystemForm = ({ className }) => {
           <FieldSet>
             <SelectField label="Тариф" name="tariffIdd" options={defaultValues.tariff} />
             <TextField name="contragent" label="Контрагент" />
-            <TextArea name="comment" label="Комментарий" />
+            <TextArea style={{ width: '100%' }} name="comment" label="Комментарий" />
           </FieldSet>
         </ModelFormContainer>
       )}

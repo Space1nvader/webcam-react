@@ -1,10 +1,11 @@
+import clsx from 'clsx';
 import React from 'react';
 import './index.scss';
 
 const Papper = (props) => {
-  const { children, ...other } = props;
+  const { children, className, ...other } = props;
   return (
-    <div className="papper" {...other}>
+    <div className={clsx('papper', className)} {...other}>
       {children}
     </div>
   );

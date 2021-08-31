@@ -11,12 +11,14 @@ const useStyles = makeStyles({
   field: {
     width: 'calc(50% - (32px / 2))',
     marginBottom: 30,
+
     '& label': {
       transform: ' translate(14px,14px) scale(1)'
     }
   },
   select: {
     '&>div': {
+      backgroundColor: '#fff',
       padding: 12
     }
   }
