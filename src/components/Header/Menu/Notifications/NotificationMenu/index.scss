@@ -1,11 +1,12 @@
 .notificationMenu {
   z-index: 1;
-  top: calc(100% + 17px);
-  left: -36px;
+  top: calc(100% + 1rem);
+  left: -52px;
   position: absolute;
   width: 19.125rem;
   background-color: var(--gray-10);
   box-shadow: 0px 8px 16px rgba(58, 58, 68, 0.12), 0px 16px 32px rgba(90, 91, 106, 0.12);
+
   &::before {
     content: '';
     position: absolute;
@@ -13,20 +14,20 @@
     top: -8px;
     background-color: var(--gray-10);
     transform: rotate(-45deg);
-    height: 16px;
-    width: 16px;
+    height: 1rem;
+    width: 1rem;
   }
   &__controls {
     height: 3.5rem;
     width: 100%;
     display: flex;
     align-items: flex-end;
-    // padding: 0 1rem;
     box-sizing: border-box;
   }
   &__body {
     background-color: #fff;
     padding: 1rem;
+    padding-bottom: 1.4rem;
     box-sizing: border-box;
   }
 }

@@ -1,15 +1,22 @@
 import React from 'react';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import IconBtn from 'components/IconBtn';
+import { Badge } from '@material-ui/core';
+import SimplePopup from 'components/SimplePopup';
 import NotificationMenu from './NotificationMenu';
 import './index.scss';
 
 const Notifications = () => (
   <div className="notifications">
-    <IconBtn>
-      <NotificationsIcon />
-    </IconBtn>
-    <NotificationMenu />
+    <SimplePopup
+      iconSize="medium"
+      icon={
+        <Badge color="secondary" variant="dot">
+          <NotificationsIcon />
+        </Badge>
+      }
+    >
+      <NotificationMenu />
+    </SimplePopup>
   </div>
 );
 
