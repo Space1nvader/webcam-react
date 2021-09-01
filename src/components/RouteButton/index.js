@@ -1,18 +1,20 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import './index.scss';
 
 const RouteButton = (props) => {
   const { children, to, icon, className = '', ...other } = props;
-  // TODO: ACTIVE CILDREN
-  // const isActiveRoute = (match, location) => console.log(match, location);
+  const { pathname } = useLocation();
+  const activeClass = () => {
+    if (pathname.includes(to)) return 'active';
+    return '';
+  };
   return (
     <NavLink
       to={to}
       activeClassName="active"
-      // isActive={(match, location) => isActiveRoute(match, location)}
-      className={clsx(`routeButton ${className}`)}
+      className={clsx(`routeButton ${className} ${activeClass()}`)}
       {...other}
     >
       {icon && icon}

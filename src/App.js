@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Redirect, Switch } from 'react-router-dom';
 import RouteCrubms from 'modules/Breadcrumbs/RouteCrubms';
 import { generateAppRoutes } from 'modules/Breadcrumbs/until';
 import { dataRoutes } from 'constants/routes';
@@ -9,7 +9,6 @@ import Layout from './components/Layout';
 import 'assets/style/main.scss';
 
 const routes = generateAppRoutes(dataRoutes);
-
 function App() {
   return (
     <Provider store={store}>
@@ -24,6 +23,7 @@ function App() {
               component={route.component}
             />
           ))}
+          <Redirect from="/" to="/models" />
         </Switch>
       </Layout>
     </Provider>

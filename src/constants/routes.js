@@ -1,22 +1,28 @@
 import ModelsPage from 'pages/ModelsPage';
 import ModelPage from 'pages/ModelPage';
+import Profile from '../components/Profile/index';
 
 export const dataRoutes = [
   {
-    path: '/',
+    path: '/models',
     label: 'Модели',
     component: ModelsPage,
     routes: [
       {
-        path: '/models/add-model',
+        path: '/add-model',
         label: 'Добавление модели',
         component: ModelPage
       },
       {
-        path: '/models/:userId',
+        path: '/:userId',
         label: 'Модель',
         component: ModelPage
       }
     ]
+  },
+  {
+    path: '/stats',
+    label: 'Статистика',
+    component: Profile
   }
 ];

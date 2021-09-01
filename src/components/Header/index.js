@@ -19,7 +19,7 @@ const Header = () => (
           <Logo />
         </Link>
         <div className="header__cell">
-          <RouteButton to="/" exact icon={<SupervisorAccountIcon />}>
+          <RouteButton to="/models" exact icon={<SupervisorAccountIcon />}>
             Модели
           </RouteButton>
           <RouteButton to="/stats" icon={<DonutSmallRoundedIcon />}>
