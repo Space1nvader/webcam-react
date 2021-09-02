@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
-import { uploadPictureSelector } from 'redux/selectors/uploadPicture';
 import { FormContainer } from 'components/Form/FormContainer';
 import { FormChangedAction } from 'redux/actions/modelForm';
 import FormTitle from 'modules/ModelProfile/components/FormTitle';
@@ -24,28 +23,29 @@ const ModelFormContainer = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [isFormChanged, setIsFormChanged] = useState(false);
-  const setFormChanges = (formChangedCheck) => {
+  const useFormChanges = (formChangedCheck) => {
     useEffect(() => {
       dispatch(FormChangedAction(formChangedCheck));
       setIsFormChanged(formChangedCheck);
     }, [formChangedCheck]);
   };
-  const usePayload = (setValue) => {
+
+  const setPayload = (setValue) => {
     useEffect(() => {
-      if (payload) setValue.apply(this, Object.entries(payload));
+      if (payload) setValue.apply(this, ...Object.entries(payload));
     }, [payload]);
   };
+
   return (
     <FormContainer initialValues={initialValues} {...other}>
       {({ values, submitForm, setFieldValue }) => {
-        setFormChanges(JSON.stringify(values) !== JSON.stringify(initialValues));
+        useFormChanges(JSON.stringify(values) !== JSON.stringify(initialValues));
         return (
           <>
             <SubmitModal onSubmit={submitForm} values={values} />
             <FormTitle>{title}</FormTitle>
             {children}
-            {usePayload(setFieldValue)}
-            {console.log(values)}
+            {setPayload(setFieldValue)}
             <Button color="secondary" type="submit" className={classes.button} variant="contained">
               сохранить
             </Button>
