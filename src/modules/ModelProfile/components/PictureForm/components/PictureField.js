@@ -6,7 +6,8 @@ import IconBtn from 'components/IconBtn';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import { useSelector, useDispatch } from 'react-redux';
 import { uploadPictureSelector } from 'redux/selectors/uploadPicture';
-import { UploadPictureAction } from '../../../../../redux/actions/uploadPicture';
+import { modelIdSelector } from 'modules/ModelProfile/redux/selectors';
+import { UploadPictureAction } from 'redux/actions/uploadPicture';
 
 const useStyles = makeStyles({
   absoluteBtn: {
@@ -49,6 +50,7 @@ const PictureField = (props) => {
   const [preview, setPreview] = useState(data[name]);
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { modelId } = useSelector(modelIdSelector);
   const { picture, success } = useSelector(uploadPictureSelector);
   const generatePicture = (src) => {
     if (src) {
@@ -59,7 +61,6 @@ const PictureField = (props) => {
   useEffect(() => {
     if (data && data[name]) setPreview(data[name]);
   }, [data]);
-
   const formData = new FormData();
   const handleSetPicturePreview = (e) => {
     const { files } = e.target;
@@ -70,14 +71,20 @@ const PictureField = (props) => {
       dispatch(UploadPictureAction(formData));
     }
   };
-
   useEffect(() => {
     if (success) {
       setFieldValue(name, picture[name]);
-      submitForm();
       setPreview(picture[name]);
+      if (modelId) submitForm();
     }
-  }, [success]);
+  }, [success, modelId]);
+
+  // useEffect(() => {
+  //   if (success && modelId) {
+  //     submitForm();
+  //   }
+  // }, [success, modelId]);
+
   return (
     <>
       <Field {...props}>

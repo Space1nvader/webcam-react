@@ -1,21 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormContainer } from 'components/Form/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
-import { modelSelector } from 'modules/ModelProfile/redux/selectors';
 import { UpdateModelAction } from 'modules/ModelProfile/redux/actions';
+import { modelIdSelector } from 'modules/ModelProfile/redux/selectors';
 import PictureField from './components/PictureField';
 import './index.scss';
 
 const PictureForm = (props) => {
   const { data, style, ...other } = props;
-
+  const { modelId } = useSelector(modelIdSelector);
   const dispatch = useDispatch();
   const onSubmit = (values) => {
-    if (data) {
-      dispatch(UpdateModelAction({ id: data.id, data: values }));
-    }
+    if (modelId) dispatch(UpdateModelAction({ id: modelId, data: values }));
   };
-
   return (
     <FormContainer
       enableReinitialize

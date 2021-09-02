@@ -1,5 +1,9 @@
 export const modelSelector = (state) => state.model;
 
+export const modelIdSelector = (state) => ({
+  modelId: state.model.modelData.id
+});
+
 export const modelSystemFormSelector = (state) => ({
   id: state.model.modelData.id,
   data: state.model.modelData.system

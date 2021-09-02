@@ -20,6 +20,11 @@ const useStyles = makeStyles({
     fontWeight: 700,
     fontSize: 14,
     textTransform: 'none',
+    '&[disabled]': {
+      cursor: 'not-allowed',
+      pointerEvents: 'auto',
+      opacity: 0.4
+    },
     '&.Mui-selected': {
       color: 'var(--gray-50)'
     },
@@ -52,6 +57,7 @@ export const TabsControls = (props) => {
           // eslint-disable-next-line react/no-array-index-key
           key={`${id}-${index}`}
           className={classes.tab}
+          disabled={tab.disabled}
           label={tab.title}
           icon={tab.icon}
         />

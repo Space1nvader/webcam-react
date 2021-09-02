@@ -11,18 +11,20 @@ import './index.scss';
 const ProfilePage = (props) => {
   const { route, match } = props;
 
-  const modelId = match.params.userId;
+  const paramsId = match.params.userId;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(GetStaticDataAction());
-    if (modelId) dispatch(GetModelAction({ id: modelId }));
+    if (paramsId) dispatch(GetModelAction({ id: paramsId }));
     return () => {
       dispatch(ResetAction());
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const { modelData } = useSelector(modelSelector);
-  if (modelData && modelData.id !== +modelId) return <Redirect to={`/models/${modelData.id}`} />;
+  const { modelData, success } = useSelector(modelSelector);
+  if (modelData && modelData.id !== +paramsId && success)
+    return <Redirect to={`/models/${modelData.id}`} />;
+
   return (
     <div className="detail">
       <NavCrumbs route={route} />
