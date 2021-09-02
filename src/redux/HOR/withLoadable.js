@@ -1,30 +1,26 @@
 export const isLoadingReducer = (state) => ({
   ...state,
-  error: null,
-  fieldsErrors: null,
+  message: null,
   isLoading: true,
   success: null
 });
 
 export const successReducer = (state, action) => ({
   ...state,
-  error: null,
-  fieldsErrors: null,
   isLoading: false,
-  success: !!action.payload
+  success: true,
+  message: action.payload.detail
 });
 
 export const errorReducer = (state, action) => ({
   ...state,
-  error: action.payload.detail,
-  fieldsErrors: action.payload.detail,
   isLoading: false,
-  success: null
+  success: false,
+  message: action.payload.detail
 });
 
 export const INITIAL_LOADABLE_STATE = {
-  error: null,
-  fieldsErrors: null,
+  message: null,
   isLoading: false,
   success: null
 };

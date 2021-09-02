@@ -4,9 +4,9 @@ import './index.scss';
 const FormTitle = (props) => {
   const { children, ...other } = props;
   return (
-    <h6 className="formTitle" {...other}>
+    <h5 className="formTitle" {...other}>
       {children}
-    </h6>
+    </h5>
   );
 };
 

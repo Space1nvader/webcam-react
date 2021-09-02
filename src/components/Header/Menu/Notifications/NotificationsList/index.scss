@@ -1,0 +1,48 @@
+.notification {
+  &List {
+    &__emptyMsg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 4rem;
+    }
+  }
+  &Item {
+    font-size: 0.875rem;
+
+    &:not(:last-of-type) {
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--gray-10);
+      margin-bottom: 1rem;
+    }
+
+    &__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.625rem;
+    }
+    &__title {
+      color: var(--gray-80);
+      font-weight: 600;
+      line-height: 1.4;
+      padding-right: 1.5rem;
+      box-sizing: border-box;
+    }
+    &__close {
+      & svg {
+        font-size: 1rem;
+      }
+    }
+    &__text {
+      box-sizing: border-box;
+      padding-right: 1.5rem;
+    }
+    &__text,
+    &__text > * {
+      line-height: 1.4;
+      letter-spacing: 0.018em;
+      color: var(--gray-50);
+    }
+  }
+}

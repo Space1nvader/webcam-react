@@ -13,30 +13,34 @@ import SystemWindow from './components/SystemWindow';
 import AccountWindow from './components/AccountWindow';
 import './index.scss';
 
-const modelProfileTabs = [
-  {
-    title: 'Системные данные',
-    icon: <SettingsIcon />,
-    component: <SystemWindow />
-  },
-  {
-    title: 'Личные данные',
-    icon: <PersonIcon />,
-    component: <PersonalWindow />
-  },
-  {
-    title: 'Основные данные',
-    icon: <PersonAddIcon />,
-    component: <DescriptionWindow />
-  },
-  {
-    title: 'Учетные данные',
-    icon: <SettingsIcon />,
-    component: <AccountWindow />
-  }
-];
 const ModelProfile = () => {
   const { id, data } = useSelector(modelPersonalFormSelector);
+  const modelProfileTabs = [
+    {
+      title: 'Системные данные',
+      icon: <SettingsIcon />,
+      component: <SystemWindow />
+    },
+
+    {
+      title: 'Личные данные',
+      icon: <PersonIcon />,
+      component: <PersonalWindow />,
+      disabled: !data
+    },
+    {
+      title: 'Основные данные',
+      icon: <PersonAddIcon />,
+      component: <DescriptionWindow />,
+      disabled: !data
+    },
+    {
+      title: 'Учетные данные',
+      icon: <SettingsIcon />,
+      component: <AccountWindow />,
+      disabled: !data
+    }
+  ];
   const avatar = data ? { id, avatar: data.avatar } : '';
   return (
     <>
@@ -50,7 +54,7 @@ const ModelProfile = () => {
         </div>
 
         <div className="modelProfile__box">
-          <ProfileTabs tabs={modelProfileTabs} />
+          <ProfileTabs id={id} tabs={modelProfileTabs} />
         </div>
       </div>
     </>

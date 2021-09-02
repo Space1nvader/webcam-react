@@ -9,7 +9,8 @@ const useStyles = makeStyles({
     width: 'calc(50% - (32px / 2))',
     marginBottom: 30,
     '& input': {
-      padding: 12
+      padding: 12,
+      backgroundColor: '#fff'
     },
     '& label': {
       transform: ' translate(14px,14px) scale(1)'
@@ -41,7 +42,6 @@ export const TextField = (props) => {
       {({ field, meta }) => {
         const isError = !!meta.error;
         const errorClass = isError ? 'error' : '';
-
         return (
           <MaterialField
             {...field}

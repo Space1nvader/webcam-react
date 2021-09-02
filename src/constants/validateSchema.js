@@ -9,7 +9,7 @@ Yup.addMethod(Yup.string, 'Rus', function Rus(err = 'Только русские
 Yup.addMethod(Yup.string, 'Req', function Req(err = 'Обязательное поле') {
   return this.required(err);
 });
-const nubmerErr = 'Допускаются только цифры';
+const numberErr = 'Допускаются только цифры';
 
 export const PROFILE_VALIDATION_SCHEMA = Yup.object().shape({
   nameRus: Yup.string().Rus(),
@@ -18,18 +18,18 @@ export const PROFILE_VALIDATION_SCHEMA = Yup.object().shape({
   patronymic: Yup.string().Eng(),
   surnameRus: Yup.string().Rus(),
   surname: Yup.string().Eng(),
-  age: Yup.number().typeError(nubmerErr).positive(),
-  serialNumber: Yup.number().typeError(nubmerErr),
+  age: Yup.number().typeError(numberErr).positive(),
+  serialNumber: Yup.number().typeError(numberErr),
   countryId: Yup.string(),
   email: Yup.string().email('Некорректный формат')
 });
 
-export const SETTING_VALIDATION_SCHEMA = Yup.object().shape({
-  height: Yup.number().typeError(nubmerErr).positive(),
-  weight: Yup.number().typeError(nubmerErr).positive(),
-  chestCircumference: Yup.number().typeError(nubmerErr).positive(),
-  hipGirth: Yup.number().typeError(nubmerErr).positive(),
-  waistCircumference: Yup.number().typeError(nubmerErr).positive(),
+export const DESCRIPTION_VALIDATION_SCHEMA = Yup.object().shape({
+  height: Yup.number().typeError(numberErr).positive(),
+  weight: Yup.number().typeError(numberErr).positive(),
+  chestCircumference: Yup.number().typeError(numberErr).positive(),
+  hipGirth: Yup.number().typeError(numberErr).positive(),
+  waistCircumference: Yup.number().typeError(numberErr).positive(),
   experience: Yup.string(),
   about: Yup.string(),
   style: Yup.string()

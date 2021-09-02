@@ -16,7 +16,6 @@ const SystemForm = ({ className }) => {
   const dispatch = useDispatch();
   const { id, data } = useSelector(modelSystemFormSelector);
   const defaultValues = useSelector(staticModelDataSelector);
-  console.log(defaultValues);
   const generateInitialValues = checkValueEmpty(data, initialValues);
 
   const onSubmit = (values) => {
@@ -41,7 +40,7 @@ const SystemForm = ({ className }) => {
           <FieldSet>
             <SelectField label="Тариф" name="tariffIdd" options={defaultValues.tariff} />
             <TextField name="contragent" label="Контрагент" />
-            <TextArea name="comment" label="Комментарий" />
+            <TextArea style={{ width: '100%' }} name="comment" label="Комментарий" />
           </FieldSet>
         </ModelFormContainer>
       )}
