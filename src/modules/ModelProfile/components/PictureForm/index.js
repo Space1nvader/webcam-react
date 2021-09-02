@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FormContainer } from 'components/Form/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { UpdateModelAction } from 'modules/ModelProfile/redux/actions';

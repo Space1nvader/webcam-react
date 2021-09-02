@@ -6,7 +6,6 @@ import IconBtn from 'components/IconBtn';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import { useSelector, useDispatch } from 'react-redux';
 import { uploadPictureSelector } from 'redux/selectors/uploadPicture';
-import { modelIdSelector } from 'modules/ModelProfile/redux/selectors';
 import { UploadPictureAction } from 'redux/actions/uploadPicture';
 
 const useStyles = makeStyles({
@@ -50,7 +49,7 @@ const PictureField = (props) => {
   const [preview, setPreview] = useState(data[name]);
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { modelId } = useSelector(modelIdSelector);
+
   const { picture, success } = useSelector(uploadPictureSelector);
   const generatePicture = (src) => {
     if (src) {
@@ -75,15 +74,9 @@ const PictureField = (props) => {
     if (success) {
       setFieldValue(name, picture[name]);
       setPreview(picture[name]);
-      if (modelId) submitForm();
+      submitForm();
     }
-  }, [success, modelId]);
-
-  // useEffect(() => {
-  //   if (success && modelId) {
-  //     submitForm();
-  //   }
-  // }, [success, modelId]);
+  }, [success]);
 
   return (
     <>

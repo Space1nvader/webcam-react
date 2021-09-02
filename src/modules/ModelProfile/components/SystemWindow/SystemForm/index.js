@@ -34,8 +34,8 @@ const SystemForm = ({ className }) => {
           validationSchema={SYSTEM_VALIDATION_SCHEMA}
           onSubmit={onSubmit}
         >
-          <FieldSet divider>
-            <TextField name="nickname" label="Псевдоним (eng*)" />
+          <FieldSet style={{ marginBottom: 30 }} divider>
+            <TextField style={{ marginBottom: 10 }} name="nickname" label="Псевдоним (eng*)" />
           </FieldSet>
           <FieldSet>
             <SelectField label="Тариф" name="tariffIdd" options={defaultValues.tariff} />
