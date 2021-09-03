@@ -12,7 +12,7 @@ export const styles = {
       backgroundColor: 'var(--indigo-0)'
     },
     '&:first-of-type': {
-      borderTop: '18px solid transparent'
+      // borderTop: '18px solid transparent'
     }
   },
   '@keyframes fadeIn': {

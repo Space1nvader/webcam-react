@@ -35,7 +35,8 @@ const useStyles = makeStyles(() => ({
 }));
 
 const TableFilters = (props) => {
-  const { setSearchParams, handleConfirmlOpen, selectAll, ...other } = props;
+  const { setSearchParams, handleConfirmlOpen, isSelectAll, handleSelectAllClick, ...other } =
+    props;
   const classes = useStyles();
   const dispatch = useDispatch();
   let holdtimer = null;
@@ -59,7 +60,11 @@ const TableFilters = (props) => {
       <TableBody>
         <TableRow>
           <Cell style={{ padding: '0 0 0 4px' }}>
-            <SmallCheckbox onChange={selectAll} style={{ marginRight: 4 }} />
+            <SmallCheckbox
+              checked={isSelectAll}
+              onChange={() => handleSelectAllClick(!isSelectAll)}
+              style={{ marginRight: 4 }}
+            />
             <IconBtn style={{ marginRight: 6 }}>
               <DonutSmallRoundedIcon style={{ fill: 'var(--red-50)' }} />
             </IconBtn>
