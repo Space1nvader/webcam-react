@@ -6,10 +6,10 @@ import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { modelSystemFormSelector } from 'modules/ModelProfile/redux/selectors';
 import { staticModelDataSelector } from 'redux/selectors/staticData';
+import { uploadPictureSelector } from 'redux/selectors/uploadPicture';
 import { filterChangesValues, checkValueEmpty } from 'utils';
 import ModelFormContainer from 'modules/ModelProfile/components/ModelFormContainer/index';
 import setSubmitForm from 'modules/ModelProfile/setSubmitForm';
-
 import { initialValues } from './initialValues';
 
 const SystemForm = ({ className }) => {
@@ -17,7 +17,7 @@ const SystemForm = ({ className }) => {
   const { id, data } = useSelector(modelSystemFormSelector);
   const defaultValues = useSelector(staticModelDataSelector);
   const generateInitialValues = checkValueEmpty(data, initialValues);
-
+  const { picture } = useSelector(uploadPictureSelector);
   const onSubmit = (values) => {
     const filtredValues = filterChangesValues(values, generateInitialValues);
     dispatch(setSubmitForm(id, filtredValues));
@@ -33,6 +33,7 @@ const SystemForm = ({ className }) => {
           initialValues={generateInitialValues}
           validationSchema={SYSTEM_VALIDATION_SCHEMA}
           onSubmit={onSubmit}
+          payload={!id && picture}
         >
           <FieldSet style={{ marginBottom: 30 }} divider>
             <TextField style={{ marginBottom: 10 }} name="nickname" label="Псевдоним (eng*)" />

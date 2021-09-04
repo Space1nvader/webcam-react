@@ -19,25 +19,33 @@ const useStyles = makeStyles({
 });
 
 const ModelFormContainer = (props) => {
-  const { children, title = '', initialValues, ...other } = props;
+  const { children, title = '', initialValues, payload, ...other } = props;
   const classes = useStyles();
   const dispatch = useDispatch();
   const [isFormChanged, setIsFormChanged] = useState(false);
-  const setFormChanges = (formChangedCheck) => {
+  const useFormChanges = (formChangedCheck) => {
     useEffect(() => {
       dispatch(FormChangedAction(formChangedCheck));
       setIsFormChanged(formChangedCheck);
     }, [formChangedCheck]);
   };
+
+  const setPayload = (setValue) => {
+    useEffect(() => {
+      if (payload) setValue.apply(this, ...Object.entries(payload));
+    }, [payload]);
+  };
+
   return (
     <FormContainer initialValues={initialValues} {...other}>
-      {({ values, submitForm }) => {
-        setFormChanges(JSON.stringify(values) !== JSON.stringify(initialValues));
+      {({ values, submitForm, setFieldValue }) => {
+        useFormChanges(JSON.stringify(values) !== JSON.stringify(initialValues));
         return (
           <>
             <SubmitModal onSubmit={submitForm} values={values} />
             <FormTitle>{title}</FormTitle>
             {children}
+            {setPayload(setFieldValue)}
             <Button color="secondary" type="submit" className={classes.button} variant="contained">
               сохранить
             </Button>

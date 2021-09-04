@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Table, TableContainer, TableBody, TableRow } from '@material-ui/core';
-import SmallCheckbox from 'components/SmallCheckbox';
-import User from 'components/User';
-import Status from 'components/SessionStatus';
-import { fromUnixTime, format } from 'date-fns';
-import { TableCell, TablePagination, TableMessage } from 'components/Table';
+import { Table, TableContainer, TableBody } from '@material-ui/core';
+import { TablePagination, TableMessage } from 'components/Table';
 import { modelsListSelector } from 'pages/ModelsPage/redux/selectors';
 import { DeleteModelsAction, GetModelsListAction } from 'pages/ModelsPage/redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import ActiveToggle from 'components/ActiveToggle';
+import ModelRows from './components/ModelRows';
 import TableFiltres from './components/Filtres';
 import TableHead from './components/Head';
 import SubmitModal from './components/SubmitModal';
@@ -21,6 +17,7 @@ const ModelsTable = (props) => {
   const classes = useStyles();
   const { pagination, isLoading, success } = useSelector(modelsListSelector);
   const [isSelect, setSelectState] = useState(new Set());
+  const [isSelectAll, setSelectAll] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [pageParams, setPageParams] = useState({ page: 0, search: '' });
   const dispatch = useDispatch();
@@ -28,7 +25,9 @@ const ModelsTable = (props) => {
     setPageParams({ ...pageParams, page });
     dispatch(GetModelsListAction({ ...pageParams, page }));
   };
-  const selected = new Set(isSelect);
+
+  const selected = useMemo(() => new Set(isSelect), [isSelect]);
+
   const handleSelectClick = (id) => () => {
     if (selected.has(id)) {
       selected.delete(id);
@@ -37,14 +36,21 @@ const ModelsTable = (props) => {
     }
     setSelectState(selected);
   };
-  const handleSelectAllClick = (e) => {
-    if (e.target.checked) {
+  const handleSelectAllClick = (checked) => {
+    if (checked) {
       rows.map((row) => selected.add(row.id));
       setSelectState(selected);
     } else {
       setSelectState(new Set());
     }
   };
+  useEffect(() => {
+    if (rows && selected.size >= rows.length) {
+      setSelectAll(true);
+    } else {
+      setSelectAll(false);
+    }
+  }, [rows, selected]);
   const handleConfirmlOpen = () => {
     setModalIsOpen(true);
   };
@@ -57,44 +63,17 @@ const ModelsTable = (props) => {
     setModalIsOpen(false);
   };
 
-  const generateFields = (type, id, value) => {
-    switch (type) {
-      case 'switch':
-        return <ActiveToggle id={id} checked={value} />;
-      case 'status':
-        return <Status value={value} />;
-      case 'date':
-        return format(fromUnixTime(value), 'dd.MM.yyyy');
-      default:
-        return value;
-    }
-  };
-  const generateTableContent = () =>
-    rows.map((row) => (
-      <TableRow className={classes.tableRow} key={row.id}>
-        <TableCell padding="checkbox">
-          <SmallCheckbox checked={isSelect.has(row.id)} onChange={handleSelectClick(row.id)} />
-        </TableCell>
-        {fields.map((field) =>
-          field.id === 'name' ? (
-            <TableCell key={field.id}>
-              <User to={`/models/${row.id}`} image={row.avatar}>
-                {row.nickname} {row.fullNameRus && `/  ${row.fullNameRus}`}
-              </User>
-            </TableCell>
-          ) : (
-            <TableCell key={field.id}>
-              {generateFields(field.type, row.id, row[field.id])}
-            </TableCell>
-          )
-        )}
-      </TableRow>
-    ));
-
   const generateTableRows = () => {
     if (!isLoading) {
       if (success) {
-        return generateTableContent();
+        return (
+          <ModelRows
+            rows={rows}
+            classes={classes.tableRow}
+            isSelect={isSelect}
+            handleSelectClick={handleSelectClick}
+          />
+        );
       }
       return <TableMessage>Список моделей пуст</TableMessage>;
     }
@@ -108,7 +87,8 @@ const ModelsTable = (props) => {
         <TableFiltres
           setSearchParams={setPageParams}
           handleConfirmlOpen={handleConfirmlOpen}
-          selectAll={handleSelectAllClick}
+          isSelectAll={isSelectAll}
+          handleSelectAllClick={handleSelectAllClick}
         />
         <Table>
           <TableHead fields={fields} />
