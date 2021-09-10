@@ -51,12 +51,10 @@ const ModelsTable = (props) => {
       setSelectAll(false);
     }
   }, [rows, selected]);
-  const handleConfirmlOpen = () => {
-    setModalIsOpen(true);
-  };
-  const handleCloseModal = () => {
-    setModalIsOpen(false);
-  };
+  const handleConfirmlOpen = () => setModalIsOpen(true);
+
+  const handleCloseModal = () => setModalIsOpen(false);
+
   const handleDeleteSelected = () => {
     dispatch(DeleteModelsAction({ data: Array.from(isSelect), pageParams }));
     setSelectState(new Set());
