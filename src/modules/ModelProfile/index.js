@@ -35,7 +35,7 @@ const ModelProfile = () => {
       disabled: !data
     },
     {
-      title: 'Учетные данные',
+      title: 'Альбомы',
       icon: <SettingsIcon />,
       component: <AccountWindow />,
       disabled: !data

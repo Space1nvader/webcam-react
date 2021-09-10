@@ -45,7 +45,7 @@ const ModelsTable = (props) => {
     }
   };
   useEffect(() => {
-    if (rows && selected.size >= rows.length) {
+    if (rows && rows.length > 0 && selected.size >= rows.length) {
       setSelectAll(true);
     } else {
       setSelectAll(false);
@@ -63,7 +63,7 @@ const ModelsTable = (props) => {
 
   const generateTableRows = () => {
     if (!isLoading) {
-      if (success) {
+      if (rows && rows.length > 0) {
         return (
           <ModelRows
             rows={rows}
