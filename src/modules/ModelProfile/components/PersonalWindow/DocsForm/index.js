@@ -29,9 +29,9 @@ const DocsForm = (props) => {
   const { className, ...other } = props;
   const dispatch = useDispatch();
   const classes = useStyles();
-  const { data } = useSelector(modelPersonalFormSelector) || '';
+  const { data = '' } = useSelector(modelPersonalFormSelector);
   const detachFile = (id) => () => {
-    dispatch(DeleteDocumentAction({ fileId: id }));
+    dispatch(DeleteDocumentAction(id));
   };
   const renderDocs = (docs) => (
     <div className="docs__list">
@@ -62,7 +62,7 @@ const DocsForm = (props) => {
     <div className={clsx('docs', className)} {...other}>
       <h6 className="docs__title">Документы</h6>
 
-      {data && data.documents && renderDocs(data.documents)}
+      {data?.documents && renderDocs(data.documents)}
       <UploadFileForm size="large" name="files" initialValue={{ files: [] }}>
         <Button className={classes.button} component="span" startIcon={<GetAppRoundedIcon />}>
           ДОБАВИТЬ ДОКУМЕНТ

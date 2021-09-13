@@ -101,7 +101,7 @@ function* deleteDocument({ payload }) {
 
     yield put({
       type: MODEL_DOCUMENTS_ACTION_TYPES.DELETE.SUCCESS,
-      payload
+      fileId: payload
     });
   } catch ({ response }) {
     yield put({
