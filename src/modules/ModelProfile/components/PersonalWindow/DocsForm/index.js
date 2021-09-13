@@ -41,10 +41,6 @@ const DocsForm = (props) => {
   };
   const renderDocs = (docs) => (
     <ScrollBar className="docs__list">
-      <div style={{ height: '20rem', background: 'red', marginBottom: '2rem' }}>123</div>
-      <div style={{ height: '20rem', background: 'red', marginBottom: '2rem' }}>123</div>
-      <div style={{ height: '20rem', background: 'red', marginBottom: '2rem' }}>123</div>
-      <div style={{ height: '20rem', background: 'red', marginBottom: '2rem' }}>123</div>
       {docs.map((doc) => (
         <Papper className="docs__item" key={doc.id}>
           <div className="docs__itemTitle">
