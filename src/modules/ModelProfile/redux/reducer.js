@@ -53,7 +53,7 @@ const handleAction = {
       ...state.modelData,
       personal: {
         ...state.modelData.personal,
-        documents: [...state.modelData.personal.documents.filter((el) => el.id !== params.fileId)]
+        documents: [...state.modelData.personal.documents.filter((el) => el.id !== params)]
       }
     }
   })
