@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Field } from 'formik';
 import MaterialField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
+import cyrillicToTranslit from 'cyrillic-to-translit-js';
 
 const useStyles = makeStyles({
   field: {
@@ -33,15 +34,20 @@ const useStyles = makeStyles({
     color: 'green'
   }
 });
-export const TextField = (props) => {
+export const TranslatedTextField = (props) => {
   const classes = useStyles();
-  const { name, label, type = 'text', className, ...other } = props;
+  const { name, translateFrom, label, type = 'text', className, ...other } = props;
 
+  const generateTranslite = (value) => cyrillicToTranslit().transform(value);
   return (
     <Field {...props}>
-      {({ field, meta }) => {
+      {({ field, form, meta }) => {
         const isError = !!meta.error;
         const errorClass = isError ? 'error' : '';
+        useEffect(() => {
+          if (!meta.touched)
+            form.setFieldValue(name, generateTranslite(form.values[translateFrom]));
+        }, [meta.touched, form.values[translateFrom]]);
 
         return (
           <MaterialField

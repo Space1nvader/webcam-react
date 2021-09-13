@@ -1,5 +1,11 @@
 import React from 'react';
-import { TextField, SelectField, PasswordField, DateField } from 'components/Form';
+import {
+  TextField,
+  TranslatedTextField,
+  SelectField,
+  PasswordField,
+  DateField
+} from 'components/Form';
 import { PROFILE_VALIDATION_SCHEMA } from 'constants/validateSchema';
 import FieldSet from 'components/Form/FieldSet';
 import clsx from 'clsx';
@@ -34,11 +40,15 @@ const PersonalForm = ({ className }) => {
       >
         <FieldSet divider>
           <TextField name="nameRus" label="Имя (рус*)" />
-          <TextField name="name" label="Имя (eng*)" />
+          <TranslatedTextField translateFrom="nameRus" name="name" label="Имя (eng*)" />
           <TextField name="patronymicRus" label="Отчество (рус)" />
-          <TextField name="patronymic" label="Отчество (eng*)" />
+          <TranslatedTextField
+            translateFrom="patronymicRus"
+            name="patronymic"
+            label="Отчество (eng*)"
+          />
           <TextField name="surnameRus" label="Фамилия (рус)" />
-          <TextField name="surname" label="Фамилия (eng*)" />
+          <TranslatedTextField translateFrom="surnameRus" name="surname" label="Фамилия (eng*)" />
         </FieldSet>
         <FieldSet divider>
           <SelectField label="Пол" name="genderId" options={defaultValues.gender} />
