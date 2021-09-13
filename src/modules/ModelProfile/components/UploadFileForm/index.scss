@@ -1,8 +1,7 @@
 .uploadFile {
+  display: flex;
+  justify-content: center;
   &__input {
     display: none;
-  }
-  &__label {
-    width: 100%;
   }
 }

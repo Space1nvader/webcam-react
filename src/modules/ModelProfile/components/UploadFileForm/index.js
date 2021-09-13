@@ -7,7 +7,7 @@ import UploadFileField from './components/UploadFileField';
 import './index.scss';
 
 const UploadFileForm = (props) => {
-  const { name, children } = props;
+  const { name, children, className } = props;
   const dispatch = useDispatch();
   const { modelData } = useSelector(modelSelector);
 
@@ -21,7 +21,12 @@ const UploadFileForm = (props) => {
   };
 
   return (
-    <FormContainer enableReinitialize initialValues={{ [name]: '' }} onSubmit={onSubmit}>
+    <FormContainer
+      className={className}
+      enableReinitialize
+      initialValues={{ [name]: '' }}
+      onSubmit={onSubmit}
+    >
       {({ setFieldValue, submitForm }) => (
         <UploadFileField {...props} submitForm={submitForm} setFieldValue={setFieldValue}>
           {children}

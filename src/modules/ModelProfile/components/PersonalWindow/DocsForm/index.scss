@@ -3,6 +3,14 @@
     margin-bottom: 2.5rem;
   }
 
+  &__list {
+    max-height: 33.75rem;
+    box-sizing: border-box;
+    overflow: auto;
+    margin-bottom: 2rem;
+    padding-right: 1.125rem;
+    box-sizing: border-box;
+  }
   &__item {
     margin-bottom: 1.25rem;
     &Title {

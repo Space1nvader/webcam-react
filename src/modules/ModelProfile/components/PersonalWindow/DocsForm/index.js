@@ -12,6 +12,7 @@ import { modelPersonalFormSelector } from 'modules/ModelProfile/redux/selectors'
 import { DeleteDocumentAction } from 'modules/ModelProfile/redux/actions';
 import Papper from 'components/Papper';
 import './index.scss';
+import ScrollBar from 'components/ScrollBar';
 
 const useStyles = makeStyles({
   button: {
@@ -19,9 +20,14 @@ const useStyles = makeStyles({
     fontWeight: 700,
     fontSize: 14,
     padding: '14px 24px',
-    color: 'var(--gray-90)',
-    backgroundColor: 'var(--gray-5)',
-    borderRadius: 6
+    color: '#fff',
+    display: 'inline-block',
+    margin: '0 auto',
+    backgroundColor: 'var(--red-60)',
+    borderRadius: 6,
+    '&:hover': {
+      backgroundColor: 'var(--red-50)'
+    }
   }
 });
 
@@ -34,7 +40,11 @@ const DocsForm = (props) => {
     dispatch(DeleteDocumentAction(id));
   };
   const renderDocs = (docs) => (
-    <div className="docs__list">
+    <ScrollBar className="docs__list">
+      <div style={{ height: '20rem', background: 'red', marginBottom: '2rem' }}>123</div>
+      <div style={{ height: '20rem', background: 'red', marginBottom: '2rem' }}>123</div>
+      <div style={{ height: '20rem', background: 'red', marginBottom: '2rem' }}>123</div>
+      <div style={{ height: '20rem', background: 'red', marginBottom: '2rem' }}>123</div>
       {docs.map((doc) => (
         <Papper className="docs__item" key={doc.id}>
           <div className="docs__itemTitle">
@@ -56,15 +66,20 @@ const DocsForm = (props) => {
           </div>
         </Papper>
       ))}
-    </div>
+    </ScrollBar>
   );
   return (
     <div className={clsx('docs', className)} {...other}>
       <h6 className="docs__title">Документы</h6>
 
       {data?.documents && renderDocs(data.documents)}
-      <UploadFileForm size="large" name="files" initialValue={{ files: [] }}>
-        <Button className={classes.button} component="span" startIcon={<GetAppRoundedIcon />}>
+
+      <UploadFileForm size="large" name="files" className="uploadFile" initialValue={{ files: [] }}>
+        <Button
+          className={classes.button}
+          component="span"
+          startIcon={<GetAppRoundedIcon color="white" />}
+        >
           ДОБАВИТЬ ДОКУМЕНТ
         </Button>
       </UploadFileForm>
