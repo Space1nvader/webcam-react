@@ -39,13 +39,10 @@ export const TextField = (props) => {
 
   return (
     <Field {...props}>
-      {({ field, form, meta }) => {
+      {({ field, meta }) => {
         const isError = !!meta.error;
         const errorClass = isError ? 'error' : '';
-        const handleChange = (e) => {
-          form.handleChange(e);
-          // if (props.onChange) props.onChange(() => form.setFieldValue('name', e.target.value));
-        };
+
         return (
           <MaterialField
             {...field}
@@ -53,7 +50,6 @@ export const TextField = (props) => {
             name={name}
             id={name}
             type={type}
-            onChange={handleChange}
             className={clsx(classes.field, className, errorClass)}
             variant="outlined"
             label={label}

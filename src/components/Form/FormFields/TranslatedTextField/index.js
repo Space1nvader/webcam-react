@@ -49,11 +49,6 @@ export const TranslatedTextField = (props) => {
             form.setFieldValue(name, generateTranslite(form.values[translateFrom]));
         }, [meta.touched, form.values[translateFrom]]);
 
-        const handleChange = (e) => {
-          form.handleChange(e);
-
-          // if (props.onChange) props.onChange(() => form.setFieldValue('name', e.target.value));
-        };
         return (
           <MaterialField
             {...field}
@@ -61,7 +56,6 @@ export const TranslatedTextField = (props) => {
             name={name}
             id={name}
             type={type}
-            onChange={handleChange}
             className={clsx(classes.field, className, errorClass)}
             variant="outlined"
             label={label}

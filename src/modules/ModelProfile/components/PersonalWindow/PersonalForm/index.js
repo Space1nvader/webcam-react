@@ -27,9 +27,6 @@ const PersonalForm = ({ className }) => {
     const filtredValues = filterChangesValues(values, generateInitialValues);
     dispatch(setSubmitForm(id, filtredValues));
   };
-  const setTraslateField = (setValue, field, value) => {
-    setValue(field, value);
-  };
   return (
     <div className={clsx(className)}>
       <FormTitle>Личные данные</FormTitle>
@@ -42,7 +39,7 @@ const PersonalForm = ({ className }) => {
         onSubmit={onSubmit}
       >
         <FieldSet divider>
-          <TextField name="nameRus" onChange={setTraslateField} label="Имя (рус*)" />
+          <TextField name="nameRus" label="Имя (рус*)" />
           <TranslatedTextField translateFrom="nameRus" name="name" label="Имя (eng*)" />
           <TextField name="patronymicRus" label="Отчество (рус)" />
           <TranslatedTextField
