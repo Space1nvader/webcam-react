@@ -15,7 +15,7 @@ const useStyles = makeStyles(styles);
 const ModelsTable = (props) => {
   const { rows, fields, ...other } = props;
   const classes = useStyles();
-  const { pagination, isLoading, success } = useSelector(modelsListSelector);
+  const { pagination, isLoading } = useSelector(modelsListSelector);
   const [isSelect, setSelectState] = useState(new Set());
   const [isSelectAll, setSelectAll] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
