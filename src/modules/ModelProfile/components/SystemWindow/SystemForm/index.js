@@ -27,8 +27,8 @@ const SystemForm = ({ className }) => {
       {defaultValues && (
         <ModelFormContainer
           title="Системные данные"
-          className="system"
-          id="system"
+          className="systemForm"
+          id="systemForm"
           enableReinitialize
           initialValues={generateInitialValues}
           validationSchema={SYSTEM_VALIDATION_SCHEMA}

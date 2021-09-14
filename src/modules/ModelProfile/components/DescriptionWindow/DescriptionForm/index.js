@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField, TextArea, SelectField } from 'components/Form';
 import FieldSet from 'components/Form/FieldSet';
-import bodyImage from 'assets/img/image19.png';
 import { DESCRIPTION_VALIDATION_SCHEMA } from 'constants/validateSchema';
 import { checkValueEmpty, filterChangesValues } from 'utils';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,46 +11,9 @@ import clsx from 'clsx';
 import setSubmitForm from 'modules/ModelProfile/setSubmitForm';
 import ModelFormContainer from 'modules/ModelProfile/components/ModelFormContainer/index';
 import { initialValues } from './initialValues';
+import style from './style';
 
-const useStyles = makeStyles({
-  formControl: {
-    width: '48%'
-  },
-  container: {
-    backgroundImage: `url(${bodyImage})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'auto 800px',
-    backgroundPosition: 'right 490px'
-  },
-  divider: {
-    position: 'relative',
-    '&::before': {
-      content: "''",
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      backgroundColor: 'var(--gray-20)',
-      height: 1
-    }
-  },
-  dividerHeader: {
-    paddingBottom: 30,
-    '&::before': {
-      width: 580
-    }
-  },
-  dividerBreast: {
-    '&::before': {
-      width: 560
-    }
-  },
-  dividerLong: {
-    marginBottom: 70,
-    '&::before': {
-      width: 610
-    }
-  }
-});
+const useStyles = makeStyles(style);
 
 const DescriptionForm = (props) => {
   const { className, ...other } = props;
@@ -69,7 +31,8 @@ const DescriptionForm = (props) => {
     <div className={clsx(classes.container, className)} {...other}>
       <ModelFormContainer
         title="Основные данные"
-        className="settings"
+        className="descriptionForm"
+        id="descriptionForm"
         enableReinitialize
         initialValues={generateInitialValues}
         validationSchema={DESCRIPTION_VALIDATION_SCHEMA}

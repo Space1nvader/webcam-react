@@ -6,9 +6,9 @@ import {
   MODEL_DOCUMENTS_ACTION_TYPES
 } from './reducer';
 
-function* getModel(action) {
+function* getModel({ payload }) {
   try {
-    const { data } = yield call(SERVICE_API.Model.getModel, action.payload);
+    const { data } = yield call(SERVICE_API.Model.getModel, payload);
     yield put({
       type: MODEL_ACTION_TYPES.GET.SUCCESS,
       payload: data
@@ -22,14 +22,15 @@ function* getModel(action) {
 }
 
 function* updateModel(action) {
+  const { payload } = action;
   try {
-    yield call(SERVICE_API.Model.updateModel, action.payload);
-
+    yield call(SERVICE_API.Model.updateModel, payload);
     yield put({
       type: MODEL_ACTION_TYPES.PUT.SUCCESS,
-      ...action.payload
+      payload
     });
-    yield* getModel(action);
+
+    yield getModel(action);
   } catch ({ response }) {
     yield put({
       type: MODEL_ACTION_TYPES.PUT.ERROR,
@@ -37,9 +38,9 @@ function* updateModel(action) {
     });
   }
 }
-function* updateModelStatus(action) {
+function* updateModelStatus({ payload }) {
   try {
-    yield call(SERVICE_API.Model.updateModelStatus, action.payload);
+    yield call(SERVICE_API.Model.updateModelStatus, payload);
     yield put({
       type: MODEL_STATUS_ACTION_TYPES.PUT.SUCCESS
     });
@@ -50,9 +51,9 @@ function* updateModelStatus(action) {
     });
   }
 }
-function* createModel(action) {
+function* createModel({ payload }) {
   try {
-    const { data } = yield call(SERVICE_API.Model.createModel, action.payload);
+    const { data } = yield call(SERVICE_API.Model.createModel, payload);
     yield put({
       type: MODEL_ACTION_TYPES.POST.SUCCESS,
       payload: data
@@ -64,9 +65,9 @@ function* createModel(action) {
     });
   }
 }
-function* deleteModel(action) {
+function* deleteModel({ payload }) {
   try {
-    const { data } = yield call(SERVICE_API.Model.deleteModel, action.payload);
+    const { data } = yield call(SERVICE_API.Model.deleteModel, payload);
 
     yield put({
       type: MODEL_ACTION_TYPES.DELETE.SUCCESS,
@@ -80,9 +81,9 @@ function* deleteModel(action) {
   }
 }
 
-function* attachDocument(action) {
+function* attachDocument({ payload }) {
   try {
-    const { data } = yield call(SERVICE_API.Model.attachFile, action.payload);
+    const { data } = yield call(SERVICE_API.Model.attachFile, payload);
     yield put({
       type: MODEL_DOCUMENTS_ACTION_TYPES.POST.SUCCESS,
       payload: data
