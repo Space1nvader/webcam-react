@@ -31,8 +31,8 @@ const PersonalForm = ({ className }) => {
     <div className={clsx(className)}>
       <FormTitle>Личные данные</FormTitle>
       <ModelFormContainer
-        className="settings"
-        id="settings"
+        className="personalForm"
+        id="personalForm"
         enableReinitialize
         initialValues={generateInitialValues}
         validationSchema={PROFILE_VALIDATION_SCHEMA}

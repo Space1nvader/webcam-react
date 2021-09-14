@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     fontSize: 14,
     padding: '14px 24px',
     color: '#fff',
-    display: 'inline-block',
+    display: 'inline-flex',
     margin: '0 auto',
     backgroundColor: 'var(--red-60)',
     borderRadius: 6,
@@ -71,11 +71,7 @@ const DocsForm = (props) => {
       {data?.documents && renderDocs(data.documents)}
 
       <UploadFileForm size="large" name="files" className="uploadFile" initialValue={{ files: [] }}>
-        <Button
-          className={classes.button}
-          component="span"
-          startIcon={<GetAppRoundedIcon color="white" />}
-        >
+        <Button className={classes.button} component="span" startIcon={<GetAppRoundedIcon />}>
           ДОБАВИТЬ ДОКУМЕНТ
         </Button>
       </UploadFileForm>
