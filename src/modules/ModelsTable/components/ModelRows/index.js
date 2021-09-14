@@ -10,7 +10,7 @@ import { TableCell } from 'components/Table';
 const ModelRows = (props) => {
   const { rows, classes, isSelect, handleSelectClick } = props;
   return rows.map((row) => (
-    <TableRow className={classes}>
+    <TableRow className={classes} key={`${row.nickname}-${row.id}`}>
       <TableCell padding="checkbox">
         <SmallCheckbox checked={isSelect.has(row.id)} onChange={handleSelectClick(row.id)} />
       </TableCell>

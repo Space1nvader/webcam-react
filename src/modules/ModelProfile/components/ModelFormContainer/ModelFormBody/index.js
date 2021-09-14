@@ -22,20 +22,19 @@ const ModelFormBody = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { form, children, title, payload, initialValues } = props;
-  const { values, submitForm, setFieldValues } = form;
+  const { values, submitForm, setFieldValue } = form;
 
   const formChangedCheck = useMemo(
     () => JSON.stringify(values) !== JSON.stringify(initialValues),
     [values, initialValues]
   );
-
   useEffect(() => {
     dispatch(FormChangedAction(formChangedCheck));
   }, [dispatch, formChangedCheck]);
 
   useEffect(() => {
-    if (payload) setFieldValues(...Object.entries(payload));
-  }, [setFieldValues, payload]);
+    if (payload) setFieldValue.apply(null, ...Object.entries(payload));
+  }, [setFieldValue, payload]);
 
   return (
     <>

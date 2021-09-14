@@ -17,6 +17,7 @@
     }
   },
   "rules": {
+    "@typescript-eslint/ban-ts-ignore": "off",
     "import/no-extraneous-dependencies": ["warn", { "devDependencies": true }],
     "import/prefer-default-export": 0,
     "react-hooks/rules-of-hooks": "warn",
