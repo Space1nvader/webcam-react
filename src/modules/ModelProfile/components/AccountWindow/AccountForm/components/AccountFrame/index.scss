@@ -1,14 +1,29 @@
-.account {
+.accountFrame {
   padding: 1.5rem;
   box-sizing: border-box;
   background-color: #fff;
+  margin-bottom: 2.125rem;
+  &__row {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   &__title {
     color: var(--gray-90);
   }
-
-  &__updateControls {
+  &__controls {
     display: flex;
     align-items: center;
+    width: calc(50% - 20px);
+    justify-content: space-between;
+  }
+  &__update {
+    align-items: center;
+    color: var(--gray-70);
+    font-size: 0.875rem;
+    font-weight: 600;
+    display: flex;
   }
   &__errors {
     width: 100%;

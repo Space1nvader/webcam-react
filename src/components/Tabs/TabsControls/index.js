@@ -10,10 +10,10 @@ const useStyles = makeStyles({
   tab: {
     display: 'flex',
     alignItems: 'center',
-    margin: '0 30px 0 0',
+    margin: '0 16px 0 0',
     borderRadius: 2,
     color: 'var(--gray-50)',
-    padding: '10px 16px',
+    padding: '10px 8px',
     minHeight: 10,
     minWidth: 30,
     width: 'min-content',

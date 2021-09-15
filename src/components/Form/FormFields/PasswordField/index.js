@@ -6,43 +6,13 @@ import IconBtn from 'components/IconBtn';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import clsx from 'clsx';
+import { style } from '../style';
 
 const useStyles = makeStyles({
-  set: {
+  ...style,
+  container: {
     position: 'relative',
     width: 'calc(50% - (32px / 2))'
-  },
-  field: {
-    position: 'relative',
-    width: '100%',
-    marginBottom: 30,
-    '& input': {
-      padding: 12
-    },
-    '& label': {
-      transform: ' translate(14px,14px) scale(1)'
-    },
-    '& p': {
-      position: 'absolute',
-      top: '100%'
-    },
-    '&.error': {
-      '& fieldset': {
-        borderColor: 'red'
-      },
-      '& p': {
-        color: 'var(--red-60)'
-      }
-    }
-  },
-  textHelper: {
-    position: 'absolute',
-    color: 'green'
-  },
-  control: {
-    position: 'absolute',
-    top: 7,
-    right: 14
   }
 });
 export const PasswordField = (props) => {
@@ -59,14 +29,14 @@ export const PasswordField = (props) => {
         const isError = !!(meta.error && meta.touched);
         const errorClass = isError ? 'error' : '';
         return (
-          <div className={classes.set}>
+          <div className={classes.container}>
             <TextField
               {...field}
               {...other}
               name={name}
               id={name}
               type={isVisible ? 'text' : 'password'}
-              className={clsx(classes.field, className, errorClass)}
+              className={clsx(classes.field, classes.password, className, errorClass)}
               variant="outlined"
               label={label}
               helperText={isError && meta.error}

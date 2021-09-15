@@ -3,36 +3,10 @@ import { Field } from 'formik';
 import MaterialField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
+import { style } from '../style';
 
-const useStyles = makeStyles({
-  field: {
-    width: 'calc(50% - (32px / 2))',
-    marginBottom: 30,
-    '& input': {
-      padding: 12,
-      backgroundColor: '#fff'
-    },
-    '& label': {
-      transform: ' translate(14px,14px) scale(1)'
-    },
-    '& p': {
-      position: 'absolute',
-      top: '100%'
-    },
-    '&.error': {
-      '& fieldset': {
-        borderColor: 'red'
-      },
-      '& p': {
-        color: 'var(--red-60)'
-      }
-    }
-  },
-  textHelper: {
-    position: 'absolute',
-    color: 'green'
-  }
-});
+const useStyles = makeStyles(style);
+
 export const TextField = (props) => {
   const classes = useStyles();
   const { name, label, type = 'text', className, ...other } = props;

@@ -6,23 +6,10 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
+import { style } from '../style';
 
-const useStyles = makeStyles({
-  field: {
-    width: 'calc(50% - (32px / 2))',
-    marginBottom: 30,
+const useStyles = makeStyles(style);
 
-    '& label': {
-      transform: ' translate(14px,14px) scale(1)'
-    }
-  },
-  select: {
-    '&>div': {
-      backgroundColor: '#fff',
-      padding: 12
-    }
-  }
-});
 export const SelectField = (props) => {
   const classes = useStyles();
   const { name, label, options, defaultValue = 'default', className, ...other } = props;
