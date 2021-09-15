@@ -9,6 +9,9 @@ Yup.addMethod(Yup.string, 'Rus', function Rus(err = 'Только русские
 Yup.addMethod(Yup.string, 'Req', function Req(err = 'Обязательное поле') {
   return this.required(err);
 });
+Yup.addMethod(Yup.number, 'Positive', function Positive(err = 'Значение должно быть больше нуля') {
+  return this.positive(err);
+});
 const numberErr = 'Допускаются только цифры';
 
 export const PROFILE_VALIDATION_SCHEMA = Yup.object().shape({
@@ -18,18 +21,18 @@ export const PROFILE_VALIDATION_SCHEMA = Yup.object().shape({
   patronymic: Yup.string().Eng(),
   surnameRus: Yup.string().Rus(),
   surname: Yup.string().Eng(),
-  age: Yup.number().typeError(numberErr).positive(),
+  age: Yup.number().typeError(numberErr).Positive(),
   serialNumber: Yup.number().typeError(numberErr),
   countryId: Yup.string(),
   email: Yup.string().email('Некорректный формат')
 });
 
 export const DESCRIPTION_VALIDATION_SCHEMA = Yup.object().shape({
-  height: Yup.number().typeError(numberErr).positive(),
-  weight: Yup.number().typeError(numberErr).positive(),
-  chestCircumference: Yup.number().typeError(numberErr).positive(),
-  hipGirth: Yup.number().typeError(numberErr).positive(),
-  waistCircumference: Yup.number().typeError(numberErr).positive(),
+  height: Yup.number().typeError(numberErr).Positive(),
+  weight: Yup.number().typeError(numberErr).Positive(),
+  chestCircumference: Yup.number().typeError(numberErr).Positive(),
+  hipGirth: Yup.number().typeError(numberErr).Positive(),
+  waistCircumference: Yup.number().typeError(numberErr).Positive(),
   experience: Yup.string(),
   about: Yup.string(),
   style: Yup.string()

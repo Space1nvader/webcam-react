@@ -7,22 +7,9 @@ import ruLocale from 'date-fns/locale/ru';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateRangeRoundedIcon from '@material-ui/icons/DateRangeRounded';
 import clsx from 'clsx';
+import { style } from '../style';
 
-const useStyles = makeStyles({
-  field: {
-    width: 'calc(50% - (32px / 2))',
-    marginBottom: 30,
-    marginTop: 0,
-
-    '& label': {
-      transform: ' translate(14px,14px) scale(1)'
-    },
-    '& input': {
-      padding: 12,
-      backgroundColor: '#fff'
-    }
-  }
-});
+const useStyles = makeStyles(style);
 
 export const DateField = (props) => {
   const [selectedDate, setSelectedDate] = React.useState('');
@@ -45,7 +32,6 @@ export const DateField = (props) => {
               variant="inline"
               inputVariant="outlined"
               format="dd/MM/yyyy"
-              margin="normal"
               id={name}
               {...other}
               {...field}

@@ -43,6 +43,8 @@ const AccountForm = ({ className }) => {
         style={{
           backgroundColor: 'var(--red-60)',
           height: 50,
+          display: 'block',
+          margin: '0 auto',
           width: 50,
           boxShadow: '0px 2px 4px rgba(156, 43, 35, 0.2), 0px 4px 8px rgba(244, 67, 54, 0.2)'
         }}
