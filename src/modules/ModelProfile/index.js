@@ -1,7 +1,8 @@
 import React from 'react';
 import PersonIcon from '@material-ui/icons/Person';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import SettingsIcon from '@material-ui/icons/Settings';
+import HowToRegIcon from '@material-ui/icons/HowToReg';
+import TuneIcon from '@material-ui/icons/Tune';
 import { useSelector } from 'react-redux';
 import { modelPersonalFormSelector } from 'modules/ModelProfile/redux/selectors';
 import ProfileTabs from './components/ProfileTabs';
@@ -30,17 +31,18 @@ const ModelProfile = () => {
     },
     {
       title: 'Основные данные',
-      icon: <PersonAddIcon />,
+      icon: <HowToRegIcon />,
       component: <DescriptionWindow />,
       disabled: !data
     },
     {
       title: 'Учетные данные',
-      icon: <SettingsIcon />,
+      icon: <TuneIcon />,
       component: <AccountWindow />,
       disabled: !data
     }
   ];
+
   const avatar = data ? { id, avatar: data.avatar } : '';
   return (
     <>

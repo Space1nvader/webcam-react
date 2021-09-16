@@ -1,43 +1,57 @@
 import React from 'react';
-// TODO: массив данных
-// import { FieldArray } from 'formik';
-import { FormContainer } from 'components/Form/FormContainer';
-import { SYSTEM_VALIDATION_SCHEMA } from 'constants/validateSchema';
 import clsx from 'clsx';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+// TODO: временные данные из формы систенмных настроек
 import { modelSystemFormSelector } from 'modules/ModelProfile/redux/selectors';
-import { staticModelDataSelector } from 'redux/selectors/staticData';
-import { checkValueEmpty, filterChangesValues } from 'utils';
-import setSubmitForm from 'modules/ModelProfile/setSubmitForm';
 import IconBtn from 'components/IconBtn';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import FormTitle from 'modules/ModelProfile/components/FormTitle';
+import { modelErrorsSelector } from 'redux/selectors/modelErrors';
 import { initialValues } from './initialValues';
 import AccountFrame from './components/AccountFrame';
 
-const AccountForm = ({ className }) => {
-  const dispatch = useDispatch();
-  const { id, data } = useSelector(modelSystemFormSelector);
-  const defaultValues = useSelector(staticModelDataSelector);
-  const generateInitialValues = checkValueEmpty(data, initialValues);
+const accounts = [
+  {
+    id: 1,
+    server: 'Chaturbate',
+    active: true,
+    login: 'chaturbate-login',
+    serverId: '1',
+    password: 'password'
+  },
+  {
+    id: 2,
+    server: 'Jasmin',
+    active: false,
+    login: 'Jasmin-login',
+    serverId: '2',
+    password: 'password'
+  }
+];
 
-  const onSubmit = (values) => {
-    const filtredValues = filterChangesValues(values, generateInitialValues);
-    dispatch(setSubmitForm(id, filtredValues));
+const AccountForm = ({ className }) => {
+  // TODO: временные данные из формы систенмных настроек
+  const { id, data } = useSelector(modelSystemFormSelector);
+  const { errors: dataErrors } = useSelector(modelErrorsSelector);
+
+  const findErrors = (accountId) => {
+    const errorsId = dataErrors.find((errors) => errors.id === accountId);
+    return errorsId?.errors || '';
   };
+
   return (
     <div className={clsx(className)}>
       <FormTitle>Учетные данные</FormTitle>
-      <FormContainer
-        className="accountForm"
-        id="accountForm"
-        enableReinitialize
-        initialValues={generateInitialValues}
-        validationSchema={SYSTEM_VALIDATION_SCHEMA}
-        onSubmit={onSubmit}
-      >
-        {({ values, submitForm }) => <AccountFrame defaultValues={defaultValues} />}
-      </FormContainer>
+      {accounts &&
+        accounts.map((account) => (
+          <AccountFrame
+            id={id}
+            errors={findErrors(account.id)}
+            data={data[account.id]}
+            initialValues={initialValues}
+          />
+        ))}
+
       <IconBtn
         title="Добавить модель"
         style={{

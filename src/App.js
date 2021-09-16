@@ -6,6 +6,7 @@ import { dataRoutes } from 'constants/routes';
 import { Provider } from 'react-redux';
 import { store } from 'redux/index';
 import Layout from './components/Layout';
+
 import 'assets/style/main.scss';
 
 const routes = generateAppRoutes(dataRoutes);

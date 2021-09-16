@@ -3,8 +3,7 @@ export const style = {
     width: 'calc(50% - (32px / 2))',
     marginBottom: 30,
     '& .MuiInputBase-formControl': {
-      backgroundColor: '#ffffff',
-      transition: 'all .2s'
+      backgroundColor: '#ffffff'
     },
     '& .MuiInputBase-input': {
       padding: 12

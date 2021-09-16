@@ -41,3 +41,12 @@ export const DESCRIPTION_VALIDATION_SCHEMA = Yup.object().shape({
 export const SYSTEM_VALIDATION_SCHEMA = Yup.object().shape({
   nickname: Yup.string().Eng().Req()
 });
+
+export const ACCOUNT_VALIDATION_SCHEMA = Yup.object().shape({
+  password: Yup.string()
+    .Eng()
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      'Пароль должен содержать больше 8 символов, заглавную букву, строчную букву, цифру и символ'
+    )
+});
