@@ -34,7 +34,6 @@ export const DateField = (props) => {
               format="dd/MM/yyyy"
               id={name}
               {...other}
-              {...field}
               labelid={name}
               label={label}
               name={name}

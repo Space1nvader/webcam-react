@@ -1,3 +1,5 @@
+import { fromUnixTime, getTime } from 'date-fns';
+import { format } from 'date-fns/esm';
 import * as Yup from 'yup';
 
 Yup.addMethod(Yup.string, 'Eng', function Eng(err = 'Только английские буквы') {
@@ -12,6 +14,16 @@ Yup.addMethod(Yup.string, 'Req', function Req(err = 'Обязательное п
 Yup.addMethod(Yup.number, 'Positive', function Positive(err = 'Значение должно быть больше нуля') {
   return this.positive(err);
 });
+Yup.addMethod(Yup.number, 'MinAge', function (message) {
+  return this.test('test-min-age', message, (value) => {
+    console.log(this);
+    // const { path, createError } = this;
+    const date = fromUnixTime(value);
+    const inputDate = new Date(date.getFullYear() + 18, date.getMonth(), date.getDate());
+    return inputDate >= new Date();
+    // || createError({ path, message });
+  });
+});
 const numberErr = 'Допускаются только цифры';
 
 export const PROFILE_VALIDATION_SCHEMA = Yup.object().shape({
@@ -24,6 +36,7 @@ export const PROFILE_VALIDATION_SCHEMA = Yup.object().shape({
   age: Yup.number().typeError(numberErr).Positive(),
   serialNumber: Yup.number().typeError(numberErr),
   countryId: Yup.string(),
+  birthday: Yup.number().MinAge('Вы должны быть старше 18 лет'),
   email: Yup.string().email('Некорректный формат')
 });
 
