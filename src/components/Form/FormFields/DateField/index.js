@@ -20,8 +20,9 @@ export const DateField = (props) => {
     <Field {...props}>
       {({ field, form, meta }) => {
         const { setFieldValue } = form;
-        const isError = !!(meta.error && meta.touched);
+        const isError = !!meta.error;
         const errorClass = isError ? 'error' : '';
+        console.log(isError);
         useEffect(() => {
           if (selectedDate) setFieldValue(name, getTime(selectedDate) / 1000);
         }, [selectedDate]);
@@ -45,7 +46,7 @@ export const DateField = (props) => {
                 size: 'small'
               }}
               keyboardIcon={<DateRangeRoundedIcon />}
-              helperText={meta.error || ''}
+              helperText={isError && meta.error}
             />
           </MuiPickersUtilsProvider>
         );

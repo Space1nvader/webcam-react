@@ -16,12 +16,9 @@ Yup.addMethod(Yup.number, 'Positive', function Positive(err = 'Значение 
 });
 Yup.addMethod(Yup.number, 'MinAge', function (message) {
   return this.test('test-min-age', message, (value) => {
-    console.log(this);
-    // const { path, createError } = this;
     const date = fromUnixTime(value);
     const inputDate = new Date(date.getFullYear() + 18, date.getMonth(), date.getDate());
-    return inputDate >= new Date();
-    // || createError({ path, message });
+    return inputDate <= new Date();
   });
 });
 const numberErr = 'Допускаются только цифры';
@@ -36,7 +33,9 @@ export const PROFILE_VALIDATION_SCHEMA = Yup.object().shape({
   age: Yup.number().typeError(numberErr).Positive(),
   serialNumber: Yup.number().typeError(numberErr),
   countryId: Yup.string(),
-  birthday: Yup.number().MinAge('Вы должны быть старше 18 лет'),
+  birthday: Yup.number()
+    .typeError('Укажите полную дату рождения')
+    .MinAge('Вам должно быть больше 18 лет'),
   email: Yup.string().email('Некорректный формат')
 });
 

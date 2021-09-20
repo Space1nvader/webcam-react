@@ -17,15 +17,15 @@ const accounts = [
     active: true,
     login: 'chaturbate-login',
     serverId: '1',
-    password: 'password'
+    password: 'chaturbate-password'
   },
   {
     id: 2,
     server: 'Jasmin',
     active: false,
-    login: 'Jasmin-login',
+    login: 'jasmin-login',
     serverId: '2',
-    password: 'password'
+    password: 'jasmin-password'
   }
 ];
 
