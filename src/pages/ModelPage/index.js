@@ -3,9 +3,10 @@ import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ModelProfile from 'modules/ModelProfile';
 import NavCrumbs from 'modules/Breadcrumbs/NavCrubms';
-import { GetModelAction, ResetAction } from 'modules/ModelProfile/redux/actions';
+import { GetModelAction, ResetModelAction } from 'modules/ModelProfile/redux/actions';
 import { GetStaticDataAction } from 'redux/actions/staticData';
 import { modelSelector } from 'modules/ModelProfile/redux/selectors';
+import { ResetTabsAction } from 'redux/actions/modelForm';
 import './index.scss';
 
 const ProfilePage = (props) => {
@@ -17,13 +18,13 @@ const ProfilePage = (props) => {
     dispatch(GetStaticDataAction());
     if (paramsId) dispatch(GetModelAction({ id: paramsId }));
     return () => {
-      dispatch(ResetAction());
+      dispatch(ResetModelAction());
+      dispatch(ResetTabsAction());
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const { modelData, success } = useSelector(modelSelector);
-  if (modelData && modelData.id !== +paramsId && success)
-    return <Redirect to={`/models/${modelData.id}`} />;
+
+  if (success && modelData.id !== +paramsId) return <Redirect to={`/models/${modelData.id}`} />;
 
   return (
     <div className="detail">

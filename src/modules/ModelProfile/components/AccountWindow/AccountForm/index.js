@@ -42,7 +42,8 @@ const AccountForm = ({ className }) => {
   return (
     <div className={clsx(className)}>
       <FormTitle>Учетные данные</FormTitle>
-      {accounts &&
+      {id &&
+        accounts &&
         accounts.map((account) => (
           <AccountFrame
             id={id}

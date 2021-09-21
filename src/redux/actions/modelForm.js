@@ -15,3 +15,6 @@ export const SetFormTabAction = (payload) => ({
 export const ResetFormConfirmAction = () => ({
   type: MODEL_FORM_ACTION_TYPES.RESET_CONFIRM
 });
+export const ResetTabsAction = () => ({
+  type: MODEL_FORM_ACTION_TYPES.RESET_STATE
+});

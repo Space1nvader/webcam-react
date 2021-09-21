@@ -2,34 +2,12 @@ import React, { useState } from 'react';
 import { Tabs, Tab, TabsControls } from 'components/Tabs';
 import './index.scss';
 import clsx from 'clsx';
+import { useSelector } from 'react-redux';
 import NotificationList from '../NotificationsList';
-
-const errors = [
-  {
-    title: 'Ошибка №21233',
-    text: 'Неверный пароль при регистрации на сайте jasmin.com'
-  },
-  {
-    title: 'Ошибка №0233',
-    text: 'Верный Логин при регистрации на сайте jasmin.com'
-  }
-];
-const changes = [
-  // {
-  //   title: 'Изменение №21233',
-  //   text: 'Неверный пароль '
-  // },
-  // {
-  //   title: 'Изменение №0233',
-  //   text: 'Верный Логин при регистрации на сайте jasmin.com Верный Логин при регистрации на сайте jasmin.com'
-  // },
-  // {
-  //   title: 'Изменение №0233',
-  //   text: 'Верный Логин при регистрации на сайте jasmin.com'
-  // }
-];
+import { modelErrorsSelector } from '../../../../../redux/selectors/modelErrors';
 
 const NotificationMenu = (props) => {
+  const { errors } = useSelector(modelErrorsSelector);
   const [currentTab, setCurrentTab] = useState(0);
   const { open } = props;
   const handleChangeCurrentTab = (index) => {
@@ -42,7 +20,7 @@ const NotificationMenu = (props) => {
     },
     {
       title: 'Изменения',
-      data: changes
+      data: errors // changes
     }
   ];
 

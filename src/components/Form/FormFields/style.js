@@ -6,7 +6,8 @@ export const style = {
       backgroundColor: '#ffffff'
     },
     '& .MuiInputBase-input': {
-      padding: 12
+      padding: 12,
+      font: '16px var(--font)'
     },
     '& label': {
       transform: ' translate(14px,14px) scale(1)'

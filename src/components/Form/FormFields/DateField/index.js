@@ -32,7 +32,7 @@ export const DateField = (props) => {
               disableToolbar
               variant="inline"
               inputVariant="outlined"
-              format="dd/MM/yyyy"
+              format="dd.MM.yyyy"
               id={name}
               {...other}
               labelid={name}

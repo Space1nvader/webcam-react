@@ -39,6 +39,6 @@ export const DeleteDocumentAction = (payload) => ({
   payload
 });
 
-export const ResetAction = () => ({
+export const ResetModelAction = () => ({
   type: MODEL_ACTION_TYPES.RESET_STATE
 });
