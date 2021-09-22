@@ -20,7 +20,7 @@ const Item = (props) => {
 
 const NotificationList = (props) => {
   const { data } = props;
-  const generateOutput = () => {
+  const generateNotifications = () => {
     if (data && data.length) {
       return data.map((el) =>
         el.errors.map((message) => <Item title={message.title}>{message.text}</Item>)
@@ -28,7 +28,7 @@ const NotificationList = (props) => {
     }
     return <div className="notificationList__emptyMsg">Список пуст</div>;
   };
-  return <div className="notificationList">{generateOutput()}</div>;
+  return <div className="notificationList">{generateNotifications()}</div>;
 };
 
 export default NotificationList;

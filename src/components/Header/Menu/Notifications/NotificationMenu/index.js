@@ -3,8 +3,9 @@ import { Tabs, Tab, TabsControls } from 'components/Tabs';
 import './index.scss';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
+import ScrollBar from 'components/ScrollBar';
+import { modelErrorsSelector } from 'redux/selectors/modelErrors';
 import NotificationList from '../NotificationsList';
-import { modelErrorsSelector } from '../../../../../redux/selectors/modelErrors';
 
 const NotificationMenu = (props) => {
   const { errors } = useSelector(modelErrorsSelector);
@@ -42,7 +43,9 @@ const NotificationMenu = (props) => {
         <Tabs activeTab={currentTab}>
           {tabs.map((tab, index) => (
             <Tab key={tab.title} value={currentTab} index={index}>
-              <NotificationList data={tab.data} />
+              <ScrollBar className="notificationMenu__scrollbar">
+                <NotificationList data={tab.data} />
+              </ScrollBar>
             </Tab>
           ))}
         </Tabs>

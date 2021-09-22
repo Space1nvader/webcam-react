@@ -2,7 +2,6 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { FormContainer } from 'components/Form/FormContainer';
-import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import RefreshRoundedIcon from '@material-ui/icons/RefreshRounded';
 import { makeStyles } from '@material-ui/core/styles';
 import FieldSet from 'components/Form/FieldSet';
@@ -15,6 +14,7 @@ import { ACCOUNT_VALIDATION_SCHEMA } from '../../validateSchema';
 import AccountErrors from '../AccontErrors';
 import style from './style';
 import './index.scss';
+import RemoveFrame from './RemoveFrame';
 
 const useStyles = makeStyles(style);
 
@@ -43,9 +43,7 @@ const AccountFrame = (props) => {
               <h6 className="accountFrame__title">Chaturbate</h6>
               <div className="accountFrame__tags" />
             </div>
-            <IconBtn>
-              <DeleteRoundedIcon style={{ fill: 'var(--gray-20)' }} />
-            </IconBtn>
+            <RemoveFrame />
           </div>
           <FieldSet style={{ marginBottom: 0 }}>
             <TextField label="Имя сервера" name="server" disabled />

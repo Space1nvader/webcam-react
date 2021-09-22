@@ -25,9 +25,15 @@
     align-items: flex-end;
     box-sizing: border-box;
   }
+  &__scrollbar {
+    max-height: 18.75rem;
+    padding-right: 1rem;
+  }
   &__body {
     background-color: #fff;
     padding: 1rem;
+    padding-right: 0;
+    height: 100%;
     padding-bottom: 1.4rem;
     box-sizing: border-box;
   }
