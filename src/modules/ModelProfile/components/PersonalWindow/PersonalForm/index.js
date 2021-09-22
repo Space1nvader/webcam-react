@@ -6,7 +6,6 @@ import {
   PasswordField,
   DateField
 } from 'components/Form';
-import { PROFILE_VALIDATION_SCHEMA } from 'constants/validateSchema';
 import FieldSet from 'components/Form/FieldSet';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,6 +15,7 @@ import { filterChangesValues, checkValueEmpty } from 'utils';
 import setSubmitForm from 'modules/ModelProfile/setSubmitForm';
 import FormTitle from 'modules/ModelProfile/components/FormTitle';
 import ModelFormContainer from 'modules/ModelProfile/components/ModelFormContainer';
+import { PROFILE_VALIDATION_SCHEMA } from './validateSchema';
 import { initialValues } from './initialValues';
 
 const PersonalForm = ({ className }) => {
@@ -56,7 +56,7 @@ const PersonalForm = ({ className }) => {
         </FieldSet>
         <FieldSet divider title="Паспортные данные">
           <DateField name="birthday" label="Дата рождения" />
-          <TextField name="serialNumber" type="text" label="Серия номер" />
+          <TextField name="serialNumber" type="number" label="Серия номер" />
           <DateField name="validatedAt" label="Срок действия" />
           <SelectField label="Страна" name="countryId" options={defaultValues.country} />
           <TextField name="region" type="text" label="Регион" />

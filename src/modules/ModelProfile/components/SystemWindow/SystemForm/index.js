@@ -1,6 +1,5 @@
 import React from 'react';
 import { TextField, SelectField, TextArea } from 'components/Form';
-import { SYSTEM_VALIDATION_SCHEMA } from 'constants/validateSchema';
 import FieldSet from 'components/Form/FieldSet';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +9,7 @@ import { uploadPictureSelector } from 'redux/selectors/uploadPicture';
 import { filterChangesValues, checkValueEmpty } from 'utils';
 import ModelFormContainer from 'modules/ModelProfile/components/ModelFormContainer/index';
 import setSubmitForm from 'modules/ModelProfile/setSubmitForm';
+import { SYSTEM_VALIDATION_SCHEMA } from './validateSchema';
 import { initialValues } from './initialValues';
 
 const SystemForm = ({ className }) => {
