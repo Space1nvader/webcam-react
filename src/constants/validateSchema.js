@@ -1,6 +1,5 @@
-import { fromUnixTime, getTime } from 'date-fns';
-import { format } from 'date-fns/esm';
 import * as Yup from 'yup';
+import { fromUnixTime } from 'date-fns';
 
 Yup.addMethod(Yup.string, 'Eng', function Eng(err = 'Только английские буквы') {
   return this.matches(/^[^а-яА-ЯёЁ]+$/, err);
@@ -21,7 +20,7 @@ Yup.addMethod(Yup.number, 'MinAge', function (message) {
     return inputDate <= new Date();
   });
 });
-const numberErr = 'Допускаются только цифры';
+export const numberErr = 'Допускаются только цифры';
 
 export const PROFILE_VALIDATION_SCHEMA = Yup.object().shape({
   nameRus: Yup.string().Rus(),
@@ -52,13 +51,4 @@ export const DESCRIPTION_VALIDATION_SCHEMA = Yup.object().shape({
 
 export const SYSTEM_VALIDATION_SCHEMA = Yup.object().shape({
   nickname: Yup.string().Eng().Req()
-});
-
-export const ACCOUNT_VALIDATION_SCHEMA = Yup.object().shape({
-  password: Yup.string()
-    .Eng()
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-      'Пароль должен содержать больше 8 символов, заглавную букву, строчную букву, цифру и символ'
-    )
 });
