@@ -13,8 +13,8 @@ export const theme = createTheme(
         dark: '#787885'
       },
       secondary: {
-        main: '#f6655a',
-        dark: '#f44336'
+        main: '#f44336',
+        dark: '#9c2b23'
       },
       error: {
         light: '#f6655a',

@@ -9,28 +9,36 @@ import { TableCell } from 'components/Table';
 
 const ModelRows = (props) => {
   const { rows, classes, isSelect, handleSelectClick } = props;
-  return rows.map((row) => (
-    <TableRow className={classes} key={`${row.nickname}-${row.id}`}>
-      <TableCell padding="checkbox">
-        <SmallCheckbox checked={isSelect.has(row.id)} onChange={handleSelectClick(row.id)} />
-      </TableCell>
-      <TableCell>
-        <User to={`/models/${row.id}`} image={row.avatar}>
-          {row.nickname} {row.fullNameRus && `/  ${row.fullNameRus}`}
-        </User>
-      </TableCell>
-      <TableCell>{row.pair}</TableCell>
-      <TableCell>{format(fromUnixTime(row.lastActiveAt), 'dd.MM.yyyy')}</TableCell>
-      <TableCell>{row.contragent}</TableCell>
-      <TableCell>{row.balance}</TableCell>
-      <TableCell>
-        <ActiveToggle id={row.id} checked={row.active} />
-      </TableCell>
-      <TableCell>
-        <Status value={row.status} />
-      </TableCell>
-    </TableRow>
-  ));
+  return (
+    <>
+      <TableRow>
+        {/* Пустая ячейка для отступа */}
+        <TableCell />
+      </TableRow>
+      {rows.map((row) => (
+        <TableRow className={classes} key={`${row.nickname}-${row.id}`}>
+          <TableCell padding="checkbox">
+            <SmallCheckbox checked={isSelect.has(row.id)} onChange={handleSelectClick(row.id)} />
+          </TableCell>
+          <TableCell>
+            <User to={`/models/${row.id}`} image={row.avatar}>
+              {row.nickname} {row.fullNameRus && `/  ${row.fullNameRus}`}
+            </User>
+          </TableCell>
+          <TableCell>{row.pair}</TableCell>
+          <TableCell>{format(fromUnixTime(row.lastActiveAt), 'dd.MM.yyyy')}</TableCell>
+          <TableCell>{row.contragent}</TableCell>
+          <TableCell>{row.balance}</TableCell>
+          <TableCell>
+            <ActiveToggle id={row.id} checked={row.active} />
+          </TableCell>
+          <TableCell>
+            <Status value={row.status} />
+          </TableCell>
+        </TableRow>
+      ))}
+    </>
+  );
 };
 
 export default ModelRows;

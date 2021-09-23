@@ -10,17 +10,17 @@ import ActiveToggle from 'components/ActiveToggle';
 import { checkValueEmpty, filterChangesValues } from 'utils';
 import setSubmitForm from 'modules/ModelProfile/setSubmitForm';
 import IconBtn from 'components/IconBtn';
+import { format, fromUnixTime } from 'date-fns';
 import { ACCOUNT_VALIDATION_SCHEMA } from '../../validateSchema';
 import AccountErrors from '../AccontErrors';
+import RemoveFrame from './RemoveFrame';
 import style from './style';
 import './index.scss';
-import RemoveFrame from './RemoveFrame';
 
 const useStyles = makeStyles(style);
 
 const AccountFrame = (props) => {
   const { id, data, errors, initialValues } = props;
-
   const classes = useStyles();
   const dispatch = useDispatch();
   const generateInitialValues = checkValueEmpty(data, initialValues);
@@ -28,7 +28,10 @@ const AccountFrame = (props) => {
     const filtredValues = filterChangesValues(values, generateInitialValues);
     dispatch(setSubmitForm(id, filtredValues));
   };
-
+  const handleRefreshRequest = () => {
+    // TODO: Запрос на обновление данных
+    console.log(id);
+  };
   return (
     <FormContainer
       enableReinitialize
@@ -40,13 +43,13 @@ const AccountFrame = (props) => {
         <div className="accountFrame">
           <div className="accountFrame__row">
             <div className="accountFrame__info">
-              <h6 className="accountFrame__title">Chaturbate</h6>
+              <h6 className="accountFrame__title">{values.server}</h6>
               <div className="accountFrame__tags" />
             </div>
-            <RemoveFrame />
+            {!values?.id && <RemoveFrame />}
           </div>
           <FieldSet style={{ marginBottom: 0 }}>
-            <TextField label="Имя сервера" name="server" disabled />
+            <TextField label="Имя сервера" name="server" disabled={!!values?.id} />
             <TextField name="login" label="Login" />
             <TextField name="serverId" label="ID сервера" />
             <PasswordField label="Пароль" name="password" />
@@ -54,26 +57,39 @@ const AccountFrame = (props) => {
               <Button
                 color="secondary"
                 type="submit"
+                title="Сохранить изменения"
                 className={classes.button}
                 variant="contained"
               >
                 сохранить
               </Button>
-              <Button className={classes.button} type="reset" variant="contained">
+              <Button
+                className={classes.button}
+                type="reset"
+                title="Отменить изменения"
+                variant="contained"
+              >
                 отменить
               </Button>
             </div>
-            <div className="accountFrame__controls">
-              <div className="accountFrame__update">
-                <IconBtn style={{ marginRight: 12 }}>
-                  <RefreshRoundedIcon style={{ fill: 'var(--gray-30)' }} />
-                </IconBtn>
-                Обновлен: 24.03.2021
+            {!!values.id && (
+              <div className="accountFrame__controls">
+                <div className="accountFrame__update">
+                  <IconBtn
+                    onClick={handleRefreshRequest}
+                    title="Обновить"
+                    style={{ marginRight: 12 }}
+                  >
+                    <RefreshRoundedIcon style={{ fill: 'var(--gray-30)' }} />
+                  </IconBtn>
+                  {!!values?.updatedAt &&
+                    `Обновлен: ${format(fromUnixTime(data.updatedAt), 'dd.MM.yyyy')}`}
+                </div>
+                <ActiveToggle label="Активна" id={id} />
               </div>
-              <ActiveToggle label="Активна" id={id} />
-            </div>
+            )}
 
-            {errors?.length && <AccountErrors className="accountFrame__errors" errors={errors} />}
+            {!!errors?.length && <AccountErrors className="accountFrame__errors" errors={errors} />}
           </FieldSet>
         </div>
       )}
