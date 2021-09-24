@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 // TODO: временные данные из формы систенмных настроек
-import { modelSystemFormSelector } from 'modules/ModelProfile/redux/selectors';
+import { modelIdSelector } from 'modules/ModelProfile/redux/selectors';
 import IconBtn from 'components/IconBtn';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import FormTitle from 'modules/ModelProfile/components/FormTitle';
@@ -33,7 +33,7 @@ const getAccounts = [
 
 const AccountForm = ({ className }) => {
   // TODO: временные данные из формы систенмных настроек
-  const { id, data } = useSelector(modelSystemFormSelector);
+  const { modelId: id } = useSelector(modelIdSelector);
   const { errors: dataErrors } = useSelector(modelErrorsSelector);
   const [accounts, setAccounts] = useState(getAccounts);
   const addAccountFrame = () => {

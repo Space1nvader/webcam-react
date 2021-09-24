@@ -23,7 +23,6 @@ export const TranslatedTextField = (props) => {
           if (!initialValues[translateFrom]?.length && !meta.touched)
             setFieldValue(name, generateTranslite(values[translateFrom]));
         }, [meta.touched, values[translateFrom]]);
-
         return (
           <MaterialField
             {...field}

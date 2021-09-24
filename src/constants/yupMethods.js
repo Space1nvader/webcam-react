@@ -4,7 +4,6 @@ import { fromUnixTime } from 'date-fns';
 Yup.addMethod(Yup.string, 'Eng', function Eng(err = 'Только английские буквы') {
   return this.matches(/^[^а-яА-ЯёЁ]+$/, err);
 });
-
 Yup.addMethod(Yup.string, 'Rus', function Rus(err = 'Только русские буквы') {
   return this.matches(/^[^a-zA-Z]+$/, err);
 });
