@@ -8,7 +8,7 @@ import { modelErrorsSelector } from 'redux/selectors/modelErrors';
 import NotificationList from '../NotificationsList';
 
 const NotificationMenu = (props) => {
-  const { errors } = useSelector(modelErrorsSelector);
+  const { id, errors } = useSelector(modelErrorsSelector);
   const [currentTab, setCurrentTab] = useState(0);
   const { open } = props;
   const handleChangeCurrentTab = (index) => {
@@ -17,10 +17,12 @@ const NotificationMenu = (props) => {
   const tabs = [
     {
       title: 'Ошибки',
+      id,
       data: errors
     },
     {
       title: 'Изменения',
+      id,
       data: errors // changes
     }
   ];
@@ -44,7 +46,7 @@ const NotificationMenu = (props) => {
           {tabs.map((tab, index) => (
             <Tab key={tab.title} value={currentTab} index={index}>
               <ScrollBar className="notificationMenu__scrollbar">
-                <NotificationList data={tab.data} />
+                <NotificationList id={tab.id} data={tab.data} />
               </ScrollBar>
             </Tab>
           ))}

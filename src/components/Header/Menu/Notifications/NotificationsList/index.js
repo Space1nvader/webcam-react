@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import IconBtn from 'components/IconBtn';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import './index.scss';
@@ -7,6 +7,7 @@ import './index.scss';
 
 const Item = (props) => {
   const { title, children, checked, ...other } = props;
+  const [isChecked, setChecked] = useState(checked);
   const setErrorChecked = () => {
     console.log(checked);
     return false;
@@ -25,12 +26,13 @@ const Item = (props) => {
 };
 
 const NotificationList = (props) => {
-  const { data } = props;
+  const { id, data } = props;
   const generateNotifications = () => {
     if (data && data.length) {
       return data.map((el) =>
-        el.errors.map((message) => (
-          <Item checked={message.ckeched} title={message.title}>
+        el.errors.map((message, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <Item checked={message.checked} key={`${message.title}-${index}`} title={message.title}>
             {message.text}
           </Item>
         ))

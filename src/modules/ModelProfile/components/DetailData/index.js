@@ -30,8 +30,8 @@ const DetailData = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { id } = useSelector(modelPersonalFormSelector);
-  const personal = useSelector(modelPersonalFormSelector).data;
-  const system = useSelector(modelSystemFormSelector).data;
+  const { data: personal } = useSelector(modelPersonalFormSelector);
+  const { data: system } = useSelector(modelSystemFormSelector);
   const history = useHistory();
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpenClick = () => setModalOpen(true);

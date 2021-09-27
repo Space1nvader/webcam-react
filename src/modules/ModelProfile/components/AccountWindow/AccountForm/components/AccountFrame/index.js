@@ -44,7 +44,8 @@ const AccountFrame = (props) => {
           <div className="accountFrame__row">
             <div className="accountFrame__info">
               <h6 className="accountFrame__title">{values.server}</h6>
-              <div className="accountFrame__tags" />
+              {/* TODO: STATUS TAg  */}
+              <div className="accountFrame__tags">{values.server}</div>
             </div>
             {!values?.id && <RemoveFrame />}
           </div>

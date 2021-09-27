@@ -5,10 +5,13 @@ const SessionStatus = (props) => {
   const { value, ...other } = props;
 
   const setStatus = () => {
-    if (value) {
-      return 'online';
+    switch (value) {
+      case 'online':
+        return 'online';
+
+      default:
+        return 'offline';
     }
-    return 'offline';
   };
   return (
     <span {...other} className={`sessionStatus ${setStatus()}`}>
