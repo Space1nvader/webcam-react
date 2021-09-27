@@ -3,11 +3,11 @@ export const style = {
     width: 'calc(50% - (32px / 2))',
     marginBottom: 30,
     '& .MuiInputBase-formControl': {
-      backgroundColor: '#ffffff',
-      transition: 'all .2s'
+      backgroundColor: '#ffffff'
     },
     '& .MuiInputBase-input': {
-      padding: 12
+      padding: 12,
+      font: '16px var(--font)'
     },
     '& label': {
       transform: ' translate(14px,14px) scale(1)'

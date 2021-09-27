@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import './index.scss';
 
 const ScrollBar = (props) => {
-  const { children, className, role: Role = 'div', ...other } = props;
+  const { children, className = '', role: Role = 'div', ...other } = props;
   return (
     <Role className={clsx('scrollbar', className)} {...other}>
       {children}

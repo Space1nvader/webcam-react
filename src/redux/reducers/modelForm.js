@@ -4,7 +4,8 @@ export const MODEL_FORM_ACTION_TYPES = new ActionTypes('MODEL_FORM', [
   'CHANGED',
   'CONFIRM',
   'CURRENT_TAB',
-  'RESET_CONFIRM'
+  'RESET_CONFIRM',
+  'RESET_STATE'
 ]).getActionTypes();
 
 const initialState = {
@@ -30,6 +31,9 @@ const handleAction = {
   [MODEL_FORM_ACTION_TYPES.RESET_CONFIRM]: (state) => ({
     ...state,
     confirmModal: initialState.confirmModal
+  }),
+  [MODEL_FORM_ACTION_TYPES.RESET_STATE]: () => ({
+    ...initialState
   })
 };
 

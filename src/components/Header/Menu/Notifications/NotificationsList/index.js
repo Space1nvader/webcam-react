@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import IconBtn from 'components/IconBtn';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import './index.scss';
 
+// TODO: SET CHCKED ON CLICK
+
 const Item = (props) => {
-  const { title, children } = props;
+  const { title, children, checked, ...other } = props;
+  const [isChecked, setChecked] = useState(checked);
+  const setErrorChecked = () => {
+    console.log(checked);
+    return false;
+  };
   return (
-    <div className="notificationItem">
+    <div className="notificationItem" {...other}>
       <div className="notificationItem__head">
         <div className="notificationItem__title">{title}</div>
-        <IconBtn className="notificationItem__close">
+        <IconBtn onClick={setErrorChecked} className="notificationItem__close">
           <CloseRoundedIcon style={{ fill: 'var(--gray-30)' }} />
         </IconBtn>
       </div>
@@ -19,14 +26,21 @@ const Item = (props) => {
 };
 
 const NotificationList = (props) => {
-  const { data } = props;
-  const generateOutput = () => {
+  const { id, data } = props;
+  const generateNotifications = () => {
     if (data && data.length) {
-      return data.map((el) => <Item title={el.title}>{el.text}</Item>);
+      return data.map((el) =>
+        el.errors.map((message, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <Item checked={message.checked} key={`${message.title}-${index}`} title={message.title}>
+            {message.text}
+          </Item>
+        ))
+      );
     }
     return <div className="notificationList__emptyMsg">Список пуст</div>;
   };
-  return <div className="notificationList">{generateOutput()}</div>;
+  return <div className="notificationList">{generateNotifications()}</div>;
 };
 
 export default NotificationList;

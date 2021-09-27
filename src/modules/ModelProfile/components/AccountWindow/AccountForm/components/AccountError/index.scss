@@ -6,17 +6,14 @@
   border-radius: 6px;
   position: relative;
   margin-top: 1.1rem;
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.25rem;
-  }
+
   &__title {
     font-weight: 600;
     font-size: 0.875rem;
     color: var(--red-80);
     display: block;
     padding-right: 2rem;
+    margin-bottom: 0.4rem;
     box-sizing: border-box;
   }
   &__text,

@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField, TextArea, SelectField } from 'components/Form';
 import FieldSet from 'components/Form/FieldSet';
-import { DESCRIPTION_VALIDATION_SCHEMA } from 'constants/validateSchema';
 import { checkValueEmpty, filterChangesValues } from 'utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { modelDescriptionFormSelector } from 'modules/ModelProfile/redux/selectors';
@@ -10,6 +9,7 @@ import { staticModelDataSelector } from 'redux/selectors/staticData';
 import clsx from 'clsx';
 import setSubmitForm from 'modules/ModelProfile/setSubmitForm';
 import ModelFormContainer from 'modules/ModelProfile/components/ModelFormContainer/index';
+import { DESCRIPTION_VALIDATION_SCHEMA } from './validateSchema';
 import { initialValues } from './initialValues';
 import style from './style';
 

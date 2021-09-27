@@ -2,34 +2,13 @@ import React, { useState } from 'react';
 import { Tabs, Tab, TabsControls } from 'components/Tabs';
 import './index.scss';
 import clsx from 'clsx';
+import { useSelector } from 'react-redux';
+import ScrollBar from 'components/ScrollBar';
+import { modelErrorsSelector } from 'redux/selectors/modelErrors';
 import NotificationList from '../NotificationsList';
 
-const errors = [
-  {
-    title: 'Ошибка №21233',
-    text: 'Неверный пароль при регистрации на сайте jasmin.com'
-  },
-  {
-    title: 'Ошибка №0233',
-    text: 'Верный Логин при регистрации на сайте jasmin.com'
-  }
-];
-const changes = [
-  // {
-  //   title: 'Изменение №21233',
-  //   text: 'Неверный пароль '
-  // },
-  // {
-  //   title: 'Изменение №0233',
-  //   text: 'Верный Логин при регистрации на сайте jasmin.com Верный Логин при регистрации на сайте jasmin.com'
-  // },
-  // {
-  //   title: 'Изменение №0233',
-  //   text: 'Верный Логин при регистрации на сайте jasmin.com'
-  // }
-];
-
 const NotificationMenu = (props) => {
+  const { id, errors } = useSelector(modelErrorsSelector);
   const [currentTab, setCurrentTab] = useState(0);
   const { open } = props;
   const handleChangeCurrentTab = (index) => {
@@ -38,11 +17,13 @@ const NotificationMenu = (props) => {
   const tabs = [
     {
       title: 'Ошибки',
+      id,
       data: errors
     },
     {
       title: 'Изменения',
-      data: changes
+      id,
+      data: errors // changes
     }
   ];
 
@@ -64,7 +45,9 @@ const NotificationMenu = (props) => {
         <Tabs activeTab={currentTab}>
           {tabs.map((tab, index) => (
             <Tab key={tab.title} value={currentTab} index={index}>
-              <NotificationList data={tab.data} />
+              <ScrollBar className="notificationMenu__scrollbar">
+                <NotificationList id={tab.id} data={tab.data} />
+              </ScrollBar>
             </Tab>
           ))}
         </Tabs>
