@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Field } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
 import DateFnsUtils from '@date-io/date-fns';
@@ -12,20 +12,17 @@ import { style } from '../style';
 const useStyles = makeStyles(style);
 
 export const DateField = (props) => {
-  const [selectedDate, setSelectedDate] = React.useState('');
-
   const classes = useStyles();
   const { name, label, className, ...other } = props;
+  const handleSelectedDate = (setFieldValue, value) => {
+    setFieldValue(name, getTime(value) / 1000);
+  };
   return (
     <Field {...props}>
       {({ field, form, meta }) => {
         const { setFieldValue } = form;
         const isError = !!meta.error;
         const errorClass = isError ? 'error' : '';
-        console.log(isError);
-        useEffect(() => {
-          if (selectedDate) setFieldValue(name, getTime(selectedDate) / 1000);
-        }, [selectedDate]);
         return (
           <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
             <KeyboardDatePicker
@@ -38,9 +35,9 @@ export const DateField = (props) => {
               labelid={name}
               label={label}
               name={name}
-              value={selectedDate || fromUnixTime(field.value)}
+              value={fromUnixTime(field.value)}
               className={clsx(classes.field, className, errorClass)}
-              onChange={setSelectedDate}
+              onChange={(date) => handleSelectedDate(setFieldValue, date)}
               KeyboardButtonProps={{
                 'aria-label': 'change date',
                 size: 'small'

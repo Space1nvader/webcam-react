@@ -17,12 +17,12 @@ export const TranslatedTextField = (props) => {
     <Field {...props}>
       {({ field, form, meta }) => {
         const isError = !!meta.error;
+        const { setFieldValue, values, initialValues } = form;
         const errorClass = isError ? 'error' : '';
         useEffect(() => {
-          if (!meta.touched)
-            form.setFieldValue(name, generateTranslite(form.values[translateFrom]));
-        }, [meta.touched, form.values[translateFrom]]);
-
+          if (!initialValues[translateFrom]?.length && !meta.touched)
+            setFieldValue(name, generateTranslite(values[translateFrom]));
+        }, [meta.touched, values[translateFrom]]);
         return (
           <MaterialField
             {...field}

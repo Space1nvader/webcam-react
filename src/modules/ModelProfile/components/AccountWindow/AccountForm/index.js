@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 // TODO: временные данные из формы систенмных настроек
-import { modelSystemFormSelector } from 'modules/ModelProfile/redux/selectors';
+import { modelIdSelector } from 'modules/ModelProfile/redux/selectors';
 import IconBtn from 'components/IconBtn';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import FormTitle from 'modules/ModelProfile/components/FormTitle';
@@ -10,14 +10,15 @@ import { modelErrorsSelector } from 'redux/selectors/modelErrors';
 import { initialValues } from './initialValues';
 import AccountFrame from './components/AccountFrame';
 
-const accounts = [
+const getAccounts = [
   {
     id: 1,
     server: 'Chaturbate',
     active: true,
     login: 'chaturbate-login',
     serverId: '1',
-    password: 'chaturbate-password'
+    password: 'chaturbate-password',
+    updatedAt: 1063483200
   },
   {
     id: 2,
@@ -25,15 +26,19 @@ const accounts = [
     active: false,
     login: 'jasmin-login',
     serverId: '2',
-    password: 'jasmin-password'
+    password: 'jasmin-password',
+    updatedAt: ''
   }
 ];
 
 const AccountForm = ({ className }) => {
   // TODO: временные данные из формы систенмных настроек
-  const { id, data } = useSelector(modelSystemFormSelector);
+  const { modelId: id } = useSelector(modelIdSelector);
   const { errors: dataErrors } = useSelector(modelErrorsSelector);
-
+  const [accounts, setAccounts] = useState(getAccounts);
+  const addAccountFrame = () => {
+    setAccounts([...accounts, ...initialValues.account]);
+  };
   const findErrors = (accountId) => {
     const errorsId = dataErrors.find((errors) => errors.id === accountId);
     return errorsId?.errors || '';
@@ -47,14 +52,16 @@ const AccountForm = ({ className }) => {
         accounts.map((account) => (
           <AccountFrame
             id={id}
+            key={account.id}
             errors={findErrors(account.id)}
-            data={data[account.id]}
+            data={account}
             initialValues={initialValues}
           />
         ))}
 
       <IconBtn
         title="Добавить модель"
+        onClick={addAccountFrame}
         style={{
           backgroundColor: 'var(--red-60)',
           height: 50,
