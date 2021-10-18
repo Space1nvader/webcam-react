@@ -9,6 +9,13 @@
     justify-content: space-between;
     align-items: center;
   }
+  &__info {
+    display: flex;
+    align-items: center;
+  }
+  &__tags {
+    margin-left: 1.25rem;
+  }
   &__title {
     color: var(--gray-90);
   }

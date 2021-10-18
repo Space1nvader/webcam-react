@@ -6,6 +6,7 @@ import { modelIdSelector } from 'modules/ModelProfile/redux/selectors';
 import IconBtn from 'components/IconBtn';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import FormTitle from 'modules/ModelProfile/components/FormTitle';
+// @ts-ignore
 import { modelErrorsSelector } from 'redux/selectors/modelErrors';
 import { initialValues } from './initialValues';
 import AccountFrame from './components/AccountFrame';
@@ -34,6 +35,7 @@ const getAccounts = [
 const AccountForm = ({ className }) => {
   // TODO: временные данные из формы систенмных настроек
   const { modelId: id } = useSelector(modelIdSelector);
+  // @ts-ignore
   const { errors: dataErrors } = useSelector(modelErrorsSelector);
   const [accounts, setAccounts] = useState(getAccounts);
   const addAccountFrame = () => {

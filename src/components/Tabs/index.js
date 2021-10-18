@@ -3,7 +3,7 @@ import { Tab } from './Tab';
 import { TabsControls } from './TabsControls';
 
 const Tabs = (props) => {
-  const { children, activeTab, ...other } = props;
+  const { children, activeTab } = props;
   const renderTab = children.filter((el) => el.props.index === activeTab);
   return <>{renderTab}</>;
 };

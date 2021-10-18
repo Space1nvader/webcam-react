@@ -11,6 +11,7 @@ import { checkValueEmpty, filterChangesValues } from 'utils';
 import setSubmitForm from 'modules/ModelProfile/setSubmitForm';
 import IconBtn from 'components/IconBtn';
 import { format, fromUnixTime } from 'date-fns';
+import SessionStatus from 'components/SessionStatus';
 import { ACCOUNT_VALIDATION_SCHEMA } from '../../validateSchema';
 import AccountErrors from '../AccontErrors';
 import RemoveFrame from './RemoveFrame';
@@ -45,7 +46,9 @@ const AccountFrame = (props) => {
             <div className="accountFrame__info">
               <h6 className="accountFrame__title">{values.server}</h6>
               {/* TODO: STATUS TAg  */}
-              <div className="accountFrame__tags">{values.server}</div>
+              <div className="accountFrame__tags">
+                <SessionStatus style={{ fontSize: 12, fontWeight: 500 }} value="offline" />
+              </div>
             </div>
             {!values?.id && <RemoveFrame />}
           </div>

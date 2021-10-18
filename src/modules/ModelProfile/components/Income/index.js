@@ -8,7 +8,7 @@ import './index.scss';
 
 const Income = ({ ...other }) => (
   // const data = useSelector(profileSelector)
-  // TODO: Сделать прибыль модели ждем бекенда
+  // TODO: Сделать прибыль модели ждем бекенда. Задача WC-22
   <div className="income" {...other}>
     <div className="income__header">
       <span className="income__title">Прибыль в месяце</span>
