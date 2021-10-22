@@ -59,6 +59,15 @@ class API {
       data
     });
   };
+
+  // sse = (path = '') => {
+  //   const eventSource = new EventSource(`${this.url}${path}`);
+
+  //   eventSource.onmessage = function (event) {
+  //     console.log('Новое сообщение', event.data);
+  //     // этот код выведет в консоль 3 сообщения, из потока данных выше
+  //   };
+  // };
 }
 
 export default new API();

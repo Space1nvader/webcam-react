@@ -17,24 +17,35 @@
       font-weight: 500;
       letter-spacing: 0.022em;
       line-height: 1.5;
-      height: 4.375rem;
+      min-height: 3.375rem;
       box-sizing: border-box;
       padding-bottom: 6px;
     }
+    &Upload,
     &Name {
-      margin-bottom: 1.75rem;
+      margin-bottom: 0.35rem;
       letter-spacing: 0.022em;
+      font-size: 1rem;
       font-weight: 500;
-      color: var(--gray-20);
       text-decoration-line: underline;
       font-feature-settings: 'ss01' on;
+      color: var(--red-60);
+      &--upload {
+        cursor: pointer;
+        color: var(--gray-20);
+        transition: color 0.3s;
+        &:hover {
+          color: var(--gray-30);
+        }
+      }
     }
     &Row {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    &Size {
+
+    &Date {
       color: var(--gray-50);
     }
     &Bar {

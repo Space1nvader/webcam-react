@@ -15,7 +15,7 @@ const useStyles = makeStyles(styles);
 const ModelsTable = (props) => {
   const { rows, fields, ...other } = props;
   const classes = useStyles();
-  const { pagination, isLoading } = useSelector(modelsListSelector);
+  const { pagination, success, isLoading } = useSelector(modelsListSelector);
   const [isSelect, setSelectState] = useState(new Set());
   const [isSelectAll, setSelectAll] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -63,17 +63,20 @@ const ModelsTable = (props) => {
 
   const generateTableRows = () => {
     if (!isLoading) {
-      if (rows?.length) {
-        return (
-          <ModelRows
-            rows={rows}
-            classes={classes.tableRow}
-            isSelect={isSelect}
-            handleSelectClick={handleSelectClick}
-          />
-        );
+      if (success) {
+        if (rows?.length) {
+          return (
+            <ModelRows
+              rows={rows}
+              classes={classes.tableRow}
+              isSelect={isSelect}
+              handleSelectClick={handleSelectClick}
+            />
+          );
+        }
+        return <TableMessage>Список моделей пуст</TableMessage>;
       }
-      return <TableMessage>Список моделей пуст</TableMessage>;
+      return <TableMessage>Что-то пошло не так</TableMessage>;
     }
     return <TableMessage>Загрузка списка моделей</TableMessage>;
   };

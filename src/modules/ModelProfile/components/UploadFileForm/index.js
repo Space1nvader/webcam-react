@@ -10,9 +10,9 @@ const UploadFileForm = (props) => {
   const { name, children, className } = props;
   const dispatch = useDispatch();
   const { modelId: id } = useSelector(modelIdSelector);
-  const onSubmit = ({ files }) => {
-    files.append('modelId', id);
-    dispatch(PostDocumentAction(files));
+  const onSubmit = (data) => {
+    data[name].append('modelId', id);
+    dispatch(PostDocumentAction(data[name]));
   };
   const initialValues = {
     [name]: ''

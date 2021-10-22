@@ -99,10 +99,9 @@ function* attachDocument({ payload }) {
 function* deleteDocument({ payload }) {
   try {
     yield call(SERVICE_API.Model.detachFile, payload);
-
     yield put({
       type: MODEL_DOCUMENTS_ACTION_TYPES.DELETE.SUCCESS,
-      fileId: payload
+      payload
     });
   } catch ({ response }) {
     yield put({

@@ -5,9 +5,10 @@ import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
 import UploadFileForm from 'modules/ModelProfile/components/UploadFileForm';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
-import { modelPersonalFormSelector } from 'modules/ModelProfile/redux/selectors';
+import { modelDocumentsSelector } from 'modules/ModelProfile/redux/selectors';
 import ScrollBar from 'components/ScrollBar';
 import Document from './Document';
+import { initialValues } from './initialValues';
 import './index.scss';
 
 const useStyles = makeStyles({
@@ -30,19 +31,27 @@ const useStyles = makeStyles({
 const DocsForm = (props) => {
   const { className, ...other } = props;
   const classes = useStyles();
-  const {
-    data: { documents }
-  } = useSelector(modelPersonalFormSelector);
-  // TODO: INITIAL DOCUMENTS
+  const { data } = useSelector(modelDocumentsSelector);
+
+  const documents = data;
+  const getDocument = (name) => data.find((document) => document.field === name) || { field: name };
+  const otherDocuments = documents.files || '';
   return (
     <div className={clsx('docs', className)} {...other}>
       <h6 className="docs__title">Документы</h6>
 
       {documents && (
         <ScrollBar className="docs__list">
-          {documents.map((document) => (
-            <Document document={document} />
-          ))}
+          <Document
+            name="Фото модели с паспортом и датой"
+            document={getDocument('faceWidthDate')}
+          />
+          <Document name="Фото лица" document={getDocument('face')} />
+          <Document name="Фото модели с паспортом" document={getDocument('faceWithPassport')} />
+          <Document name="Обратная сторона паспорта" document={getDocument('passportBackSide')} />
+          <Document name="Паспорт" document={getDocument('passport')} />
+          <Document name="Анкета" document={getDocument('form')} />
+          {otherDocuments && otherDocuments.map((document) => <Document document={document} />)}
         </ScrollBar>
       )}
 

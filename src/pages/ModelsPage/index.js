@@ -25,9 +25,7 @@ const ModelsPage = () => {
     return () => {
       dispatch(ResetAction());
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <div className="dashboard">
       <div className="dashboard__header">
