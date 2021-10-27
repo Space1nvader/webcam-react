@@ -3,7 +3,6 @@ import { generateFieldName } from './generageFieldNames';
 const initial = {
   title: '',
   active: false,
-  idServer: '',
   login: '',
   serverId: '',
   password: ''

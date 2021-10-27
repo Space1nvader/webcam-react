@@ -11,31 +11,11 @@ import { staticModelDataSelector } from 'redux/selectors/staticData';
 import { initialValues } from './initialValues';
 import AccountFrame from './components/AccountFrame';
 
-// const placeholders = [
-//   {
-//     title: 'Chaturbate',
-//     active: false,
-//     login: '',
-//     serverId: '',
-//     password: '',
-//     updatedAt: ''
-//   },
-//   {
-//     title: 'Jasmin',
-//     active: false,
-//     login: '',
-//     serverId: '',
-//     password: '',
-//     updatedAt: ''
-//   }
-// ];
-
 const AccountForm = ({ className, children }) => {
   // TODO: временные данные из формы систенмных настроек
   const { id, data } = useSelector(modelAccountFormSelector);
   const { errors: dataErrors } = useSelector(modelErrorsSelector);
-  const { server } = useSelector(staticModelDataSelector);
-  console.log(server);
+  const { server: servers } = useSelector(staticModelDataSelector);
   const [accounts, setAccounts] = useState(data);
   const addAccountFrame = () => {
     setAccounts([...accounts, ...initialValues.account]);
@@ -44,7 +24,12 @@ const AccountForm = ({ className, children }) => {
     const errorsId = dataErrors.find((errors) => errors.id === accountId);
     return errorsId?.errors || '';
   };
-  const generatedAccounts = [...placeholders, ...accounts];
+  // const generatedAccounts = () =>
+  //   servers.filter((server) => !data.some((el) => server.title === el.title));
+
+  console.log(servers);
+  console.log(data);
+  console.log(generatedAccounts());
   return (
     <div className={clsx(className)}>
       <FormTitle>Учетные данные</FormTitle>
