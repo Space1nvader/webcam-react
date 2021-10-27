@@ -2,42 +2,41 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 // TODO: временные данные из формы систенмных настроек
-import { modelIdSelector } from 'modules/ModelProfile/redux/selectors';
+import { modelAccountFormSelector } from 'modules/ModelProfile/redux/selectors';
 import IconBtn from 'components/IconBtn';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import FormTitle from 'modules/ModelProfile/components/FormTitle';
-// @ts-ignore
 import { modelErrorsSelector } from 'redux/selectors/modelErrors';
+import { staticModelDataSelector } from 'redux/selectors/staticData';
 import { initialValues } from './initialValues';
 import AccountFrame from './components/AccountFrame';
 
-const getAccounts = [
-  {
-    id: 1,
-    server: 'Chaturbate',
-    active: true,
-    login: 'chaturbate-login',
-    serverId: '1',
-    password: 'chaturbate-password',
-    updatedAt: 1063483200
-  },
-  {
-    id: 2,
-    server: 'Jasmin',
-    active: false,
-    login: 'jasmin-login',
-    serverId: '2',
-    password: 'jasmin-password',
-    updatedAt: ''
-  }
-];
+// const placeholders = [
+//   {
+//     title: 'Chaturbate',
+//     active: false,
+//     login: '',
+//     serverId: '',
+//     password: '',
+//     updatedAt: ''
+//   },
+//   {
+//     title: 'Jasmin',
+//     active: false,
+//     login: '',
+//     serverId: '',
+//     password: '',
+//     updatedAt: ''
+//   }
+// ];
 
-const AccountForm = ({ className }) => {
+const AccountForm = ({ className, children }) => {
   // TODO: временные данные из формы систенмных настроек
-  const { modelId: id } = useSelector(modelIdSelector);
-  // @ts-ignore
+  const { id, data } = useSelector(modelAccountFormSelector);
   const { errors: dataErrors } = useSelector(modelErrorsSelector);
-  const [accounts, setAccounts] = useState(getAccounts);
+  const { server } = useSelector(staticModelDataSelector);
+  console.log(server);
+  const [accounts, setAccounts] = useState(data);
   const addAccountFrame = () => {
     setAccounts([...accounts, ...initialValues.account]);
   };
@@ -45,22 +44,20 @@ const AccountForm = ({ className }) => {
     const errorsId = dataErrors.find((errors) => errors.id === accountId);
     return errorsId?.errors || '';
   };
-
+  const generatedAccounts = [...placeholders, ...accounts];
   return (
     <div className={clsx(className)}>
       <FormTitle>Учетные данные</FormTitle>
-      {id &&
-        accounts &&
-        accounts.map((account) => (
+      {generatedAccounts &&
+        generatedAccounts.map((account) => (
           <AccountFrame
             id={id}
-            key={account.id}
+            key={account.title}
             errors={findErrors(account.id)}
             data={account}
             initialValues={initialValues}
           />
         ))}
-
       <IconBtn
         title="Добавить модель"
         onClick={addAccountFrame}

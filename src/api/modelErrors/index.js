@@ -1,5 +1,6 @@
 import API from 'api/restApiService';
 
+// TODO: MODEL ERRORS
 const data = {
   errors: []
 };

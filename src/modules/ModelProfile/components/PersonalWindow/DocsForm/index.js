@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { modelDocumentsSelector } from 'modules/ModelProfile/redux/selectors';
 import ScrollBar from 'components/ScrollBar';
 import Document from './Document';
-import { initialValues } from './initialValues';
+// import { initialValues } from './initialValues';
 import './index.scss';
 
 const useStyles = makeStyles({

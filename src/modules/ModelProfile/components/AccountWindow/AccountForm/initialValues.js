@@ -1,11 +1,12 @@
-export const initialValues = {
-  account: [
-    {
-      server: '',
-      active: false,
-      login: '',
-      serverId: '',
-      password: ''
-    }
-  ]
+import { generateFieldName } from './generageFieldNames';
+
+const initial = {
+  title: '',
+  active: false,
+  idServer: '',
+  login: '',
+  serverId: '',
+  password: ''
 };
+
+export const initialValues = (prefix) => generateFieldName(initial, prefix);
