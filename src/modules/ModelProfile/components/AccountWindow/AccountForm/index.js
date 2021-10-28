@@ -24,12 +24,49 @@ const AccountForm = ({ className, children }) => {
     const errorsId = dataErrors.find((errors) => errors.id === accountId);
     return errorsId?.errors || '';
   };
-  // const generatedAccounts = () =>
-  //   servers.filter((server) => !data.some((el) => server.title === el.title));
 
-  console.log(servers);
-  console.log(data);
+  const placeholder = [
+    {
+      title: 'Chatur'
+    },
+    {
+      title: 'Jasmin'
+    }
+  ];
+  const tests = [
+    {
+      id: 0,
+      title: 'Chatur',
+      password: 'chatur-123',
+      login: 'chtur-log'
+    },
+    {
+      id: 1,
+      title: 'Jasmin',
+      password: 'jasmin-321',
+      login: 'jas-log'
+    },
+    {
+      id: 2,
+      title: 'server2',
+      password: 'ser',
+      login: 'ser'
+    }
+  ];
+  const generatedAccounts = () =>
+    placeholder.map((holder) =>
+      tests.find((test) => {
+        if (holder.title === test.title) {
+          // console.log({ ...holder, ...test });
+          return { ...holder, ...test };
+        }
+        // console.log('net takova', test.title);
+        return false;
+      })
+    );
   console.log(generatedAccounts());
+  // servers.filter((server) => !data.some((el) => server.title === el.title));
+
   return (
     <div className={clsx(className)}>
       <FormTitle>Учетные данные</FormTitle>

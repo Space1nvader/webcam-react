@@ -10,25 +10,23 @@ import Layout from './components/Layout';
 import 'assets/style/main.scss';
 
 const routes = generateAppRoutes(dataRoutes);
-function App() {
-  return (
-    <Provider store={store}>
-      <Layout>
-        <Switch>
-          {routes.map((route) => (
-            <RouteCrubms
-              key={route.path}
-              label={route.label}
-              route={route}
-              path={route.path}
-              component={route.component}
-            />
-          ))}
-          <Redirect from="/" to="/models" />
-        </Switch>
-      </Layout>
-    </Provider>
-  );
-}
+const App = () => (
+  <Provider store={store}>
+    <Layout>
+      <Switch>
+        {routes.map((route) => (
+          <RouteCrubms
+            key={route.path}
+            label={route.label}
+            route={route}
+            path={route.path}
+            component={route.component}
+          />
+        ))}
+        <Redirect from="/" to="/models" />
+      </Switch>
+    </Layout>
+  </Provider>
+);
 
 export default App;
