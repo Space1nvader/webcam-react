@@ -20,6 +20,12 @@ class Model {
     API.post(`/models/documents`, data, { 'Content-Type': 'multipart/form-data' });
 
   detachFile = (id) => API.delete(`/models/documents`, { id });
+
+  // MODEL SERVERS
+
+  attachServer = (data) => API.post(`/models/servers`, data);
+
+  detachServer = (id) => API.delete(`/models/servers`, { id });
 }
 
 export default new Model();

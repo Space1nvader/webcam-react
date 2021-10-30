@@ -10,109 +10,61 @@ import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import FormTitle from 'modules/ModelProfile/components/FormTitle';
 import { modelErrorsSelector } from 'redux/selectors/modelErrors';
 import { staticModelDataSelector } from 'redux/selectors/staticData';
-import { initialValues } from './initialValues';
+import { initialValues, placeholders } from './initialValues';
 import AccountFrame from './components/AccountFrame';
 
 const AccountForm = ({ className, children }) => {
-  const tests = [
-    {
-      id: 0,
-      title: 'Chatur',
-      password: 'chatur-123',
-      login: 'chtur-log'
-    },
-    {
-      id: 1,
-      title: 'Jasmin',
-      password: 'jasmin-321',
-      login: 'jas-log'
-    },
-    {
-      id: 2,
-      title: 'server2',
-      password: 'ser',
-      login: 'ser',
-      custom: true
-    }
-  ];
   // TODO: временные данные из формы систенмных настроек
   const { id, data } = useSelector(modelAccountFormSelector);
   const { errors: dataErrors } = useSelector(modelErrorsSelector);
   const { server: servers } = useSelector(staticModelDataSelector);
-  const [accounts, setAccounts] = useState(tests);
+  const [accounts, setAccounts] = useState(placeholders);
   const addAccountFrame = () => {
-    setAccounts([...accounts, ...initialValues.account]);
+    setAccounts([...accounts, { ...initialValues('test'), custom: true }]);
   };
   const findErrors = (accountId) => {
     const errorsId = dataErrors.find((errors) => errors.id === accountId);
     return errorsId?.errors || '';
   };
 
-  const placeholders = [
-    {
-      title: 'Chatur'
-    },
-    {
-      title: 'Jasmin'
-    },
-    {
-      title: 'hui'
-    },
-    { title: 'test3' }
-  ];
-
   useEffect(() => {
-    // console.log(
-    //   tests.reduce((acc, test, index) => {
-    //     if (cur.title === placeholders[index].title) {
-    //       return [...acc, { ...test, ...placeholders[index] }];
-    //     }
-    //     return [...acc, test, placeholders[index]];
-    //   }, [])
-    // );
-    // const otherAccounts = tests.map((test) =>
-    //   placeholders.filter((holder) => {
-    //     if (test.title !== holder.title) {
-    //       console.log(test);
-    //       return test;
-    //     }
-    //     return undefined;
-    //   })
-    // );
-    // console.log(otherAccounts);
-    // tests.map((test) =>
-    //   placeholders.find((holder) => {
-    //     if (holder.title !== test.title) {
-    //       return { ...test, ...holder };
-    //     }
-    //     return false;
-    //   })
-    // )
-    //   [...placeholders, ...tests].map((account) =>
-    //     tests.find((test) => {
-    //       if (account.title === test.title) {
-    //         return { ...test, ...account };
-    //       }
-    //       setAccounts([...accounts]);
-    //       return false;
-    //     })
-    //   )
-    // setAccounts(combineAccounts);
-    // console.log(combineAccounts);
+    const tests = [
+      {
+        id: 0,
+        title: 'Chatur',
+        password: 'chatur-123',
+        login: 'Chtur-log'
+      },
+      {
+        id: 1,
+        title: 'Jasmin',
+        password: 'Jasmin-321',
+        login: 'Jasmin-log'
+      },
+      {
+        id: 2,
+        title: 'server2',
+        password: 'ser',
+        login: 'ser',
+        custom: true
+      },
+      {
+        id: 3,
+        title: 'server3',
+        password: 'ser1',
+        login: 'ser1',
+        custom: true
+      }
+    ];
+    const combineAccounts = accounts.reduce((acc, cur, index) => {
+      if (cur.title === tests[index]?.title) {
+        return [...acc, { ...cur, ...tests[index] }];
+      }
+      return [...acc, cur];
+    }, []);
+
+    setAccounts([...combineAccounts, ...tests.filter((el) => el.custom)]);
   }, []);
-  // const generatedAccounts = () =>
-  //   placeholder.map((holder) =>
-  //     tests.find((test) => {
-  //       if (holder.title === test.title) {
-  //         // console.log({ ...holder, ...test });
-  //         return { ...holder, ...test };
-  //       }
-  //       // console.log('net takova', test.title);
-  //       return false;
-  //     })
-  //   );
-  // console.log(generatedAccounts());
-  // servers.filter((server) => !data.some((el) => server.title === el.title));
 
   return (
     <div className={clsx(className)}>

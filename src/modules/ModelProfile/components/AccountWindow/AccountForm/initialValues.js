@@ -1,4 +1,4 @@
-import { generateFieldName } from './generageFieldNames';
+import { generateFieldNames } from './generageFieldNames';
 
 const initial = {
   title: '',
@@ -7,5 +7,12 @@ const initial = {
   serverId: '',
   password: ''
 };
-
-export const initialValues = (prefix) => generateFieldName(initial, prefix);
+export const placeholders = [
+  {
+    title: 'Chatur'
+  },
+  {
+    title: 'Jasmin'
+  }
+];
+export const initialValues = (prefix) => generateFieldNames(initial, prefix);

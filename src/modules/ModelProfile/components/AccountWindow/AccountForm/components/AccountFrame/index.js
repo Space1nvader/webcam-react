@@ -14,6 +14,7 @@ import { format, fromUnixTime } from 'date-fns';
 import SessionStatus from 'components/SessionStatus';
 import { ACCOUNT_VALIDATION_SCHEMA } from '../../validateSchema';
 import AccountErrors from '../AccontErrors';
+import { generateFieldNames } from '../../generageFieldNames';
 import RemoveFrame from './RemoveFrame';
 import style from './style';
 import './index.scss';
@@ -24,18 +25,22 @@ const AccountFrame = (props) => {
   const { data, id, errors, initialValues } = props;
   const classes = useStyles();
   const dispatch = useDispatch();
-  const generateInitialValues = checkValueEmpty(data, initialValues(data.title));
+
+  const generateInitialValues = checkValueEmpty(
+    generateFieldNames(data, data.title),
+    initialValues(data.title)
+  );
   const onSubmit = (values) => {
-    const filtredValues = filterChangesValues(values, generateInitialValues);
-    dispatch(setSubmitForm(id, filtredValues));
+    console.log({ ...values, modelId: id });
+    // const filtredValues = filterChangesValues(values, generateInitialValues);
+    // dispatch(setSubmitForm(id, filtredValues));
   };
-  console.log(data.id);
   const handleRefreshRequest = () => {
     // TODO: Запрос на обновление данных
     console.log(id);
   };
-  const created = data.id >= 0 ? true : undefined;
   const generateFieldName = (field) => `${data.title}-${field}`;
+  const created = !data.custom;
   return (
     <FormContainer
       enableReinitialize
@@ -47,7 +52,7 @@ const AccountFrame = (props) => {
         <div className="accountFrame">
           <div className="accountFrame__row">
             <div className="accountFrame__info">
-              <h6 className="accountFrame__title">{values.title}</h6>
+              <h6 className="accountFrame__title">{values[generateFieldName('title')]}</h6>
               {/* TODO: STATUS TAg  */}
               {created && (
                 <div className="accountFrame__tags">
@@ -55,16 +60,12 @@ const AccountFrame = (props) => {
                 </div>
               )}
             </div>
-            {created && <RemoveFrame />}
+            {!created && <RemoveFrame />}
           </div>
           <FieldSet style={{ marginBottom: 0 }}>
-            <TextField
-              label="Имя сервера"
-              name={generateFieldName('title')}
-              disabled={data.custom}
-            />
-            <TextField label="login" name={generateFieldName('Login')} />
-            <TextField label="ID сервера" name={generateFieldName('serverId')} />
+            <TextField label="Имя сервера" name={generateFieldName('title')} disabled={created} />
+            <TextField label="login" name={generateFieldName('login')} />
+            <TextField label="ID сервера" name={generateFieldName('id')} />
             <PasswordField label="Пароль" autoComplete="on" name={generateFieldName('password')} />
             <div className="accountFrame__formControls">
               <Button
