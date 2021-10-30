@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+/* eslint-disable arrow-body-style */
+/* eslint-disable array-callback-return */
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 // TODO: временные данные из формы систенмных настроек
@@ -12,27 +14,6 @@ import { initialValues } from './initialValues';
 import AccountFrame from './components/AccountFrame';
 
 const AccountForm = ({ className, children }) => {
-  // TODO: временные данные из формы систенмных настроек
-  const { id, data } = useSelector(modelAccountFormSelector);
-  const { errors: dataErrors } = useSelector(modelErrorsSelector);
-  const { server: servers } = useSelector(staticModelDataSelector);
-  const [accounts, setAccounts] = useState(data);
-  const addAccountFrame = () => {
-    setAccounts([...accounts, ...initialValues.account]);
-  };
-  const findErrors = (accountId) => {
-    const errorsId = dataErrors.find((errors) => errors.id === accountId);
-    return errorsId?.errors || '';
-  };
-
-  const placeholder = [
-    {
-      title: 'Chatur'
-    },
-    {
-      title: 'Jasmin'
-    }
-  ];
   const tests = [
     {
       id: 0,
@@ -50,28 +31,94 @@ const AccountForm = ({ className, children }) => {
       id: 2,
       title: 'server2',
       password: 'ser',
-      login: 'ser'
+      login: 'ser',
+      custom: true
     }
   ];
-  const generatedAccounts = () =>
-    placeholder.map((holder) =>
-      tests.find((test) => {
-        if (holder.title === test.title) {
-          // console.log({ ...holder, ...test });
-          return { ...holder, ...test };
-        }
-        // console.log('net takova', test.title);
-        return false;
-      })
-    );
-  console.log(generatedAccounts());
+  // TODO: временные данные из формы систенмных настроек
+  const { id, data } = useSelector(modelAccountFormSelector);
+  const { errors: dataErrors } = useSelector(modelErrorsSelector);
+  const { server: servers } = useSelector(staticModelDataSelector);
+  const [accounts, setAccounts] = useState(tests);
+  const addAccountFrame = () => {
+    setAccounts([...accounts, ...initialValues.account]);
+  };
+  const findErrors = (accountId) => {
+    const errorsId = dataErrors.find((errors) => errors.id === accountId);
+    return errorsId?.errors || '';
+  };
+
+  const placeholders = [
+    {
+      title: 'Chatur'
+    },
+    {
+      title: 'Jasmin'
+    },
+    {
+      title: 'hui'
+    },
+    { title: 'test3' }
+  ];
+
+  useEffect(() => {
+    // console.log(
+    //   tests.reduce((acc, test, index) => {
+    //     if (cur.title === placeholders[index].title) {
+    //       return [...acc, { ...test, ...placeholders[index] }];
+    //     }
+    //     return [...acc, test, placeholders[index]];
+    //   }, [])
+    // );
+    // const otherAccounts = tests.map((test) =>
+    //   placeholders.filter((holder) => {
+    //     if (test.title !== holder.title) {
+    //       console.log(test);
+    //       return test;
+    //     }
+    //     return undefined;
+    //   })
+    // );
+    // console.log(otherAccounts);
+    // tests.map((test) =>
+    //   placeholders.find((holder) => {
+    //     if (holder.title !== test.title) {
+    //       return { ...test, ...holder };
+    //     }
+    //     return false;
+    //   })
+    // )
+    //   [...placeholders, ...tests].map((account) =>
+    //     tests.find((test) => {
+    //       if (account.title === test.title) {
+    //         return { ...test, ...account };
+    //       }
+    //       setAccounts([...accounts]);
+    //       return false;
+    //     })
+    //   )
+    // setAccounts(combineAccounts);
+    // console.log(combineAccounts);
+  }, []);
+  // const generatedAccounts = () =>
+  //   placeholder.map((holder) =>
+  //     tests.find((test) => {
+  //       if (holder.title === test.title) {
+  //         // console.log({ ...holder, ...test });
+  //         return { ...holder, ...test };
+  //       }
+  //       // console.log('net takova', test.title);
+  //       return false;
+  //     })
+  //   );
+  // console.log(generatedAccounts());
   // servers.filter((server) => !data.some((el) => server.title === el.title));
 
   return (
     <div className={clsx(className)}>
       <FormTitle>Учетные данные</FormTitle>
-      {generatedAccounts &&
-        generatedAccounts.map((account) => (
+      {accounts &&
+        accounts.map((account) => (
           <AccountFrame
             id={id}
             key={account.title}

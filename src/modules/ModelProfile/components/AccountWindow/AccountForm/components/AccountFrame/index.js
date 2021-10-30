@@ -29,6 +29,7 @@ const AccountFrame = (props) => {
     const filtredValues = filterChangesValues(values, generateInitialValues);
     dispatch(setSubmitForm(id, filtredValues));
   };
+  console.log(data.id);
   const handleRefreshRequest = () => {
     // TODO: Запрос на обновление данных
     console.log(id);
@@ -57,7 +58,11 @@ const AccountFrame = (props) => {
             {created && <RemoveFrame />}
           </div>
           <FieldSet style={{ marginBottom: 0 }}>
-            <TextField label="Имя сервера" name={generateFieldName('title')} disabled={!data?.id} />
+            <TextField
+              label="Имя сервера"
+              name={generateFieldName('title')}
+              disabled={data.custom}
+            />
             <TextField label="login" name={generateFieldName('Login')} />
             <TextField label="ID сервера" name={generateFieldName('serverId')} />
             <PasswordField label="Пароль" autoComplete="on" name={generateFieldName('password')} />
