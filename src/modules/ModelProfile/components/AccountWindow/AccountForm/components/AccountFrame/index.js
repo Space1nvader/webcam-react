@@ -7,14 +7,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import FieldSet from 'components/Form/FieldSet';
 import { TextField, PasswordField } from 'components/Form';
 import ActiveToggle from 'components/ActiveToggle';
-import { checkValueEmpty, filterChangesValues } from 'utils';
-import setSubmitForm from 'modules/ModelProfile/setSubmitForm';
+import { checkValueEmpty } from 'utils';
 import IconBtn from 'components/IconBtn';
+import { AttachServerAction } from 'modules/ModelProfile/redux/actions';
 import { format, fromUnixTime } from 'date-fns';
 import SessionStatus from 'components/SessionStatus';
 import { ACCOUNT_VALIDATION_SCHEMA } from '../../validateSchema';
 import AccountErrors from '../AccontErrors';
-import { generateFieldNames } from '../../generageFieldNames';
+import { generateFieldPrefix, removeFieldPrefix } from '../../utils';
 import RemoveFrame from './RemoveFrame';
 import style from './style';
 import './index.scss';
@@ -27,13 +27,13 @@ const AccountFrame = (props) => {
   const dispatch = useDispatch();
 
   const generateInitialValues = checkValueEmpty(
-    generateFieldNames(data, data.title),
-    initialValues(data.title)
+    generateFieldPrefix(data, `${data.title}-`),
+    generateFieldPrefix(initialValues, `${data.title}-`)
   );
   const onSubmit = (values) => {
-    console.log({ ...values, modelId: id });
-    // const filtredValues = filterChangesValues(values, generateInitialValues);
-    // dispatch(setSubmitForm(id, filtredValues));
+    console.log(values);
+    const sendData = removeFieldPrefix(values, `${data.title}-`);
+    dispatch(AttachServerAction({ modelId: id, ...sendData }));
   };
   const handleRefreshRequest = () => {
     // TODO: Запрос на обновление данных
@@ -48,7 +48,7 @@ const AccountFrame = (props) => {
       validationSchema={ACCOUNT_VALIDATION_SCHEMA(data.title)}
       onSubmit={onSubmit}
     >
-      {({ values, submitForm }) => (
+      {({ values }) => (
         <div className="accountFrame">
           <div className="accountFrame__row">
             <div className="accountFrame__info">

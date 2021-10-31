@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { generateFieldNames } from './generageFieldNames';
+import { generateFieldPrefix } from './utils';
 
 const schema = {
   password: Yup.string()
@@ -12,4 +12,4 @@ const schema = {
 };
 
 export const ACCOUNT_VALIDATION_SCHEMA = (prefix) =>
-  Yup.object().shape(generateFieldNames(schema, prefix));
+  Yup.object().shape(generateFieldPrefix(schema, prefix));
