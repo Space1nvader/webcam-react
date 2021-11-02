@@ -21,6 +21,7 @@ const AccountForm = ({ className }) => {
   const { server: servers } = useSelector(staticModelDataSelector);
   const [accounts, setAccounts] = useState(servers);
   const dispatch = useDispatch();
+  console.log('che', data);
   const addAccountFrame = () => {
     setAccounts([...accounts, { ...initialValues, custom: true }]);
   };
@@ -34,15 +35,13 @@ const AccountForm = ({ className }) => {
   };
 
   useEffect(() => {
-    const combineAccounts = accounts.reduce((acc, cur, index) => {
-      if (cur.title === data[index]?.title) {
-        return [...acc, { ...cur, ...data[index] }];
-      }
-      return [...acc, cur];
+    const combineAccounts = accounts.reduce((acc, cur) => {
+      const heh = data.find((element) => cur.title === element?.title && element);
+      return [...acc, { ...cur, ...heh }];
     }, []);
 
     setAccounts([...combineAccounts, ...data.filter((el) => el.custom)]);
-  }, []);
+  }, [servers, data]);
 
   return (
     <div className={clsx(className)}>

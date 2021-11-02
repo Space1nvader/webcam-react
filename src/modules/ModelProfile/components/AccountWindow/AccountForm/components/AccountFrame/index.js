@@ -25,7 +25,7 @@ const AccountFrame = (props) => {
   const { data, id, errors, initialValues, removeAccountFrame, ...other } = props;
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  console.log('data', data);
   const generateInitialValues = checkValueEmpty(
     generateFieldPrefix(data, `${data.title}-`),
     generateFieldPrefix(initialValues, `${data.title}-`)
@@ -43,11 +43,11 @@ const AccountFrame = (props) => {
   const created = !data.custom;
   return (
     <FormContainer
-      enableReinitialize
       initialValues={generateInitialValues}
       validationSchema={ACCOUNT_VALIDATION_SCHEMA(data.title)}
       onSubmit={onSubmit}
       {...other}
+      enableReinitialize
     >
       {({ values }) => (
         <div className="accountFrame">
