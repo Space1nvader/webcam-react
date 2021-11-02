@@ -3,7 +3,7 @@ export const initialValues = {
   title: '',
   active: false,
   login: '',
-  idServer: '',
+  serverId: '',
   password: ''
 };
 export const placeholders = [

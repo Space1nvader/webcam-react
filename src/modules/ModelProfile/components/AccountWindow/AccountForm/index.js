@@ -2,7 +2,7 @@
 /* eslint-disable array-callback-return */
 import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 // TODO: временные данные из формы систенмных настроек
 import { modelAccountFormSelector } from 'modules/ModelProfile/redux/selectors';
 import IconBtn from 'components/IconBtn';
@@ -10,17 +10,23 @@ import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import FormTitle from 'modules/ModelProfile/components/FormTitle';
 import { modelErrorsSelector } from 'redux/selectors/modelErrors';
 import { staticModelDataSelector } from 'redux/selectors/staticData';
-import { initialValues, placeholders } from './initialValues';
+import { initialValues } from './initialValues';
 import AccountFrame from './components/AccountFrame';
 
-const AccountForm = ({ className, children }) => {
-  // TODO: временные данные из формы систенмных настроек
+import { DetachServerAction } from '../../../redux/actions';
+
+const AccountForm = ({ className }) => {
   const { id, data } = useSelector(modelAccountFormSelector);
   const { errors: dataErrors } = useSelector(modelErrorsSelector);
   const { server: servers } = useSelector(staticModelDataSelector);
-  const [accounts, setAccounts] = useState(placeholders);
+  const [accounts, setAccounts] = useState(servers);
+  const dispatch = useDispatch();
   const addAccountFrame = () => {
-    setAccounts([...accounts, { ...initialValues('test'), custom: true }]);
+    setAccounts([...accounts, { ...initialValues, custom: true }]);
+  };
+  const handleRemoveAccountFrame = (accountId) => () => {
+    dispatch(DetachServerAction(accountId));
+    // setAccounts(accounts.filter((account) => account.id !== accountId));
   };
   const findErrors = (accountId) => {
     const errorsId = dataErrors.find((errors) => errors.id === accountId);
@@ -28,42 +34,14 @@ const AccountForm = ({ className, children }) => {
   };
 
   useEffect(() => {
-    const tests = [
-      {
-        id: 0,
-        title: 'Chatur',
-        password: 'chatur-123',
-        login: 'Chtur-log'
-      },
-      {
-        id: 1,
-        title: 'Jasmin',
-        password: 'Jasmin-321',
-        login: 'Jasmin-log'
-      },
-      {
-        id: 2,
-        title: 'server2',
-        password: 'ser',
-        login: 'ser',
-        custom: true
-      },
-      {
-        id: 3,
-        title: 'server3',
-        password: 'ser1',
-        login: 'ser1',
-        custom: true
-      }
-    ];
     const combineAccounts = accounts.reduce((acc, cur, index) => {
-      if (cur.title === tests[index]?.title) {
-        return [...acc, { ...cur, ...tests[index] }];
+      if (cur.title === data[index]?.title) {
+        return [...acc, { ...cur, ...data[index] }];
       }
       return [...acc, cur];
     }, []);
 
-    setAccounts([...combineAccounts, ...tests.filter((el) => el.custom)]);
+    setAccounts([...combineAccounts, ...data.filter((el) => el.custom)]);
   }, []);
 
   return (
@@ -74,6 +52,7 @@ const AccountForm = ({ className, children }) => {
           <AccountFrame
             id={id}
             key={account.title}
+            removeAccountFrame={handleRemoveAccountFrame}
             errors={findErrors(account.id)}
             data={account}
             initialValues={initialValues}

@@ -16,10 +16,15 @@ const useStyles = makeStyles({
     width: 240
   }
 });
-const RemoveFrame = () => {
+const RemoveFrame = ({ onClick }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpenClick = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
+  const handleConfimClick = () => {
+    if (onClick) onClick();
+    setModalOpen(false);
+  };
+
   const classes = useStyles();
   return (
     <>
@@ -28,14 +33,14 @@ const RemoveFrame = () => {
       </IconBtn>
       <Popup
         style={{ width: 480 }}
-        title="Вы уверены что хотите удалить модель?"
+        title="Вы уверены что хотите удалить этот аккаунт?"
         open={modalOpen}
         onClose={handleModalClose}
       >
+        {/* TODO:удаление фрейма аккаунта */}
         <Button
           color="secondary"
-          // TODO: удаление фрейма аккаунта
-          // onClick={handleConfimClick}
+          onClick={handleConfimClick}
           type="submit"
           className={classes.button}
           variant="contained"

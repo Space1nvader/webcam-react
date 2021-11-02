@@ -15,14 +15,14 @@ import SessionStatus from 'components/SessionStatus';
 import { ACCOUNT_VALIDATION_SCHEMA } from '../../validateSchema';
 import AccountErrors from '../AccontErrors';
 import { generateFieldPrefix, removeFieldPrefix } from '../../utils';
-import RemoveFrame from './RemoveFrame';
+import RemoveAccountButton from './RemoveFrame';
 import style from './style';
 import './index.scss';
 
 const useStyles = makeStyles(style);
 
 const AccountFrame = (props) => {
-  const { data, id, errors, initialValues } = props;
+  const { data, id, errors, initialValues, removeAccountFrame, ...other } = props;
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -31,7 +31,6 @@ const AccountFrame = (props) => {
     generateFieldPrefix(initialValues, `${data.title}-`)
   );
   const onSubmit = (values) => {
-    console.log(values);
     const sendData = removeFieldPrefix(values, `${data.title}-`);
     dispatch(AttachServerAction({ modelId: id, ...sendData }));
   };
@@ -39,6 +38,7 @@ const AccountFrame = (props) => {
     // TODO: Запрос на обновление данных
     console.log(id);
   };
+
   const generateFieldName = (field) => `${data.title}-${field}`;
   const created = !data.custom;
   return (
@@ -47,6 +47,7 @@ const AccountFrame = (props) => {
       initialValues={generateInitialValues}
       validationSchema={ACCOUNT_VALIDATION_SCHEMA(data.title)}
       onSubmit={onSubmit}
+      {...other}
     >
       {({ values }) => (
         <div className="accountFrame">
@@ -60,12 +61,12 @@ const AccountFrame = (props) => {
                 </div>
               )}
             </div>
-            {!created && <RemoveFrame />}
+            {!created && <RemoveAccountButton onClick={removeAccountFrame(data.id)} />}
           </div>
           <FieldSet style={{ marginBottom: 0 }}>
             <TextField label="Имя сервера" name={generateFieldName('title')} disabled={created} />
             <TextField label="login" name={generateFieldName('login')} />
-            <TextField label="ID сервера" name={generateFieldName('id')} />
+            <TextField label="ID сервера" name={generateFieldName('serverId')} />
             <PasswordField label="Пароль" autoComplete="on" name={generateFieldName('password')} />
             <div className="accountFrame__formControls">
               <Button

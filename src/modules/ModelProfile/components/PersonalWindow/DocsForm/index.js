@@ -34,7 +34,8 @@ const DocsForm = (props) => {
   const { data } = useSelector(modelDocumentsSelector);
 
   const documents = data;
-  const getDocument = (name) => data.find((document) => document.field === name) || { field: name };
+  const getDocument = (name) =>
+    documents.find((document) => document.field === name) || { field: name };
   const otherDocuments = documents.files || '';
   return (
     <div className={clsx('docs', className)} {...other}>
