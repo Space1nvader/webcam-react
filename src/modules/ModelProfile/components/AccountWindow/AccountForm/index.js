@@ -26,7 +26,7 @@ const AccountForm = ({ className }) => {
   };
   const handleRemoveAccountFrame = (accountId) => () => {
     dispatch(DetachServerAction(accountId));
-    // setAccounts(accounts.filter((account) => account.id !== accountId));
+    setAccounts(accounts.filter((account) => account.id !== accountId));
   };
   const findErrors = (accountId) => {
     const errorsId = dataErrors.find((errors) => errors.id === accountId);
