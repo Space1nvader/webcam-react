@@ -1,30 +1,27 @@
 import React from 'react';
 import { FormContainer } from 'components/Form/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
-import { modelSelector } from 'modules/ModelProfile/redux/selectors';
-import { CreateModelAction, PostDocumentAction } from 'modules/ModelProfile/redux/actions';
+import { modelIdSelector } from 'modules/ModelProfile/redux/selectors';
+import { PostDocumentAction } from 'modules/ModelProfile/redux/actions';
 import UploadFileField from './components/UploadFileField';
 import './index.scss';
 
 const UploadFileForm = (props) => {
   const { name, children, className } = props;
   const dispatch = useDispatch();
-  const { modelData } = useSelector(modelSelector);
-
-  const onSubmit = ({ files }) => {
-    if (modelData) {
-      files.append('modelId', modelData.id);
-      dispatch(PostDocumentAction(files));
-    } else {
-      dispatch(CreateModelAction(files));
-    }
+  const { modelId: id } = useSelector(modelIdSelector);
+  const onSubmit = (data) => {
+    data[name].append('modelId', id);
+    dispatch(PostDocumentAction(data[name]));
   };
-
+  const initialValues = {
+    [name]: ''
+  };
   return (
     <FormContainer
       className={className}
       enableReinitialize
-      initialValues={{ [name]: '' }}
+      initialValues={initialValues}
       onSubmit={onSubmit}
     >
       {({ setFieldValue, submitForm }) => (

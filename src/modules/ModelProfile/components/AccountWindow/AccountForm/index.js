@@ -1,64 +1,63 @@
-import React, { useState } from 'react';
+/* eslint-disable arrow-body-style */
+/* eslint-disable array-callback-return */
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 // TODO: временные данные из формы систенмных настроек
-import { modelIdSelector } from 'modules/ModelProfile/redux/selectors';
+import { modelAccountFormSelector } from 'modules/ModelProfile/redux/selectors';
 import IconBtn from 'components/IconBtn';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import FormTitle from 'modules/ModelProfile/components/FormTitle';
 import { modelErrorsSelector } from 'redux/selectors/modelErrors';
+import { staticModelDataSelector } from 'redux/selectors/staticData';
 import { initialValues } from './initialValues';
 import AccountFrame from './components/AccountFrame';
 
-const getAccounts = [
-  {
-    id: 1,
-    server: 'Chaturbate',
-    active: true,
-    login: 'chaturbate-login',
-    serverId: '1',
-    password: 'chaturbate-password',
-    updatedAt: 1063483200
-  },
-  {
-    id: 2,
-    server: 'Jasmin',
-    active: false,
-    login: 'jasmin-login',
-    serverId: '2',
-    password: 'jasmin-password',
-    updatedAt: ''
-  }
-];
+import { DetachServerAction } from '../../../redux/actions';
 
 const AccountForm = ({ className }) => {
-  // TODO: временные данные из формы систенмных настроек
-  const { modelId: id } = useSelector(modelIdSelector);
+  const { id, data } = useSelector(modelAccountFormSelector);
   const { errors: dataErrors } = useSelector(modelErrorsSelector);
-  const [accounts, setAccounts] = useState(getAccounts);
+  const { server: servers } = useSelector(staticModelDataSelector);
+  const [accounts, setAccounts] = useState(servers);
+  const dispatch = useDispatch();
   const addAccountFrame = () => {
-    setAccounts([...accounts, ...initialValues.account]);
+    setAccounts([...accounts, { ...initialValues, custom: true }]);
+  };
+  const handleRemoveAccountFrame = (accountId) => () => {
+    dispatch(DetachServerAction(accountId));
+    // setAccounts(accounts.filter((account) => account.id !== accountId));
   };
   const findErrors = (accountId) => {
     const errorsId = dataErrors.find((errors) => errors.id === accountId);
     return errorsId?.errors || '';
   };
 
+  useEffect(() => {
+    const combineAccounts = accounts.reduce((acc, cur, index) => {
+      if (cur.title === data[index]?.title) {
+        return [...acc, { ...cur, ...data[index] }];
+      }
+      return [...acc, cur];
+    }, []);
+
+    setAccounts([...combineAccounts, ...data.filter((el) => el.custom)]);
+  }, []);
+
   return (
     <div className={clsx(className)}>
       <FormTitle>Учетные данные</FormTitle>
-      {id &&
-        accounts &&
+      {accounts &&
         accounts.map((account) => (
           <AccountFrame
             id={id}
-            key={account.id}
+            key={account.title}
+            removeAccountFrame={handleRemoveAccountFrame}
             errors={findErrors(account.id)}
             data={account}
             initialValues={initialValues}
           />
         ))}
-
       <IconBtn
         title="Добавить модель"
         onClick={addAccountFrame}

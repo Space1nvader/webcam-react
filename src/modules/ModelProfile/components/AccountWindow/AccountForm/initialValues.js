@@ -1,11 +1,16 @@
 export const initialValues = {
-  account: [
-    {
-      server: '',
-      active: false,
-      login: '',
-      serverId: '',
-      password: ''
-    }
-  ]
+  id: '',
+  title: '',
+  active: false,
+  login: '',
+  serverId: '',
+  password: ''
 };
+export const placeholders = [
+  {
+    title: 'Chatur'
+  },
+  {
+    title: 'Jasmin'
+  }
+];

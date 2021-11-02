@@ -7,6 +7,7 @@ import './index.scss';
 
 const Item = (props) => {
   const { title, children, checked, ...other } = props;
+  // TODO: CHECKED ERRORS
   const [isChecked, setChecked] = useState(checked);
   const setErrorChecked = () => {
     console.log(checked);

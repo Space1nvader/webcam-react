@@ -60,7 +60,7 @@ const PictureField = (props) => {
   };
   useEffect(() => {
     if (data && data[name]) setPreview(data[name]);
-  }, [data]);
+  }, [data, name]);
   const formData = new FormData();
   const handleSetPicturePreview = (e) => {
     const { files } = e.target;
@@ -79,6 +79,7 @@ const PictureField = (props) => {
         submitForm();
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [success]);
 
   return (

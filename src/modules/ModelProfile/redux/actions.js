@@ -1,7 +1,8 @@
 import {
   MODEL_ACTION_TYPES,
   MODEL_STATUS_ACTION_TYPES,
-  MODEL_DOCUMENTS_ACTION_TYPES
+  MODEL_DOCUMENTS_ACTION_TYPES,
+  MODEL_SERVERS_ACTION_TYPES
 } from './reducer';
 
 export const GetModelAction = (payload) => ({
@@ -36,6 +37,16 @@ export const PostDocumentAction = (payload) => ({
 
 export const DeleteDocumentAction = (payload) => ({
   type: MODEL_DOCUMENTS_ACTION_TYPES.DELETE.START,
+  payload
+});
+
+export const AttachServerAction = (payload) => ({
+  type: MODEL_SERVERS_ACTION_TYPES.POST.START,
+  payload
+});
+
+export const DetachServerAction = (payload) => ({
+  type: MODEL_SERVERS_ACTION_TYPES.DELETE.START,
   payload
 });
 

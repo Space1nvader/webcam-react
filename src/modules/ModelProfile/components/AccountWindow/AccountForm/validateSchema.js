@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
+import { generateFieldPrefix } from './utils';
 
-export const ACCOUNT_VALIDATION_SCHEMA = Yup.object().shape({
+const schema = {
   password: Yup.string()
     .matches(
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
@@ -8,4 +9,7 @@ export const ACCOUNT_VALIDATION_SCHEMA = Yup.object().shape({
     )
     .Eng(),
   login: Yup.string().Eng()
-});
+};
+
+export const ACCOUNT_VALIDATION_SCHEMA = (prefix) =>
+  Yup.object().shape(generateFieldPrefix(schema, prefix));

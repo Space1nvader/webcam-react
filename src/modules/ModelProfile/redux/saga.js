@@ -3,7 +3,8 @@ import SERVICE_API from 'api';
 import {
   MODEL_ACTION_TYPES,
   MODEL_STATUS_ACTION_TYPES,
-  MODEL_DOCUMENTS_ACTION_TYPES
+  MODEL_DOCUMENTS_ACTION_TYPES,
+  MODEL_SERVERS_ACTION_TYPES
 } from './reducer';
 
 function* getModel({ payload }) {
@@ -99,14 +100,42 @@ function* attachDocument({ payload }) {
 function* deleteDocument({ payload }) {
   try {
     yield call(SERVICE_API.Model.detachFile, payload);
-
     yield put({
       type: MODEL_DOCUMENTS_ACTION_TYPES.DELETE.SUCCESS,
-      fileId: payload
+      payload
     });
   } catch ({ response }) {
     yield put({
       type: MODEL_DOCUMENTS_ACTION_TYPES.DELETE.ERROR,
+      payload: response.data
+    });
+  }
+}
+function* attachServer({ payload }) {
+  try {
+    const { data } = yield call(SERVICE_API.Model.attachServer, payload);
+    yield put({
+      type: MODEL_SERVERS_ACTION_TYPES.POST.SUCCESS,
+      payload: data
+    });
+  } catch ({ response }) {
+    yield put({
+      type: MODEL_SERVERS_ACTION_TYPES.POST.ERROR,
+      payload: response.data
+    });
+  }
+}
+
+function* detachServer({ payload }) {
+  try {
+    yield call(SERVICE_API.Model.detachServer, payload);
+    yield put({
+      type: MODEL_SERVERS_ACTION_TYPES.DELETE.SUCCESS,
+      payload
+    });
+  } catch ({ response }) {
+    yield put({
+      type: MODEL_SERVERS_ACTION_TYPES.DELETE.ERROR,
       payload: response.data
     });
   }
@@ -119,5 +148,7 @@ export function* ModelProfileSaga() {
   yield takeEvery(MODEL_ACTION_TYPES.DELETE.START, deleteModel);
   yield takeEvery(MODEL_DOCUMENTS_ACTION_TYPES.POST.START, attachDocument);
   yield takeEvery(MODEL_DOCUMENTS_ACTION_TYPES.DELETE.START, deleteDocument);
+  yield takeEvery(MODEL_SERVERS_ACTION_TYPES.POST.START, attachServer);
+  yield takeEvery(MODEL_SERVERS_ACTION_TYPES.DELETE.START, detachServer);
   yield takeEvery(MODEL_STATUS_ACTION_TYPES.PUT.START, updateModelStatus);
 }

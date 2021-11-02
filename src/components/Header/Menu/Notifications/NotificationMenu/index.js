@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Tabs, Tab, TabsControls } from 'components/Tabs';
-import './index.scss';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import ScrollBar from 'components/ScrollBar';
 import { modelErrorsSelector } from 'redux/selectors/modelErrors';
 import NotificationList from '../NotificationsList';
+import './index.scss';
 
 const NotificationMenu = (props) => {
   const { id, errors } = useSelector(modelErrorsSelector);

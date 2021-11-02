@@ -9,7 +9,7 @@ const UploadFileField = (props) => {
     const data = new FormData();
     if (files && files.length) {
       for (let i = 0; i < files.length; i += 1) {
-        data.append('file[]', files[i]);
+        data.append(`${name}[]`, files[i]);
       }
       setFieldValue(name, data);
       submitForm();

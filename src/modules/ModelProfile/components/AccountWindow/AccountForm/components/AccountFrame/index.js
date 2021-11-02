@@ -7,53 +7,67 @@ import { makeStyles } from '@material-ui/core/styles';
 import FieldSet from 'components/Form/FieldSet';
 import { TextField, PasswordField } from 'components/Form';
 import ActiveToggle from 'components/ActiveToggle';
-import { checkValueEmpty, filterChangesValues } from 'utils';
-import setSubmitForm from 'modules/ModelProfile/setSubmitForm';
+import { checkValueEmpty } from 'utils';
 import IconBtn from 'components/IconBtn';
+import { AttachServerAction } from 'modules/ModelProfile/redux/actions';
 import { format, fromUnixTime } from 'date-fns';
+import SessionStatus from 'components/SessionStatus';
 import { ACCOUNT_VALIDATION_SCHEMA } from '../../validateSchema';
 import AccountErrors from '../AccontErrors';
-import RemoveFrame from './RemoveFrame';
+import { generateFieldPrefix, removeFieldPrefix } from '../../utils';
+import RemoveAccountButton from './RemoveFrame';
 import style from './style';
 import './index.scss';
 
 const useStyles = makeStyles(style);
 
 const AccountFrame = (props) => {
-  const { id, data, errors, initialValues } = props;
+  const { data, id, errors, initialValues, removeAccountFrame, ...other } = props;
   const classes = useStyles();
   const dispatch = useDispatch();
-  const generateInitialValues = checkValueEmpty(data, initialValues);
+
+  const generateInitialValues = checkValueEmpty(
+    generateFieldPrefix(data, `${data.title}-`),
+    generateFieldPrefix(initialValues, `${data.title}-`)
+  );
   const onSubmit = (values) => {
-    const filtredValues = filterChangesValues(values, generateInitialValues);
-    dispatch(setSubmitForm(id, filtredValues));
+    const sendData = removeFieldPrefix(values, `${data.title}-`);
+    dispatch(AttachServerAction({ modelId: id, ...sendData }));
   };
   const handleRefreshRequest = () => {
     // TODO: Запрос на обновление данных
     console.log(id);
   };
+
+  const generateFieldName = (field) => `${data.title}-${field}`;
+  const created = !data.custom;
   return (
     <FormContainer
       enableReinitialize
       initialValues={generateInitialValues}
-      validationSchema={ACCOUNT_VALIDATION_SCHEMA}
+      validationSchema={ACCOUNT_VALIDATION_SCHEMA(data.title)}
       onSubmit={onSubmit}
+      {...other}
     >
-      {({ values, submitForm }) => (
+      {({ values }) => (
         <div className="accountFrame">
           <div className="accountFrame__row">
             <div className="accountFrame__info">
-              <h6 className="accountFrame__title">{values.server}</h6>
+              <h6 className="accountFrame__title">{values[generateFieldName('title')]}</h6>
               {/* TODO: STATUS TAg  */}
-              <div className="accountFrame__tags">{values.server}</div>
+              {created && (
+                <div className="accountFrame__tags">
+                  <SessionStatus style={{ fontSize: 12, fontWeight: 500 }} value="offline" />
+                </div>
+              )}
             </div>
-            {!values?.id && <RemoveFrame />}
+            {!created && <RemoveAccountButton onClick={removeAccountFrame(data.id)} />}
           </div>
           <FieldSet style={{ marginBottom: 0 }}>
-            <TextField label="Имя сервера" name="server" disabled={!!values?.id} />
-            <TextField name="login" label="Login" />
-            <TextField name="serverId" label="ID сервера" />
-            <PasswordField label="Пароль" name="password" />
+            <TextField label="Имя сервера" name={generateFieldName('title')} disabled={created} />
+            <TextField label="login" name={generateFieldName('login')} />
+            <TextField label="ID сервера" name={generateFieldName('serverId')} />
+            <PasswordField label="Пароль" autoComplete="on" name={generateFieldName('password')} />
             <div className="accountFrame__formControls">
               <Button
                 color="secondary"
@@ -73,7 +87,7 @@ const AccountFrame = (props) => {
                 отменить
               </Button>
             </div>
-            {!!values.id && (
+            {created && (
               <div className="accountFrame__controls">
                 <div className="accountFrame__update">
                   <IconBtn
@@ -83,13 +97,12 @@ const AccountFrame = (props) => {
                   >
                     <RefreshRoundedIcon style={{ fill: 'var(--gray-30)' }} />
                   </IconBtn>
-                  {!!values?.updatedAt &&
+                  {!!data?.updatedAt &&
                     `Обновлен: ${format(fromUnixTime(data.updatedAt), 'dd.MM.yyyy')}`}
                 </div>
-                <ActiveToggle label="Активна" id={id} />
+                <ActiveToggle label="Активна" id={data.id} />
               </div>
             )}
-
             {!!errors?.length && <AccountErrors className="accountFrame__errors" errors={errors} />}
           </FieldSet>
         </div>
